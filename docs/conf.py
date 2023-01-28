@@ -10,7 +10,6 @@ import pathlib
 import sys
 from typing import Any, Dict
 
-
 ROOT_DIR = pathlib.Path(__file__).absolute().parent.parent.parent
 sys.path.insert(0, str(ROOT_DIR / 'safety_gymnasium'))
 
@@ -54,7 +53,7 @@ autodoc_preserve_defaults = True
 #
 html_theme = 'furo'
 html_title = 'Documentation'
-html_baseurl = 'https://www.safety-gymnasium.com'
+html_baseurl = 'https://gymnasium.farama.org'
 html_copy_source = False
 html_favicon = '_static/images/favicon.png'
 html_theme_options = {

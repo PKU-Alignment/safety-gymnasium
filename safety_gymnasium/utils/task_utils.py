@@ -28,7 +28,7 @@ def get_task_class_name(task_id):
 
 
 def quat2mat(quat):
-    """Convert Quaternion to a 3x3 Rotation Matrix using mujoco"""
+    """Convert Quaternion to a 3x3 Rotation Matrix using mujoco."""
     # pylint: disable=invalid-name
     q = np.array(quat, dtype='float64')
     m = np.zeros(9, dtype='float64')

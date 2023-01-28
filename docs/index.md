@@ -28,9 +28,35 @@ env.close()
 
 ```{toctree}
 :hidden:
+:caption: INTRODUCTION
+
+introduction/about_safety_gymnasium
+introduction/basic_usage
+```
+
+```{toctree}
+:hidden:
+:caption: CONPONETS OF ENVIRONMENTS
+
+components_of_environments/agents
+components_of_environments/objects
+components_of_environments/tasks
+```
+
+```{toctree}
+:hidden:
+:caption: ENVIRONMENTS
+
+environments/safe_navigation
+```
+
+```{toctree}
+:hidden:
 :caption: API
 
+api/bases
 api/builder
+api/utils
 ```
 
 ```{toctree}

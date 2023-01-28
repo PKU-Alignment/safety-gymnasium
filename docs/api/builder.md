@@ -14,7 +14,7 @@ title: Builder
 ###  DataClass
 
 ```{eval-rst}
-.. autoclass:: safety_gymnasium.builder.RenderParameters
+.. autoclass:: safety_gymnasium.builder.RenderConf
 ```
 
 
