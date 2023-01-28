@@ -1,6 +1,8 @@
-# Tasks
+Tasks
+==========
 
-![tasks](../_static/images/tasks.png)
+.. image:: ../_static/images/tasks.png
+    :align: center
 
 在Task当中，可以囊括特定Agents和Objects，进而定义环境自身的行为（如reward机制，reset机制等），从而组合为一个完整的Enviroment。
 
@@ -9,8 +11,9 @@
 
 
 
-```{toctree}
-:hidden:
-tasks/task_example.md
-```
+.. toctree::
+    :hidden:
+
+    tasks/task_example.rst
+
 
