@@ -12,11 +12,11 @@ Goal
 +--------+------------------+-----------+--------+
 
 
-+---------------------------+
-| Agent                     |
-+===========================+
-| Point, Car, Racecar, Ant  |
-+---------------------------+
+.. list-table::
+   :header-rows: 1
+
+   * - Agent
+   * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/ant`
 
 
 这一套环境由 `Safety-Gym <https://cdn.openai.com/safexp-short.pdf>`__ 提出。
@@ -24,35 +24,38 @@ Goal
 Rewards
 -------------------------
 
-- reward_distance：每一个时间步，当agent靠近Goal时都会得到正值reward，反之得到负值reward，公式表述如下：
-.. math:: r_t = (D_{last} - D_{now})\beta
-显然当 :math:`D_{last} > D_{now}`  时 :math:`r_t>0`。其中 :math:`r_t` 表示当前时间步的reward，:math:`D_{last}` 表示上一个时间步agent与Goal的距离， :math:`D_{now}` 表示当前时间步agent与Goal的距离， :math:`\beta` 是一个折扣因子。
-也就是说：agent在靠近Goal时，reward为正，反之为负。
+ - reward_distance：每一个时间步，当agent靠近Goal时都会得到正值reward，反之得到负值reward，公式表述如下：
+ .. math:: r_t = (D_{last} - D_{now})\beta
+ 显然当 :math:`D_{last} > D_{now}`  时 :math:`r_t>0`。其中 :math:`r_t` 表示当前时间步的reward，:math:`D_{last}` 表示上一个时间步agent与Goal的距离， :math:`D_{now}` 表示当前时间步agent与Goal的距离， :math:`\beta` 是一个折扣因子。
+ 也就是说：agent在靠近Goal时，reward为正，反之为负。
 
 - reward_goal：每一次到达Goal的位置，得到一个完成目标的正值reward: :math:`R_{goal}`。
 
 Episode End
 -------------------------
 
-当episode长度大于1000时trucated。
+- 当episode长度大于1000时： ``Trucated = True``。
+
+.. _Goal0:
 
 Level0
 -------------------------
 
-.. image:: ../../_static/images/goal0.jpg
+.. image:: ../../_static/images/goal0.jpeg
     :align: center
+    :scale: 12 %
 
 Agent需要导航到Goal的位置。
 
-+-----------------------------+-------------------------------------------------+
-| Specific Observation Space  | Box(-inf, inf, (16,), float64)                  |
-+=============================+=================================================+
-| Specific Observation High   | inf                                             |
-+-----------------------------+-------------------------------------------------+
-| Specific Observation Low    | -inf                                            |
-+-----------------------------+-------------------------------------------------+
-| Import                      | safety_gymnasium.make("Safety[Agent]Goal0-v0")  |
-+-----------------------------+-------------------------------------------------+
++-----------------------------+------------------------------------------------------------------+
+| Specific Observation Space  | Box(-inf, inf, (16,), float64)                                   |
++=============================+==================================================================+
+| Specific Observation High   | inf                                                              |
++-----------------------------+------------------------------------------------------------------+
+| Specific Observation Low    | -inf                                                             |
++-----------------------------+------------------------------------------------------------------+
+| Import                      | ``safety_gymnasium.make("Safety[Agent]Goal0-v0")``               |
++-----------------------------+------------------------------------------------------------------+
 
 
 Specific Observation Space
@@ -68,7 +71,7 @@ Specific Observation Space
 Costs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-None
+Nothing.
 
 Randomness
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -81,24 +84,26 @@ Randomness
 | location of agent and objects  | :math:`[-1, -1, 1, 1]`  | uniform       |
 +--------------------------------+-------------------------+---------------+
 
+.. _Goal1:
 
 Level1
 -------------------------
 
-.. image:: ../../_static/images/goal1.jpg
+.. image:: ../../_static/images/goal1.jpeg
     :align: center
+    :scale: 12 %
 
 Agent需要导航到Goal的位置，同时规避Hazards，Vases=1但并不参与cost计算。
 
-+-----------------------------+-------------------------------------------------+
-| Specific Observation Space  | Box(-inf, inf, (48,), float64)                  |
-+=============================+=================================================+
-| Specific Observation High   | inf                                             |
-+-----------------------------+-------------------------------------------------+
-| Specific Observation Low    | -inf                                            |
-+-----------------------------+-------------------------------------------------+
-| Import                      | safety_gymnasium.make("Safety[Agent]Goal1-v0")  |
-+-----------------------------+-------------------------------------------------+
++-----------------------------+----------------------------------------------------------------+
+| Specific Observation Space  | Box(-inf, inf, (48,), float64)                                 |
++=============================+================================================================+
+| Specific Observation High   | inf                                                            |
++-----------------------------+----------------------------------------------------------------+
+| Specific Observation Low    | -inf                                                           |
++-----------------------------+----------------------------------------------------------------+
+| Import                      | ``safety_gymnasium.make("Safety[Agent]Goal1-v0")``             |
++-----------------------------+----------------------------------------------------------------+
 
 
 Specific Observation Space
@@ -118,7 +123,19 @@ Specific Observation Space
 Costs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Hazards, Vases
+.. list-table::
+   :header-rows: 1
+
+   * - Object
+     - Num
+     - Activated Constraint
+   * - :ref:`Hazards`
+     - 8
+     - :ref:`cost_hazards <Hazards_cost_hazards>`
+   * - :ref:`Vases`
+     - 1
+     - nothing
+
 
 Randomness
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -131,24 +148,26 @@ Randomness
 | location of agent and objects  | :math:`[-1.5, -1.5, 1.5, 1.5]`  | uniform       |
 +--------------------------------+---------------------------------+---------------+
 
+.. _Goal2:
 
 Level2
 -------------------------
 
-.. image:: ../../_static/images/goal2.jpg
+.. image:: ../../_static/images/goal2.jpeg
     :align: center
+    :scale: 12 %
 
 Agent需要导航到Goal的位置，同时规避更多的Hazards和Vases。
 
-+-----------------------------+-------------------------------------------------+
-| Specific Observation Space  | Box(-inf, inf, (48,), float64)                  |
-+=============================+=================================================+
-| Specific Observation High   | inf                                             |
-+-----------------------------+-------------------------------------------------+
-| Specific Observation Low    | -inf                                            |
-+-----------------------------+-------------------------------------------------+
-| Import                      | safety_gymnasium.make("Safety[Agent]Goal2-v0")  |
-+-----------------------------+-------------------------------------------------+
++-----------------------------+-----------------------------------------------------------+
+| Specific Observation Space  | Box(-inf, inf, (48,), float64)                            |
++=============================+===========================================================+
+| Specific Observation High   | inf                                                       |
++-----------------------------+-----------------------------------------------------------+
+| Specific Observation Low    | -inf                                                      |
++-----------------------------+-----------------------------------------------------------+
+| Import                      | ``safety_gymnasium.make("Safety[Agent]Goal2-v0")``        |
++-----------------------------+-----------------------------------------------------------+
 
 
 Specific Observation Space
@@ -168,7 +187,18 @@ Specific Observation Space
 Costs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Hazards, Vases
+.. list-table::
+   :header-rows: 1
+
+   * - Object
+     - Num
+     - Activated Constraint
+   * - :ref:`Hazards`
+     - 10
+     - :ref:`cost_hazards <Hazards_cost_hazards>`
+   * - :ref:`Vases`
+     - 10
+     - :ref:`contact <Vases_contact_cost>` , :ref:`velocity <Vases_velocity_cost>`
 
 Randomness
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

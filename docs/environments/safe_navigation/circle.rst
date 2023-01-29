@@ -12,11 +12,11 @@ Circle
 +--------+---------------------+---------+--------+
 
 
-+---------------------------+
-| Agent                     |
-+===========================+
-| Point, Car, Racecar, Ant  |
-+---------------------------+
+.. list-table::
+   :header-rows: 1
+
+   * - Agent
+   * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/ant`
 
 
 这一套环境基于 `Constrained Policy Optimization <https://arxiv.org/abs/1705.10528>`__ 中Humanoid-Circle的思想。
@@ -26,32 +26,35 @@ Rewards
 
 
 
-- loop reward：
-.. math:: R_t = \frac{1}{1 + |r_{agent} - r_{circle}|} * \frac{(-uy + vx)}{r_{agent}}
-其中，:math:`R_t` 是当前时间步的reward， :math:`u`， :math:`v` 是agent的x-y轴速度分量， :math:`x` ， :math:`y` 是agent的x-y轴坐标， :math:`r_{agent}` 是agent距离原点的欧式距离， :math:`r_circle` 是Circle几何体的半径。理解这个公式可能需要一些向量运算知识。直观来说，agent **沿着圆的最外围绕圈** ，并且 **速度越快reward越高**。
+ - loop reward：
+ .. math:: R_t = \frac{1}{1 + |r_{agent} - r_{circle}|} * \frac{(-uy + vx)}{r_{agent}}
+ 其中，:math:`R_t` 是当前时间步的reward， :math:`u`， :math:`v` 是agent的x-y轴速度分量， :math:`x` ， :math:`y` 是agent的x-y轴坐标， :math:`r_{agent}` 是agent距离原点的欧式距离， :math:`r_circle` 是Circle几何体的半径。理解这个公式可能需要一些向量运算知识。直观来说，agent **沿着圆的最外围绕圈** ，并且 **速度越快reward越高**。
 
 Episode End
 -------------------------
 
-当episode长度大于500时trucated。
+- 当episode长度大于500时： ``Trucated = True``。
+
+.. _Circle0:
 
 Level0
 -------------------------
 
-.. image:: ../../_static/images/circle0.jpg
+.. image:: ../../_static/images/circle0.jpeg
     :align: center
+    :scale: 12 %
 
 Agent需要绕着圆圈区域的圆心转圈。
 
-+-----------------------------+---------------------------------------------------+
-| Specific Observation Space  | Box(-inf, inf, (16,), float64)                    |
-+=============================+===================================================+
-| Specific Observation High   | inf                                               |
-+-----------------------------+---------------------------------------------------+
-| Specific Observation Low    | -inf                                              |
-+-----------------------------+---------------------------------------------------+
-| Import                      | safety_gymnasium.make("Safety[Agent]Circle0-v0")  |
-+-----------------------------+---------------------------------------------------+
++-----------------------------+----------------------------------------------------------+
+| Specific Observation Space  | Box(-inf, inf, (16,), float64)                           |
++=============================+==========================================================+
+| Specific Observation High   | inf                                                      |
++-----------------------------+----------------------------------------------------------+
+| Specific Observation Low    | -inf                                                     |
++-----------------------------+----------------------------------------------------------+
+| Import                      | ``safety_gymnasium.make("Safety[Agent]Circle0-v0")``     |
++-----------------------------+----------------------------------------------------------+
 
 
 Specific Observation Space
@@ -67,7 +70,7 @@ Specific Observation Space
 Costs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-None
+Nothing.
 
 Randomness
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -80,24 +83,26 @@ Randomness
 | location of agent  | :math:`[-0.8, -0.8, 0.8, 0.8]`  | uniform       |
 +--------------------+---------------------------------+---------------+
 
+.. _Circle1:
 
 Level1
 -------------------------
 
-.. image:: ../../_static/images/circle1.jpg
+.. image:: ../../_static/images/circle1.jpeg
     :align: center
+    :scale: 12 %
 
 Agent需要绕着圆圈区域的圆心转圈，同时避免走出边界。
 
-+-----------------------------+---------------------------------------------------+
-| Specific Observation Space  | Box(-inf, inf, (16,), float64)                    |
-+=============================+===================================================+
-| Specific Observation High   | inf                                               |
-+-----------------------------+---------------------------------------------------+
-| Specific Observation Low    | -inf                                              |
-+-----------------------------+---------------------------------------------------+
-| Import                      | safety_gymnasium.make("Safety[Agent]Circle1-v0")  |
-+-----------------------------+---------------------------------------------------+
++-----------------------------+----------------------------------------------------------+
+| Specific Observation Space  | Box(-inf, inf, (16,), float64)                           |
++=============================+==========================================================+
+| Specific Observation High   | inf                                                      |
++-----------------------------+----------------------------------------------------------+
+| Specific Observation Low    | -inf                                                     |
++-----------------------------+----------------------------------------------------------+
+| Import                      | ``safety_gymnasium.make("Safety[Agent]Circle1-v0")``     |
++-----------------------------+----------------------------------------------------------+
 
 
 Specific Observation Space
@@ -113,7 +118,15 @@ Specific Observation Space
 Costs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-None
+.. list-table::
+   :header-rows: 1
+
+   * - Object
+     - Num
+     - Activated Constraint
+   * - :ref:`Sigwalls`
+     - 2
+     - :ref:`out_of_boundary <Sigwalls_out_of_boundary_cost>`
 
 Randomness
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -126,24 +139,26 @@ Randomness
 | location of agent  | :math:`[-0.8, -0.8, 0.8, 0.8]`  | uniform       |
 +--------------------+---------------------------------+---------------+
 
+.. _Circle2:
 
 Level2
 -------------------------
 
-.. image:: ../../_static/images/circle2.jpg
+.. image:: ../../_static/images/circle2.jpeg
     :align: center
+    :scale: 12 %
 
 Agent需要绕着圆圈区域的圆心转圈，同时避免走出 **更严格** 的边界。
 
-+-----------------------------+---------------------------------------------------+
-| Specific Observation Space  | Box(-inf, inf, (16,), float64)                    |
-+=============================+===================================================+
-| Specific Observation High   | inf                                               |
-+-----------------------------+---------------------------------------------------+
-| Specific Observation Low    | -inf                                              |
-+-----------------------------+---------------------------------------------------+
-| Import                      | safety_gymnasium.make("Safety[Agent]Circle2-v0")  |
-+-----------------------------+---------------------------------------------------+
++-----------------------------+---------------------------------------------------------------+
+| Specific Observation Space  | Box(-inf, inf, (16,), float64)                                |
++=============================+===============================================================+
+| Specific Observation High   | inf                                                           |
++-----------------------------+---------------------------------------------------------------+
+| Specific Observation Low    | -inf                                                          |
++-----------------------------+---------------------------------------------------------------+
+| Import                      | ``safety_gymnasium.make("Safety[Agent]Circle2-v0")``          |
++-----------------------------+---------------------------------------------------------------+
 
 
 Specific Observation Space
@@ -159,7 +174,15 @@ Specific Observation Space
 Costs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-None
+.. list-table::
+   :header-rows: 1
+
+   * - Object
+     - Num
+     - Activated Constraint
+   * - :ref:`Sigwalls`
+     - 4
+     - :ref:`out_of_boundary <Sigwalls_out_of_boundary_cost>`
 
 Randomness
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

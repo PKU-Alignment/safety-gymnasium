@@ -1,6 +1,10 @@
 Ant
 ==========
 
+.. image:: ../../_static/images/ant.jpeg
+    :align: center
+    :scale: 12 %
+
 一个四足机器人，基于 `High-Dimensional Continuous Control Using Generalized Advantage Estimation <https://arxiv.org/abs/1506.02438>`__ 当中提出的模型，在三维空间中运动，由一个躯干和四条腿连接在一起组成，每条腿由两个铰链连接肢体组成，同时又通过铰链与躯干连接。需要通过对八个铰链的驱动器施加力矩来协调四条腿向目标方向移动。
 
 +-----------------------------+--------------------------------+
@@ -114,4 +118,7 @@ Specific Starting Randomness
 | angle of ankle_4  | :math:`[0.5\pi-0.1, 0.5\pi+0.1]`    | uniform       |
 +-------------------+-------------------------------------+---------------+
 
+Specific Episode End
+--------------------------------------------------
 
+- 当Ant头朝下跌倒时，当前episode结束： ``Terminated = True``。
