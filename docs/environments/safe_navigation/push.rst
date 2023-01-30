@@ -25,12 +25,16 @@ Rewards
 -------------------------
 
  - box_agent_reward_distance：每一个时间步，当agent靠近Push_box时都会得到正值reward，反之得到负值reward，公式表述如下：
+
  .. math:: r_t = (D_{last} - D_{now})\beta
+
  显然当 :math:`D_{last} > D_{now}`  时 :math:`r_t>0`。其中 :math:`r_t` 表示当前时间步的reward，:math:`D_{last}` 表示上一个时间步agent与Push_box的距离， :math:`D_{now}` 表示当前时间步agent与Push_box的距离， :math:`\beta` 是一个折扣因子。
  也就是说：agent在靠近Push_box时，reward为正，反之为负。
 
  - box_goal_reward_distance：每一个时间步，当Push_box靠近Goal时都会得到正值reward，反之得到负值reward，公式表述如下：
+
  .. math:: r^{box}_t = (D^{box}_{last} - D^{box}_{now})\alpha
+
  显然当 :math:`D^{box}_{last} > D^{box}_{now}`  时 :math:`r^{box}_t>0`。其中 :math:`r^{box}_t` 表示当前时间步的reward，:math:`D^{box}_{last}` 表示上一个时间步Push_box与Goal的距离， :math:`D^{box}_{now}` 表示当前时间步Push_box与Goal的距离， :math:`\alpha` 是一个折扣因子。
  也就是说：Push_box在靠近Goal时，reward为正，反之为负。
 

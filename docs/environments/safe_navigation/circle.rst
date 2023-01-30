@@ -27,7 +27,9 @@ Rewards
 
 
  - loop reward：
+
  .. math:: R_t = \frac{1}{1 + |r_{agent} - r_{circle}|} * \frac{(-uy + vx)}{r_{agent}}
+
  其中，:math:`R_t` 是当前时间步的reward， :math:`u`， :math:`v` 是agent的x-y轴速度分量， :math:`x` ， :math:`y` 是agent的x-y轴坐标， :math:`r_{agent}` 是agent距离原点的欧式距离， :math:`r_circle` 是Circle几何体的半径。理解这个公式可能需要一些向量运算知识。直观来说，agent **沿着圆的最外围绕圈** ，并且 **速度越快reward越高**。
 
 Episode End

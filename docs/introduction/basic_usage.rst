@@ -5,6 +5,7 @@
 -----
 
 .. code-block:: bash
+
     # 通过pypi
     pip install Safety-Gymnasium
     # 通过github/源码
