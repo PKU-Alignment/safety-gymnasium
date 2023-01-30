@@ -109,7 +109,7 @@ class DebugInfo:
 
 
 class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
-    r'''Base class for agent.
+    r"""Base class for agent.
 
     Get mujoco-specific info about agent and control agent in environments.
 
@@ -150,7 +150,7 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
     - :attr:`mat` (np.ndarray): The Cartesian rotation matrix of agent.
     - :attr:`vel` (np.ndarray): The Cartesian velocity of agent.
     - :attr:`pos` (np.ndarray): The Cartesian position of agent.
-    '''
+    """
 
     def __init__(  # pylint: disable=too-many-arguments
         self,

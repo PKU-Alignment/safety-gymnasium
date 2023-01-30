@@ -165,7 +165,6 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
       some geoms that has no randomness.
     - :attr:`goal_achieved` (bool): Determine whether the goal is achieved, it will be called in every timestep
       and it is implemented in different task.
-
     """
 
     def __init__(self, config: dict):  # pylint: disable-next=too-many-statements
@@ -173,7 +172,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
 
         Args:
             config (dict): Configuration dictionary, used to pre-config some attributes
-            according to tasks via :meth:`safety_gymnasium.register`.
+              according to tasks via :meth:`safety_gymnasium.register`.
         """
         super().__init__(config=config)
 
