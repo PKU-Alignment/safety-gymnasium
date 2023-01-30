@@ -6,12 +6,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "safety_gymnasium"
-description = "A comprehensive and reliable environment for safe reinforcement learning."
+description = "A highly scalable and customizable safe reinforcement learning environment."
 readme = "README.md"
 requires-python = ">= 3.8"
 authors = [{ name = "Safety Gymnasium Contributors" }]
 license = { text = "Apache License, Version 2.0" }
-keywords = ["Safe Reinforcement Learning", "Reinforcement Learning", "PyTorch"]
+keywords = ["Safe Reinforcement Learning", "RL Environment", "MuJoCo"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "License :: OSI Approved :: Apache Software License",
@@ -43,7 +43,7 @@ Documentation = "https://www.safety-gymnasium.com"
 
 [project.optional-dependencies]
 lint = [
-    "isort",
+    "isort == 5.12.0",
     "black >= 22.6.0",
     "pylint >= 2.15.0",
     "mypy >= 0.990",
