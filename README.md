@@ -76,7 +76,7 @@ while not terminated:
 
 ### Install from PyPi
 ```
-pip install safety-gymnaisum
+pip install safety-gymnaisum Notes:coming as soon as possible.
 ```
 
 ### Install from source
@@ -84,8 +84,8 @@ pip install safety-gymnaisum
 ```bash
 conda create -n <virtual-env-name> python=3.8
 conda activate <virtual-env-name>
-git clone https://github.com/PKU-MARL/safety-gymnasium
-cd safety_gymnasium
+git clone git@github.com:PKU-MARL/Safety-Gymnasium.git
+cd Safety-Gymnasium
 pip install -e .
 ```
 
