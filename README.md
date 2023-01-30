@@ -5,7 +5,7 @@
 
 **This library is currently under heavy development - if you have suggestions on the API or use-cases you'd like to be covered, please open an github issue or reach out. We'd love to hear about how you're using the library.**
 
-Safety-Gymnasium is a highly scalable and customizable safe reinforcement learning environment that provides a standard API compliant with information on constraints. We aim to deliver a good view of benchmarking Safety Reinforcement Learning (Safe RL) algorithms and a more standardized environment setting. Users can explore new insights in the RL community by constructing an elegant code framework and designing well-designed environments. 
+Safety-Gymnasium is a highly scalable and customizable safe reinforcement learning environment that provides a standard API compliant with information on constraints. We aim to deliver a good view of benchmarking Safety Reinforcement Learning (Safe RL) algorithms and a more standardized environment setting. Users can explore new insights in the RL community by constructing an elegant code framework and designing well-designed environments.
 
 --------------------------------------------------------------------------------
 
