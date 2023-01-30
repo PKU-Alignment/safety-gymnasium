@@ -31,7 +31,7 @@ Here we provide a table for comparison of **Safety Gymnasium** and existing Safe
 
 We designed a variety of safety-enhanced learning tasks around the latest version of Gymnasium:`safety-velocity`, `safety-run`, `safety-circle`, `safety-goal`, `safety-button`, etc, leading to a unified safety-enhanced learning benchmark environment called `Safety Gymnasium.`
 
-Further, to facilitate the progress of community research, we redesigned [Safety Gym](https://github.com/openai/safety-gym) and removed the dependency on `mujoco-py`. We built it on top of [MuJoCo](https://github.com/deepmind/mujoco) and fixed some bugs, more specific bug report can refer to [Safety Gym's BUG Report](https://github.com/PKU-MARL/Safety-Gymnasium/blob/main/docs/safety_gym_bug_report.md).
+Further, to facilitate the progress of community research, we redesigned [Safety Gym](https://github.com/openai/safety-gym) and removed the dependency on `mujoco-py`. We built it on top of [MuJoCo](https://github.com/deepmind/mujoco) and fixed some bugs, more specific bug report can refer to [Safety Gym's BUG Report](https://github.com/PKU-MARL/Safety-Gymnasium/blob/main/safety_gym_bug_report.md).
 
 Here is a list of all the environments we support; some are being tested in our baseline, and we will gradually disclose it in the later updates.
 
