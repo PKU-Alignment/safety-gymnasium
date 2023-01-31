@@ -11,7 +11,7 @@ Safety-Gymnasium is a highly scalable and customizable Safe Reinforcement Learni
 
 ## Why Safety-Gymnasium?
 
-Here we provide a table for comparison of **Safety-Gymnasium** and existing SafeRL Environments.
+Here we provide a table for comparison of **Safety-Gymnasium** and existing SafeRL Environments libraries.
 
 |SafeRL<br/>Envs|Engine| Vectorized<br/> Environments | New Gym API<sup>**(3)**</sup> |    Vision Input     |
 | :----------------------------------------------------------: | :---------------------------: | :-------------------: | :---------------------------: | :-----------------: |
