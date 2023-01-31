@@ -31,7 +31,7 @@ Rewards
  显然当 :math:`D_{last} > D_{now}`  时 :math:`r_t>0`。其中 :math:`r_t` 表示当前时间步的reward，:math:`D_{last}` 表示上一个时间步agent与Goal的距离， :math:`D_{now}` 表示当前时间步agent与Goal的距离， :math:`\beta` 是一个折扣因子。
  也就是说：agent在靠近Goal时，reward为正，反之为负。
 
-- reward_goal：每一次到达Goal的位置，得到一个完成目标的正值reward: :math:`R_{goal}`。
+ - reward_goal：每一次到达Goal的位置，得到一个完成目标的正值reward: :math:`R_{goal}`。
 
 Episode End
 -------------------------
