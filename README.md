@@ -19,7 +19,7 @@ Here we provide a table for comparison of **Safety-Gymnasium** and existing Safe
 | [safe-control-gym](https://github.com/utiasDSL/safe-control-gym)<br/>![GitHub last commit](https://img.shields.io/github/last-commit/utiasDSL/safe-control-gym?label=last%20update)|           PyBullet           |         ❌               |               ❌               |          ❌          |
 |            Velocity-Constraints<sup>**(2)**</sup>            |   N/A   |   ❌                 |         ❌          |               ❌               |          ❌          |
 | [mujoco-circle](https://github.com/ymzhang01/mujoco-circle)<br/>![GitHub last commit](https://img.shields.io/github/last-commit/ymzhang01/mujoco-circle?label=last%20update) | PyTorch |  ❌|  ❌           |               ❌               |          ❌          |
-| Safety Gymnaisum<br/>![GitHub last commit](https://img.shields.io/github/last-commit/PKU-MARL/Safety_Gymnaisum?label=last%20update) |      **MuJoCo 2.3.0+**        |   ✅  |               ✅               |          ✅          |
+| Safety Gymnaisum<br/>![GitHub last commit](https://img.shields.io/github/last-commit/PKU-MARL/Safety-Gymnasium) |      **MuJoCo 2.3.0+**        |   ✅  |               ✅               |          ✅          |
 
 <sup>(1): Maintenance (expect bug fixes and minor updates); the last commit is 19 Nov 2021. Safety Gym depends on `mujoco-py` 2.0.2.7, which was updated on Oct 12, 2019.</sup><br/>
 <sup>(2): There is no official library for speed-related environments, and its associated cost constraints are constructed from info. But the task is widely used in the study of SafeRL, and we encapsulate it in Safety-Gymnasium.</sup><br/>
