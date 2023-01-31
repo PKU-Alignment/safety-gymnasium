@@ -37,9 +37,9 @@ Here is a list of all the environments we support for now; some are being tested
 
 <table border="1">
     <tr>
-        <td>Category</td>
-        <td>Task</td>
-        <td>Agent</td>
+        <th>Category</th>
+        <th>Task</th>
+        <th>Agent</th>
     </tr>
     <tr>
         <td rowspan="4">Safe Navigation</td>
@@ -56,7 +56,7 @@ Here is a list of all the environments we support for now; some are being tested
         <td>Circle[012]</td>
     </tr>
     <tr>
-        <td>Safe Velovity</td>
+        <td>Safe Velocity</td>
         <td>Velocity</td>
         <td>HalfCheetah, Hopper, Swimmer, Walker2d, Ant, Humanoid</td>
     </tr>
