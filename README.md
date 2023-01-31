@@ -33,7 +33,36 @@ We designed a variety of safety-enhanced learning tasks and integrated the contr
 
 Further, to facilitate the progress of community research, we redesigned [Safety Gym](https://github.com/openai/safety-gym) and removed the dependency on `mujoco-py`. We built it on top of [MuJoCo](https://github.com/deepmind/mujoco) and fixed some bugs, more specific bug report can refer to [Safety Gym's BUG Report](https://github.com/PKU-MARL/Safety-Gymnasium/blob/main/safety_gym_bug_report.md).
 
-Here is a list of all the environments we support; some are being tested in our baseline, and we will gradually disclose it in the later updates.
+Here is a list of all the environments we support for now; some are being tested in our baselines, and we will gradually disclose it in the later updates.
+
+<table border="1">
+    <tr>
+        <td>Category</td>
+        <td>Task</td>
+        <td>Agent</td>
+    </tr>
+    <tr>
+        <td rowspan="4">Safe Navigation</td>
+        <td>Goal[012]</td>
+        <td rowspan="4">Point, Car, Racecar, Ant</td>
+    </tr>
+    <tr>
+        <td>Button[012]</td>
+    </tr>
+    <tr>
+        <td>Push[012]</td>
+    </tr>
+    <tr>
+        <td>Circle[012]</td>
+    </tr>
+    <tr>
+        <td>Safe Velovity</td>
+        <td>Velocity</td>
+        <td>HalfCheetah, Hopper, Swimmer, Walker2d, Ant, Humanoid</td>
+    </tr>
+</table>
+
+Here is some pictures about tasks in Safe Navigation.
 
 #### Agents
 
