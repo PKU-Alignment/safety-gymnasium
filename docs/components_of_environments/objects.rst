@@ -5,39 +5,39 @@ Objects
 
     * - .. figure:: ../_static/images/goal.jpeg
             :width: 230px
-            :target: ./geom/#goal
+            :target: ./geom.html/#goal
         .. centered:: :ref:`Goal`
       - .. figure:: ../_static/images/buttons.jpeg
             :width: 230px
-            :target: ./geom/#buttons
+            :target: ./geom.html/#buttons
         .. centered:: :ref:`Buttons`
       - .. figure:: ../_static/images/circle.jpeg
             :width: 230px
-            :target: ./geom/#circle
+            :target: ./geom.html/#circle
         .. centered:: :ref:`Circle`
     * - .. figure:: ../_static/images/pillars.jpeg
             :width: 230px
-            :target: ./geom/#pillars
+            :target: ./geom.html/#pillars
         .. centered:: :ref:`Pillars`
       - .. figure:: ../_static/images/hazards.jpeg
             :width: 230px
-            :target: ./geom/#hazards
+            :target: ./geom.html/#hazards
         .. centered:: :ref:`Hazards`
       - .. figure:: ../_static/images/sigwalls.jpeg
             :width: 230px
-            :target: ./geom/#sigwalls
+            :target: ./geom.html/#sigwalls
         .. centered:: :ref:`Sigwalls`
     * - .. figure:: ../_static/images/vases.jpeg
             :width: 230px
-            :target: ./free_geom/#vases
+            :target: ./free_geom.html/#vases
         .. centered:: :ref:`Vases`
       - .. figure:: ../_static/images/push_box.jpeg
             :width: 230px
-            :target: ./free_geom/#push-box
+            :target: ./free_geom.html/#push-box
         .. centered:: :ref:`Push_box`
       - .. figure:: ../_static/images/gremlins.jpeg
             :width: 230px
-            :target: ./mocap/#gremlins
+            :target: ./mocap.html/#gremlins
         .. centered:: :ref:`Gremlins`
 
 环境当中的物体分为3类： **Geom**, **FreeGeom**, **Mocap**。
