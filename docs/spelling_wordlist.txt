@@ -360,3 +360,15 @@ shorthands
 Racecar
 Sigwalls
 pid
+KeyboardViewer
+fixedfar
+fixednear
+RGB
+nv
+nq
+nu
+nbody
+qpos
+qvel
+ctrl
+glfw

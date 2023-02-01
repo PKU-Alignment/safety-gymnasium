@@ -16,7 +16,6 @@
 
 import numpy as np
 from gymnasium.envs.mujoco.ant_v4 import AntEnv
-
 from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 
 

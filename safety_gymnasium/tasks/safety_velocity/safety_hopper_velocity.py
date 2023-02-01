@@ -15,7 +15,6 @@
 """Hopper environment with a safety constraint on velocity."""
 
 from gymnasium.envs.mujoco.hopper_v4 import HopperEnv
-
 from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 
 

@@ -154,7 +154,7 @@
   </contact>
   <actuator>
     <velocity name="diff_ring" joint="diff_ring" forcerange="-1 1" ctrlrange="-20 20"/>
-    <position name="left_steering_hinge_joint" joint="left_steering_hinge_joint" forcerange="-1 1" ctrlrange="-0.785 0.785"/>
+    <position name="steering_hinge" joint="left_steering_hinge_joint" forcerange="-1 1" ctrlrange="-0.785 0.785"/>
   </actuator>
     <sensor>
         <!-- Used for observation -->

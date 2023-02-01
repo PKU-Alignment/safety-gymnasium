@@ -15,7 +15,6 @@
 """Walker2d environment with a safety constraint on velocity."""
 
 from gymnasium.envs.mujoco.walker2d_v4 import Walker2dEnv
-
 from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 
 

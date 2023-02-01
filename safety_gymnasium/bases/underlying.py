@@ -17,19 +17,19 @@
 import abc
 from copy import deepcopy
 from dataclasses import dataclass
-from typing import Union
+from typing import Union, List
 
 import gymnasium
 import mujoco
 import numpy as np
 from gymnasium.envs.mujoco.mujoco_rendering import RenderContextOffscreen
-
 import safety_gymnasium
 from safety_gymnasium import agents
+from safety_gymnasium.bases.base_object import Geom, FreeGeom, Mocap
 from safety_gymnasium.assets.color import COLOR
+from safety_gymnasium.assets.free_geoms import FREE_GEOMS_REGISTER
 from safety_gymnasium.assets.geoms import GEOMS_REGISTER
 from safety_gymnasium.assets.mocaps import MOCAPS_REGISTER
-from safety_gymnasium.assets.objects import OBJS_REGISTER
 from safety_gymnasium.utils.common_utils import MujocoException
 from safety_gymnasium.utils.keyboard_viewer import KeyboardViewer
 from safety_gymnasium.utils.random_generator import RandomGenerator
@@ -38,7 +38,16 @@ from safety_gymnasium.world import World
 
 @dataclass
 class RenderConf:
-    """Render options."""
+    r"""Render options.
+
+    Attributes:
+        libels (bool): Whether to render labels.
+        lidar_markers (bool): Whether to render lidar markers.
+        lidar_radius (float): Radius of the lidar markers.
+        lidar_size (float): Size of the lidar markers.
+        lidar_offset_init (float): Initial offset of the lidar markers.
+        lidar_offset_delta (float): Delta offset of the lidar markers.
+    """
 
     labels: bool = False
     lidar_markers: bool = True
@@ -50,48 +59,70 @@ class RenderConf:
 
 @dataclass
 class PlacementsConf:
-    """Placement options."""
+    r"""Placement options.
 
-    placements = None  # this is generated during running
-    extents = [-2, -2, 2, 2]  # Placement limits (min X, min Y, max X, max Y)
-    margin = 0.0  # Additional margin added to keepout when placing objects
+    Attributes:
+        placements (dict): Generated during running.
+        extents (list): Placement limits (min X, min Y, max X, max Y).
+        margin (float): Additional margin added to keepout when placing objects.
+    """
+
+    placements = None
+    extents = [-2, -2, 2, 2]
+    margin = 0.0
 
 
 @dataclass
 class SimulationConf:
-    """Simulation options."""
+    r"""Simulation options.
 
-    # Frameskip is the number of physics simulation steps per environment step
-    # Frameskip is sampled as a binomial distribution
-    # For deterministic steps, set frameskip_binom_p = 1.0 (always take max frameskip)
-    # Number of draws trials in binomial distribution (max frameskip)
+    Note:
+        Frameskip is the number of physics simulation steps per environment step and is sampled
+        as a binomial distribution.
+        For deterministic steps, set frameskip_binom_p = 1.0 (always take max frameskip).
+
+    Attributes:
+        frameskip_binom_n (int): Number of draws trials in binomial distribution (max frameskip).
+        frameskip_binom_p (float): Probability of trial return (controls distribution).
+    """
+
     frameskip_binom_n: int = 10
-    # Probability of trial return (controls distribution)
     frameskip_binom_p: float = 1.0
 
 
 @dataclass
 class VisionEnvConf:
-    """Vision observation parameters"""
+    r"""Vision observation parameters.
 
-    vision_size = (
-        60,
-        40,
-    )  # Size (width, height) of vision observation;
-    # gets flipped internally to (rows, cols) format
+    Attributes:
+        vision_size (tuple): Size (width, height) of vision observation.
+    """
+
+    vision_size = (60, 40)
 
 
 @dataclass
 class FloorConf:
-    """Floor options."""
+    r"""Floor options.
+
+    Attributes:
+        type (str): Type of floor.
+        size (tuple): Size of floor in environments.
+    """
 
     type: str = 'mat'  # choose from 'mat' and 'village'
-    size: tuple = (3.5, 3.5, 0.1)  # Size of floor in environments
+    size: tuple = (3.5, 3.5, 0.1)
 
 
 @dataclass
 class WorldInfo:
-    """World information."""
+    r"""World information generated in running.
+
+    Attributes:
+        layout (dict): Layout of the world.
+        reset_layout (dict): Saved layout of the world after reset.
+        world_config_dict (dict): World configuration dictionary.
+    """
 
     layout: dict = None
     reset_layout: dict = None
@@ -99,13 +130,67 @@ class WorldInfo:
 
 
 class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
-    """Base class which is in charge of mujoco and underlying process.
+    r"""Base class which is in charge of mujoco and underlying process.
 
-    In short: The engine for the Safety Gymnasium environment.
+    Methods:
+
+    - :meth:`_parse`: Parse the configuration from dictionary.
+    - :meth:`_build_agent`: Build the agent instance.
+    - :meth:`_add_geoms`: Add geoms into current environment.
+    - :meth:`_add_free_geoms`: Add free geoms into current environment.
+    - :meth:`_add_mocaps`: Add mocaps into current environment.
+    - :meth:`reset`: Reset the environment, it is dependent on :meth:`_build`.
+    - :meth:`_build`: Build the mujoco instance of environment from configurations.
+    - :meth:`simulation_forward`: Forward the simulation.
+    - :meth:`update_layout`: Update the layout dictionary of the world to update states of some objects.
+    - :meth:`_set_goal`: Set the goal position in physical simulator.
+    - :meth:`_render_lidar`: Render the lidar.
+    - :meth:`_render_compass`: Render the compass.
+    - :meth:`_render_area`: Render the area.
+    - :meth:`_render_sphere`: Render the sphere.
+    - :meth:`render`: Render the environment, it may call :meth:`_render_lidar`, :meth:`_render_compass`
+      :meth:`_render_area`, :meth:`_render_sphere`.
+    - :meth:`_get_viewer`: Get the viewer instance according to render_mode.
+    - :meth:`_update_viewer`: Update the viewer when world is updated.
+    - :meth:`_obs_lidar`: Get observations from the lidar.
+    - :meth:`_obs_compass`: Get observations from the compass.
+    - :meth:`_build_placements_dict`: Build the placements dictionary for different types of object.
+    - :meth:`_build_world_config`: Build the world configuration, combine separate configurations from
+        different types of objects together as world configuration.
+
+    Attributes:
+
+    - :attr:`sim_conf` (SimulationConf): Simulation options.
+    - :attr:`placements_conf` (PlacementsConf): Placement options.
+    - :attr:`render_conf` (RenderConf): Render options.
+    - :attr:`vision_env_conf` (VisionEnvConf): Vision observation parameters.
+    - :attr:`floor_conf` (FloorConf): Floor options.
+    - :attr:`random_generator` (RandomGenerator): Random generator instance.
+    - :attr:`world` (World): World, which is in charge of mujoco.
+    - :attr:`world_info` (WorldInfo): World information generated according to environment in running.
+    - :attr:`viewer` (Union[KeyboardViewer, RenderContextOffscreen]): Viewer for environment.
+    - :attr:`_viewers` (dict): Viewers.
+    - :attr:`_geoms` (dict): Geoms which are added into current environment.
+    - :attr:`_free_geoms` (dict): FreeGeoms which are added into current environment.
+    - :attr:`_mocaps` (dict): Mocaps which are added into current environment.
+    - :attr:`agent_name` (str): Name of the agent in current environment.
+    - :attr:`observe_vision` (bool): Whether to observe vision from the agent.
+    - :attr:`debug` (bool): Whether to enable debug mode, which is pre-config during registration.
+    - :attr:`observation_flatten` (bool): Whether to flatten the observation.
+    - :attr:`agent` (Agent): Agent instance added into current environment.
+    - :attr:`action_noise` (float): Magnitude of independent per-component gaussian action noise.
+    - :attr:`model`: mjModel.
+    - :attr:`data`: mjData.
+    - :attr:`_obstacles` (list): All types of object in current environment.
     """
 
-    def __init__(self, config=None):
-        """Initialize the engine."""
+    def __init__(self, config: dict = None):
+        """Initialize the engine.
+
+        Args:
+            config (dict): Configuration dictionary, used to pre-config some attributes
+                according to tasks via :meth:`safety_gymnasium.register`.
+        """
 
         self.sim_conf = SimulationConf()
         self.placements_conf = PlacementsConf()
@@ -123,7 +208,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
 
         # Obstacles which are added in environments.
         self._geoms = {}
-        self._objects = {}
+        self._free_geoms = {}
         self._mocaps = {}
 
         # something are parsed from pre-defined configs
@@ -138,11 +223,14 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         )
         self._build_agent(self.agent_name)
 
-    def _parse(self, config):
+    def _parse(self, config: dict) -> None:
         """Parse a config dict.
 
         Modify some attributes according to config.
         So that easily adapt to different environment settings.
+
+        Args:
+            config (dict): Configuration dictionary.
         """
         for key, value in config.items():
             if '.' in key:
@@ -153,14 +241,14 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                 assert hasattr(self, key), f'Bad key {key}'
                 setattr(self, key, value)
 
-    def _build_agent(self, agent_name):
+    def _build_agent(self, agent_name: str) -> None:
         """Build the agent in the world."""
         assert hasattr(agents, agent_name), 'agent not found'
         agent_cls = getattr(agents, agent_name)
         self.agent = agent_cls(random_generator=self.random_generator)
 
-    def _add_geoms(self, *geoms):
-        """Add geom type objects into environments and set corresponding attributes."""
+    def _add_geoms(self, *geoms: Geom) -> None:
+        """Register geom type objects into environments and set corresponding attributes."""
         for geom in geoms:
             assert (
                 type(geom) in GEOMS_REGISTER
@@ -169,18 +257,18 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             setattr(self, geom.name, geom)
             geom.set_agent(self.agent)
 
-    def _add_objects(self, *objects):
-        """Add object type objects into environments and set corresponding attributes."""
-        for obj in objects:
+    def _add_free_geoms(self, *free_geoms: FreeGeom) -> None:
+        """Register FreeGeom type objects into environments and set corresponding attributes."""
+        for obj in free_geoms:
             assert (
-                type(obj) in OBJS_REGISTER
+                type(obj) in FREE_GEOMS_REGISTER
             ), 'Please figure out the type of object before you add it into envs.'
-            self._objects[obj.name] = obj
+            self._free_geoms[obj.name] = obj
             setattr(self, obj.name, obj)
             obj.set_agent(self.agent)
 
-    def _add_mocaps(self, *mocaps):
-        """Add mocap type objects into environments and set corresponding attributes."""
+    def _add_mocaps(self, *mocaps: Mocap) -> None:
+        """Register mocap type objects into environments and set corresponding attributes."""
         for mocap in mocaps:
             assert (
                 type(mocap) in MOCAPS_REGISTER
@@ -189,14 +277,14 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             setattr(self, mocap.name, mocap)
             mocap.set_agent(self.agent)
 
-    def reset(self):
+    def reset(self) -> None:
         """Reset the environment."""
         self._build()
         # Save the layout at reset
         self.world_info.reset_layout = deepcopy(self.world_info.layout)
 
-    def _build(self):
-        """Build a new physics simulation environment"""
+    def _build(self) -> None:
+        """Build the mujoco instance of environment from configurations."""
         if self.placements_conf.placements is None:
             self._build_placements_dict()
             self.random_generator.set_placements_info(
@@ -220,8 +308,13 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             if self.viewer:
                 self._update_viewer(self.model, self.data)
 
-    def simulation_forward(self, action):
-        """Take a step in the physics simulation."""
+    def simulation_forward(self, action: np.ndarray) -> None:
+        """Take a step in the physics simulation.
+
+        Note:
+            - The **step** mentioned above is not the same as the **step** in Mujoco sense.
+            - The **step** here is the step in episode sense.
+        """
         # Simulate physics forward
         if self.debug:
             self.agent.debug()
@@ -255,8 +348,13 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         mujoco.mj_forward(self.model, self.data)  # Needed to get sensor readings correct!
         return exception
 
-    def update_layout(self):
-        """Update layout dictionary with new places of objects."""
+    def update_layout(self) -> None:
+        """Update layout dictionary with new places of objects from Mujoco instance.
+
+        When the objects moves, and if we want to update locations of some objects in environment,
+        then the layout dictionary needs to be updated to make sure that we won't wrongly change
+        the locations of other objects because we build world according to layout dictionary.
+        """
         mujoco.mj_forward(self.model, self.data)  # pylint: disable=no-member
         for k in list(self.world_info.layout.keys()):
             # Mocap objects have to be handled separately
@@ -264,16 +362,24 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                 continue
             self.world_info.layout[k] = self.data.body(k).xpos[:2].copy()
 
-    def _set_goal(self, pos):
-        """Set the goal position."""
+    def _set_goal(self, pos: np.ndarray) -> None:
+        """Set position of goal object in Mujoco instance.
+
+        Note:
+            This method is used to make sure the position of goal object in Mujoco instance
+            is the same as the position of goal object in layout dictionary or in attributes
+            of task instance.
+        """
         if pos.shape == (2,):
             self.model.body('goal').pos[:2] = pos[:2]
         elif pos.shape == (3,):
-            self.model.body('goal').pos[:2] = pos[:2]
+            self.model.body('goal').pos[:3] = pos[:3]
         else:
             raise NotImplementedError
 
-    def _render_lidar(self, poses, color, offset, group):
+    def _render_lidar(
+        self, poses: np.ndarray, color: np.ndarray, offset: float, group: int
+    ) -> None:
         """Render the lidar observation."""
         agent_pos = self.agent.pos
         agent_mat = self.agent.mat
@@ -294,7 +400,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                 label='',
             )
 
-    def _render_compass(self, pose, color, offset):
+    def _render_compass(self, pose: np.ndarray, color: np.ndarray, offset: float) -> None:
         """Render a compass observation."""
         agent_pos = self.agent.pos
         agent_mat = self.agent.mat
@@ -310,7 +416,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         )
 
     # pylint: disable-next=too-many-arguments
-    def _render_area(self, pos, size, color, label='', alpha=0.1):
+    def _render_area(
+        self, pos: np.ndarray, size: float, color: np.ndarray, label: str = '', alpha: float = 0.1
+    ) -> None:
         """Render a radial area in the environment."""
         z_size = min(size, 0.3)
         pos = np.asarray(pos)
@@ -325,7 +433,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         )
 
     # pylint: disable-next=too-many-arguments
-    def _render_sphere(self, pos, size, color, label='', alpha=0.1):
+    def _render_sphere(
+        self, pos: np.ndarray, size: float, color: np.ndarray, label: str = '', alpha: float = 0.1
+    ) -> None:
         """Render a radial area in the environment."""
         pos = np.asarray(pos)
         if pos.shape == (2,):
@@ -339,8 +449,27 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         )
 
     # pylint: disable-next=too-many-arguments,too-many-branches,too-many-statements
-    def render(self, width, height, mode, camera_id=None, camera_name=None, cost=None):
-        """Render the environment to the screen."""
+    def render(
+        self,
+        width: int,
+        height: int,
+        mode: str,
+        camera_id: int = None,
+        camera_name: str = None,
+        cost: float = None,
+    ) -> None:
+        """Render the environment to somewhere.
+
+        Note:
+            The camera_name parameter can be chosen from:
+              - **human**: the camera used for freely moving around and can get input
+                from keyboard real time.
+              - **vision**: the camera used for vision observation, which is fixed in front of the
+                agent's head.
+              - **track**: The camera used for tracking the agent.
+              - **fixednear**: the camera used for top-down observation.
+              - **fixedfar**: the camera used for top-down observation, but is further than **fixednear**.
+        """
         self.model.vis.global_.offwidth = width
         self.model.vis.global_.offheight = height
 
@@ -411,7 +540,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         raise NotImplementedError(f'Render mode {mode} is not implemented.')
 
     def _get_viewer(
-        self, mode
+        self, mode: str
     ) -> Union[
         'safety_gymnasium.utils.keyboard_viewer.KeyboardViewer',
         'gymnasium.envs.mujoco.mujoco_rendering.RenderContextOffscreen',
@@ -432,18 +561,18 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
 
         return self.viewer
 
-    def _update_viewer(self, model, data):
+    def _update_viewer(self, model, data) -> None:
         """update the viewer with new model and data"""
         assert self.viewer, 'Call before self.viewer existing.'
         self.viewer.model = model
         self.viewer.data = data
 
     @abc.abstractmethod
-    def _obs_lidar(self, positions, group):
+    def _obs_lidar(self, positions: np.ndarray, group: int) -> np.ndarray:
         """Calculate and return a lidar observation.  See sub methods for implementation."""
 
     @abc.abstractmethod
-    def _obs_compass(self, pos):
+    def _obs_compass(self, pos: np.ndarray) -> np.ndarray:
         """Return a agent-centric compass observation of a list of positions.
 
         Compass is a normalized (unit-length) egocentric XY vector,
@@ -455,11 +584,11 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         """
 
     @abc.abstractmethod
-    def _build_placements_dict(self):
+    def _build_placements_dict(self) -> dict:
         """Build a dict of placements.  Happens only once."""
 
     @abc.abstractmethod
-    def _build_world_config(self, layout):
+    def _build_world_config(self, layout: dict) -> dict:
         """Create a world_config from our own config."""
 
     @property
@@ -473,8 +602,14 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         return self.world.data
 
     @property
-    def _obstacles(self):
-        """Get the obstacles in the task."""
+    def _obstacles(self) -> List[Union[Geom, FreeGeom, Mocap]]:
+        """Get the obstacles in the task.
+
+        Combine all types of object in current environment together into single list
+        in order to easily iterate them.
+        """
         return (
-            list(self._geoms.values()) + list(self._objects.values()) + list(self._mocaps.values())
+            list(self._geoms.values())
+            + list(self._free_geoms.values())
+            + list(self._mocaps.values())
         )

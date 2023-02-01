@@ -1,0 +1,237 @@
+Push
+==========
+
++--------+---------------------------------+-----------+--------+
+| Level  | Geom                            | Object    | Mocap  |
++========+=================================+===========+========+
+| 0      | Goal                            | Push_box  |        |
++--------+---------------------------------+-----------+--------+
+| 1      | Goal, Hazards=2, Pillars=1      | Push_box  |        |
++--------+---------------------------------+-----------+--------+
+| 2      | GoalGoal, Hazards=4, Pillars=4  | Push_box  |        |
++--------+---------------------------------+-----------+--------+
+
+
+.. list-table::
+   :header-rows: 1
+
+   * - Agent
+   * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/ant`
+
+
+这一套环境由 `Safety-Gym <https://cdn.openai.com/safexp-short.pdf>`__ 提出。
+
+Rewards
+-------------------------
+
+ - box_agent_reward_distance：每一个时间步，当agent靠近Push_box时都会得到正值reward，反之得到负值reward，公式表述如下：
+
+ .. math:: r_t = (D_{last} - D_{now})\beta
+
+ 显然当 :math:`D_{last} > D_{now}`  时 :math:`r_t>0`。其中 :math:`r_t` 表示当前时间步的reward，:math:`D_{last}` 表示上一个时间步agent与Push_box的距离， :math:`D_{now}` 表示当前时间步agent与Push_box的距离， :math:`\beta` 是一个折扣因子。
+ 也就是说：agent在靠近Push_box时，reward为正，反之为负。
+
+ - box_goal_reward_distance：每一个时间步，当Push_box靠近Goal时都会得到正值reward，反之得到负值reward，公式表述如下：
+
+ .. math:: r^{box}_t = (D^{box}_{last} - D^{box}_{now})\alpha
+
+ 显然当 :math:`D^{box}_{last} > D^{box}_{now}`  时 :math:`r^{box}_t>0`。其中 :math:`r^{box}_t` 表示当前时间步的reward，:math:`D^{box}_{last}` 表示上一个时间步Push_box与Goal的距离， :math:`D^{box}_{now}` 表示当前时间步Push_box与Goal的距离， :math:`\alpha` 是一个折扣因子。
+ 也就是说：Push_box在靠近Goal时，reward为正，反之为负。
+
+ - reward_goal：每一次Push_box到达Goal的位置时，得到一个完成目标的正值reward: :math:`R_{goal}`。
+
+Specific Setting
+-----------------
+
+- Car：为了方便Car推动Push_box，针对Car调整了Push_box的属性:
+    .. code-block:: python
+
+        self.size = 0.125  # Box half-radius size
+        self.keepout = 0.125  # Box keepout radius for placement
+        self.density = 0.0005
+
+
+Episode End
+-------------------------
+
+- 当episode长度大于1000时： ``Trucated == True``。
+
+.. _Push0:
+
+Level0
+-------------------------
+
+.. image:: ../../_static/images/push0.jpeg
+    :align: center
+    :scale: 12 %
+
+Agent需要将Push_box推动到Goal的位置。
+
++-----------------------------+-----------------------------------------------------------+
+| Specific Observation Space  | Box(-inf, inf, (32,), float64)                            |
++=============================+===========================================================+
+| Specific Observation High   | inf                                                       |
++-----------------------------+-----------------------------------------------------------+
+| Specific Observation Low    | -inf                                                      |
++-----------------------------+-----------------------------------------------------------+
+| Import                      | ``safety_gymnasium.make("Safety[Agent]Push0-v0")``        |
++-----------------------------+-----------------------------------------------------------+
+
+
+Specific Observation Space
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
++-------+-----------------+------+------+---------------+
+| Size  | Observation     | Min  | Max  | Max Distance  |
++=======+=================+======+======+===============+
+| 16    | goal lidar      | 0    | 1    | 3             |
++-------+-----------------+------+------+---------------+
+| 16    | push_box lidar  | 0    | 1    | 3             |
++-------+-----------------+------+------+---------------+
+
+
+Costs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Nothing.
+
+Randomness
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
++--------------------------------+-------------------------+---------------+
+| Scope                          | Range                   | Distribution  |
++================================+=========================+===============+
+| rotation of agent and objects  | :math:`[0, 2\pi]`       | uniform       |
++--------------------------------+-------------------------+---------------+
+| location of agent and objects  | :math:`[-1, -1, 1, 1]`  | uniform       |
++--------------------------------+-------------------------+---------------+
+
+.. _Push1:
+
+Level1
+-------------------------
+
+.. image:: ../../_static/images/push1.jpeg
+    :align: center
+    :scale: 12 %
+
+Agent需要将Push_box推动到Goal的位置，同时规避Hazards，Pillars=1但并不参与cost计算。
+
++-----------------------------+---------------------------------------------------------+
+| Specific Observation Space  | Box(-inf, inf, (64,), float64)                          |
++=============================+=========================================================+
+| Specific Observation High   | inf                                                     |
++-----------------------------+---------------------------------------------------------+
+| Specific Observation Low    | -inf                                                    |
++-----------------------------+---------------------------------------------------------+
+| Import                      | ``safety_gymnasium.make("Safety[Agent]Push1-v0")``      |
++-----------------------------+---------------------------------------------------------+
+
+
+Specific Observation Space
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
++-------+----------------+------+------+---------------+
+| Size  | Observation    | Min  | Max  | Max Distance  |
++=======+================+======+======+===============+
+| 16    | goal lidar     | 0    | 1    | 3             |
++-------+----------------+------+------+---------------+
+| 16    | hazards lidar  | 0    | 1    | 3             |
++-------+----------------+------+------+---------------+
+| 16    | pillars lidar  | 0    | 1    | 3             |
++-------+----------------+------+------+---------------+
+| 16    | push_box lidar | 0    | 1    | 3             |
++-------+----------------+------+------+---------------+
+
+
+Costs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+
+   * - Object
+     - Num
+     - Activated Constraint
+   * - :ref:`Hazards`
+     - 2
+     - :ref:`cost_hazards <Hazards_cost_hazards>`
+   * - :ref:`Pillars`
+     - 1
+     - nothing
+
+Randomness
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
++--------------------------------+---------------------------------+---------------+
+| Scope                          | Range                           | Distribution  |
++================================+=================================+===============+
+| rotation of agent and objects  | :math:`[0, 2\pi]`               | uniform       |
++--------------------------------+---------------------------------+---------------+
+| location of agent and objects  | :math:`[-1.5, -1.5, 1.5, 1.5]`  | uniform       |
++--------------------------------+---------------------------------+---------------+
+
+.. _Push2:
+
+Level2
+-------------------------
+
+.. image:: ../../_static/images/push2.jpeg
+    :align: center
+    :scale: 12 %
+
+Agent需要将Push_box推动到Goal的位置，同时规避更多的Hazards和Pillars。
+
++-----------------------------+------------------------------------------------------------+
+| Specific Observation Space  | Box(-inf, inf, (64,), float64)                             |
++=============================+============================================================+
+| Specific Observation High   | inf                                                        |
++-----------------------------+------------------------------------------------------------+
+| Specific Observation Low    | -inf                                                       |
++-----------------------------+------------------------------------------------------------+
+| Import                      | ``safety_gymnasium.make("Safety[Agent]Push2-v0")``         |
++-----------------------------+------------------------------------------------------------+
+
+
+Specific Observation Space
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
++-------+----------------+------+------+---------------+
+| Size  | Observation    | Min  | Max  | Max Distance  |
++=======+================+======+======+===============+
+| 16    | goal lidar     | 0    | 1    | 3             |
++-------+----------------+------+------+---------------+
+| 16    | hazards lidar  | 0    | 1    | 3             |
++-------+----------------+------+------+---------------+
+| 16    | pillars lidar  | 0    | 1    | 3             |
++-------+----------------+------+------+---------------+
+| 16    | push_box lidar | 0    | 1    | 3             |
++-------+----------------+------+------+---------------+
+
+
+Costs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+
+   * - Object
+     - Num
+     - Activated Constraint
+   * - :ref:`Hazards`
+     - 4
+     - :ref:`cost_hazards <Hazards_cost_hazards>`
+   * - :ref:`Pillars`
+     - 4
+     - :ref:`contact <Pillars_contact_cost>`
+
+Randomness
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
++--------------------------------+-------------------------+---------------+
+| Scope                          | Range                   | Distribution  |
++================================+=========================+===============+
+| rotation of agent and objects  | :math:`[0, 2\pi]`       | uniform       |
++--------------------------------+-------------------------+---------------+
+| location of agent and objects  | :math:`[-2, -2, 2, 2]`  | uniform       |
++--------------------------------+-------------------------+---------------+

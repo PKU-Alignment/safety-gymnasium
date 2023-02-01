@@ -18,7 +18,6 @@ from typing import Iterable, List, Optional, Union
 
 import gymnasium
 from gymnasium.vector.vector_env import VectorEnv
-
 from safety_gymnasium.utils.registration import make as safety_make
 from safety_gymnasium.vector.async_vector_env import SafetyAsyncVectorEnv
 from safety_gymnasium.vector.sync_vector_env import SafetySyncVectorEnv
