@@ -1,7 +1,7 @@
 Point
 ==========
 
-.. image:: ../../_static/images/poin.jpeg
+.. image:: ../../_static/images/point.jpeg
     :align: center
     :scale: 12 %
 

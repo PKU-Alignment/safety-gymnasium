@@ -3,9 +3,9 @@ Agents
 
 .. list-table:: 
 
-    * - .. figure:: ../_static/images/poin.jpeg
+    * - .. figure:: ../_static/images/point.jpeg
             :width: 230px
-            :target: Agents/point
+            :target: agents/point.html
         .. centered:: :doc:`agents/point`
       - .. figure:: ../_static/images/car.jpeg
             :width: 230px
@@ -13,11 +13,11 @@ Agents
         .. centered:: :doc:`agents/car`
       - .. figure:: ../_static/images/racecar.jpeg
             :width: 230px
-            :target: Agents/racecar.html
+            :target: agents/racecar.html
         .. centered:: :doc:`agents/racecar`
     * - .. figure:: ../_static/images/ant.jpeg
             :width: 230px
-            :target: agents/ant
+            :target: agents/ant.html
         .. centered:: :doc:`agents/ant`
       - .. figure:: ../_static/images/coming_soon.png
             :width: 230px
