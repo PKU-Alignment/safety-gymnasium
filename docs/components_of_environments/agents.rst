@@ -3,7 +3,7 @@ Agents
 
 .. list-table:: 
 
-    * - .. figure:: ../_static/images/point.jpeg
+    * - .. figure:: ../_static/images/poin.jpeg
             :width: 230px
             :target: Agents/point
         .. centered:: :doc:`agents/point`
