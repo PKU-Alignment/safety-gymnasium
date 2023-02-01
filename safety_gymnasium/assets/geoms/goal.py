@@ -17,14 +17,13 @@
 from dataclasses import dataclass, field
 
 import numpy as np
-
 from safety_gymnasium.assets.color import COLOR
 from safety_gymnasium.assets.group import GROUP
-from safety_gymnasium.bases.base_obstacle import Geoms
+from safety_gymnasium.bases.base_object import Geom
 
 
 @dataclass
-class Goal(Geoms):  # pylint: disable=too-many-instance-attributes
+class Goal(Geom):  # pylint: disable=too-many-instance-attributes
     """Goal parameters."""
 
     name: str = 'goal'

@@ -16,7 +16,7 @@
 
 import mujoco
 import numpy as np
-
+import gymnasium
 from safety_gymnasium.assets.geoms import Buttons, Goal
 from safety_gymnasium.bases.base_task import BaseTask
 
@@ -92,18 +92,13 @@ class ButtonLevel0(BaseTask):
 
         if self.observe_vision:
             obs['vision'] = self._obs_vision()
+
+        assert self.obs_info.obs_space_dict.contains(
+            obs
+        ), f'Bad obs {obs} {self.obs_info.obs_space_dict}'
+
         if self.observation_flatten:
-            flat_obs = np.zeros(self.obs_info.obs_flat_size)
-            offset = 0
-            for k in sorted(self.obs_info.obs_space_dict.keys()):
-                k_size = np.prod(obs[k].shape)
-                flat_obs[offset : offset + k_size] = obs[k].flat
-                offset += k_size
-            obs = flat_obs
-            assert self.observation_space.contains(obs), f'Bad obs {obs} {self.observation_space}'
-            assert (
-                offset == self.obs_info.obs_flat_size
-            ), 'Obs from mujoco do not match env pre-specifed lenth.'
+            obs = gymnasium.spaces.utils.flatten(self.obs_info.obs_space_dict, obs)
         return obs
 
     @property
@@ -117,8 +112,3 @@ class ButtonLevel0(BaseTask):
                 if any(n in self.agent.body_info.geom_names for n in geom_names):
                     return True
         return False
-
-    @property
-    def goal_pos(self):
-        """Helper to get goal position from layout."""
-        return self.goal.pos  # pylint: disable=no-member

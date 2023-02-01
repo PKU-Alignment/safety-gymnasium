@@ -17,14 +17,13 @@
 from dataclasses import dataclass
 
 import numpy as np
-
 from safety_gymnasium.assets.color import COLOR
 from safety_gymnasium.assets.group import GROUP
-from safety_gymnasium.bases.base_obstacle import Geoms
+from safety_gymnasium.bases.base_object import Geom
 
 
 @dataclass
-class Sigwalls(Geoms):  # pylint: disable=too-many-instance-attributes
+class Sigwalls(Geom):  # pylint: disable=too-many-instance-attributes
     """Non collision object."""
 
     name: str = 'sigwalls'

@@ -10,7 +10,6 @@ import pathlib
 import sys
 from typing import Any, Dict
 
-
 ROOT_DIR = pathlib.Path(__file__).absolute().parent.parent.parent
 sys.path.insert(0, str(ROOT_DIR / 'safety_gymnasium'))
 
@@ -53,13 +52,13 @@ autodoc_preserve_defaults = True
 # a list of builtin themes.
 #
 html_theme = 'furo'
-html_title = 'Documentation'
-html_baseurl = 'https://www.safety-gymnasium.com'
+html_title = 'Safety Gymnasium Documentation'
+html_baseurl = 'https://safety_gymnasium.com'
 html_copy_source = False
-html_favicon = '_static/images/favicon.png'
+# html_favicon = '_static/images/favicon.png'
 html_theme_options = {
-    'light_logo': 'images/logo.png',
-    'dark_logo': 'images/logo.png',
+    # 'light_logo': 'images/logo.png',
+    # 'dark_logo': 'images/logo.png',
     'gtag': 'G-6H9C8TWXZ8',
     'description': 'A standard API for reinforcement learning and a diverse set of reference environments (formerly Gym)',
     'image': 'images/logo.png',
