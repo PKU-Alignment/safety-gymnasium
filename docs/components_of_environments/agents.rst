@@ -5,19 +5,19 @@ Agents
 
     * - .. figure:: ../_static/images/point.jpeg
             :width: 230px
-            :target: ./agents/point.html
+            :target: point
         .. centered:: :doc:`agents/point`
       - .. figure:: ../_static/images/car.jpeg
             :width: 230px
-            :target: ./agents/car.html
+            :target: car
         .. centered:: :doc:`agents/car`
       - .. figure:: ../_static/images/racecar.jpeg
             :width: 230px
-            :target: ./agents/racecar.html
+            :target: racecar
         .. centered:: :doc:`agents/racecar`
     * - .. figure:: ../_static/images/ant.jpeg
             :width: 230px
-            :target: ./agents/ant.html
+            :target: ant
         .. centered:: :doc:`agents/ant`
       - .. figure:: ../_static/images/coming_soon.png
             :width: 230px
