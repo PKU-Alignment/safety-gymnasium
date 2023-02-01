@@ -5,15 +5,15 @@ Agents
 
     * - .. figure:: ../_static/images/point.jpeg
             :width: 230px
-            :target: point
+            :target: agent/point
         .. centered:: :doc:`agents/point`
       - .. figure:: ../_static/images/car.jpeg
             :width: 230px
-            :target: car
+            :target: agent/car.html
         .. centered:: :doc:`agents/car`
       - .. figure:: ../_static/images/racecar.jpeg
             :width: 230px
-            :target: racecar
+            :target: agent/racecar.rst
         .. centered:: :doc:`agents/racecar`
     * - .. figure:: ../_static/images/ant.jpeg
             :width: 230px
