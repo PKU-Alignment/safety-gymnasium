@@ -57,7 +57,6 @@ class SafetySyncVectorEnv(SyncVectorEnv):
         """Steps through each of the environments returning the batched results."""
         observations, infos = [], {}
         for i, (env, action) in enumerate(zip(self.envs, self._actions)):
-
             (
                 observation,
                 self._rewards[i],
