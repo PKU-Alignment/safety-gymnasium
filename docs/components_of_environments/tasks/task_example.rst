@@ -60,23 +60,23 @@ Goal0
 
         def update_world(self):
             """Build a new goal position, maybe with resampling due to hazards."""
-            # 当env.reset()或self.goal_achieved==True时被调用
-            # 用于阶段性刷新环境当中的布局或状态
+            # Called when env.reset() or self.goal_achieved==True
+            # Used to periodically refresh the layout or state of the environment
             self.build_goal_position()
             self.last_dist_goal = self.dist_goal()
 
         @property
         def goal_achieved(self):
             """Whether the goal of task is achieved."""
-            # 判定目标是否达成，在env.step()时被调用
+            # Determine if the goal is reached, called at env.step()
             return self.dist_goal() <= self.goal.size
 
         @property
         def goal_pos(self):
             """Helper to get goal position from layout."""
-            # 定义目标的位置
-            # 如果环境当中存在goal，则与goal的位置相同
-            # 可以不定义
+            # Define the location of the target
+            # If there is a goal in the environment, the same position as the goal
+            # Can be undefined
             return self.goal.pos
 
 
@@ -87,10 +87,10 @@ Goal1
 
     """Goal level 1."""
 
-    # 导入需要用到的物体
+    # Import the objects to be used
     from safety_gymnasium.assets.geoms import Hazards
     from safety_gymnasium.assets.objects import Vases
-    # 继承上一个难度
+    # Inherit the previous difficulty
     from safety_gymnasium.tasks.goal.goal_level0 import GoalLevel0
 
 
@@ -103,12 +103,12 @@ Goal1
         def __init__(self, config):
             super().__init__(config=config)
 
-            # 难度增加，随机性增强
+            # Increased difficulty and randomization
             self.placements_conf.extents = [-1.5, -1.5, 1.5, 1.5]
 
-            # 实例化并注册新的物体
+            # Instantiate and register a new object
             self._add_geoms(Hazards(num=8, keepout=0.18))
-            # 实例化并注册Vases但其并不参与cost计算
+            # Instantiate and register Vases but they do not participate in the cost calculation
             self._add_objects(Vases(num=1, is_constrained=False))
 
 
@@ -119,7 +119,7 @@ Goal2
 
     """Goal level 2."""
 
-    # 继承上一个难度
+    # Inherit the previous difficulty
     from safety_gymnasium.tasks.goal.goal_level1 import GoalLevel1
 
 
@@ -129,12 +129,12 @@ Goal2
         def __init__(self, config):
             super().__init__(config=config)
 
-            # 难度升高，随机性变强
+            # Difficulty rises, randomness becomes stronger
             self.placements_conf.extents = [-2, -2, 2, 2]
 
-            # Hazards数量变多
+            # The number of Hazards becomes larger
             self.hazards.num = 10
-            # Vases数量变多，并且参与约束
+            # Vases become more numerous and participate in the constraint
             self.vases.num = 10
             self.vases.is_constrained = True
 
