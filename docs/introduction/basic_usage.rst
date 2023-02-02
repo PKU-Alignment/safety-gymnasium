@@ -1,37 +1,39 @@
-基本使用
-========
+Basic Usage
+===========
 
-安装
------
+Installation
+------------
 
 .. code-block:: bash
 
-    # 通过pypi
-    pip install Safety-Gymnasium
-    # 通过github/源码
-    git clone https://github.com/PKU-MARL/safety-gymnasium
-    cd safety-gymnasium
+    # From the Python Package Index (PyPI)
+    pip install safety-gymnasium
+    # From the source code
+    git clone git@github.com:PKU-MARL/Safety-Gymnasium.git
+    cd Safety-Gymnasium
     pip install -e .
 
 
-规范
------
+Specification
+-------------
 
-`Gymnasium <https://github.com/Farama-Foundation/Gymnasium>`__ 提供了良好定义且被RL Community广泛接受的API规范，我们的库完全遵循该规范，并且提供了方便Safe RL研究所必要的接口。因此习惯于Gymnasium的研究者可近乎0迁移成本地上手我们的库，关于一些基础API和代码工具可参考：
-`Gymnasium文档 <https://www.gymlibrary.dev/>`__ 。
+`Gymnasium <https://github.com/Farama-Foundation/Gymnasium>`__ provides a well-defined and widely accepted API by the RL Community, and our library exactly adheres to this specification and provides a Safe RL-specific interface.So researchers accustomed to Gymnasium can get started with our library at near zero migration cost, for some basic API and code tools refer to: `Gymnasium Documentation <https://www.gymlibrary.dev/>`__.
 
-初始化环境
-----------
+Initializing the environment
+----------------------------
 
 .. code-block:: python
 
     env = safety_gymnasium.make('SafetyPointCircle0-v0', render_mode='human')
-    # Vision环境
-    # env = safety_gymnasium.make('SafetyPointCircle0Vision-v0', render_mode='human')
-    # 键盘Debug环境（由于agent本身的动力学复杂性，仅支持部分agent。）
-	# env = safety_gymnasium.make('SafetyPointCircle0Debug-v0', render_mode='human')
+    '''
+    Vision Environment
+        env = safety_gymnasium.make('SafetyPointCircle0Vision-v0', render_mode='human')
+    Keyboard Debug environment 
+    due to the complexity of the agent's inherent dynamics, only partial support for the agent.
+	env = safety_gymnasium.make('SafetyPointCircle0Debug-v0', render_mode='human')
+    '''
     obs, info = env.reset()
-    # 设置seed：
+    # Set seeds
     # obs, _ = env.reset(seed=0)
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
@@ -39,7 +41,7 @@
         assert env.observation_space.contains(obs)
         act = env.action_space.sample()
         assert env.action_space.contains(act)
-        # 针对Safe RL做了修改，增加了cost返回值
+        # modified for Safe RL, added cost
         obs, reward, cost, terminated, truncated, info = env.step(act)
         ep_ret += reward
         ep_cost += cost
@@ -48,8 +50,8 @@
 
 	env.close()
 
-状态空间
---------
+Observation Space
+-----------------
 
 .. code-block:: python
 
@@ -58,14 +60,22 @@
     print(env.observation_space)
     # Box(-inf, inf, (28,), float64)
     print(env.obs_space_dict)
-    # OrderedDict([('accelerometer', Box(-inf, inf, (3,), float64)), ('velocimeter', Box(-inf, inf, (3,), float64)), ('gyro', Box(-inf, inf, (3,), float64)), ('magnetometer', Box(-inf, inf, (3,), float64)), ('circle_lidar', Box(0.0, 1.0, (16,), float64))])
-    # 每一个部分在obs数组当中的位置：
+    '''
+    OrderedDict([
+        ('accelerometer', Box(-inf, inf, (3,), float64)), 
+        ('velocimeter', Box(-inf, inf, (3,), float64)), 
+        ('gyro', Box(-inf, inf, (3,), float64)), 
+        ('magnetometer', Box(-inf, inf, (3,), float64)), 
+        ('circle_lidar', Box(0.0, 1.0, (16,), float64))
+        ])
+    '''
+    # position of each part in the obs array
     print(sorted(env.obs_space_dict))
 	# ['accelerometer', 'circle_lidar', 'gyro', 'magnetometer', 'velocimeter']
 
 
-动作空间
----------
+Action Space
+------------
 
 .. code-block:: python
 
