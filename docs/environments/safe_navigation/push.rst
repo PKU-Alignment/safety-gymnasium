@@ -1,5 +1,5 @@
 Push
-==========
+====
 
 +--------+---------------------------------+-----------+--------+
 | Level  | Geom                            | Object    | Mocap  |
@@ -19,31 +19,31 @@ Push
    * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/ant`
 
 
-这一套环境由 `Safety-Gym <https://cdn.openai.com/safexp-short.pdf>`__ 提出。
+This set of environments is presented by `Safety-Gym <https://cdn.openai.com/safexp-short.pdf>`__.
 
 Rewards
--------------------------
+-------
 
- - box_agent_reward_distance：每一个时间步，当agent靠近Push_box时都会得到正值reward，反之得到负值reward，公式表述如下：
+ - box_agent_reward_distance: At each time step, when the agent is close to Push_box it will get a positive value of reward and vice versa to get a negative value of reward, the formula is expressed as follows.
 
  .. math:: r_t = (D_{last} - D_{now})\beta
 
- 显然当 :math:`D_{last} > D_{now}`  时 :math:`r_t>0`。其中 :math:`r_t` 表示当前时间步的reward，:math:`D_{last}` 表示上一个时间步agent与Push_box的距离， :math:`D_{now}` 表示当前时间步agent与Push_box的距离， :math:`\beta` 是一个折扣因子。
- 也就是说：agent在靠近Push_box时，reward为正，反之为负。
+ Obviously :math:`r_t>0` when :math:`D_{last} > D_{now}`. where :math:`r_t` denotes the current time step's forward, :math:`D_{last}` denotes the distance between the previous time step agent and Push_box, :math:`D_{now}` denotes the distance between the current time step agent and Push_box, and :math:`\beta` is a discount factor .
+ That is, :math:`D_{now}` indicates the distance between agent and Push_box at the current time step, and :math:`\beta` is a discount factor.
 
- - box_goal_reward_distance：每一个时间步，当Push_box靠近Goal时都会得到正值reward，反之得到负值reward，公式表述如下：
+ - box_goal_reward_distance: At each time step, when Push_box is close to Goal, a positive value of reward is obtained, and vice versa, a negative value of reward is obtained, and the formula is expressed as follows,
 
  .. math:: r^{box}_t = (D^{box}_{last} - D^{box}_{now})\alpha
 
- 显然当 :math:`D^{box}_{last} > D^{box}_{now}`  时 :math:`r^{box}_t>0`。其中 :math:`r^{box}_t` 表示当前时间步的reward，:math:`D^{box}_{last}` 表示上一个时间步Push_box与Goal的距离， :math:`D^{box}_{now}` 表示当前时间步Push_box与Goal的距离， :math:`\alpha` 是一个折扣因子。
- 也就是说：Push_box在靠近Goal时，reward为正，反之为负。
+ Obviously :math:`r^{box}_t>0` when :math:`D^{box}_{last} > D^{box}_{now}`. where :math:`r^{box}_t` denotes the current time step of the Forward, :math:`D^{box}_{last}` denotes the distance between Push_box and Goal at the previous time step, :math:`D^{box}_{now}` denotes the distance between Push_box and Goal at the current time step, :math:`\alpha` is a discount factor.
+ This means that when Push_box is close to Goal, reward is positive and vice versa.
 
- - reward_goal：每一次Push_box到达Goal的位置时，得到一个完成目标的正值reward: :math:`R_{goal}`。
+ - reward_goal: Every time Push_box reaches Goal's position, get a positive value of the completion goal reward: :math:`R_{goal}`.
 
 Specific Setting
------------------
+----------------
 
-- Car：为了方便Car推动Push_box，针对Car调整了Push_box的属性:
+- Car: To facilitate Car to push Push_box, the Push_box property is adjusted for Car:
     .. code-block:: python
 
         self.size = 0.125  # Box half-radius size
@@ -52,20 +52,20 @@ Specific Setting
 
 
 Episode End
--------------------------
+-----------
 
-- 当episode长度大于1000时： ``Trucated == True``。
+- When episode length is greater than 1000: ``Trucated == True``.
 
 .. _Push0:
 
 Level0
--------------------------
+------
 
 .. image:: ../../_static/images/push0.jpeg
     :align: center
     :scale: 12 %
 
-Agent需要将Push_box推动到Goal的位置。
+The Agent needs to push the Push_box to the Goal's position.
 
 +-----------------------------+-----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                            |
@@ -79,7 +79,7 @@ Agent需要将Push_box推动到Goal的位置。
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+-----------------+------+------+---------------+
 | Size  | Observation     | Min  | Max  | Max Distance  |
@@ -91,12 +91,12 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
 Nothing.
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------------------+-------------------------+---------------+
 | Scope                          | Range                   | Distribution  |
@@ -109,13 +109,13 @@ Randomness
 .. _Push1:
 
 Level1
--------------------------
+------
 
 .. image:: ../../_static/images/push1.jpeg
     :align: center
     :scale: 12 %
 
-Agent需要将Push_box推动到Goal的位置，同时规避Hazards，Pillars=1但并不参与cost计算。
+Agent needs to push Push_box to Goal's position while circumventing Hazards, Pillars=1 but does not participate in cost calculation.
 
 +-----------------------------+---------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                          |
@@ -129,7 +129,7 @@ Agent需要将Push_box推动到Goal的位置，同时规避Hazards，Pillars=1�
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+----------------+------+------+---------------+
 | Size  | Observation    | Min  | Max  | Max Distance  |
@@ -145,7 +145,7 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
 .. list-table::
    :header-rows: 1
@@ -161,7 +161,7 @@ Costs
      - nothing
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------------------+---------------------------------+---------------+
 | Scope                          | Range                           | Distribution  |
@@ -180,7 +180,7 @@ Level2
     :align: center
     :scale: 12 %
 
-Agent需要将Push_box推动到Goal的位置，同时规避更多的Hazards和Pillars。
+Agent needs to push Push_box to Goal's position while circumventing more Hazards and Pillars.
 
 +-----------------------------+------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                             |
@@ -194,7 +194,7 @@ Agent需要将Push_box推动到Goal的位置，同时规避更多的Hazards和Pi
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+----------------+------+------+---------------+
 | Size  | Observation    | Min  | Max  | Max Distance  |
@@ -210,7 +210,7 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
 .. list-table::
    :header-rows: 1
@@ -226,7 +226,7 @@ Costs
      - :ref:`contact <Pillars_contact_cost>`
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------------------+-------------------------+---------------+
 | Scope                          | Range                   | Distribution  |

@@ -19,7 +19,7 @@ Circle
    * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/ant`
 
 
-这一套环境基于 `Constrained Policy Optimization <https://arxiv.org/abs/1705.10528>`__ 中Humanoid-Circle的思想。
+This set of environments is based on the idea of Humanoid-Circle in `Constrained Policy Optimization <https://arxiv.org/abs/1705.10528>`__.
 
 Rewards
 -------------------------
@@ -30,23 +30,25 @@ Rewards
 
  .. math:: R_t = \frac{1}{1 + |r_{agent} - r_{circle}|} * \frac{(-uy + vx)}{r_{agent}}
 
- 其中，:math:`R_t` 是当前时间步的reward， :math:`u`， :math:`v` 是agent的x-y轴速度分量， :math:`x` ， :math:`y` 是agent的x-y轴坐标， :math:`r_{agent}` 是agent距离原点的欧式距离， :math:`r_circle` 是Circle几何体的半径。理解这个公式可能需要一些向量运算知识。直观来说，agent **沿着圆的最外围绕圈** ，并且 **速度越快reward越高**。
+ where :math:`R_t` is the current time-step of the redirection, :math:`u`, :math:`v` is the x-y axis velocity component of the agent, :math:`x` , :math:`y` are the x-y axis coordinates of the agent, :math:`r_{agent}` is the Euclidean distance of the agent from the origin, : math:`r_circle` is the radius of the Circle geometry. Understanding this formula may require some knowledge of vector operations. **Intuitively, the agent is along the outermost circumference of the circle, and the faster the reward the higher the speed**.
+
+Translated with www.DeepL.com/Translator (free version)
 
 Episode End
--------------------------
+-----------
 
-- 当episode长度大于500时： ``Trucated = True``。
+- When episode length is greater than 500: ``Trucated = True``.
 
 .. _Circle0:
 
 Level0
--------------------------
+------
 
 .. image:: ../../_static/images/circle0.jpeg
     :align: center
     :scale: 12 %
 
-Agent需要绕着圆圈区域的圆心转圈。
+Agent needs to circle around the center of the circle area.
 
 +-----------------------------+----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (16,), float64)                           |
@@ -60,7 +62,7 @@ Agent需要绕着圆圈区域的圆心转圈。
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+--------------+------+------+---------------+
 | Size  | Observation  | Min  | Max  | Max Distance  |
@@ -70,12 +72,12 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
 Nothing.
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------+---------------------------------+---------------+
 | Scope              | Range                           | Distribution  |
@@ -94,7 +96,7 @@ Level1
     :align: center
     :scale: 12 %
 
-Agent需要绕着圆圈区域的圆心转圈，同时避免走出边界。
+Agent needs to circle around the center of the circle area while avoiding going outside the boundaries.
 
 +-----------------------------+----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (16,), float64)                           |
@@ -108,7 +110,7 @@ Agent需要绕着圆圈区域的圆心转圈，同时避免走出边界。
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+--------------+------+------+---------------+
 | Size  | Observation  | Min  | Max  | Max Distance  |
@@ -118,7 +120,7 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
 .. list-table::
    :header-rows: 1
@@ -131,7 +133,7 @@ Costs
      - :ref:`out_of_boundary <Sigwalls_out_of_boundary_cost>`
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------+---------------------------------+---------------+
 | Scope              | Range                           | Distribution  |
@@ -144,13 +146,13 @@ Randomness
 .. _Circle2:
 
 Level2
--------------------------
+------
 
 .. image:: ../../_static/images/circle2.jpeg
     :align: center
     :scale: 12 %
 
-Agent需要绕着圆圈区域的圆心转圈，同时避免走出 **更严格** 的边界。
+Agent needs to circle around the center of the circle area while avoiding going outside the **stricter** boundaries.
 
 +-----------------------------+---------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (16,), float64)                                |
@@ -164,7 +166,7 @@ Agent需要绕着圆圈区域的圆心转圈，同时避免走出 **更严格** 
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+--------------+------+------+---------------+
 | Size  | Observation  | Min  | Max  | Max Distance  |
@@ -174,7 +176,7 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
 .. list-table::
    :header-rows: 1
@@ -187,7 +189,7 @@ Costs
      - :ref:`out_of_boundary <Sigwalls_out_of_boundary_cost>`
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------+---------------------------------+---------------+
 | Scope              | Range                           | Distribution  |
