@@ -66,7 +66,42 @@ Here is some pictures about tasks in Safe Navigation.
 
 #### Agents
 
-<img src="./images/agents.png"/>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><figure class="align-default">
+<a class="reference external image-reference"><img alt="./images/point_front.jpeg" src="./images/point_front.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="doc">Point</span></a></strong></p></td>
+<td><figure class="align-default">
+<a class="reference external image-reference" href="agents/car.html"><img alt="./images/car_front.jpeg" src="./images/car_front.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="doc">Car</span></a></strong></p></td>
+<td><figure class="align-default">
+<a class="reference external image-reference" href="agents/racecar.html"><img alt="./images/racecar_front.jpeg" src="./images/racecar_front.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="doc">Racecar</span></a></strong></p></td>
+</tr>
+<tr class="row-even"><td><figure class="align-default">
+<a class="reference external image-reference" href="agents/ant.html"><img alt="./images/ant_front.jpeg" src="./images/ant_front.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="doc">Ant</span></a></strong></p></td>
+<td><figure class="align-default">
+<a class="reference internal image-reference"><img alt="./images/coming_soon.png" src="./images/coming_soon.png" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong>Coming soon…</strong></p></td>
+<td><figure class="align-default">
+<a class="reference internal image-reference"><img alt="./images/coming_soon.png" src="./images/coming_soon.png" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong>Coming soon…</strong></p></td>
+</tr>
+</tbody>
+</table>
 
 #### Tasks
 
