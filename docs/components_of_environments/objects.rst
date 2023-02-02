@@ -145,9 +145,9 @@ Group mechanism
 
     .. list-table::
 
-        * - .. figure:: ../_static/images/group_lidar_left.jpeg
+        * - .. figure:: ../_static/images/group_far.jpeg
                 :width: 230px
-          - .. figure:: ../_static/images/group_lidar_right.jpeg
+          - .. figure:: ../_static/images/group_near.jpeg
                 :width: 230px
 
     可以看到，当物体种类变多时，呈现相应数量的互不干扰的雷达。
@@ -161,13 +161,13 @@ Render lidar
 
 .. list-table::
 
-    * - .. figure:: ../_static/images/lidar_far.jpeg
+    * - .. figure:: ../_static/images/lidar_far_distance.jpeg
             :width: 230px
         .. centered:: far
-      - .. figure:: ../_static/images/lidar_mid.jpeg
+      - .. figure:: ../_static/images/lidar_mid_distance.jpeg
             :width: 230px
         .. centered:: mid
-      - .. figure:: ../_static/images/lidar_near.jpeg
+      - .. figure:: ../_static/images/lidar_near_distance.jpeg
             :width: 230px
         .. centered:: near
 
