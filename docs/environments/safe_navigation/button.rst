@@ -19,29 +19,29 @@ Button
    * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/ant`
 
 
-这一套环境由 `Safety-Gym <https://cdn.openai.com/safexp-short.pdf>`__ 提出。
+This set of environments is presented by `Safety-Gym <https://cdn.openai.com/safexp-short.pdf>`__.
 
 Rewards
 --------
 
- - reward_distance：每一个时间步，当agent靠近goal button时都会得到正值reward，反之得到负值reward，公式表述如下：
+ - reward_distance: At each time step, when the agent is near the goal button, it will get a positive value of reward, and vice versa, it will get a negative value of reward, the formula is expressed as follows.
 
  .. math:: r_t = (D_{last} - D_{now})\beta
 
- 显然当 :math:`D_{last} > D_{now}`  时 :math:`r_t>0`。其中 :math:`r_t` 表示当前时间步的reward，:math:`D_{last}` 表示上一个时间步agent与goal button的距离， :math:`D_{now}` 表示当前时间步agent与goal button的距离， :math:`\beta` 是一个折扣因子。
- 也就是说：agent在靠近goal button时，reward为正，反之为负。
+ Obviously :math:`r_t>0` when :math:`D_{last} > D_{now}`. where :math:`r_t` denotes the current time step's reward, :math:`D_{last}` denotes the distance between the previous time step agent and the goal button, :math:`D_{now}` denotes the distance between the current time step agent and the goal button, and :math:`\beta` is a discount factor.
+ That is, :math:`\beta` is a discount factor.
 
- - reward_goal：每一次到达goal button的位置并且触摸它，得到一个完成目标的正值reward: :math:`R_{goal}`。
+ - reward_goal: Each time agent reach the position of the goal button and touch it, you get a positive value of reward: :math:`R_{goal}` for completing the goal.
 
 Specific Setting
 ----------------
 
-- Buttons: 当agent触摸goal button之后，环境会刷新goal button，并且在接下来的10个时间步屏蔽掉goal lidar的观测(全部置0)，Buttons参与的cost计算同时也会被屏蔽。
+- Buttons: After the agent touches the goal button, the environment will refresh the goal button and block the goal lidar observations (all set to 0) for the next 10 time steps, and the cost calculation involving Buttons will also be blocked.
 
 Episode End
 ------------
 
-- 当episode长度大于1000时： ``Trucated = True``。
+- When episode length is greater than 1000: ``Trucated = True``.
 
 .. _Button0:
 
@@ -52,7 +52,7 @@ Level0
     :align: center
     :scale: 12 %
 
-Agent需要导航到goal button的位置并触摸goal button。
+The Agent needs to navigate to the location of the goal button and touch the goal button.
 
 +-----------------------------+-------------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                                    |
@@ -66,7 +66,7 @@ Agent需要导航到goal button的位置并触摸goal button。
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+----------------+------+------+---------------+
 | Size  | Observation    | Min  | Max  | Max Distance  |
@@ -78,12 +78,12 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^
+^^^^^
 
 Nothing.
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------------------+-------------------------+---------------+
 | Scope                          | Range                   | Distribution  |
@@ -96,13 +96,13 @@ Randomness
 .. _Button1:
 
 Level1
--------------------------
+------
 
 .. image:: ../../_static/images/button1.jpeg
     :align: center
     :scale: 12 %
 
-Agent需要导航到goal button的位置并触摸 **正确的** goal button, 同时需要规避Gremlins和Hazards。
+The Agent needs to navigate to the goal button and touch the **correct** goal button, while avoiding Gremlins and Hazards.
 
 +-----------------------------+--------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                               |
@@ -116,7 +116,7 @@ Agent需要导航到goal button的位置并触摸 **正确的** goal button, 同
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+----------------+------+------+---------------+
 | Size  | Observation    | Min  | Max  | Max Distance  |
@@ -132,7 +132,7 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
 .. list-table::
    :header-rows: 1
@@ -152,7 +152,7 @@ Costs
 
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------------------+---------------------------------+---------------+
 | Scope                          | Range                           | Distribution  |
@@ -165,13 +165,13 @@ Randomness
 .. _Button2:
 
 Level2
--------------------------
+------
 
 .. image:: ../../_static/images/button2.jpeg
     :align: center
     :scale: 12 %
 
-Agent需要导航到goal button的位置并触摸 **正确的** goal button, 同时需要规避 **更多的** Gremlins和Hazards。
+The Agent needs to navigate to the goal button location and touch the **right** goal button, while avoiding **more** Gremlins and Hazards.
 
 +-----------------------------+------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                             |
@@ -185,7 +185,7 @@ Agent需要导航到goal button的位置并触摸 **正确的** goal button, 同
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+----------------+------+------+---------------+
 | Size  | Observation    | Min  | Max  | Max Distance  |
@@ -201,7 +201,7 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
 .. list-table::
    :header-rows: 1
@@ -220,7 +220,7 @@ Costs
      - :ref:`cost_hazards <Hazards_cost_hazards>`
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------------------+---------------------------------+---------------+
 | Scope                          | Range                           | Distribution  |

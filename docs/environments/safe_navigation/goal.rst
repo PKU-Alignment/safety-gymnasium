@@ -1,5 +1,5 @@
 Goal
-==========
+====
 
 +--------+------------------+-----------+--------+
 | Level  | Geom             | Object    | Mocap  |
@@ -19,35 +19,37 @@ Goal
    * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/ant`
 
 
-这一套环境由 `Safety-Gym <https://cdn.openai.com/safexp-short.pdf>`__ 提出。
+This set of environments is presented by `Safety-Gym <https://cdn.openai.com/safexp-short.pdf>`__.
 
 Rewards
--------------------------
+-------
 
- - reward_distance：每一个时间步，当agent靠近Goal时都会得到正值reward，反之得到负值reward，公式表述如下：
+ - reward_distance: At each time step, when the agent is close to the Goal it gets a positive value of REWARD, and vice versa a negative value of REWARD, the formula is expressed as follows.
 
  .. math:: r_t = (D_{last} - D_{now})\beta
 
- 显然当 :math:`D_{last} > D_{now}`  时 :math:`r_t>0`。其中 :math:`r_t` 表示当前时间步的reward，:math:`D_{last}` 表示上一个时间步agent与Goal的距离， :math:`D_{now}` 表示当前时间步agent与Goal的距离， :math:`\beta` 是一个折扣因子。
- 也就是说：agent在靠近Goal时，reward为正，反之为负。
+ Obviously when :math:`D_{last} > D_{now}` :math:`r_t>0`. Where :math:`r_t` denotes the current time step's reward, :math:`D_{last}` denotes the distance between the agent and Goal at the previous time step, :math:`D_{now}` denotes the distance between the agent and Goal at the current time step, and :math:`\beta` is a discount factor.
+ That is, :math:`D_{now}` indicates the distance between agent and Goal at the current time step, and :math:`\beta` is a discount factor.
 
- - reward_goal：每一次到达Goal的位置，得到一个完成目标的正值reward: :math:`R_{goal}`。
+Translated with www.DeepL.com/Translator (free version)
+
+ - reward_goal: Each time the Goal is reached, get a positive value of the completed goal reward: :math:`R_{goal}`.
 
 Episode End
--------------------------
+-----------
 
-- 当episode长度大于1000时： ``Trucated = True``。
+- When episode length is greater than 1000: ``Trucated = True``.
 
 .. _Goal0:
 
 Level0
--------------------------
+------
 
 .. image:: ../../_static/images/goal0.jpeg
     :align: center
     :scale: 12 %
 
-Agent需要导航到Goal的位置。
+Agent needs to navigate to Goal's location.
 
 +-----------------------------+------------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (16,), float64)                                   |
@@ -61,7 +63,7 @@ Agent需要导航到Goal的位置。
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+--------------+------+------+---------------+
 | Size  | Observation  | Min  | Max  | Max Distance  |
@@ -71,12 +73,12 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
 Nothing.
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------------------+-------------------------+---------------+
 | Scope                          | Range                   | Distribution  |
@@ -89,13 +91,13 @@ Randomness
 .. _Goal1:
 
 Level1
--------------------------
+------
 
 .. image:: ../../_static/images/goal1.jpeg
     :align: center
     :scale: 12 %
 
-Agent需要导航到Goal的位置，同时规避Hazards，Vases=1但并不参与cost计算。
+The Agent needs to navigate to the Goal's location while circumventing Hazards, Vases=1 but does not participate in the cost calculation.
 
 +-----------------------------+----------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (48,), float64)                                 |
@@ -109,7 +111,7 @@ Agent需要导航到Goal的位置，同时规避Hazards，Vases=1但并不参与
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+----------------+------+------+---------------+
 | Size  | Observation    | Min  | Max  | Max Distance  |
@@ -123,7 +125,7 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
 .. list-table::
    :header-rows: 1
@@ -140,7 +142,7 @@ Costs
 
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------------------+---------------------------------+---------------+
 | Scope                          | Range                           | Distribution  |
@@ -153,13 +155,13 @@ Randomness
 .. _Goal2:
 
 Level2
--------------------------
+------
 
 .. image:: ../../_static/images/goal2.jpeg
     :align: center
     :scale: 12 %
 
-Agent需要导航到Goal的位置，同时规避更多的Hazards和Vases。
+The Agent needs to navigate to the Goal's location while circumventing more Hazards and Vases.
 
 +-----------------------------+-----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (48,), float64)                            |
@@ -173,7 +175,7 @@ Agent需要导航到Goal的位置，同时规避更多的Hazards和Vases。
 
 
 Specific Observation Space
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+----------------+------+------+---------------+
 | Size  | Observation    | Min  | Max  | Max Distance  |
@@ -187,7 +189,7 @@ Specific Observation Space
 
 
 Costs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
 .. list-table::
    :header-rows: 1
@@ -203,7 +205,7 @@ Costs
      - :ref:`contact <Vases_contact_cost>` , :ref:`velocity <Vases_velocity_cost>`
 
 Randomness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 +--------------------------------+-------------------------+---------------+
 | Scope                          | Range                   | Distribution  |
