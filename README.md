@@ -67,6 +67,7 @@ Here is some pictures about tasks in Safe Navigation.
 #### Agents
 
 <table class="docutils align-default">
+<caption align="top"><b>Agents</b></caption>  
 <tbody>
 <tr class="row-odd"><td><figure class="align-default">
 <a class="reference external image-reference"><img alt="./images/point_front.jpeg" src="./images/point_front.jpeg" style="width: 230px;"></a>
@@ -105,7 +106,91 @@ Here is some pictures about tasks in Safe Navigation.
 
 #### Tasks
 
-<img src="./images/tasks.png" width="2048px"/>
+<table class="docutils align-default">
+<caption align="top"><b>Tasks</b></caption>  
+<tbody>
+<tr class="row-odd"><td><figure class="align-default">
+<a class="reference external image-reference"><img alt="./images/goal0.jpeg" src="./images/goal0.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Goal0</span></a></strong></p></td>
+<td><figure class="align-default">
+<a class="reference external image-reference"><img alt="./images/goal1.jpeg" src="./images/goal1.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Goal1</span></a></strong></p></td>
+<td><figure class="align-default">
+<a class="reference external image-reference"><img alt="./images/goal2.jpeg" src="./images/goal2.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Goal2</span></a></strong></p></td>
+</tr>
+<tr class="row-even"><td><figure class="align-default">
+<a class="reference external image-reference"><img alt="./images/button0.jpeg" src="./images/button0.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Button0</span></a></strong></p></td>
+<td><figure class="align-default">
+<a class="reference external image-reference" href="./button#button1"><img alt="./images/button1.jpeg" src="./images/button1.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Button1</span></a></strong></p></td>
+<td><figure class="align-default">
+<a class="reference external image-reference" href="./button#button2"><img alt="./images/button2.jpeg" src="./images/button2.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Button2</span></a></strong></p></td>
+</tr>
+<tr class="row-odd"><td><figure class="align-default">
+<a class="reference external image-reference"><img alt="./images/push0.jpeg" src="./images/push0.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Push0</span></a></strong></p></td>
+<td><figure class="align-default">
+<a class="reference external image-reference"><img alt="./images/push1.jpeg" src="./images/push1.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Push1</span></a></strong></p></td>
+<td><figure class="align-default">
+<a class="reference external image-reference"><img alt="./images/push2.jpeg" src="./images/push2.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Push2</span></a></strong></p></td>
+</tr>
+<tr class="row-even"><td><figure class="align-default">
+<a class="reference external image-reference"><img alt="./images/circle0.jpeg" src="./images/circle0.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Circle0</span></a></strong></p></td>
+<td><figure class="align-default">
+<a class="reference external image-reference"><img alt="./images/circle1.jpeg" src="./images/circle1.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Circle1</span></a></strong></p></td>
+<td><figure class="align-default">
+<a class="reference external image-reference" href="./circle#circle2"><img alt="./images/circle2.jpeg" src="./images/circle2.jpeg" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong><a class="reference internal"><span class="std std-ref">Circle2</span></a></strong></p></td>
+</tr>
+<tr class="row-odd"><td><figure class="align-default">
+<a class="reference internal image-reference"><img alt="./images/coming_soon.png" src="./images/coming_soon.png" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong>Coming soon…</strong></p></td>
+<td><figure class="align-default">
+<a class="reference internal image-reference"><img alt="./images/coming_soon.png" src="./images/coming_soon.png" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong>Coming soon…</strong></p></td>
+<td><figure class="align-default">
+<a class="reference internal image-reference"><img alt="./images/coming_soon.png" src="./images/coming_soon.png" style="width: 230px;"></a>
+</figure>
+<p class="centered">
+<strong>Coming soon…</strong></p></td>
+</tr>
+</tbody>
+</table>
 
 ### Vision-base Safe RL
 
