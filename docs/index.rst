@@ -32,7 +32,7 @@ Safety Gymnasium is a standard API for safe reinforcement learning, and a divers
 
 .. toctree::
    :hidden:
-   :caption: CONPONETS OF ENVIRONMENTS
+   :caption: COMPONETS OF ENVIRONMENTS
 
    components_of_environments/agents
    components_of_environments/objects
