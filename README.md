@@ -67,7 +67,6 @@ Here is some pictures about tasks in Safe Navigation.
 #### Agents
 
 <table class="docutils align-default">
-<caption align="top"><b>Agents</b></caption>  
 <tbody>
 <tr class="row-odd"><td><figure class="align-default">
 <a class="reference external image-reference"><img alt="./images/point_front.jpeg" src="./images/point_front.jpeg" style="width: 230px;"></a>
@@ -107,7 +106,6 @@ Here is some pictures about tasks in Safe Navigation.
 #### Tasks
 
 <table class="docutils align-default">
-<caption align="top"><b>Tasks</b></caption>  
 <tbody>
 <tr class="row-odd"><td><figure class="align-default">
 <a class="reference external image-reference"><img alt="./images/goal0.jpeg" src="./images/goal0.jpeg" style="width: 230px;"></a>
