@@ -1,9 +1,21 @@
 Ant
 ==========
 
-.. image:: ../../_static/images/ant.jpeg
-    :align: center
-    :scale: 12 %
+.. list-table:: 
+
+    * - .. figure:: ../../_static/images/ant_front.jpeg
+            :width: 200px
+        .. centered:: front
+      - .. figure:: ../../_static/images/ant_back.jpeg
+            :width: 200px
+        .. centered:: back
+      - .. figure:: ../../_static/images/ant_left.jpeg
+            :width: 200px
+        .. centered:: left
+      - .. figure:: ../../_static/images/ant_right.jpeg
+            :width: 200px
+        .. centered:: right
+
 
 一个四足机器人，基于 `High-Dimensional Continuous Control Using Generalized Advantage Estimation <https://arxiv.org/abs/1506.02438>`__ 当中提出的模型，在三维空间中运动，由一个躯干和四条腿连接在一起组成，每条腿由两个铰链连接肢体组成，同时又通过铰链与躯干连接。需要通过对八个铰链的驱动器施加力矩来协调四条腿向目标方向移动。
 

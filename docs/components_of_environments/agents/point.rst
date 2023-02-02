@@ -1,9 +1,20 @@
 Point
 ==========
 
-.. image:: ../../_static/images/point.jpeg
-    :align: center
-    :scale: 12 %
+.. list-table:: 
+
+    * - .. figure:: ../../_static/images/point_front.jpeg
+            :width: 200px
+        .. centered:: front
+      - .. figure:: ../../_static/images/point_back.jpeg
+            :width: 200px
+        .. centered:: back
+      - .. figure:: ../../_static/images/point_left.jpeg
+            :width: 200px
+        .. centered:: left
+      - .. figure:: ../../_static/images/point_right.jpeg
+            :width: 200px
+        .. centered:: right
 
 一个被约束在2D平面上的简单机器人，拥有两个驱动器，一个用于转动，另一个用于向前/向后移动。这种分解控制方案使得机器人特别容易控制导航。在它前面有一个小正方形，这样既可以更容易直观地确定机器人的方向，也可以帮助Point推动出现在Push中的box。
 

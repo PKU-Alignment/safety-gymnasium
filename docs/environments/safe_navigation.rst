@@ -2,7 +2,6 @@ Safe Navigation
 ================
 
 .. list-table:: 
-    :header-rows: 1
 
     * - .. figure:: ../_static/images/goal0.jpeg
             :width: 230px

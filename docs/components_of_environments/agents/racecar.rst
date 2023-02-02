@@ -1,9 +1,20 @@
 Racecar
 ==========
 
-.. image:: ../../_static/images/racecar.jpeg
-    :align: center
-    :scale: 12 %
+.. list-table:: 
+
+    * - .. figure:: ../../_static/images/racecar_front.jpeg
+            :width: 200px
+        .. centered:: front
+      - .. figure:: ../../_static/images/racecar_back.jpeg
+            :width: 200px
+        .. centered:: back
+      - .. figure:: ../../_static/images/racecar_left.jpeg
+            :width: 200px
+        .. centered:: left
+      - .. figure:: ../../_static/images/racecar_right.jpeg
+            :width: 200px
+        .. centered:: right
 
 一个更接近现实中汽车动力学的机器人，在三维空间中运动，它有两个位置伺服，一个调整后轮速度至目标速度，另一个调整前轮转向角度至目标角度。Racecar参考了广为人知的MIT Racecar项目的动力学模型。对于它来说，要完成指定目标，必须像人驾驶汽车一样，协调好轮胎的转向角度和速度之间的关系。
 

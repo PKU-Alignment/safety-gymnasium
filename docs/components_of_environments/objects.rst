@@ -52,7 +52,7 @@ Objects
 
     2. 环境当中的物体性质有差异，比如：有的物体可以参与计算cost，有的没有碰撞实体。下文介绍当中我们将给出提示。
     3. 所有可参与计算cost的物体根据任务难度可能不会成为约束，例如：Goal1当中碰撞vases并不产生cost。
-    4. 你可以根据需要定义或改变物体的 **cost计算公式** ， **数量** ， **位置** ， **碰撞属性** ， **密度** ， **移动范式** 等，以探索不同情况下RL算法的表现。
+    4. 你可以根据需要定义或改变物体的 **cost计算公式** ，**数量** ，**位置** ，**碰撞属性** ，**密度** ，**移动范式** 等，以探索不同情况下RL算法的表现。
 
 通用参数
 --------
@@ -164,10 +164,10 @@ Render lidar
     * - .. figure:: ../_static/images/lidar_far.jpeg
             :width: 230px
         .. centered:: far
-      - .. figure:: ../_static/images/lidar_mid.png
+      - .. figure:: ../_static/images/lidar_mid.jpeg
             :width: 230px
         .. centered:: mid
-      - .. figure:: ../_static/images/lidar_near.png
+      - .. figure:: ../_static/images/lidar_near.jpeg
             :width: 230px
         .. centered:: near
 
