@@ -1,5 +1,5 @@
 Agents
-==========
+======
 
 .. list-table:: 
 
@@ -26,7 +26,7 @@ Agents
             :width: 230px
         .. centered:: Coming soon...
 
-我们为tasks设计了一批统一的agent，agent是环境的重要组成部分，在本章节中将会详细介绍其特性。
+We have designed a set of unified agents for tasks, which are an important part of the environment. Its features are described in detail in this section.
 
 
 .. toctree::

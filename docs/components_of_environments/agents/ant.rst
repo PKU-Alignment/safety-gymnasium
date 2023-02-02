@@ -1,5 +1,5 @@
 Ant
-==========
+===
 
 .. list-table:: 
 
@@ -17,7 +17,7 @@ Ant
         .. centered:: right
 
 
-一个四足机器人，基于 `High-Dimensional Continuous Control Using Generalized Advantage Estimation <https://arxiv.org/abs/1506.02438>`__ 当中提出的模型，在三维空间中运动，由一个躯干和四条腿连接在一起组成，每条腿由两个铰链连接肢体组成，同时又通过铰链与躯干连接。需要通过对八个铰链的驱动器施加力矩来协调四条腿向目标方向移动。
+A quadrupedal robot, based on the model proposed in `High-Dimensional Continuous Control Using Generalized Advantage Estimation <https://arxiv.org/abs/1506.02438>`__. Moving in three dimensions, it consists of a torso and four legs connected together, each leg consisting of two hinged connecting limbs, which are at the same time connected to the torso by hinges. It is necessary to coordinate the movement of the four legs in the target direction by applying moments to the drivers of the eight hinges.
 
 +-----------------------------+--------------------------------+
 | Specific Action Space       | Box(-1.0, 1.0, (8,), float64)  |
@@ -31,7 +31,7 @@ Ant
 
 
 Specific Action Space
--------------------------
+---------------------
 
 +------+-------------------------------------------------------------------+--------------+--------------+-----------------------------------+-------------+---------------+
 | Num  | Action                                                            | Control Min  | Control Max  | Name (in corresponding XML file)  | Joint/Site  | Unit          |
@@ -131,6 +131,6 @@ Specific Starting Randomness
 +-------------------+-------------------------------------+---------------+
 
 Specific Episode End
---------------------------------------------------
+--------------------
 
-- 当Ant头朝下跌倒时，当前episode结束： ``Terminated = True``。
+- When Ant falls headfirst, the current episode ends: ``Terminated = True``.
