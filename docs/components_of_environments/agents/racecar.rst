@@ -1,5 +1,5 @@
 Racecar
-==========
+=======
 
 .. list-table:: 
 
@@ -16,7 +16,7 @@ Racecar
             :width: 200px
         .. centered:: right
 
-一个更接近现实中汽车动力学的机器人，在三维空间中运动，它有两个位置伺服，一个调整后轮速度至目标速度，另一个调整前轮转向角度至目标角度。Racecar参考了广为人知的MIT Racecar项目的动力学模型。对于它来说，要完成指定目标，必须像人驾驶汽车一样，协调好轮胎的转向角度和速度之间的关系。
+A robot closer to realistic car dynamics, moving in three dimensions, it has two position servos, one to adjust the rear wheel speed to the target speed and the other to adjust the front wheel steering angle to the target angle. racecar references the widely known MIT Racecar project's dynamics model. For it to accomplish the specified goal, it must coordinate the relationship between the steering angle of the tires and the speed, just like a human driving a car.
 
 +-----------------------------+-------------------------------------------------------------------+
 | Specific Action Space       | Box([-20.          -0.785], [20.          0.785], (2,), float64)  |
@@ -30,7 +30,7 @@ Racecar
 
 
 Specific Action Space
--------------------------
+---------------------
 
 +------+-------------------------------+--------------+--------------+-----------------------------------+-------------+-----------------+
 | Num  | Action                        | Control Min  | Control Max  | Name (in corresponding XML file)  | Joint/Site  | Unit            |
@@ -42,7 +42,7 @@ Specific Action Space
 
 
 Specific Observation Space
----------------------------
+--------------------------
 
 +-------+----------------+------+------+-----------------------------------+-------------+----------------------------+
 | Size  | Observation    | Min  | Max  | Name (in corresponding XML file)  | Joint/Site  | Unit                       |
@@ -58,11 +58,11 @@ Specific Observation Space
 
 
 Specific Starting Randomness
------------------------------
+----------------------------
 
 Nothing.
 
 Specific Episode End
---------------------------------------------------
+--------------------
 
 Nothing.

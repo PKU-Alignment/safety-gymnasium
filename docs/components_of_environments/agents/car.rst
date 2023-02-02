@@ -1,5 +1,5 @@
 Car
-==========
+===
 
 .. list-table:: 
 
@@ -16,7 +16,7 @@ Car
             :width: 200px
         .. centered:: right
 
-一个稍微复杂一些的机器人，在三维空间中运动，它有两个独立驱动的平行车轮和一个自由滚动的后轮。对于这个机器人来说，无论是转向还是向前/向后移动都需要协调两个驱动器。它在设计上类似于用于教育的简单机器人。
+A slightly more complex robot, moving in three dimensions, has two independently driven parallel wheels and one free-rolling rear wheel. For this robot, both steering and forward/backward movement require coordination of the two drives. It is similar in design to a simple robot used for educational purposes.
 
 +-----------------------------+--------------------------------+
 | Specific Action Space       | Box(-1.0, 1.0, (2,), float64)  |
@@ -30,7 +30,7 @@ Car
 
 
 Specific Action Space
--------------------------
+---------------------
 
 +------+---------------------------+--------------+--------------+-----------------------------------+-------------+------------+
 | Num  | Action                    | Control Min  | Control Max  | Name (in corresponding XML file)  | Joint/Site  | Unit       |
@@ -62,11 +62,11 @@ Specific Observation Space
 
 
 Specific Starting Randomness
---------------------------------------------------
+----------------------------
 
 Nothing.
 
 Specific Episode End
---------------------------------------------------
+--------------------
 
 Nothing.

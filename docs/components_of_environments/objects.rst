@@ -40,99 +40,97 @@ Objects
             :target: objects/mocap.html#gremlins
         .. centered:: :ref:`Gremlins`
 
-环境当中的物体分为3类： **Geom**, **FreeGeom**, **Mocap**。
+The objects of the environment are divided into three groups: **Geom**, **FreeGeom**, **Mocap**.
 
-- Geom：是指环境当中不可通过接触和碰撞来改变位置的静态物体。用于建模现实当中固定的静态物体。
-- FreeGeom：是指环境当中可移动的静态物体，与其交互可能会产生cost，也可能需要移动它以完成任务。用于建模现实当中可移动的静态物体。
-- Mocap：是指环境当中按照一定规律自主移动的物体，与其交互可能会产生cost，也可以通过物理交互影响其运动方式。用于建模现实中受控制的运动物体。
+- Geom is a static object in the environment that cannot change its position by contact or collision. It is used to model static objects that are fixed in reality.
+- FreeGeom refers to a movable static object in the environment, with which interaction may result in a cost, or which may need to be moved to complete a task. It is used to model realistic static objects that can be moved.
+- Mocap refers to objects in the environment that move autonomously according to a certain pattern, with which interaction may produce cost, and can also influence the way they move through physical interaction. It is used to model realistic controlled moving objects.
 
 .. Note::
 
-    1. 环境当中的物体有的有且仅有一个实例，而有的可以有多个，这一点我们通过命名的单复数形式来区分，例如：Vases，意味着这个物体可以有多个实例，而Goal意味着这个物体有且仅有一个实例。
+    1. Some objects in the environment have one and only one instance, while others can have more than one. This is distinguished by the singular and plural forms of naming, e.g., Vases, which means that the object can have more than one instance, and Goal, which means that the object has one and only one instance.
+    2. There are differences in the characteristics of objects in the environment, e.g., some objects can participate in the calculation of cost, and some do not collide with entities. We will give hints in the following section.
+    3. All objects that can participate in the cost calculation may not become constraints depending on the difficulty of the task, e.g., collision vases in Goal1 do not generate costs.
+    4. You can define or change the **cost formula** , **quantity** , **position** , **collision property** , **density** , **movement paradigm** , etc. of the object as needed to explore the performance of the RL algorithm in different situations.
 
-    2. 环境当中的物体性质有差异，比如：有的物体可以参与计算cost，有的没有碰撞实体。下文介绍当中我们将给出提示。
-    3. 所有可参与计算cost的物体根据任务难度可能不会成为约束，例如：Goal1当中碰撞vases并不产生cost。
-    4. 你可以根据需要定义或改变物体的 **cost计算公式** ，**数量** ，**位置** ，**碰撞属性** ，**密度** ，**移动范式** 等，以探索不同情况下RL算法的表现。
+General parameters
+------------------
 
-通用参数
---------
+Each object has **custom parameters** and **methods** needed to interact with the environment.
 
-每一个物体都有与环境交互需要的 **自定义参数** 和 **方法**。
+- By changing the values of these parameters for existing objects, the behavior of the environment can be changed to individualize the testing algorithm.
 
-- 通过改变已有物体这些参数的值，可以改变环境的行为，以个性化测试算法。
-
-- 通过在我们提供的协议下定义 **新的** 一套 **参数** 和 **交互方式**，可以 **实现理想的物体特性**。这个过程包括 **参数的定义** 和 **方法的实现**。
+- The ideal object characteristics can be achieved by defining a new set of parameters and interactions under the protocol we provide. This process includes **definition of parameters** and **implementation of methods**.
 
 .. code-block:: python
 
     @dataclass
     class Example(Geoms):
 
-        name: str  # 物体的名字，是类名的小写。
-        num: int  # 物体的数量。Note：若为唯一的物体，则没有该属性
-        size: float = 0.3  # 物体的尺寸，视具体的形状而言，可能由多个可自定义的成员变量来共同决定。
-        # 物体位置随机采样的区域，可以指定多个区域，从中均匀随机采样。
-        # 每一个区域的格式为(xmin, ymin, xmax, ymax)，以list包裹
+        name: str  # The name of the object, which is the lowercase of the class name.
+        num: int  # Number of objects. If it is a unique object, there is no such property.
+        size: float = 0.3  # The size of an object, depending on the specific shape, may be determined jointly by several customizable member variables.
+        # The area where the object position is randomly sampled, multiple areas can be specified from which uniform random sampling is performed.
+        # Each region has the format (xmin, ymin, xmax, ymax), wrapped in list
         placements: list
 
-        # 仅能填写二维坐标
-        # 显式指定前i个该物体的位置，i为填写的xy坐标数量
+        # Only two-dimensional coordinates can be filled in
+        # Explicitly specify the first i positions of the object, i is the number of filled xy coordinates
         locations: list
-        # 采样坐标时判断是否与其他物体位置冲突预留的距离
-        # 一般设定为与物体半径一样大
+        # Distance reserved for judging whether there is a conflict with the position of other objects when sampling coordinates
+        # Typically set to the same size as the object radius
         keepout: float = 0.3  # Keepout radius when placing goals
         
-        # 在Simulator当中显示的颜色
+        # Colors displayed in Simulator
         color: np.array = COLOR['apple']
-        # 划分group，服务于某些机制
-        # 例如：lidar
+        # Dividing groups to serve certain mechanisms, e.g., lidar.
         group: np.array = GROUP['apple']
-        # 在当前环境中是否被雷达观测
+        # Whether it is observed by lidar in the current environment
         is_lidar_observed: bool = True
-        # 在当前环境中是否被指南针观测，仅支持数量恒为1的物体。
+        # Whether or not it is observed by the compass in the current environment, only objects with a constant number of one are supported.
         is_comp_observed: bool = False
-        # 在当前环境中是否参与约束。
+        # Whether to participate in the constraint in the current environment.
         is_constrained: bool = False
 
 
-雷达机制
---------
+Lidar Mechanism
+---------------
 
-在我们的库当中，通过雷达向agent提供关于物体的观测信息。
+In Safety-Gymnasium, observations of objects are provided to the agent via lidar.
 
 .. Note::
-    这也意味着，Safe Navigation类别当中的任务，所有的观测都是本地信息，不包含全局的环境信息，我们认为这更贴近于现实当中机器人所能得到的观测。
+    This also means that for tasks in the Safe Navigation categories, all observations are local and do not contain global information about the environment, which we believe is closer to the observations available to robots in reality.
 
 Natural lidar
 ^^^^^^^^^^^^^
 
-激光雷达通过Mujoco提供的接口实现，从机制上对应于现实当中的激光雷达。
+Natural lidar is implemented through an interface provided by Mujoco, which mechanically corresponds to the real Lidar.
 
 .. Note::
-    Natural lidar类别的每一个雷达的返回值是当前探测到的物体距离激光发射点的距离，若没有探测到，则为-1。
+    The return value for each lidar of the Natural Lidar is the distance of the currently detected object from the laser emission point, or -1 if no detection is made.
 
 Pseudo lidar
 ^^^^^^^^^^^^
 
-伪激光雷达的工作原理是循环场景中的所有的该类别物体，确定其是否在范围内，然后填充对应位置的雷达观测值。
+Pseudo lidar works by cycling through all objects of that category in the scene, determining if they are in range, and then populating the lidar observations for the corresponding location.
 
-两种雷达都是针对某一个类别的特定目标来设计的，并且会忽略其他类别的目标。例如：Vases lidar只能检测Vases，而Goal lidar只能检测Goal。
+Both lidars are designed to target a specific class of targets and will ignore other classes of targets. For example, the Vases lidar can only detect Vases, while the Goal lidar can only detect Goals.
 
 .. Note::
-    在task的lidar_conf数据类当中，若指定了 :attr:`max_dist`,那么Pseudo lidar会按照如下公式给出observation：
+    In the lidar_conf data class of the class, if :attr:`max_dist` is specified, then Pseudo lidar will give the observation according to the following formula.
 
     .. math:: O_i = \frac{D_i}{D_{max}}
 
-    其中 :math:`O_i` 表示第i个雷达的数值， :math:`D_i` 表示第i个雷达的距离， :math:`D_{max}` 表示雷达的最大探测距离。
+    where :math:`O_i` denotes the value of the ith lidar, :math:`D_i` denotes the distance of the ith lidar, and :math:`D_{max}` denotes the maximum detection distance of the lidar.
 
-    否则，将按照指数衰减的方式来给出数值：
+    Otherwise, the values are given in terms of exponential decay as follows.
 
     .. math:: O_i = e^{-\alpha D_i}
 
-    其中 :math:`\alpha` 是衰减系数。
+    where :math:`\alpha` is the decay factor.
 
 .. hint::
-    在task的lidar_conf数据类当中，通过修改lidar_type，可以切换雷达类别，但Natural lidar会显著更难。
+    In the lidar_conf data class of task, the lidar category can be switched by modifying the lidar_type, but Natural lidar will be significantly more difficult.
 
 Group mechanism
 ^^^^^^^^^^^^^^^

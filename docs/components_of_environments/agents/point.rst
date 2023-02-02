@@ -1,5 +1,5 @@
 Point
-==========
+=====
 
 .. list-table:: 
 
@@ -16,7 +16,7 @@ Point
             :width: 200px
         .. centered:: right
 
-一个被约束在2D平面上的简单机器人，拥有两个驱动器，一个用于转动，另一个用于向前/向后移动。这种分解控制方案使得机器人特别容易控制导航。在它前面有一个小正方形，这样既可以更容易直观地确定机器人的方向，也可以帮助Point推动出现在Push中的box。
+A simple robot constrained to a 2D plane has two actuators, one for rotation and the other for forward/backward movement. This decomposed control scheme makes it particularly easy to control the robot's navigation. It has a small square in front of it, which makes it easier to visually determine the robot's orientation and also helps Point push the box that appears in Push.
 
 +-----------------------------+--------------------------------+
 | Specific Action Space       | Box(-1.0, 1.0, (2,), float64)  |
@@ -30,7 +30,7 @@ Point
 
 
 Specific Action Space
--------------------------
+---------------------
 
 +------+---------------------------------------------------------+--------------+--------------+-----------------------------------+-------------+-----------------+
 | Num  | Action                                                  | Control Min  | Control Max  | Name (in corresponding XML file)  | Joint/Site  | Unit            |
@@ -42,7 +42,7 @@ Specific Action Space
 
 
 Specific Observation Space
---------------------------------------------------
+--------------------------
 
 +-------+----------------+------+------+-----------------------------------+-------------+----------------------------+
 | Size  | Observation    | Min  | Max  | Name (in corresponding XML file)  | Joint/Site  | Unit                       |
@@ -58,11 +58,11 @@ Specific Observation Space
 
 
 Specific Starting Randomness
-------------------------------
+----------------------------
 
 Nothing.
 
 Specific Episode End
---------------------------------------------------
+--------------------
 
 Nothing.
