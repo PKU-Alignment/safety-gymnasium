@@ -135,11 +135,10 @@ Both lidars are designed to target a specific class of targets and will ignore o
 Group mechanism
 ^^^^^^^^^^^^^^^
 
-我们在底层实现当中，将不同的物体分为不同的group，每一个group通过不同的雷达来探测。
-举例来说：对于探测Goal的雷达而言，Buttons是不存在的，反之亦然。
+In the underlying implementation, we divide different objects into different groups, and each group is detected by a different lidar. For example: Buttons are not present for the lidar that detects Goal, and vice versa.
 
 .. Note:: 
-    这样的机制在可视化时也会被体现出来：
+    Such a mechanism is also reflected in the visualization.
 
     .. list-table::
 
@@ -148,14 +147,14 @@ Group mechanism
           - .. figure:: ../_static/images/group_near.jpeg
                 :width: 230px
 
-    可以看到，当物体种类变多时，呈现相应数量的互不干扰的雷达。
+    It can be seen that as the variety of objects becomes larger, a corresponding number of radars that do not interfere with each other are presented.
 
 Render lidar
 ^^^^^^^^^^^^
 
-雷达在render时会被可视化，对应于agent头顶上的围成圆形的小球，小球亮起的颜色与物体颜色一致。当一个位置的雷达探测到目标时，会亮起，越接近目标，颜色越深。
+The lidar will be visualized when rendered, corresponding to the small ball enclosed in a circle above the agent's head, which lights up in the same color as the object. When the lidar at a location detects a target, it lights up, and the closer it is to the target, the darker the color.
 
-以下是与物体距离不同情况下雷达的可视化效果：
+The following is a visualization of the lidar at different distances from the object.
 
 .. list-table::
 
@@ -170,7 +169,7 @@ Render lidar
         .. centered:: near
 
 .. Note::
-    雷达可视化标记是没有实体的，仅仅服务于人类观众。
+    Lidar visualization markers are not physical and serve only the researcher.
 
 
 
