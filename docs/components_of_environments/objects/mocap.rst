@@ -1,7 +1,7 @@
 Mocap
 =====
 
-是指环境当中按照一定规律自主移动的物体，与其交互可能会产生cost，也可以通过物理交互影响其运动方式。用于建模现实中受控制的运动物体。
+Refers to objects in the environment that move autonomously according to a certain pattern, and with which interaction may produce cost, or may affect the way they move through physical interaction. It is used to model realistic moving objects under control.
 
 .. list-table:: 
 
@@ -26,14 +26,14 @@ Can be constrained    No collision
    ✅                  ❌              
 ===================== =============== 
 
-特定用于Button任务，建模环境当中移动的物体。
+Specifically for the Button task, modeling moving objects in the environment.
 
-- 在Button[12]当中：与其接触会产生cost。
+- In Button [12]: contact with it generates cost.
 
 Constraints
 ^^^^^^^^^^^
 
 .. _Gremlins_contact_cost:
 
-- contact_cost：当agent与Gremlins产生接触时，会产生cost： ``self.contact_cost``。
+- contact_cost: When the agent makes contact with Gremlins, it generates cost: ``self.contact_cost``.
 

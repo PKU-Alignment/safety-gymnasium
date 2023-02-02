@@ -64,9 +64,9 @@ Navigation
             :width: 230px
         .. centered:: Coming soon...
 
-在Task当中，可以囊括特定Agents和Objects，进而定义环境自身的行为（如reward机制，reset机制等），从而组合为一个完整的Enviroment。
+In a task, you can include specific Agents and Objects, which in turn define the environment's own behavior (e.g., reward mechanism, reset mechanism, etc.), thus combining them into a complete enviroment.
 
-对于具体的task，我们会在Environments章节与环境一起介绍，此处仅提示定义一个task的流程。
+For specific tasks, we will introduce them in the Environments section together with the environment, and here we only hint at the process of defining a task.
 
 
 

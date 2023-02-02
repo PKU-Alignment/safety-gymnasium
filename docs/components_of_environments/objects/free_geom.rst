@@ -1,7 +1,7 @@
 FreeGeom
-==========
+========
 
-是指环境当中可移动的静态物体，与其交互可能会产生cost，也可能需要移动它以完成任务。用于建模现实当中可移动的静态物体。
+Refers to a movable static object in the environment, with which interaction may result in cost, or which may need to be moved to complete a task. It is used to model realistic static objects that can be moved.
 
 .. list-table:: 
 
@@ -18,7 +18,7 @@ FreeGeom
 .. _Vases:
 
 Vases
---------
+-----
 
 .. image:: ../../_static/images/vases.jpeg
     :align: center
@@ -30,25 +30,24 @@ Can be constrained    No collision
    ✅                  ❌              
 ===================== =============== 
 
-特定用于Goal任务，建模环境中易碎的静态物体，如果agent接触或使其移动会产生cost。
+Specifically for Goal tasks, modeling fragile static objects in the environment that would generate cost if the agent touched or made them move.
 
-- 在Goal[1]任务当中：Vases=1，但不会产生cost。
-- 在Goal[2]任务当中： 只有 ``contact_cost`` 和 ``velocity_cost`` 是默认开启的。
+- In the Goal[1] task: Vases=1, but no cost is generated.
+- In the Goal[2] task: only ``contact_cost`` and ``velocity_cost`` are enabled by default.
 
 Constraints
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^
 
 .. _Vases_contact_cost:
 
-- contact_cost：当agent与Gremlins产生接触时，会产生cost： ``self.contact_cost``。
+- contact_cost: When the agent makes contact with Gremlins, it generates cost: ``self.contact_cost``.
 
 .. _Vases_displace_cost:
 
-- displace_cost：当任意一个Vases的当前位置 > ``self.displace_threshold``，会产生cost： ``dist * self.displace_cost``。
-
+- displace_cost: When the current position of any of the Vases > ``self.displace_threshold``, it generates cost: ``dist * self.displace_cost``.
 .. _Vases_velocity_cost:
 
-- velocity_cost：当agent使得Vases移动时，若速度 >= ``self.velocity_threshold``，会产生cost： ``vel * self.velocity_cost``。
+- velocity_cost: When agent makes Vases move, if velocity >= ``self.velocity_threshold``, it will generate cost: ``vel * self.velocity_cost``.
 
 .. _Push_box:
 
@@ -65,12 +64,12 @@ Can be constrained    No collision
    ❌                  ❌              
 ===================== =============== 
 
-特定用于Push任务，建模需要机器人移动到指定位置的静态物体。
+Specifically for Push tasks, modeling static objects that require the robot to move to a specified location.
 
 
-- 在所有Push任务当中：靠近获得正值reward，反之获得负值reward，使Push_box靠近Goal获得正值reward，反之获得负值reward。
+- Among all Push tasks: close to get a positive reward and vice versa to get a negative reward, make Push_box close to Goal to get a positive reward and vice versa to get a negative reward.
 
 Constraints
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^
 
 Nothing.

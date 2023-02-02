@@ -1,7 +1,7 @@
 Task Example
 ==============
 
-**下面是定义Goal的例子**：
+**The following is an example of the definition of Goal**.
 
 Goal0
 -------------------------
@@ -10,9 +10,9 @@ Goal0
 
     """Goal level 0."""
 
-    # 引入需要的物体
+    # Introduce the required objects
     from safety_gymnasium.assets.geoms import Goal
-    # 需要继承BaseTask
+    # Need to inherit from BaseTask
     from safety_gymnasium.bases.base_task import BaseTask
 
 
@@ -22,20 +22,20 @@ Goal0
         def __init__(self, config):
             super().__init__(config=config)
 
-            # 定义环境的随机性
-            # 若没有对每个物体特殊指定该变量
-            # 则默认使用此处指定的全局区域
+            # Define randomness of the environment
+            # If the variable is not assigned specifically to each object
+            # then the global area specified here is used by default
             self.placements_conf.extents = [-1, -1, 1, 1]
 
-            # 实例化并注册物体
+            # Instantiate and register the object
             self._add_geoms(Goal(keepout=0.305))
 
-            # 计算reward需要的特定数据成员
+            # Calculate the specific data members needed for the reward
             self.last_dist_goal = None
 
         def calculate_reward(self):
             """Determine reward depending on the agent and tasks."""
-            # 定义理想中的reward函数，是整个任务的目标
+            # Defining the ideal reward function is the goal of the whole task
             reward = 0.0
             dist_goal = self.dist_goal()
             reward += (self.last_dist_goal - dist_goal) * self.goal.reward_distance
@@ -47,15 +47,15 @@ Goal0
             return reward
 
         def specific_reset(self):
-            # 任务特定的reset机制
-            # 在env.reset()时被调用
-            # 用于reset特定的成员变量
+            # Task-specific reset mechanism
+            # Called at env.reset()
+            # Used to reset specific member variables
             pass
 
         def specific_step(self):
-            # 任务特定的step机制
-            # 在env.step()时被调用
-            # 用于随时间改变成员变量的值
+            # Task-specific step mechanism
+            # Called at env.step()
+            # Used to change the value of member variables over time
             pass
 
         def update_world(self):
