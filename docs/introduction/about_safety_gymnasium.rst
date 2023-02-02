@@ -5,7 +5,7 @@
 关于Safe RL
 -----------
 
-近年来，RL（强化学习）算法，特别是DeepRL算法在许多任务中都取得了良好的性能。比如：在Atari游戏中仅用视觉输入就获得高分，在高维度上完成复杂的控制任务，以及在围棋比赛中击败人类大师。然而，在RL的策略更新过程中，Agent **经常** 学习到 **reward hacking** 甚至 **危险行为** 以 **提高其累积reward**。这样可能 **导致片面追求reward** 而 **不能满足我们设计reward的初衷**。因此，**Safe RL算法致力于** 训练Agent在 **最大化reward的同时满足给定的约束条件**，从而避免学习到一些脱离现实而片面追求reward的行为策略。
+In recent years, RL (reinforcement learning) algorithms, especially DeepRL algorithms, have achieved good performance in numerous tasks. For example: gaining high scores in Atari games using only visual input, fulfilling complex control tasks in high dimensions, and beating human grandmasters in Go competitions. However, in the process of policy optimization in RL, Agents **often** learn **reward hacking** or even **risky behavior** to **improve their cumulative rewards**. This may **lead to one-sided pursuit of reward** and **contradict the original purpose** of our reward design. Therefore, the **Safe RL algorithm aims to ** train the Agent to ** maximize reward while satisfying the given constraints**, so as to avoid learning behavioral policies that are out of touch with reality and one-sidedly pursue reward.
 
 强化学习可以理解为Agent通过给定的reward信号学习，不断优化自身策略，在解决无法严格进行数学建模的问题时十分有效。在此基础上，Safe RL也可以广义地理解为一个**约束求解问题**：Agent需要在不断学习reward信号的同时对约束(cost)信号进行学习，从而对难以有效建模的约束进行学习，在满足约束的前提下，最大化reward。
 
