@@ -45,6 +45,7 @@ Constraints
 .. _Vases_displace_cost:
 
 - displace_cost: When the current position of any of the Vases > ``self.displace_threshold``, it generates cost: ``dist * self.displace_cost``.
+
 .. _Vases_velocity_cost:
 
 - velocity_cost: When agent makes Vases move, if velocity >= ``self.velocity_threshold``, it will generate cost: ``vel * self.velocity_cost``.
