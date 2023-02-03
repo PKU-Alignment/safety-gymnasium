@@ -1,10 +1,12 @@
 
-Safety Gymnasium is a standard API for safe reinforcement learning, and a diverse collection of reference environments
-======================================================================================================================
+Safety Gymnasium
+================
 
-.. image:: _static/images/racecar_demo.gif
+Safety Gymnasium is a standard API for safe reinforcement learning, and a diverse collection of reference environments.
+
+.. image:: _static/images/point_demo.gif
    :alt: racecar    
-   :width: 200
+   :width: 500
    :align: center
 
 .. code-block:: python

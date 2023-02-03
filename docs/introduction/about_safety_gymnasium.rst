@@ -36,13 +36,14 @@ In recent years, RL (reinforcement learning) algorithms, especially DeepRL algor
         ^^^^^^^^^^^^^^^^^
         Therefore, the **Safe RL algorithm aims to** train the Agent to act while
         
-        - maximizing the reward
-        - satisfying the given constraints.
+        - Maximizing the reward
+        - Satisfying the given constraints.
 
         so as to avoid learning behavioral policies that are out of touch with reality and one-sidedly pursue reward.
 
-* - .. figure:: ../_static/images/overview.png
-    .. centered:: The overview of Safe Reinforcement Learning
+
+.. image:: ../_static/images/overview.png
+.. centered:: The overview of Safe Reinforcement Learning
 
 Reinforcement learning can be considered as an agent continuously optimizing its own policy by learning from a given reward signal, and is very effective in solving problems that cannot be strictly modeled mathematically. On this foundation, Safe RL can also be broadly understood as a **constraint solving problem**: the agent needs to learn the reward signal along with the constraint signal to maximize the reward while satisfying the constraint.
 
