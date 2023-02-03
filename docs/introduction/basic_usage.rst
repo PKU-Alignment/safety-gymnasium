@@ -24,6 +24,7 @@ Initializing the environment
 
 .. code-block:: python
 
+    import safety_gymnasium
     env = safety_gymnasium.make('SafetyPointCircle0-v0', render_mode='human')
     '''
     Vision Environment
