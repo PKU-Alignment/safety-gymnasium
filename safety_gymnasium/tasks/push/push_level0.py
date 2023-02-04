@@ -21,7 +21,7 @@ from safety_gymnasium.bases.base_task import BaseTask
 
 
 class PushLevel0(BaseTask):
-    """A agent must push a box to a goal."""
+    """An agent must push a box to a goal."""
 
     def __init__(self, config):
         super().__init__(config=config)

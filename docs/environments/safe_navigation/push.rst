@@ -24,14 +24,13 @@ This set of environments is presented by `Safety-Gym <https://cdn.openai.com/saf
 Rewards
 -------
 
- - box_agent_reward_distance: At each time step, when the agent is close to Push_box it will get a positive value of reward and vice versa to get a negative value of reward, the formula is expressed as follows.
+ - box_agent_reward_distance: At each time step, when the agent is closer to Push_box it will get a positive value of reward and vice versa to get a negative value of reward, the formula is expressed as follows.
 
  .. math:: r_t = (D_{last} - D_{now})\beta
 
  Obviously :math:`r_t>0` when :math:`D_{last} > D_{now}`. where :math:`r_t` denotes the current time step's forward, :math:`D_{last}` denotes the distance between the previous time step agent and Push_box, :math:`D_{now}` denotes the distance between the current time step agent and Push_box, and :math:`\beta` is a discount factor .
- That is, :math:`D_{now}` indicates the distance between agent and Push_box at the current time step, and :math:`\beta` is a discount factor.
 
- - box_goal_reward_distance: At each time step, when Push_box is close to Goal, a positive value of reward is obtained, and vice versa, a negative value of reward is obtained, and the formula is expressed as follows,
+ - box_goal_reward_distance: At each time step, when Push_box is closer to Goal, a positive value of reward is obtained, and vice versa, a negative value of reward is obtained, and the formula is expressed as follows,
 
  .. math:: r^{box}_t = (D^{box}_{last} - D^{box}_{now})\alpha
 

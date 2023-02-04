@@ -418,7 +418,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         return obs
 
     def _obs_lidar_pseudo(self, positions: np.ndarray) -> np.ndarray:
-        """Return a agent-centric lidar observation of a list of positions.
+        """Return an agent-centric lidar observation of a list of positions.
 
         Lidar is a set of bins around the agent (divided evenly in a circle).
         The detection directions are exclusive and exhaustive for a full 360 view.
@@ -466,7 +466,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         return obs
 
     def _obs_compass(self, pos: np.ndarray) -> np.ndarray:
-        """Return a agent-centric compass observation of a list of positions.
+        """Return an agent-centric compass observation of a list of positions.
 
         Compass is a normalized (unit-length) egocentric XY vector,
         from the agent to the object.

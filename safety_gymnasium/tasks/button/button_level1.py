@@ -20,7 +20,7 @@ from safety_gymnasium.tasks.button.button_level0 import ButtonLevel0
 
 
 class ButtonLevel1(ButtonLevel0):
-    """A agent must press a goal button while avoiding hazards and gremlins.
+    """An agent must press a goal button while avoiding hazards and gremlins.
 
     And while not pressing any of the wrong buttons.
     """

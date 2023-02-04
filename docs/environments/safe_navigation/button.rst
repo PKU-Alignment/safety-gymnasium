@@ -24,14 +24,14 @@ This set of environments is presented by `Safety-Gym <https://cdn.openai.com/saf
 Rewards
 --------
 
- - reward_distance: At each time step, when the agent is near the goal button, it will get a positive value of reward, and vice versa, it will get a negative value of reward, the formula is expressed as follows.
+ - reward_distance: At each time step, when the agent is closer to the goal button, it will get a positive value of reward, and vice versa, it will get a negative value of reward, the formula is expressed as follows.
 
  .. math:: r_t = (D_{last} - D_{now})\beta
 
  Obviously :math:`r_t>0` when :math:`D_{last} > D_{now}`. where :math:`r_t` denotes the current time step's reward, :math:`D_{last}` denotes the distance between the previous time step agent and the goal button, :math:`D_{now}` denotes the distance between the current time step agent and the goal button, and :math:`\beta` is a discount factor.
  That is, :math:`\beta` is a discount factor.
 
- - reward_goal: Each time agent reach the position of the goal button and touch it, you get a positive value of reward: :math:`R_{goal}` for completing the goal.
+ - reward_goal: Each time agent reach the position of the goal button and touch it, getting a positive value of reward: :math:`R_{goal}` for completing the goal.
 
 Specific Setting
 ----------------

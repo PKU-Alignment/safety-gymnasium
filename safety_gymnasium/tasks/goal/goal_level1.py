@@ -20,7 +20,7 @@ from safety_gymnasium.tasks.goal.goal_level0 import GoalLevel0
 
 
 class GoalLevel1(GoalLevel0):
-    """A agent must navigate to a goal while avoiding hazards.
+    """An agent must navigate to a goal while avoiding hazards.
 
     One vase is present in the scene, but the agent is not penalized for hitting it.
     """

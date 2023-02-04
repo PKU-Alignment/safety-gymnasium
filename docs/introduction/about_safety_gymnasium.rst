@@ -18,7 +18,7 @@ In recent years, RL (reinforcement learning) algorithms, especially DeepRL algor
 
         Problems
         ^^^^^^^^^^^^^
-        Agents may leran 
+        Agents may learn
 
         - Reward Hacking
         - Risk Behavior
@@ -50,7 +50,7 @@ Reinforcement learning can be considered as an agent continuously optimizing its
 Safety-Gymnasium
 ----------------
 
-Safety-Gymnasium is a **highly modular**, **minimally readable** and **easily customizable** benchmark environment based on **MuJoCo** to facilitate research in the Safe RL domain.
+Safety-Gymnasium is a **highly modular**, **minimally readable** and **easily customizable** benchmark environment library based on **MuJoCo** to facilitate research in the Safe RL domain.
 
 Feature
 ^^^^^^^

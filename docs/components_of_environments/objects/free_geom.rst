@@ -68,7 +68,7 @@ Can be constrained    No collision
 Specifically for Push tasks, modeling static objects that require the robot to move to a specified location.
 
 
-- Among all Push tasks: close to get a positive reward and vice versa to get a negative reward, make Push_box close to Goal to get a positive reward and vice versa to get a negative reward.
+- Among all Push tasks: get closer to get a positive reward and vice versa to get a negative reward, make Push_box close to Goal to get a positive reward and vice versa to get a negative reward.
 
 Constraints
 ^^^^^^^^^^^

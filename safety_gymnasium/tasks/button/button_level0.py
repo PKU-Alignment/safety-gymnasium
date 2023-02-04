@@ -23,7 +23,7 @@ from safety_gymnasium.bases.base_task import BaseTask
 
 # pylint: disable-next=too-many-instance-attributes
 class ButtonLevel0(BaseTask):
-    """A agent must press a goal button."""
+    """An agent must press a goal button."""
 
     def __init__(self, config):
         super().__init__(config=config)

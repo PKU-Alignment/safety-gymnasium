@@ -17,7 +17,7 @@ Goal0
 
 
     class GoalLevel0(BaseTask):
-        """A agent must navigate to a goal."""
+        """An agent must navigate to a goal."""
 
         def __init__(self, config):
             super().__init__(config=config)
@@ -35,7 +35,7 @@ Goal0
 
         def calculate_reward(self):
             """Determine reward depending on the agent and tasks."""
-            # Defining the ideal reward function is the goal of the whole task
+            # Defining the ideal reward function, which is the goal of the whole task
             reward = 0.0
             dist_goal = self.dist_goal()
             reward += (self.last_dist_goal - dist_goal) * self.goal.reward_distance
@@ -95,7 +95,7 @@ Goal1
 
 
     class GoalLevel1(GoalLevel0):
-        """A agent must navigate to a goal while avoiding hazards.
+        """An agent must navigate to a goal while avoiding hazards.
 
         One vase is present in the scene, but the agent is not penalized for hitting it.
         """
@@ -124,7 +124,7 @@ Goal2
 
 
     class GoalLevel2(GoalLevel1):
-        """A agent must navigate to a goal while avoiding more hazards and vases."""
+        """An agent must navigate to a goal while avoiding more hazards and vases."""
 
         def __init__(self, config):
             super().__init__(config=config)

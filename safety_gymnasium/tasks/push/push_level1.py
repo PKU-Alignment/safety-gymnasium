@@ -19,7 +19,7 @@ from safety_gymnasium.tasks.push.push_level0 import PushLevel0
 
 
 class PushLevel1(PushLevel0):
-    """A agent must push a box to a goal while avoiding hazards.
+    """An agent must push a box to a goal while avoiding hazards.
 
     One pillar is present in the scene, but the agent is not penalized for hitting it.
     """

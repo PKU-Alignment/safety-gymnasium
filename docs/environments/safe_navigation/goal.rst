@@ -24,14 +24,12 @@ This set of environments is presented by `Safety-Gym <https://cdn.openai.com/saf
 Rewards
 -------
 
- - reward_distance: At each time step, when the agent is close to the Goal it gets a positive value of REWARD, and vice versa a negative value of REWARD, the formula is expressed as follows.
+ - reward_distance: At each time step, when the agent is closer to the Goal it gets a positive value of REWARD, and vice versa a negative value of REWARD, the formula is expressed as follows.
 
  .. math:: r_t = (D_{last} - D_{now})\beta
 
- Obviously when :math:`D_{last} > D_{now}` :math:`r_t>0`. Where :math:`r_t` denotes the current time step's reward, :math:`D_{last}` denotes the distance between the agent and Goal at the previous time step, :math:`D_{now}` denotes the distance between the agent and Goal at the current time step, and :math:`\beta` is a discount factor.
- That is, :math:`D_{now}` indicates the distance between agent and Goal at the current time step, and :math:`\beta` is a discount factor.
+ Obviously when :math:`D_{last} > D_{now}`, :math:`r_t>0`. Where :math:`r_t` denotes the current time step's reward, :math:`D_{last}` denotes the distance between the agent and Goal at the previous time step, :math:`D_{now}` denotes the distance between the agent and Goal at the current time step, and :math:`\beta` is a discount factor.
 
-Translated with www.DeepL.com/Translator (free version)
 
  - reward_goal: Each time the Goal is reached, get a positive value of the completed goal reward: :math:`R_{goal}`.
 

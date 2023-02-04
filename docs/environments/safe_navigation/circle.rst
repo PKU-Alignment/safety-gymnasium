@@ -30,9 +30,8 @@ Rewards
 
  .. math:: R_t = \frac{1}{1 + |r_{agent} - r_{circle}|} * \frac{(-uy + vx)}{r_{agent}}
 
- where :math:`R_t` is the current time-step of the redirection, :math:`u`, :math:`v` is the x-y axis velocity component of the agent, :math:`x` , :math:`y` are the x-y axis coordinates of the agent, :math:`r_{agent}` is the Euclidean distance of the agent from the origin, : math:`r_circle` is the radius of the Circle geometry. Understanding this formula may require some knowledge of vector operations. **Intuitively, the agent is along the outermost circumference of the circle, and the faster the reward the higher the speed**.
+ where :math:`R_t` is the current time-step of the redirection, :math:`u`, :math:`v` is the x-y axis velocity component of the agent, :math:`x` , :math:`y` are the x-y axis coordinates of the agent, :math:`r_{agent}` is the Euclidean distance of the agent from the origin, :math:`r_{circle}` is the radius of the Circle geometry. Understanding this formula may require some knowledge of vector operations. **Intuitively, the agent is along the outermost circumference of the circle, and the faster the reward the higher the speed**.
 
-Translated with www.DeepL.com/Translator (free version)
 
 Episode End
 -----------

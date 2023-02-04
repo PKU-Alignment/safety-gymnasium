@@ -147,12 +147,12 @@ In the underlying implementation, we divide different objects into different gro
           - .. figure:: ../_static/images/group_near.jpeg
                 :width: 230px
 
-    It can be seen that as the variety of objects becomes larger, a corresponding number of radars that do not interfere with each other are presented.
+    It can be seen that as the variety of objects becomes larger, a corresponding number of lidars that do not interfere with each other are presented.
 
 Render lidar
 ^^^^^^^^^^^^
 
-The lidar will be visualized when rendered, corresponding to the small ball enclosed in a circle above the agent's head, which lights up in the same color as the object. When the lidar at a location detects a target, it lights up, and the closer it is to the target, the darker the color.
+The lidar will be visualized when rendered, corresponding to the small ball enclosed in a circle above the agent's head, which lights up in the same color as the object. When the lidar at a location detects a target, it lights up, and the closer it is to the target, the brighter the color.
 
 The following is a visualization of the lidar at different distances from the object.
 

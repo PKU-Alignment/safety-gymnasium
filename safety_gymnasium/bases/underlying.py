@@ -573,7 +573,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
 
     @abc.abstractmethod
     def _obs_compass(self, pos: np.ndarray) -> np.ndarray:
-        """Return a agent-centric compass observation of a list of positions.
+        """Return an agent-centric compass observation of a list of positions.
 
         Compass is a normalized (unit-length) egocentric XY vector,
         from the agent to the object.

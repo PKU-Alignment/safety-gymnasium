@@ -19,7 +19,7 @@ from safety_gymnasium.bases.base_task import BaseTask
 
 
 class GoalLevel0(BaseTask):
-    """A agent must navigate to a goal."""
+    """An agent must navigate to a goal."""
 
     def __init__(self, config):
         super().__init__(config=config)
