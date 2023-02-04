@@ -1,7 +1,7 @@
 Agents
 ======
 
-.. list-table:: 
+.. list-table::
 
     * - .. figure:: ../_static/images/point_front.jpeg
             :width: 230px
@@ -36,5 +36,3 @@ We have designed a set of unified agents for tasks, which are an important part 
     agents/car.rst
     agents/racecar.rst
     agents/ant.rst
-
-

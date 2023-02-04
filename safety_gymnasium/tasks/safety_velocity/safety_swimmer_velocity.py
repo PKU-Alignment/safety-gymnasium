@@ -16,6 +16,7 @@
 
 import numpy as np
 from gymnasium.envs.mujoco.swimmer_v4 import SwimmerEnv
+
 from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 
 

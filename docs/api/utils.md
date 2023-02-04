@@ -8,6 +8,3 @@ title: Utils
 :hidden:
 utils/random_generator.md
 ```
-
-
-

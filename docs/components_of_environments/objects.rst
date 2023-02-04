@@ -1,7 +1,7 @@
 Objects
 =======
 
-.. list-table:: 
+.. list-table::
 
     * - .. figure:: ../_static/images/goal.jpeg
             :width: 230px
@@ -80,7 +80,7 @@ Each object has **custom parameters** and **methods** needed to interact with th
         # Distance reserved for judging whether there is a conflict with the position of other objects when sampling coordinates
         # Typically set to the same size as the object radius
         keepout: float = 0.3  # Keepout radius when placing goals
-        
+
         # Colors displayed in Simulator
         color: np.array = COLOR['apple']
         # Dividing groups to serve certain mechanisms, e.g., lidar.
@@ -137,7 +137,7 @@ Group mechanism
 
 In the underlying implementation, we divide different objects into different groups, and each group is detected by a different lidar. For example: Buttons are not present for the lidar that detects Goal, and vice versa.
 
-.. Note:: 
+.. Note::
     Such a mechanism is also reflected in the visualization.
 
     .. list-table::
@@ -179,5 +179,3 @@ The following is a visualization of the lidar at different distances from the ob
     objects/geom.rst
     objects/free_geom.rst
     objects/mocap.rst
-
-

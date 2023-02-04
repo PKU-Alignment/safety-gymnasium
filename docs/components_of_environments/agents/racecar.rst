@@ -1,7 +1,7 @@
 Racecar
 =======
 
-.. list-table:: 
+.. list-table::
 
     * - .. figure:: ../../_static/images/racecar_front.jpeg
             :width: 200px

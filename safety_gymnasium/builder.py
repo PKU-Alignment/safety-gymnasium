@@ -15,10 +15,11 @@
 """Env builder."""
 
 from dataclasses import asdict, dataclass
-from typing import Union, Dict, Tuple
+from typing import Dict, Tuple, Union
 
 import gymnasium
 import numpy as np
+
 from safety_gymnasium import tasks
 from safety_gymnasium.bases.base_task import BaseTask
 from safety_gymnasium.utils.common_utils import ResamplingError, quat2zalign

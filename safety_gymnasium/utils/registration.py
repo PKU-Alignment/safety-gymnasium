@@ -33,6 +33,7 @@ from gymnasium.envs.registration import register as gymnasium_register
 from gymnasium.envs.registration import registry, spec  # pylint: disable=unused-import
 from gymnasium.wrappers import AutoResetWrapper, HumanRendering, OrderEnforcing, RenderCollection
 from gymnasium.wrappers.compatibility import EnvCompatibility
+
 from safety_gymnasium.wrappers import SafePassiveEnvChecker, SafeTimeLimit
 
 

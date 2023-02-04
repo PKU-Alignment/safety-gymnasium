@@ -14,8 +14,10 @@
 # ==============================================================================
 """Random generator."""
 
-from typing import Dict, Tuple, List
+from typing import Dict, List, Tuple
+
 import numpy as np
+
 from safety_gymnasium.utils.common_utils import ResamplingError
 
 
@@ -56,7 +58,7 @@ class RandomGenerator:
 
     def __init__(self):
         """Initialize the random number generator."""
-        self.random_generator: np.random.RandomState = None
+        self.random_generator: np.random.mtrand.RandomState = None
         self.placements: dict = None
         self.placements_extents: list = None
         self.placements_margin: float = None

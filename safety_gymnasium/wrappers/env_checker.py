@@ -16,6 +16,7 @@
 
 from gymnasium.core import ActType
 from gymnasium.wrappers.env_checker import PassiveEnvChecker
+
 from safety_gymnasium.utils.passive_env_checker import env_step_passive_checker
 
 

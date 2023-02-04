@@ -24,7 +24,7 @@ In recent years, RL (reinforcement learning) algorithms, especially DeepRL algor
         - Risk Behavior
         - Unrealistic Strategy
 
-        to improve their cumulative rewards, This may lead to **one-sided pursuit of reward** and **contradict the original purpose** of our reward design. 
+        to improve their cumulative rewards, This may lead to **one-sided pursuit of reward** and **contradict the original purpose** of our reward design.
 
     .. grid-item-card::
         :class-item: sd-font-weight-bold
@@ -35,7 +35,7 @@ In recent years, RL (reinforcement learning) algorithms, especially DeepRL algor
         Solutions
         ^^^^^^^^^^^^^^^^^
         Therefore, the **Safe RL algorithm aims to** train the Agent to act while
-        
+
         - Maximizing the reward
         - Satisfying the given constraints.
 
@@ -62,4 +62,3 @@ Feature
 - Good support and refactoring of the classic Safe RL environment: **Safety-Gym** , **Safety-Velocity**.
 - Less dependence.
 - Easy to install.
-

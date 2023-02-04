@@ -16,6 +16,7 @@
 
 import numpy as np
 from gymnasium.envs.mujoco.humanoid_v4 import HumanoidEnv, mass_center
+
 from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 
 

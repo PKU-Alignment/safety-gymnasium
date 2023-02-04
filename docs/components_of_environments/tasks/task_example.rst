@@ -137,5 +137,3 @@ Goal2
             # Vases become more numerous and participate in the constraint
             self.vases.num = 10
             self.vases.is_constrained = True
-
-

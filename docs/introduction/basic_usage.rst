@@ -29,7 +29,7 @@ Initializing the environment
     '''
     Vision Environment
         env = safety_gymnasium.make('SafetyPointCircle0Vision-v0', render_mode='human')
-    Keyboard Debug environment 
+    Keyboard Debug environment
     due to the complexity of the agent's inherent dynamics, only partial support for the agent.
 	env = safety_gymnasium.make('SafetyPointCircle0Debug-v0', render_mode='human')
     '''
@@ -63,10 +63,10 @@ Observation Space
     print(env.obs_space_dict)
     '''
     OrderedDict([
-        ('accelerometer', Box(-inf, inf, (3,), float64)), 
-        ('velocimeter', Box(-inf, inf, (3,), float64)), 
-        ('gyro', Box(-inf, inf, (3,), float64)), 
-        ('magnetometer', Box(-inf, inf, (3,), float64)), 
+        ('accelerometer', Box(-inf, inf, (3,), float64)),
+        ('velocimeter', Box(-inf, inf, (3,), float64)),
+        ('gyro', Box(-inf, inf, (3,), float64)),
+        ('magnetometer', Box(-inf, inf, (3,), float64)),
         ('circle_lidar', Box(0.0, 1.0, (16,), float64))
         ])
     '''
@@ -84,5 +84,3 @@ Action Space
     obs, info = env.reset()
     print(env.action_space)
     # Box(-1.0, 1.0, (2,), float64)
-
-

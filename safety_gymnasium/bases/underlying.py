@@ -17,19 +17,20 @@
 import abc
 from copy import deepcopy
 from dataclasses import dataclass
-from typing import Union, List
+from typing import List, Union
 
 import gymnasium
 import mujoco
 import numpy as np
 from gymnasium.envs.mujoco.mujoco_rendering import RenderContextOffscreen
+
 import safety_gymnasium
 from safety_gymnasium import agents
-from safety_gymnasium.bases.base_object import Geom, FreeGeom, Mocap
 from safety_gymnasium.assets.color import COLOR
 from safety_gymnasium.assets.free_geoms import FREE_GEOMS_REGISTER
 from safety_gymnasium.assets.geoms import GEOMS_REGISTER
 from safety_gymnasium.assets.mocaps import MOCAPS_REGISTER
+from safety_gymnasium.bases.base_object import FreeGeom, Geom, Mocap
 from safety_gymnasium.utils.common_utils import MujocoException
 from safety_gymnasium.utils.keyboard_viewer import KeyboardViewer
 from safety_gymnasium.utils.random_generator import RandomGenerator

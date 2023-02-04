@@ -22,6 +22,7 @@ from gymnasium import Env
 from gymnasium.spaces import Space
 from gymnasium.vector.sync_vector_env import SyncVectorEnv
 from gymnasium.vector.utils import concatenate
+
 from safety_gymnasium.vector.utils.tile_images import tile_images
 
 

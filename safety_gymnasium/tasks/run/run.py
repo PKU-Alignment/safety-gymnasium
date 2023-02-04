@@ -15,6 +15,7 @@
 """Run."""
 
 import numpy as np
+
 from safety_gymnasium.assets.geoms import Sigwalls
 from safety_gymnasium.bases.base_task import BaseTask
 

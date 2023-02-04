@@ -3,7 +3,7 @@ FreeGeom
 
 Refers to a movable static object in the environment, with which interaction may result in cost, or which may need to be moved to complete a task. It is used to model realistic static objects that can be moved.
 
-.. list-table:: 
+.. list-table::
 
     * - .. figure:: ../../_static/images/vases.jpeg
             :width: 230px
@@ -24,11 +24,11 @@ Vases
     :align: center
     :scale: 12 %
 
-===================== =============== 
-Can be constrained    No collision   
-===================== =============== 
-   ✅                  ❌              
-===================== =============== 
+===================== ===============
+Can be constrained    No collision
+===================== ===============
+   ✅                  ❌
+===================== ===============
 
 Specifically for Goal tasks, modeling fragile static objects in the environment that would generate cost if the agent touched or made them move.
 
@@ -59,11 +59,11 @@ Push_box
     :align: center
     :scale: 12 %
 
-===================== =============== 
-Can be constrained    No collision   
-===================== =============== 
-   ❌                  ❌              
-===================== =============== 
+===================== ===============
+Can be constrained    No collision
+===================== ===============
+   ❌                  ❌
+===================== ===============
 
 Specifically for Push tasks, modeling static objects that require the robot to move to a specified location.
 

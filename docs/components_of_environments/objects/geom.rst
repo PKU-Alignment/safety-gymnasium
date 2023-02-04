@@ -3,7 +3,7 @@ Geom
 
 It is a static object in the environment that cannot change its position by contact and collision. It is used to model static objects that are fixed in reality.
 
-.. list-table:: 
+.. list-table::
 
     * - .. figure:: ../../_static/images/goal.jpeg
             :width: 230px
@@ -40,11 +40,11 @@ Goal
     :align: center
     :scale: 12 %
 
-===================== =============== 
-Can be constrained    No collision   
-===================== =============== 
-   ❌                  ✅              
-===================== =============== 
+===================== ===============
+Can be constrained    No collision
+===================== ===============
+   ❌                  ✅
+===================== ===============
 
 Used to model the target location in the environment.
 
@@ -64,11 +64,11 @@ Buttons
     :align: center
     :scale: 12 %
 
-===================== =============== 
-Can be constrained    No collision   
-===================== =============== 
-   ✅                  ❌              
-===================== =============== 
+===================== ===============
+Can be constrained    No collision
+===================== ===============
+   ✅                  ❌
+===================== ===============
 
 Specifically for the Button task, four solid, fixed-position buttons are modeled, and one button is randomly selected as the target button, which must be approached and pressed.
 
@@ -92,11 +92,11 @@ Circle
     :align: center
     :scale: 12 %
 
-===================== =============== 
-Can be constrained    No collision   
-===================== =============== 
-   ❌                  ✅              
-===================== =============== 
+===================== ===============
+Can be constrained    No collision
+===================== ===============
+   ❌                  ✅
+===================== ===============
 
 Specifically used in the Circle task to visualize a ``size`` sized circular area.
 
@@ -114,11 +114,11 @@ Pillars
     :align: center
     :scale: 12 %
 
-===================== =============== 
-Can be constrained    No collision   
-===================== =============== 
-   ✅                  ❌              
-===================== =============== 
+===================== ===============
+Can be constrained    No collision
+===================== ===============
+   ✅                  ❌
+===================== ===============
 
 Used to model large cylindrical obstacles in the environment.
 
@@ -140,11 +140,11 @@ Hazards
     :align: center
     :scale: 12 %
 
-===================== =============== 
-Can be constrained    No collision   
-===================== =============== 
-   ✅                  ✅              
-===================== =============== 
+===================== ===============
+Can be constrained    No collision
+===================== ===============
+   ✅                  ✅
+===================== ===============
 
 Used to model hazardous areas in the environment where entering the area generates cost.
 
@@ -164,11 +164,11 @@ Sigwalls
     :align: center
     :scale: 12 %
 
-===================== =============== 
-Can be constrained    No collision   
-===================== =============== 
-   ✅                  ✅              
-===================== =============== 
+===================== ===============
+Can be constrained    No collision
+===================== ===============
+   ✅                  ✅
+===================== ===============
 
 Specifically for Circle tasks, visualize 2 or 4 solid-free walls to limit the circular area to a smaller area where crossing the wall from inside the safe area to the outside will generate cost.
 
@@ -181,4 +181,3 @@ Constraints
 .. _Sigwalls_out_of_boundary_cost:
 
 - out_of_boundary_cost: When agent crosses the boundary from inside the circular domain outward, it generates cost: ``1``
-

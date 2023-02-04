@@ -16,6 +16,7 @@
 
 import glfw
 import numpy as np
+
 from safety_gymnasium.bases.base_agent import BaseAgent
 from safety_gymnasium.utils.random_generator import RandomGenerator
 

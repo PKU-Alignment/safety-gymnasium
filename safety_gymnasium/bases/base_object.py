@@ -18,6 +18,7 @@ import abc
 from dataclasses import dataclass
 
 import numpy as np
+
 from safety_gymnasium.bases.base_agent import BaseAgent
 from safety_gymnasium.utils.random_generator import RandomGenerator
 from safety_gymnasium.world import Engine
@@ -46,7 +47,8 @@ class BaseObject(abc.ABC):
     - :attr:`name` (str): Name of the obstacle, used as key in :meth:`process_config` to fill configuration
       dictionary.
     - :attr:`engine` (:class:`safety_gymnasium.world.Engine`): Physical engine instance.
-    - :attr:`random_generator` (:class:`safety_gymnasium.utils.random_generator.RandomGenerator`): Random generator instance.
+    - :attr:`random_generator` (:class:`safety_gymnasium.utils.random_generator.RandomGenerator`):
+      Random generator instance.
     - :attr:`agent` (:class:`safety_gymnasium.bases.base_agent.BaseAgent`): Agent instance.
     - :attr:`pos` (np.ndarray): Get the position of the object.
     """
@@ -120,7 +122,7 @@ class BaseObject(abc.ABC):
 
     def _specific_agent_config(self) -> None:
         """Modify properties according to specific agent.
-        
+
         Note:
             This method will be called only once in one environment, that is when :meth:`set_agent`
             is called.
@@ -130,7 +132,7 @@ class BaseObject(abc.ABC):
     @abc.abstractmethod
     def pos(self) -> np.ndarray:
         """Get the position of the obstacle.
-        
+
         Returns:
             np.ndarray: Position of the obstacle.
         """
@@ -139,7 +141,7 @@ class BaseObject(abc.ABC):
     @abc.abstractmethod
     def get_config(self, xy_pos: np.ndarray, rot: float):
         """Get the config of the obstacle.
-        
+
         Returns:
             dict: Configuration of this type of object in current environment.
         """

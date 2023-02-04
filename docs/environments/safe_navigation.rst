@@ -1,7 +1,7 @@
 Safe Navigation
 ================
 
-.. list-table:: 
+.. list-table::
 
     * - .. figure:: ../_static/images/goal0.jpeg
             :width: 230px
@@ -73,5 +73,3 @@ We have refactored and optimized the widely used but unmaintained and lacking su
     safe_navigation/goal.rst
     safe_navigation/button.rst
     safe_navigation/push.rst
-
-

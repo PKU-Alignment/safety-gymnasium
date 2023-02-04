@@ -15,6 +15,7 @@
 """HalfCheetah environment with a safety constraint on velocity."""
 
 from gymnasium.envs.mujoco.half_cheetah_v4 import HalfCheetahEnv
+
 from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 
 

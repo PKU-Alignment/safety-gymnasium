@@ -10,6 +10,7 @@ import pathlib
 import sys
 from typing import Any, Dict
 
+
 ROOT_DIR = pathlib.Path(__file__).absolute().parent.parent.parent
 sys.path.insert(0, str(ROOT_DIR / 'safety_gymnasium'))
 

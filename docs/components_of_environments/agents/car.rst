@@ -1,7 +1,7 @@
 Car
 ===
 
-.. list-table:: 
+.. list-table::
 
     * - .. figure:: ../../_static/images/car_front.jpeg
             :width: 200px

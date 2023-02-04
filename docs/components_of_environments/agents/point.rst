@@ -1,7 +1,7 @@
 Point
 =====
 
-.. list-table:: 
+.. list-table::
 
     * - .. figure:: ../../_static/images/point_front.jpeg
             :width: 200px

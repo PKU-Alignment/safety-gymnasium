@@ -29,5 +29,3 @@ title: RandomGenerator
 .. autofunction:: safety_gymnasium.utils.random_generator.RandomGenerator.choice
 .. autofunction:: safety_gymnasium.utils.random_generator.RandomGenerator.uniform
 ```
-
-

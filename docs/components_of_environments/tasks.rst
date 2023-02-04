@@ -4,7 +4,7 @@ Tasks
 Navigation
 ----------
 
-.. list-table:: 
+.. list-table::
 
     * - .. figure:: ../_static/images/goal0.jpeg
             :width: 230px
@@ -75,5 +75,3 @@ For specific tasks, we will introduce them in the Environments section together 
     :hidden:
 
     tasks/task_example.rst
-
-

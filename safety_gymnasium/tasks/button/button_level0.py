@@ -14,9 +14,10 @@
 # ==============================================================================
 """Button task 0."""
 
+import gymnasium
 import mujoco
 import numpy as np
-import gymnasium
+
 from safety_gymnasium.assets.geoms import Buttons, Goal
 from safety_gymnasium.bases.base_task import BaseTask
 

@@ -18,6 +18,7 @@ import os
 from dataclasses import InitVar, dataclass, field
 
 import mujoco
+
 import safety_gymnasium
 
 
