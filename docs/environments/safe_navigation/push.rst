@@ -24,18 +24,18 @@ This set of environments is presented by `Safety-Gym <https://cdn.openai.com/saf
 Rewards
 -------
 
- - box_agent_reward_distance: At each time step, when the agent is closer to Push_box it will get a positive value of reward and vice versa to get a negative value of reward, the formula is expressed as follows.
+ - box_agent_reward_distance: At each time step, when the agent is closer to Push_box it will get a positive value of reward and getting farther will cause a negative reward, the formula is expressed as follows.
 
  .. math:: r_t = (D_{last} - D_{now})\beta
 
  Obviously :math:`r_t>0` when :math:`D_{last} > D_{now}`. where :math:`r_t` denotes the current time step's forward, :math:`D_{last}` denotes the distance between the previous time step agent and Push_box, :math:`D_{now}` denotes the distance between the current time step agent and Push_box, and :math:`\beta` is a discount factor .
 
- - box_goal_reward_distance: At each time step, when Push_box is closer to Goal, a positive value of reward is obtained, and vice versa, a negative value of reward is obtained, and the formula is expressed as follows,
+ - box_goal_reward_distance: At each time step, when Push_box is closer to Goal, a positive value of reward is obtained, and getting farther will cause a negative reward, the formula is expressed as follows,
 
  .. math:: r^{box}_t = (D^{box}_{last} - D^{box}_{now})\alpha
 
  Obviously :math:`r^{box}_t>0` when :math:`D^{box}_{last} > D^{box}_{now}`. where :math:`r^{box}_t` denotes the current time step of the Forward, :math:`D^{box}_{last}` denotes the distance between Push_box and Goal at the previous time step, :math:`D^{box}_{now}` denotes the distance between Push_box and Goal at the current time step, :math:`\alpha` is a discount factor.
- This means that when Push_box is close to Goal, reward is positive and vice versa.
+ This means that when Push_box is close to Goal, reward is positive.
 
  - reward_goal: Every time Push_box reaches Goal's position, get a positive value of the completion goal reward: :math:`R_{goal}`.
 

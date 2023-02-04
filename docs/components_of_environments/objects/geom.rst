@@ -48,7 +48,7 @@ Can be constrained    No collision
 
 Used to model the target location in the environment.
 
-- In the general setting: get closer to the location of Goal to get a positive reward, and vice versa to get a negative reward, arrive to get the task completion reward, after which the target location will be refreshed.
+- In the general setting: Get closer to the location of Goal to get a positive reward, and getting farther will cause a negative reward. Arrive to get the task completion reward, after which the target location will be refreshed.
 
 Constraints
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

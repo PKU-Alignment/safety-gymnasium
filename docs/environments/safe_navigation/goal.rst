@@ -24,7 +24,7 @@ This set of environments is presented by `Safety-Gym <https://cdn.openai.com/saf
 Rewards
 -------
 
- - reward_distance: At each time step, when the agent is closer to the Goal it gets a positive value of REWARD, and vice versa a negative value of REWARD, the formula is expressed as follows.
+ - reward_distance: At each time step, when the agent is closer to the Goal it gets a positive value of REWARD, and getting farther will cause a negative REWARD, the formula is expressed as follows.
 
  .. math:: r_t = (D_{last} - D_{now})\beta
 
