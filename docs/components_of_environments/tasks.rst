@@ -64,7 +64,7 @@ Navigation
             :width: 230px
         .. centered:: Coming soon...
 
-In a task, you can include specific Agents and Objects, which in turn define the environment's own behavior (e.g., reward mechanism, reset mechanism, etc.), thus combining them into a complete enviroment.
+In a task, you can include specific Agents and Objects, which in turn define the environment's own behavior (e.g., reward mechanism, reset mechanism, etc.), thus combining them into a complete environment.
 
 For specific tasks, we will introduce them in the Environments section together with the environment, and here we only hint at the process of defining a task.
 

@@ -129,7 +129,7 @@ Constraints
 
 .. _Pillars_contact_cost:
 
-- contact_cost：当agent与Pillars产生接触时，会产生cost： ``self.cost``
+- contact_cost: When the agent comes into contact with Pillars, a cost will be generated: ``self.cost``
 
 .. _Hazards:
 
