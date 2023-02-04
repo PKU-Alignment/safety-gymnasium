@@ -18,6 +18,7 @@ import abc
 import os
 from collections import OrderedDict
 from dataclasses import dataclass
+from typing import Union
 
 import gymnasium
 import mujoco
@@ -32,69 +33,148 @@ from safety_gymnasium.utils.task_utils import theta2vec
 
 @dataclass
 class LidarConf:
-    """Lidar options.
+    r"""Lidar observation parameters.
 
-    Lidar observation parameters.
+    Attributes:
+        num_bins (int): Bins (around a full circle) for lidar sensing.
+        max_dist (float): Maximum distance for lidar sensitivity (if None, exponential distance).
+        exp_gain (float): Scaling factor for distance in exponential distance lidar.
+        type (str): 'pseudo', 'natural', see self._obs_lidar().
+        alias (bool): Lidar bins alias into each other.
     """
 
-    num_bins: int = 16  # Bins (around a full circle) for lidar sensing
-    max_dist: float = 3  # Maximum distance for lidar sensitivity (if None, exponential distance)
-    exp_gain: float = 1.0  # Scaling factor for distance in exponential distance lidar
-    type: str = 'pseudo'  # 'pseudo', 'natural', see self._obs_lidar()
-    alias: bool = True  # Lidar bins alias into each other
+    num_bins: int = 16
+    max_dist: float = 3
+    exp_gain: float = 1.0
+    type: str = 'pseudo'
+    alias: bool = True
 
 
 @dataclass
 class CompassConf:
-    """Compass options.
+    r"""Compass observation parameters.
 
-    Compass observation parameters.
+    Attributes:
+        shape (int): 2 for XY unit vector, 3 for XYZ unit vector.
     """
 
-    shape = 2  # Set to 2 or 3 for XY or XYZ unit vector compass observation.
+    shape: int = 2
 
 
 @dataclass
 class RewardConf:
-    """Reward options."""
+    r"""Reward options.
 
-    reward_orientation = False  # Reward for being upright
-    reward_orientation_scale = 0.002  # Scale for uprightness reward
-    reward_orientation_body = 'agent'  # What body to get orientation from
-    reward_exception = -10.0  # Reward when encountering a mujoco exception
-    reward_clip = 10  # Clip reward, last resort against physics errors causing magnitude spikes
+    Attributes:
+        reward_orientation (bool): Reward for being upright.
+        reward_orientation_scale (float): Scale for uprightness reward.
+        reward_orientation_body (str): What body to get orientation from.
+        reward_exception (float): Reward when encountering a mujoco exception.
+        reward_clip (float): Clip reward, last resort against physics errors causing magnitude spikes.
+    """
+
+    reward_orientation: bool = False
+    reward_orientation_scale: float = 0.002
+    reward_orientation_body: str = 'agent'
+    reward_exception: float = -10.0
+    reward_clip: float = 10
 
 
 @dataclass
 class CostConf:
-    """Cost options."""
+    r"""Cost options.
 
-    constrain_indicator = True  # If true, all costs are either 1 or 0 for a given step.
+    Attributes:
+        constrain_indicator (bool): If true, all costs are either 1 or 0 for a given step.
+    """
+
+    constrain_indicator: bool = True
 
 
 @dataclass
 class MechanismConf:
-    """Rule options."""
+    r"""Mechanism options.
 
-    # Starting position distribution
-    randomize_layout = True  # If false, set the random seed before layout to constant
-    continue_goal = True  # If true, draw a new goal after achievement
-    terminate_resample_failure = True  # If true, end episode when resampling fails,
-    # otherwise, raise a python exception.
+    Starting position distribution.
+
+    Attributes:
+        randomize_layout (bool): If false, set the random seed before layout to constant.
+        continue_goal (bool): If true, draw a new goal after achievement.
+        terminate_resample_failure (bool): If true, end episode when resampling fails,
+        otherwise, raise a python exception.
+    """
+
+    randomize_layout: bool = True
+    continue_goal: bool = True
+    terminate_resample_failure: bool = True
 
 
 @dataclass
 class ObservationInfo:
-    """Observation information."""
+    r"""Observation information generated in running.
 
-    obs_space_dict = None
-    obs_flat_size = None
+    Attributes:
+        obs_space_dict (:class:`gymnasium.spaces.Dict`): Observation space dictionary.
+    """
+
+    obs_space_dict: gymnasium.spaces.Dict = None
 
 
 class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-many-public-methods
-    """Base task class for defining some common characteristic."""
+    r"""Base task class for defining some common characteristic and Mechanism.
+
+    Methods:
+
+    - :meth:`dist_goal`: Return the distance from the agent to the goal XY position.
+    - :meth:`calculate_cost`: Determine costs depending on the agent and obstacles, actually all
+      cost calculation is done in different :meth:`safety_gymnasium.bases.base_obstacle.BaseObject.cal_cost`
+      which implemented in different types of object, We just combine all results of them here.
+    - :meth:`build_observation_space`: Build observation space, combine agent specific observation space
+      and task specific observation space together.
+    - :meth:`_build_placements_dict`: Build placement dictionary for all types of object.
+    - :meth:`toggle_observation_space`: Toggle observation space.
+    - :meth:`_build_world_config`: Create a world_config from all separate configs of different types of object.
+    - :meth:`_build_static_geoms_config`: Build static geoms config from yaml files.
+    - :meth:`build_goal_position`: Build goal position, it will be called when the task is initialized or
+      when the goal is achieved.
+    - :meth:`_placements_dict_from_object`: Build placement dictionary for a specific type of object.
+    - :meth:`obs`: Combine and return all separate observations of different types of object.
+    - :meth:`_obs_lidar`: Return lidar observation, unify natural lidar and pseudo lidar in API.
+    - :meth:`_obs_lidar_natural`: Return natural lidar observation.
+    - :meth:`_obs_lidar_pseudo`: Return pseudo lidar observation.
+    - :meth:`_obs_compass`: Return compass observation.
+    - :meth:`_obs_vision`: Return vision observation, that is RGB image captured by camera
+      fixed in front of agent.
+    - :meth:`_ego_xy`: Return the egocentric XY vector to a position from the agent.
+    - :meth:`calculate_reward`: Calculate reward, it will be called in every timestep, and it is
+      implemented in different task.
+    - :meth:`specific_reset`: Reset task specific parameters, it will be called in every reset.
+    - :meth:`specific_step`: Step task specific parameters, it will be called in every timestep.
+    - :meth:`update_world`: Update world, it will be called when ``env.reset()`` or :meth:`goal_achieved` == True.
+
+    Attributes:
+
+    - :attr:`num_steps` (int): Maximum number of environment steps in an episode.
+    - :attr:`lidar_conf` (:class:`LidarConf`): Lidar observation parameters.
+    - :attr:`reward_conf` (:class:`RewardConf`): Reward options.
+    - :attr:`cost_conf` (:class:`CostConf`): Cost options.
+    - :attr:`mechanism_conf` (:class:`MechanismConf`): Mechanism options.
+    - :attr:`action_space` (gymnasium.spaces.Box): Action space.
+    - :attr:`observation_space` (gymnasium.spaces.Dict): Observation space.
+    - :attr:`obs_info` (:class:`ObservationInfo`): Observation information generated in running.
+    - :attr:`_is_load_static_geoms` (bool): Whether to load static geoms in current task which is mean
+      some geoms that has no randomness.
+    - :attr:`goal_achieved` (bool): Determine whether the goal is achieved, it will be called in every timestep
+      and it is implemented in different task.
+    """
 
     def __init__(self, config: dict):  # pylint: disable-next=too-many-statements
+        """Initialize the task.
+
+        Args:
+            config (dict): Configuration dictionary, used to pre-config some attributes
+              according to tasks via :meth:`safety_gymnasium.register`.
+        """
         super().__init__(config=config)
 
         self.num_steps = 1000  # Maximum number of environment steps in an episode
@@ -111,11 +191,12 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
 
         self._is_load_static_geoms = False  # Whether to load static geoms in current task.
 
-    def dist_goal(self):
+    def dist_goal(self) -> float:
         """Return the distance from the agent to the goal XY position."""
-        return self.agent.dist_xy(self.goal_pos)
+        assert hasattr(self, 'goal'), 'Please make sure you have added goal into env.'
+        return self.agent.dist_xy(self.goal.pos)  # pylint: disable=no-member
 
-    def calculate_cost(self):
+    def calculate_cost(self) -> dict:
         """Determine costs depending on the agent and obstacles."""
         # pylint: disable-next=no-member
         mujoco.mj_forward(self.model, self.data)  # Ensure positions and contacts are correct
@@ -129,8 +210,8 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         cost['cost'] = sum(v for k, v in cost.items() if k.startswith('cost_'))
         return cost
 
-    def build_observation_space(self):
-        """Construct observation space.  Happens only once at during __init__ in Builder."""
+    def build_observation_space(self) -> gymnasium.spaces.Dict:
+        """Construct observation space.  Happens only once during __init__ in Builder."""
         obs_space_dict = OrderedDict()  # See self.obs()
 
         obs_space_dict.update(self.agent.build_sensor_observation_space())
@@ -152,19 +233,16 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
                 0, 255, self.vision_env_conf.vision_size + (3,), dtype=np.uint8
             )
 
-        # Flatten it ourselves
-        self.obs_info.obs_space_dict = obs_space_dict
+        self.obs_info.obs_space_dict = gymnasium.spaces.Dict(obs_space_dict)
+
         if self.observation_flatten:
-            self.obs_info.obs_flat_size = sum(
-                np.prod(i.shape) for i in self.obs_info.obs_space_dict.values()
-            )
-            self.observation_space = gymnasium.spaces.Box(
-                -np.inf, np.inf, (self.obs_info.obs_flat_size,), dtype=np.float64
+            self.observation_space = gymnasium.spaces.utils.flatten_space(
+                self.obs_info.obs_space_dict
             )
         else:
-            self.observation_space = gymnasium.spaces.Dict(obs_space_dict)
+            self.observation_space = self.obs_info.obs_space_dict
 
-    def _build_placements_dict(self):
+    def _build_placements_dict(self) -> None:
         """Build a dict of placements.
 
         Happens only once.
@@ -177,12 +255,12 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
 
         self.placements_conf.placements = placements
 
-    def toggle_observation_space(self):
+    def toggle_observation_space(self) -> None:
         """Toggle observation space."""
         self.observation_flatten = not self.observation_flatten
         self.build_observation_space()
 
-    def _build_world_config(self, layout):  # pylint: disable=too-many-branches
+    def _build_world_config(self, layout: dict) -> dict:  # pylint: disable=too-many-branches
         """Create a world_config from our own config."""
         world_config = {}
 
@@ -200,7 +278,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         world_config.update(
             {
                 'geoms': {},
-                'objects': {},
+                'free_geoms': {},
                 'mocaps': {},
             }
         )
@@ -212,10 +290,11 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
 
         return world_config
 
-    def _build_static_geoms_config(self, geoms_config):
+    def _build_static_geoms_config(self, geoms_config: dict) -> None:
         """Load static geoms from .yaml file.
 
         Static geoms are geoms which won't be considered when calculate reward and cost.
+        And have no randomness.
         """
         env_info = self.__class__.__name__.split('Level')
         config_name = env_info[0].lower()
@@ -232,7 +311,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             for group in meshes_config[idx].values():
                 geoms_config.update(group)
 
-    def build_goal_position(self):
+    def build_goal_position(self) -> None:
         """Build a new goal position, maybe with resampling due to hazards."""
         # Resample until goal is compatible with layout
         if 'goal' in self.world_info.layout:
@@ -249,7 +328,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         self._set_goal(self.world_info.layout['goal'])
         mujoco.mj_forward(self.model, self.data)  # pylint: disable=no-member
 
-    def _placements_dict_from_object(self, object_name):
+    def _placements_dict_from_object(self, object_name: dict) -> dict:
         """Get the placements dict subset just for a given object name."""
         placements_dict = {}
 
@@ -278,7 +357,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             placements_dict[object_fmt.format(i=i)] = (placements, object_keepout)
         return placements_dict
 
-    def obs(self):
+    def obs(self) -> Union[dict, np.ndarray]:
         """Return the observation of our agent."""
         # pylint: disable-next=no-member
         mujoco.mj_forward(self.model, self.data)  # Needed to get sensor's data correct
@@ -294,21 +373,16 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
 
         if self.observe_vision:
             obs['vision'] = self._obs_vision()
+
+        assert self.obs_info.obs_space_dict.contains(
+            obs
+        ), f'Bad obs {obs} {self.obs_info.obs_space_dict}'
+
         if self.observation_flatten:
-            flat_obs = np.zeros(self.obs_info.obs_flat_size)
-            offset = 0
-            for k in sorted(self.obs_info.obs_space_dict.keys()):
-                k_size = np.prod(obs[k].shape)
-                flat_obs[offset : offset + k_size] = obs[k].flat
-                offset += k_size
-            obs = flat_obs
-            assert self.observation_space.contains(obs), f'Bad obs {obs} {self.observation_space}'
-            assert (
-                offset == self.obs_info.obs_flat_size
-            ), 'Obs from mujoco do not match env pre-specifed lenth.'
+            obs = gymnasium.spaces.utils.flatten(self.obs_info.obs_space_dict, obs)
         return obs
 
-    def _obs_lidar(self, positions, group):
+    def _obs_lidar(self, positions: Union[np.ndarray, list], group: int) -> np.ndarray:
         """Calculate and return a lidar observation.
 
         See sub methods for implementation.
@@ -321,7 +395,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
 
         raise ValueError(f'Invalid lidar_type {self.lidar_conf.type}')
 
-    def _obs_lidar_natural(self, group):
+    def _obs_lidar_natural(self, group: int) -> np.ndarray:
         """Natural lidar casts rays based on the ego-frame of the agent.
 
         Rays are circularly projected from the agent body origin around the agent z axis.
@@ -344,8 +418,8 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
                 obs[i] = np.exp(-dist)
         return obs
 
-    def _obs_lidar_pseudo(self, positions):
-        """Return a agent-centric lidar observation of a list of positions.
+    def _obs_lidar_pseudo(self, positions: np.ndarray) -> np.ndarray:
+        """Return an agent-centric lidar observation of a list of positions.
 
         Lidar is a set of bins around the agent (divided evenly in a circle).
         The detection directions are exclusive and exhaustive for a full 360 view.
@@ -392,8 +466,8 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
                 obs[bin_minus] = max(obs[bin_minus], (1 - alias) * sensor)
         return obs
 
-    def _obs_compass(self, pos):
-        """Return a agent-centric compass observation of a list of positions.
+    def _obs_compass(self, pos: np.ndarray) -> np.ndarray:
+        """Return an agent-centric compass observation of a list of positions.
 
         Compass is a normalized (unit-length) egocentric XY vector,
         from the agent to the object.
@@ -416,14 +490,21 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         assert vec.shape == (self.compass_conf.shape,), f'Bad vec {vec}'
         return vec
 
-    def _obs_vision(self):
-        """Return pixels from the agent camera."""
+    def _obs_vision(self) -> np.ndarray:
+        """Return pixels from the agent camera.
+
+        Note:
+            This is a 3D array of shape (rows, cols, channels).
+            The channels are RGB, in that order.
+            If you are on a headless machine, you may need to checkout this:
+            URL: `issue <https://github.com/PKU-MARL/Safety Gymnasium/issues/27>`_
+        """
         rows, cols = self.vision_env_conf.vision_size
         width, height = cols, rows
         vision = self.render(width, height, mode='rgb_array', camera_name='vision', cost={})
         return vision
 
-    def _ego_xy(self, pos):
+    def _ego_xy(self, pos: np.ndarray) -> np.ndarray:
         """Return the egocentric XY vector to a position from the agent."""
         assert pos.shape == (2,), f'Bad pos {pos}'
         agent_3vec = self.agent.pos
@@ -433,30 +514,26 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         return np.matmul(world_3vec, agent_mat)[:2]  # only take XY coordinates
 
     @abc.abstractmethod
-    def calculate_reward(self):
+    def calculate_reward(self) -> float:
         """Determine reward depending on the agent and tasks."""
 
     @abc.abstractmethod
-    def specific_reset(self):
+    def specific_reset(self) -> None:
         """Set positions and orientations of agent and obstacles."""
 
     @abc.abstractmethod
-    def specific_step(self):
+    def specific_step(self) -> None:
         """Each task can define a specific step function.
 
-        It will be called when :func:`step()` is called using env.step().
+        It will be called when :meth:`safety_gymnaisum.builder.Builder.step()` is called using env.step().
         For example, you can do specific data modification.
         """
 
     @abc.abstractmethod
-    def update_world(self):
+    def update_world(self) -> None:
         """Update one task specific goal."""
 
     @property
-    def goal_pos(self):
-        """Helper to get goal position from layout."""
-
-    @property
     @abc.abstractmethod
-    def goal_achieved(self):
+    def goal_achieved(self) -> bool:
         """Check if task specific goal is achieved."""

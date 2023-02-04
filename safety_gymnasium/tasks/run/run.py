@@ -21,7 +21,7 @@ from safety_gymnasium.bases.base_task import BaseTask
 
 
 class RunLevel0(BaseTask):
-    """A agent must run as far as possible while avoid going outside the boundary."""
+    """An agent must run as far as possible while avoid going outside the boundary."""
 
     def __init__(self, config):
         super().__init__(config=config)

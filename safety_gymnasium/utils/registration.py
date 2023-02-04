@@ -114,7 +114,7 @@ def make(
             _check_version_exists(name_space, name, version)
             raise error.Error(f'No registered env with id: {id}')
 
-        assert id in safe_registry, f'Environment {id} is not registered in safety_gymnasium.'
+        assert id in safe_registry, f'Environment {id} is not registered in safety-gymnasium.'
 
     _kwargs = spec_.kwargs.copy()
     _kwargs.update(kwargs)

@@ -19,7 +19,7 @@ from safety_gymnasium.bases.base_task import BaseTask
 
 
 class GoalLevel0(BaseTask):
-    """A agent must navigate to a goal."""
+    """An agent must navigate to a goal."""
 
     def __init__(self, config):
         super().__init__(config=config)
@@ -59,8 +59,3 @@ class GoalLevel0(BaseTask):
         """Whether the goal of task is achieved."""
         # pylint: disable-next=no-member
         return self.dist_goal() <= self.goal.size
-
-    @property
-    def goal_pos(self):
-        """Helper to get goal position from layout."""
-        return self.goal.pos  # pylint: disable=no-member

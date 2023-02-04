@@ -62,6 +62,7 @@ docs-install:
 	$(call check_pip_install,sphinx-autobuild)
 	$(call check_pip_install,sphinx-copybutton)
 	$(call check_pip_install,sphinx-autodoc-typehints)
+	$(call check_pip_install,sphinx-design)
 	$(call check_pip_install_extra,sphinxcontrib.spelling,sphinxcontrib.spelling pyenchant)
 
 pytest-install:

@@ -15,18 +15,31 @@
 """Env builder."""
 
 from dataclasses import asdict, dataclass
+from typing import Dict, Tuple, Union
 
 import gymnasium
 import numpy as np
 
 from safety_gymnasium import tasks
+from safety_gymnasium.bases.base_task import BaseTask
 from safety_gymnasium.utils.common_utils import ResamplingError, quat2zalign
 from safety_gymnasium.utils.task_utils import get_task_class_name
 
 
 @dataclass
-class RenderParameters:
-    """Render Parameters."""
+class RenderConf:
+    r"""Render options.
+
+    Attributes:
+        mode (str): render mode, can be 'human', 'rgb_array', 'depth_array'.
+        width (int): width of the rendered image.
+        height (int): height of the rendered image.
+        camera_id (int): camera id to render.
+        camera_name (str): camera name to render.
+
+        Note:
+            ``camera_id`` and ``camera_name`` can only be set one of them.
+    """
 
     mode: str = None
     width: int = 256
@@ -37,12 +50,33 @@ class RenderParameters:
 
 # pylint: disable-next=too-many-instance-attributes
 class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
-    """
-    Builder: an environment-building tool for safe exploration research.
+    r"""An entry point to organize different environments, while showing unified API for users.
 
-    The Builder() class constructs the basic control framework of environments, while
+    The Builder class constructs the basic control framework of environments, while
     the details were hidden. There is another important parts, which is **task module**
     including all task specific operation.
+
+    Methods:
+
+    - :meth:`_setup_simulation`: Set up mujoco the simulation instance.
+    - :meth:`_get_task`: Instantiate a task object.
+    - :meth:`set_seed`: Set the seed for the environment.
+    - :meth:`reset`: Reset the environment.
+    - :meth:`step`: Step the environment.
+    - :meth:`_reward`: Calculate the reward.
+    - :meth:`_cost`: Calculate the cost.
+    - :meth:`render`: Render the environment.
+
+    Attributes:
+
+    - :attr:`task_id` (str): Task id.
+    - :attr:`config` (dict): Pre-defined configuration of the environment, which is passed via
+      :meth:`safety_gymnasium.register()`.
+    - :attr:`render_parameters` (RenderConf): Render parameters.
+    - :attr:`action_space` (gymnasium.spaces.Box): Action space.
+    - :attr:`observation_space` (gymnasium.spaces.Dict): Observation space.
+    - :attr:`obs_space_dict` (dict): Observation space dictionary.
+    - :attr:`done` (bool): Whether the episode is done.
     """
 
     metadata = {
@@ -56,37 +90,57 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        task_id,
-        config=None,
-        render_mode=None,
-        width=256,
-        height=256,
-        camera_id=None,
-        camera_name=None,
-    ):
+        task_id: str,
+        config: dict = None,
+        render_mode: str = None,
+        width: int = 256,
+        height: int = 256,
+        camera_id: int = None,
+        camera_name: str = None,
+    ) -> None:
+        """Initialize the builder.
+
+        Note:
+            The ``camera_name`` parameter can be chosen from:
+              - **human**: The camera used for freely moving around and can get input
+                from keyboard real time.
+              - **vision**: The camera used for vision observation, which is fixed in front of the
+                agent's head.
+              - **track**: The camera used for tracking the agent.
+              - **fixednear**: The camera used for top-down observation.
+              - **fixedfar**: The camera used for top-down observation, but is further than **fixednear**.
+
+        Args:
+            task_id (str): Task id.
+            config (dict): Pre-defined configuration of the environment, which is passed via
+              :meth:`safety_gymnasium.register`.
+            render_mode (str): Render mode, can be 'human', 'rgb_array', 'depth_array'.
+            width (int): Width of the rendered image.
+            height (int): Height of the rendered image.
+            camera_id (int): Camera id to render.
+            camera_name (str): Camera name to render.
+        """
         gymnasium.utils.EzPickle.__init__(self, config=config)
 
-        self.task_id = task_id
-        self.config = config
-        self._seed = None
+        self.task_id: str = task_id
+        self.config: dict = config
+        self._seed: int = None
         self._setup_simulation()
 
-        self.first_reset = None
-        self.steps = None
-        self.cost = None
-        self.terminated = True
-        self.truncated = False
+        self.first_reset: bool = None
+        self.steps: int = None
+        self.cost: float = None
+        self.terminated: bool = True
+        self.truncated: bool = False
 
-        self.render_parameters = RenderParameters(
-            render_mode, width, height, camera_id, camera_name
-        )
+        self.render_parameters = RenderConf(render_mode, width, height, camera_id, camera_name)
 
-    def _setup_simulation(self):
+    def _setup_simulation(self) -> None:
         """Set up mujoco the simulation instance."""
         self.task = self._get_task()
         self.set_seed()
 
-    def _get_task(self):
+    def _get_task(self) -> BaseTask:
         """Instantiate a task object."""
         class_name = get_task_class_name(self.task_id)
         assert hasattr(tasks, class_name), f'Task={class_name} not implemented.'
@@ -96,13 +150,15 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         task.build_observation_space()
         return task
 
-    def set_seed(self, seed=None):
+    def set_seed(self, seed: int = None) -> None:
         """Set internal random state seeds."""
         self._seed = np.random.randint(2**32) if seed is None else seed
         self.task.random_generator.set_random_seed(self._seed)
 
-    def reset(self, seed=None, options=None):  # pylint: disable=arguments-differ
-        """Reset the physics simulation and return observation."""
+    def reset(
+        self, *, seed: int = None, options: dict = None
+    ) -> Tuple[np.ndarray, dict]:  # pylint: disable=arguments-differ
+        """Reset the environment and return observations."""
         info = {}
 
         if seed is not None:
@@ -131,7 +187,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         # Return an observation
         return (self.task.obs(), info)
 
-    def step(self, action):
+    def step(self, action: np.ndarray) -> Tuple[np.ndarray, float, float, bool, bool, dict]:
         """Take a step and return observation, reward, cost, terminated, truncated, info."""
         assert not self.done, 'Environment must be reset before stepping.'
         action = np.array(action, copy=False)  # Cast to ndarray
@@ -188,8 +244,11 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
             self.render()
         return self.task.obs(), reward, cost, self.terminated, self.truncated, info
 
-    def _reward(self):
-        """Calculate the dense component of reward.  Call exactly once per step."""
+    def _reward(self) -> float:
+        """Calculate the current rewards.
+
+        Call exactly once per step.
+        """
         reward = self.task.calculate_reward()
 
         # Intrinsic reward for uprightness
@@ -209,8 +268,11 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
         return reward
 
-    def _cost(self):
-        """Calculate the current costs and return a dict."""
+    def _cost(self) -> dict:
+        """Calculate the current costs and return a dict.
+
+        Call exactly once per step.
+        """
         cost = self.task.calculate_cost()
 
         # Optionally remove shaping from reward functions.
@@ -222,8 +284,8 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
         return cost
 
-    def render(self):
-        """Call underlying render() directly.
+    def render(self) -> Union[None, np.ndarray]:
+        """Call underlying :meth:`safety_gymnasium.bases.underlying.Underlying.render` directly.
 
         Width and height in parameters are constant defaults for rendering
         frames for humans. (not used for vision)
@@ -235,21 +297,21 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         return self.task.render(cost=self.cost, **asdict(self.render_parameters))
 
     @property
-    def action_space(self):
+    def action_space(self) -> gymnasium.spaces.Box:
         """Helper to get action space."""
         return self.task.action_space
 
     @property
-    def observation_space(self):
+    def observation_space(self) -> Union[gymnasium.spaces.Box, gymnasium.spaces.Dict]:
         """Helper to get observation space."""
         return self.task.observation_space
 
     @property
-    def obs_space_dict(self):
+    def obs_space_dict(self) -> Dict[str, gymnasium.spaces.Box]:
         """Helper to get observation space dictionary."""
         return self.task.obs_info.obs_space_dict
 
     @property
-    def done(self):
+    def done(self) -> bool:
         """Whether this episode is ended."""
         return self.terminated or self.truncated

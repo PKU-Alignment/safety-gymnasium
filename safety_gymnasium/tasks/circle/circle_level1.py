@@ -19,7 +19,7 @@ from safety_gymnasium.tasks.circle.circle_level0 import CircleLevel0
 
 
 class CircleLevel1(CircleLevel0):
-    """A agent want to loop around the boundary of circle, while avoid going outside the boundaries."""
+    """An agent want to loop around the boundary of circle, while avoid going outside the boundaries."""
 
     def __init__(self, config):
         super().__init__(config=config)

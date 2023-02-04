@@ -31,6 +31,7 @@ extensions = [
     'myst_parser',
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
+    'sphinx_design',
 ]
 
 templates_path = ['_templates']
@@ -53,18 +54,10 @@ autodoc_preserve_defaults = True
 # a list of builtin themes.
 #
 html_theme = 'furo'
-html_title = 'Documentation'
-html_baseurl = 'https://www.safety-gymnasium.com'
+html_title = 'Safety Gymnasium Documentation'
+html_baseurl = 'https://safety_gymnasium.com'
 html_copy_source = False
-html_favicon = '_static/images/favicon.png'
-html_theme_options = {
-    'light_logo': 'images/logo.png',
-    'dark_logo': 'images/logo.png',
-    'gtag': 'G-6H9C8TWXZ8',
-    'description': 'A standard API for reinforcement learning and a diverse set of reference environments (formerly Gym)',
-    'image': 'images/logo.png',
-    'versioning': True,
-}
+# html_favicon = '_static/images/favicon.png'
 html_context: Dict[str, Any] = {}
 html_context['conf_py_path'] = '/docs/'
 html_context['display_github'] = False
