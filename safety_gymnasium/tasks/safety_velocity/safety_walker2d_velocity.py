@@ -49,7 +49,7 @@ class SafetyWalker2dVelocityEnv(Walker2dEnv):
             'x_velocity': x_velocity,
         }
 
-        cost = x_velocity > self._velocity_threshold
+        cost = float(x_velocity > self._velocity_threshold)
 
         if self.viewer:
             clear_viewer(self.viewer)

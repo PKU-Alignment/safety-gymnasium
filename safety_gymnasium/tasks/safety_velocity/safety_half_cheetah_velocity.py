@@ -47,7 +47,7 @@ class SafetyHalfCheetahVelocityEnv(HalfCheetahEnv):
             'reward_ctrl': -ctrl_cost,
         }
 
-        cost = x_velocity > self._velocity_threshold
+        cost = float(x_velocity > self._velocity_threshold)
 
         if self.viewer:
             clear_viewer(self.viewer)
