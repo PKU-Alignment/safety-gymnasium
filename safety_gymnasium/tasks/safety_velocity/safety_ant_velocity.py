@@ -64,7 +64,7 @@ class SafetyAntVelocityEnv(AntEnv):
         reward = rewards - costs
 
         velocity = np.sqrt(x_velocity**2 + y_velocity**2)
-        cost = velocity > self._velocity_threshold
+        cost = float(velocity > self._velocity_threshold)
 
         if self.viewer:
             clear_viewer(self.viewer)
