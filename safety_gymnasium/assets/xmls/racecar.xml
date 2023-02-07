@@ -45,11 +45,11 @@
         <site name="agent" pos="0.02 0 0"/>
         <body name="pos_change" pos="-0.16 0 0">
             <body name="car_body">
-                <geom type="mesh" contype="0" conaffinity="0" density="0" rgba="0.8 0 0 1" mesh="chassis_differential"/>
-                <geom type="mesh" rgba="0.8 0 0 1" mesh="chassis_differential"/>
+                <geom type="mesh" contype="0" conaffinity="0" density="0" rgba="0.7412 0.0431 0.1843 1" mesh="chassis_differential"/>
+                <geom type="mesh" rgba="0.7412 0.0431 0.1843 1" mesh="chassis_differential"/>
             </body>
             <geom size="0.0165 0.0875 0.015" pos="0.39 0 0.04" type="box"/>
-            <geom size="0.0165 0.0875 0.015" pos="0.39 0 0.04" type="box" contype="0" conaffinity="0" density="0" rgba="0.6 0.6 0.6 1"/>
+            <geom size="0.0165 0.0875 0.015" pos="0.39 0 0.04" type="box" contype="0" conaffinity="0" density="0" rgba="0.0039 0.1529 0.3961 1"/>
 
             <body name="left_steering_hinge" pos="0.325 0.1 0" quat="0.707105 0 0.707108 0">
                 <inertial pos="0 0 0" mass="0.1" diaginertia="4e-06 4e-06 4e-06"/>
