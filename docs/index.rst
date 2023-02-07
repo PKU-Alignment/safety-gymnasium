@@ -4,7 +4,7 @@ Safety Gymnasium
 
 Safety Gymnasium is a standard API for safe reinforcement learning, and a diverse collection of reference environments.
 
-.. image:: _static/images/point_demo.gif
+.. image:: _static/images/car_demo.gif
    :alt: racecar
    :width: 500
    :align: center
@@ -12,7 +12,7 @@ Safety Gymnasium is a standard API for safe reinforcement learning, and a divers
 .. code-block:: python
 
    import safety_gymnasium
-   env = safety_gymnasium.vector.make("SafetyPointGoal1-v0", render_mode="human", num_envs=4)
+   env = safety_gymnasium.vector.make("SafetyCarGoal1-v0", render_mode="human", num_envs=8)
    observation, info = env.reset(seed=0)
    for _ in range(1000):
       action = env.action_space.sample()  # this is where you would insert your policy
