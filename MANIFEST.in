@@ -1,0 +1,4 @@
+recursive-include safety_gymnasium/assets/meshes *.stl *.STL *.obj
+recursive-include safety_gymnasium/assets/textures *.png *.jpg *.jpeg
+recursive-include safety_gymnasium/assets/xmls *.xml
+recursive-include safety_gymnasium/configs *.yaml
