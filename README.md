@@ -223,7 +223,7 @@ while not terminated:
 
 ### Install from PyPi
 ```
-pip install safety-gymnasium Notes:coming as soon as possible.
+pip install safety-gymnasium==0.1.0b0
 ```
 
 ### Install from source
