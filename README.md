@@ -7,14 +7,14 @@
 [![codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License](https://img.shields.io/github/license/PKU-MARL/safety-gymnasium?label=license)](#license)
 
-[**Why Safety-Gymnasium?**](#why-safety-gymnasium) | [**Environments**](#environments) | [**Installation**](#installation) | [**Documentation**](#documentation) | [**Design environments by yourself**](#design-environments-by-yourself)
+<!-- [**Why Safety-Gymnasium?**](#why-safety-gymnasium) | [**Environments**](#environments) | [**Installation**](#installation) | [**Documentation**](#documentation) | [**Design environments by yourself**](#design-environments-by-yourself) -->
 
 <p align="center">
-  <a href="https://omnisafe.readthedocs.io">Why Safety-Gymnasium?</a> |
-  <a href="https://github.com/PKU-MARL/omnisafe#implemented-algorithms">Implemented Algorithms</a> |
-  <a href="https://github.com/PKU-MARL/omnisafe#installation">Installation</a> |
-  <a href="https://github.com/PKU-MARL/omnisafe#getting-started">Getting Started</a> |
-  <a href="https://github.com/PKU-MARL/omnisafe#license">License</a>
+  <a href="https://www.safety-gymnasium.com">Documentation</a> |
+  <a href="https://github.com/PKU-MARL/safety-gymnasium#why-safety-gymnasium">Why Safety-Gymnasium?</a> |
+  <a href="https://github.com/PKU-MARL/safety-gymnasium#environments">Environments</a> |
+  <a href="https://github.com/PKU-MARL/safety-gymnasium#installation">Installation</a> |
+  <a href="https://github.com/PKU-MARL/safety-gymnasium#customize-your-environments">Customize your environments</a>
 </p>
 
 **This library is currently under heavy development - if you have suggestions on the API or use-cases you'd like to be covered, please open an github issue or reach out. We'd love to hear about how you're using the library.**
@@ -374,7 +374,7 @@ pip install -e .
 
 --------------------------------------------------------------------------------
 
-## Design environments by yourself
+## Customize your environments
 
 We construct a highly expandable framework of code so that you can easily comprehend it and design your own environments to facilitate your research with no more than 100 lines of code on average.
 
