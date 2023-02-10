@@ -9,15 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ------
 
-## [Unreleased]
+## [0.1.0b0] 2023-02-08
 
 ### Added
-
-
-### Changed
-
-
-### Fixed
-
-
-### Removed
+- The first beta release of Safety-Gymnasium.
+- Add `task:safe-velocity` and `task:safe-navigation`.
+- Add [documentation](www.safety-gymnasium.com).
+- Add `robot:racecar` and `robot:ant`.
