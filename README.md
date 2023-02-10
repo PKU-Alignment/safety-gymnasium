@@ -15,7 +15,7 @@
 <a href="https://github.com/PKU-MARL/safety-gymnasium#why-safety-gymnasium">Why Safety-Gymnasium?</a> |
   <a href="https://www.safety-gymnasium.com">Documentation</a> |
   <a href="https://github.com/PKU-MARL/safety-gymnasium#installation">Install guide</a> |
-  <a href="https://github.com/PKU-MARL/safety-gymnasium#customize-your-environments">Customization</a>
+  <a href="https://github.com/PKU-MARL/safety-gymnasium#customize-your-environments">Customization</a> |
   <a href="https://github.com/PKU-MARL/safety-gymnasium#future-plans">Future Plans</a>
 </p>
 
