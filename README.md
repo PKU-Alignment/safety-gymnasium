@@ -13,8 +13,10 @@
 <a href="https://github.com/PKU-MARL/safety-gymnasium#why-safety-gymnasium">Why Safety-Gymnasium?</a> |
   <a href="https://www.safety-gymnasium.com">Documentation</a> |
   <a href="https://github.com/PKU-MARL/safety-gymnasium#environments">Environments</a> |
-  <a href="https://github.com/PKU-MARL/safety-gymnasium#installation">Installation</a> |
-  <a href="https://github.com/PKU-MARL/safety-gymnasium#customize-your-environments">Customize your environments</a>
+  <a href="https://github.com/PKU-MARL/safety-gymnasium#installation">Installation</a>
+</p>
+<p align="center">
+<a href="https://github.com/PKU-MARL/safety-gymnasium#customize-your-environments">Customize your environments</a>
 </p>
 
 **This library is currently under heavy development - if you have suggestions on the API or use-cases you'd like to be covered, please open an github issue or reach out. We'd love to hear about how you're using the library.**
