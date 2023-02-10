@@ -1,6 +1,6 @@
 <div align="center">
 <h1>
-  Safety-Gymnasium 
+  Safety-Gymnasium
 </h1>
 </div>
 
