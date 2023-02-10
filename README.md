@@ -10,8 +10,8 @@
 <!-- [**Why Safety-Gymnasium?**](#why-safety-gymnasium) | [**Environments**](#environments) | [**Installation**](#installation) | [**Documentation**](#documentation) | [**Design environments by yourself**](#design-environments-by-yourself) -->
 
 <p align="center">
+<a href="https://github.com/PKU-MARL/safety-gymnasium#why-safety-gymnasium">Why Safety-Gymnasium?</a> |
   <a href="https://www.safety-gymnasium.com">Documentation</a> |
-  <a href="https://github.com/PKU-MARL/safety-gymnasium#why-safety-gymnasium">Why Safety-Gymnasium?</a> |
   <a href="https://github.com/PKU-MARL/safety-gymnasium#environments">Environments</a> |
   <a href="https://github.com/PKU-MARL/safety-gymnasium#installation">Installation</a> |
   <a href="https://github.com/PKU-MARL/safety-gymnasium#customize-your-environments">Customize your environments</a>
