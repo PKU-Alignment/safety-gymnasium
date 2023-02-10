@@ -9,7 +9,7 @@ Installation
     # From the Python Package Index (PyPI)
     pip install safety-gymnasium
     # From the source code
-    git clone git@github.com:PKU-MARL/Safety-Gymnasium.git
+    git clone git@github.com:PKU-MARL/safety-gymnasium.git
     cd Safety-Gymnasium
     pip install -e .
 

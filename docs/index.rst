@@ -61,6 +61,6 @@ Safety Gymnasium is a standard API for safe reinforcement learning, and a divers
    :hidden:
    :caption: Development
 
-`Github <https://github.com/PKU-MARL/Safety-Gymnasium>`__
+`Github <https://github.com/PKU-MARL/safety-gymnasium>`__
 
-`Contribute to the Docs <https://github.com/PKU-MARL/Safety-Gymnasium/blob/main/CONTRIBUTING.md>`__
+`Contribute to the Docs <https://github.com/PKU-MARL/safety-gymnasium/blob/main/CONTRIBUTING.md>`__
