@@ -161,14 +161,11 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         """Reset the environment and return observations."""
         info = {}
 
-        if seed is not None:
-            self._seed = seed  # pylint: disable=attribute-defined-outside-init
-
         if not self.task.mechanism_conf.randomize_layout:
+            assert seed is None, 'Cannot set seed if randomize_layout=False'
             self.set_seed(0)
-        else:
-            self._seed += 1  # Increment seed
-            self.set_seed(self._seed)
+        elif seed is not None:
+            self.set_seed(seed)
 
         self.terminated = False
         self.truncated = False
