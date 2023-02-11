@@ -14,7 +14,7 @@
 # ==============================================================================
 """Safety-Gymnasium."""
 
-__version__ = '0.1.0b0'
+__version__ = '0.1.0'
 __license__ = 'Apache License, Version 2.0'
 __author__ = 'Safety Gymnasium Contributors'
 __release__ = False
