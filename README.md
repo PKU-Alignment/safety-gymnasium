@@ -50,7 +50,7 @@ Here we provide a table for comparison of **Safety-Gymnasium** and existing Safe
 
 ## Environments
 
-We designed a variety of safety-enhanced learning tasks and integrated the contributions of RL community:`safety-velocity`, `safety-run`, `safety-circle`, `safety-goal`, `safety-button`, etc, leading to a unified safety-enhanced learning benchmark environment called `Safety-Gymnasium.`
+We designed a variety of safety-enhanced learning tasks and integrated the contributions of RL community:`safety-velocity`, `safety-run`, `safety-circle`, `safety-goal`, `safety-button`, etc, leading to a unified safety-enhanced learning benchmark environment library called `Safety-Gymnasium.`
 
 Further, to facilitate the progress of community research, we redesigned [Safety Gym](https://github.com/openai/safety-gym) and removed the dependency on `mujoco-py`. We built it on top of [MuJoCo](https://github.com/deepmind/mujoco) and fixed some bugs, more specific bug report can refer to [Safety Gym's BUG Report](https://github.com/PKU-MARL/safety-gymnasium/blob/main/safety_gym_bug_report.md).
 
@@ -83,7 +83,7 @@ Here is a list of all the environments we support for now; some are being tested
   </tr>
 </table>
 
-Here is some pictures about tasks in Safe Navigation.
+Here are some pictures about tasks in Safe Navigation.
 
 #### Agents
 
@@ -385,6 +385,7 @@ pip install -e .
 
 We construct a highly expandable framework of code so that you can easily comprehend it and design your own environments to facilitate your research with no more than 100 lines of code on average.
 
+For details, please refer to our documentation.
 Here is a minimal example:
 
 ```python
@@ -397,14 +398,13 @@ from safety_gymnasium.bases import BaseTask
 class MytaskLevel0(BaseTask):
     def __init__(self, config):
         super().__init__(config=config)
-  # define some properties
+        # define some properties
         self.num_steps = 500
-        self.robot.placements = [(-0.8, -0.8, 0.8, 0.8)]
-        self.robot.keepout = 0
-        self.lidar_max_dist = 6
+        self.agent.placements = [(-0.8, -0.8, 0.8, 0.8)]
+        self.agent.keepout = 0
+        self.lidar_conf.max_dist = 6
         # add objects into environments
         self.add_geoms(Apples(num=2, size=0.3))
-        self.specific_agent_config()
 
     def calculate_reward(self):
         # implement your reward function
@@ -412,17 +412,10 @@ class MytaskLevel0(BaseTask):
         reward = 1
         return reward
 
-    def specific_agent_config(self):
-        # depending on your task
-        pass
-
     def specific_reset(self):
         # depending on your task
 
     def specific_step(self):
-        # depending on your task
-
-    def build_goal(self):
         # depending on your task
 
     def update_world(self):
