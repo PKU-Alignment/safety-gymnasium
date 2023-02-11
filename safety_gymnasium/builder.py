@@ -162,7 +162,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         info = {}
 
         if not self.task.mechanism_conf.randomize_layout:
-            assert seed is None, "Cannot set seed if randomize_layout=False"
+            assert seed is None, 'Cannot set seed if randomize_layout=False'
             self.set_seed(0)
         elif seed is not None:
             self.set_seed(seed)
