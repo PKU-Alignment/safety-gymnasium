@@ -1,0 +1,100 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - setup.py
+      - pyproject.toml
+      - MANIFEST.in
+      - tests/**
+      - safety_gymnasium/**
+      - .github/workflows/tests.yml
+  # Allow to trigger the workflow manually
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  test-py37:
+    name: Test for Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.7"]
+      fail-fast: false
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          update-environment: true
+
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+
+      - name: Set `SETUPTOOLS_ENABLE_FEATURES`
+        if: ${{ matrix.python-version == '3.7' && matrix.os == 'windows-latest' }}
+        run: |
+          Write-Output 'SETUPTOOLS_ENABLE_FEATURES="legacy-editable"' | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Install Safety-Gymnasium
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install -vvv --editable '.[test]'
+
+      - name: Test with pytest
+        run: |
+          make pytest
+
+  test:
+    name: Test for Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    needs: [test-py37]
+    runs-on: ${{ matrix.os }}
+    if: github.event_name != 'push' || startsWith(github.ref, 'refs/tags/')
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+      fail-fast: false
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          update-environment: true
+
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+
+      - name: Install Safety-Gymnasium
+        run: |
+          python -m pip install -vvv -e '.[test]'
+
+      - name: Test with pytest
+        run: |
+          make pytest
