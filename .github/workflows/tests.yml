@@ -23,13 +23,13 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  test-py37:
+  test-py38:
     name: Test for Python ${{ matrix.python-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ["3.7"]
+        python-version: ["3.8"]
       fail-fast: false
     timeout-minutes: 30
     steps:
@@ -50,7 +50,7 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
 
       - name: Set `SETUPTOOLS_ENABLE_FEATURES`
-        if: ${{ matrix.python-version == '3.7' && matrix.os == 'windows-latest' }}
+        if: ${{ matrix.python-version == '3.8' && matrix.os == 'windows-latest' }}
         run: |
           Write-Output 'SETUPTOOLS_ENABLE_FEATURES="legacy-editable"' | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
 
@@ -65,7 +65,7 @@ jobs:
 
   test:
     name: Test for Python ${{ matrix.python-version }} on ${{ matrix.os }}
-    needs: [test-py37]
+    needs: [test-py38]
     runs-on: ${{ matrix.os }}
     if: github.event_name != 'push' || startsWith(github.ref, 'refs/tags/')
     strategy:
