@@ -51,7 +51,7 @@ jobs:
 
       - name: Update .bashrc
         run: |
-          "export MUJOCO_GL=osmesa" >> ~/.bashrc
+          echo "export MUJOCO_GL=osmesa" >> ~/.bashrc
           source ~/.bashrc
 
       - name: Set `SETUPTOOLS_ENABLE_FEATURES`
@@ -98,7 +98,7 @@ jobs:
 
       - name: Update .bashrc
         run: |
-          "export MUJOCO_GL=osmesa" >> ~/.bashrc
+          echo "export MUJOCO_GL=osmesa" >> ~/.bashrc
           source ~/.bashrc
 
       - name: Install Safety-Gymnasium
