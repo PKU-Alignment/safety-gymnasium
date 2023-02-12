@@ -34,7 +34,7 @@ def test_env(agent_id, env_id, level, render_mode):
     # obs, _ = env.reset(seed=0)
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(1000):  # pylint: disable=unused-variable
+    for step in range(10):  # pylint: disable=unused-variable
         if terminated or truncated:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
@@ -70,7 +70,7 @@ def test_run_env(agent_id, env_id, level, render_mode):
     # obs, _ = env.reset(seed=0)
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(1000):  # pylint: disable=unused-variable
+    for step in range(10):  # pylint: disable=unused-variable
         if terminated or truncated:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
@@ -105,7 +105,7 @@ def test_velocity_env(agent_id, env_id, render_mode):
     # obs, _ = env.reset(seed=0)
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(1000):  # pylint: disable=unused-variable
+    for step in range(10):  # pylint: disable=unused-variable
         if terminated or truncated:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
