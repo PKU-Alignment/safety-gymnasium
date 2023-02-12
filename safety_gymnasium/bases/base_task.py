@@ -302,9 +302,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
 
         # load all config of meshes in specific environment from .yaml file
         base_dir = os.path.dirname(safety_gymnasium.__file__)
-        with open(
-            os.path.join(base_dir, f'configs/{config_name}.yaml'), 'r', encoding='utf-8'
-        ) as file:
+        with open(os.path.join(base_dir, f'configs/{config_name}.yaml'), encoding='utf-8') as file:
             meshes_config = yaml.load(file, Loader=yaml.FullLoader)
 
         for idx in range(level + 1):
