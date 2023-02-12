@@ -49,6 +49,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools wheel
 
+      - name: Update .bashrc
+        run: |
+          "export MUJOCO_GL=osmesa" >> ~/.bashrc
+          source ~/.bashrc
+
       - name: Set `SETUPTOOLS_ENABLE_FEATURES`
         if: ${{ matrix.python-version == '3.8' && matrix.os == 'windows-latest' }}
         run: |
@@ -90,6 +95,11 @@ jobs:
       - name: Upgrade pip
         run: |
           python -m pip install --upgrade pip setuptools wheel
+
+      - name: Update .bashrc
+        run: |
+          "export MUJOCO_GL=osmesa" >> ~/.bashrc
+          source ~/.bashrc
 
       - name: Install Safety-Gymnasium
         run: |

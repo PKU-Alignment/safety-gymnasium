@@ -16,8 +16,7 @@
 
 import helpers
 import safety_gymnasium
-import os
-os.environ['PATH'] += "export MUJOCO_GL=osmesa"
+
 
 @helpers.parametrize(
     agent_id=['Point'],
