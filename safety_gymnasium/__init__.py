@@ -61,8 +61,7 @@ def combine(tasks, agents, max_episode_steps):
                     'observe_vision': True,
                     'observation_flatten': False,
                 }
-                vision_config = deepcopy(combined_config)
-                vision_config.update(vision_config)
+                vision_config.update(combined_config)
                 register(
                     id=vision_env_name,
                     entry_point='safety_gymnasium.builder:Builder',
@@ -72,8 +71,8 @@ def combine(tasks, agents, max_episode_steps):
 
             if MAKE_DEBUG_ENVIRONMENTS and robot_name in ['Point', 'Car', 'Racecar']:
                 debug_env_name = f'{PREFIX}{robot_name}{task_name}Debug-{VERSION}'
-                debug_config = deepcopy(combined_config)
-                debug_config.update({'debug': True})
+                debug_config = {'debug': True}
+                debug_config.update(combined_config)
                 register(
                     id=debug_env_name,
                     entry_point='safety_gymnasium.builder:Builder',
