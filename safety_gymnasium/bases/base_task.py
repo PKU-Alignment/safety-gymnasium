@@ -121,7 +121,7 @@ class ObservationInfo:
 
 
 class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-many-public-methods
-    r"""Base task class for defining some common characteristic and Mechanism.
+    r"""Base task class for defining some common characteristic and mechanism.
 
     Methods:
 
@@ -223,7 +223,10 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
                     0.0, 1.0, (self.lidar_conf.num_bins,), dtype=np.float64
                 )
             if hasattr(obstacle, 'is_comp_observed') and obstacle.is_comp_observed:
-                gymnasium.spaces.Box(-1.0, 1.0, (self.compass_conf.shape,), dtype=np.float64)
+                name = obstacle.name + '_' + 'comp'
+                obs_space_dict[name] = gymnasium.spaces.Box(
+                    -1.0, 1.0, (self.compass_conf.shape,), dtype=np.float64
+                )
 
         if self.observe_vision:
             width, height = self.vision_env_conf.vision_size
