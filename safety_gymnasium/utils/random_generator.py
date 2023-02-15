@@ -58,7 +58,7 @@ class RandomGenerator:
 
     def __init__(self):
         """Initialize the random number generator."""
-        self.random_generator: np.random.mtrand.RandomState = None
+        self.random_generator: np.random.RandomState = None  # pylint: disable=no-member
         self.placements: dict = None
         self.placements_extents: list = None
         self.placements_margin: float = None
