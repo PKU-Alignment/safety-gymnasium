@@ -33,7 +33,7 @@ class CircleLevel0(BaseTask):
 
         self.lidar_conf.max_dist = 6
 
-        # Reward for circle goal (complicated formula depending on pos and vel)
+        # reward for circle goal (complicated formula depending on pos and vel)
         self.reward_factor: float = 1e-1
 
         self._add_geoms(Circle())
@@ -41,7 +41,7 @@ class CircleLevel0(BaseTask):
     def calculate_reward(self):
         """The agent should loop around the boundary of circle."""
         reward = 0.0
-        # Circle environment reward
+        # circle environment reward
         agent_pos = self.agent.pos
         agent_vel = self.agent.vel
         x, y, _ = agent_pos

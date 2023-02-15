@@ -18,14 +18,17 @@ import numpy as np
 
 
 def quat2zalign(quat):
-    """From quaternion, extract z_{ground} dot z_{body}"""
-    # z_{body} from quaternion [a,b,c,d] in ground frame is:
-    # [ 2bd + 2ac,
-    #   2cd - 2ab,
-    #   a**2 - b**2 - c**2 + d**2
-    # ]
-    # so inner product with z_{ground} = [0,0,1] is
-    # z_{body} dot z_{ground} = a**2 - b**2 - c**2 + d**2
+    """From quaternion, extract z_{ground} dot z_{body}
+
+    z_{body} from quaternion [a,b,c,d] in ground frame is:
+    [ 2bd + 2ac,
+        2cd - 2ab,
+        a**2 - b**2 - c**2 + d**2
+    ]
+    so inner product with z_{ground} = [0,0,1] is
+    z_{body} dot z_{ground} = a**2 - b**2 - c**2 + d**2
+    """
+
     a, b, c, d = quat  # pylint: disable=invalid-name
     return a**2 - b**2 - c**2 + d**2
 
@@ -34,7 +37,7 @@ def convert(value):
     """Convert a value into a string for mujoco XML"""
     if isinstance(value, (int, float, str)):
         return str(value)
-    # Numpy arrays and lists
+    # numpy arrays and lists
     return ' '.join(str(i) for i in np.asarray(value))
 
 

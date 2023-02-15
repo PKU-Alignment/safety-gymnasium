@@ -169,7 +169,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
         self.terminated = False
         self.truncated = False
-        self.steps = 0  # Count of steps taken in this episode
+        self.steps = 0  # count of steps taken in this episode
 
         self.task.reset()
         self.task.update_world()  # refresh specific settings
@@ -178,16 +178,16 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
         cost = self._cost()
         assert cost['cost'] == 0, f'World has starting cost! {cost}'
-        # Reset stateful parts of the environment
-        self.first_reset = False  # Built our first world successfully
+        # reset stateful parts of the environment
+        self.first_reset = False  # built our first world successfully
 
-        # Return an observation
+        # return an observation
         return (self.task.obs(), info)
 
     def step(self, action: np.ndarray) -> Tuple[np.ndarray, float, float, bool, bool, dict]:
         """Take a step and return observation, reward, cost, terminated, truncated, info."""
         assert not self.done, 'Environment must be reset before stepping.'
-        action = np.array(action, copy=False)  # Cast to ndarray
+        action = np.array(action, copy=False)  # cast to ndarray
 
         info = {}
 
@@ -198,32 +198,32 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
             reward = self.task.reward_conf.reward_exception
             info['cost_exception'] = 1.0
         else:
-            # Reward processing
+            # reward processing
             reward = self._reward()
 
-            # Constraint violations
+            # constraint violations
             info.update(self._cost())
 
             cost = info['cost']
 
             self.task.specific_step()
 
-            # Goal processing
+            # goal processing
             if self.task.goal_achieved:
                 info['goal_met'] = True
                 if self.task.mechanism_conf.continue_goal:
-                    # Update the internal layout
+                    # update the internal layout
                     # so we can correctly resample (given objects have moved)
                     self.task.update_layout()
-                    # Try to build a new goal, end if we fail
+                    # try to build a new goal, end if we fail
                     if self.task.mechanism_conf.terminate_resample_failure:
                         try:
                             self.task.update_world()
                         except ResamplingError:
-                            # Normal end of episode
+                            # normal end of episode
                             self.terminated = True
                     else:
-                        # Try to make a goal, which could raise a ResamplingError exception
+                        # try to make a goal, which could raise a ResamplingError exception
                         self.task.update_world()
                 else:
                     self.terminated = True
@@ -232,10 +232,10 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         if not self.task.agent.is_alive():
             self.terminated = True
 
-        # Timeout
+        # timeout
         self.steps += 1
         if self.steps >= self.task.num_steps:
-            self.truncated = True  # Maximum number of steps in an episode reached
+            self.truncated = True  # maximum number of steps in an episode reached
 
         if self.render_parameters.mode == 'human':
             self.render()
@@ -248,14 +248,14 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         """
         reward = self.task.calculate_reward()
 
-        # Intrinsic reward for uprightness
+        # intrinsic reward for uprightness
         if self.task.reward_conf.reward_orientation:
             zalign = quat2zalign(
                 self.task.data.get_body_xquat(self.task.reward_conf.reward_orientation_body)
             )
             reward += self.task.reward_conf.reward_orientation_scale * zalign
 
-        # Clip reward
+        # clip reward
         reward_clip = self.task.reward_conf.reward_clip
         if reward_clip:
             in_range = -reward_clip < reward < reward_clip
@@ -272,10 +272,10 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         """
         cost = self.task.calculate_cost()
 
-        # Optionally remove shaping from reward functions.
+        # optionally remove shaping from reward functions.
         if self.task.cost_conf.constrain_indicator:
             for k in list(cost.keys()):
-                cost[k] = float(cost[k] > 0.0)  # Indicator function
+                cost[k] = float(cost[k] > 0.0)  # indicator function
 
         self.cost = cost
 

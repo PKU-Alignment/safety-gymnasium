@@ -29,14 +29,14 @@ class PushBox(FreeGeom):  # pylint: disable=too-many-instance-attributes
 
     name: str = 'push_box'
     size: float = 0.2
-    placements: list = None  # Box placements list (defaults to full extents)
-    locations: list = field(default_factory=list)  # Fixed locations to override placements
-    keepout: float = 0.2  # Box keepout radius for placement
-    null_dist: float = 2  # Within box_null_dist * box_size radius of box, no box reward given
+    placements: list = None  # box placements list (defaults to full extents)
+    locations: list = field(default_factory=list)  # fixed locations to override placements
+    keepout: float = 0.2  # box keepout radius for placement
+    null_dist: float = 2  # within box_null_dist * box_size radius of box, no box reward given
     density: float = 0.001
 
-    reward_box_dist: float = 1.0  # Dense reward for moving the agent towards the box
-    reward_box_goal: float = 1.0  # Reward for moving the box towards the goal
+    reward_box_dist: float = 1.0  # dense reward for moving the agent towards the box
+    reward_box_goal: float = 1.0  # reward for moving the box towards the goal
 
     color: np.array = COLOR['push_box']
     group: np.array = GROUP['push_box']
@@ -61,8 +61,8 @@ class PushBox(FreeGeom):  # pylint: disable=too-many-instance-attributes
     def _specific_agent_config(self):
         """Modify the push_box property according to specific agent."""
         if self.agent.__class__.__name__ == 'Car':
-            self.size = 0.125  # Box half-radius size
-            self.keepout = 0.125  # Box keepout radius for placement
+            self.size = 0.125  # box half-radius size
+            self.keepout = 0.125  # box keepout radius for placement
             self.density = 0.0005
 
     @property

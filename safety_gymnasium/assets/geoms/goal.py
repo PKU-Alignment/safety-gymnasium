@@ -29,16 +29,16 @@ class Goal(Geom):  # pylint: disable=too-many-instance-attributes
 
     name: str = 'goal'
     size: float = 0.3
-    placements: list = None  # Placements where goal may appear (defaults to full extents)
-    locations: list = field(default_factory=list)  # Fixed locations to override placements
-    keepout: float = 0.4  # Keepout radius when placing goals
+    placements: list = None  # placements where goal may appear (defaults to full extents)
+    locations: list = field(default_factory=list)  # fixed locations to override placements
+    keepout: float = 0.4  # keepout radius when placing goals
     alpha: float = 0.25
 
-    reward_goal: float = 1.0  # Sparse reward for being inside the goal area
-    # Reward is distance towards goal plus a constant for being within range of goal
+    reward_goal: float = 1.0  # sparse reward for being inside the goal area
+    # reward is distance towards goal plus a constant for being within range of goal
     # reward_distance should be positive to encourage moving towards the goal
     # if reward_distance is 0, then the reward function is sparse
-    reward_distance: float = 1.0  # Dense reward multiplied by the distance moved to the goal
+    reward_distance: float = 1.0  # dense reward multiplied by the distance moved to the goal
 
     color: np.array = COLOR['goal']
     group: np.array = GROUP['goal']

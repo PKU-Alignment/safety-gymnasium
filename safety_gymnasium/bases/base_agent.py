@@ -187,7 +187,7 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
         self._init_body_info()
         self.debug_info = DebugInfo()
 
-        # Needed to figure out z-height of free joint of offset body
+        # need to figure out z-height of free joint of offset body
         self.z_height: float = self.engine.data.body('agent').xpos[2]
 
         self.action_space: gymnasium.spaces.Box = self._build_action_space()
@@ -270,10 +270,10 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
                     ):  # pylint: disable=no-member
                         self.sensor_info.ballangvel_names.append(name)
                 elif joint_type == mujoco.mjtJoint.mjJNT_SLIDE:  # pylint: disable=no-member
-                    # Adding slide joints is trivially easy in code,
-                    # but this removes one of the good properties about our observations.
-                    # (That we are invariant to relative whole-world transforms)
-                    # If slide joints are added we should ensure this stays true!
+                    # add slide joints is trivially easy in code,
+                    # but this removes one of the good properties about our observations
+                    # (that we are invariant to relative whole-world transforms)
+                    # if slide joints are added we should ensure this stays true
                     raise ValueError('Slide joints in agents not currently supported')
             elif (
                 # pylint: disable-next=no-member
@@ -307,9 +307,9 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
             action (np.ndarray): The action to apply.
             noise (np.ndarray): The noise to add to the action.
         """
-        action = np.array(action, copy=False)  # Cast to ndarray
+        action = np.array(action, copy=False)  # cast to ndarray
 
-        # Set action
+        # set action
         action_range = self.engine.model.actuator_ctrlrange
 
         self.engine.data.ctrl[:] = np.clip(action, action_range[:, 0], action_range[:, 1])
@@ -325,13 +325,13 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
         """
         obs_space_dict = {}
 
-        for sensor in self.sensor_conf.sensors:  # Explicitly listed sensors
+        for sensor in self.sensor_conf.sensors:  # explicitly listed sensors
             dim = self.sensor_info.sensor_dim[sensor]
             obs_space_dict[sensor] = gymnasium.spaces.Box(-np.inf, np.inf, (dim,), dtype=np.float64)
-        # Velocities don't have wraparound effects that rotational positions do
-        # Wraparounds are not kind to neural networks
-        # Whereas the angle 2*pi is very close to 0, this isn't true in the network
-        # In theory the network could learn this, but in practice we simplify it
+        # velocities don't have wraparound effects that rotational positions do
+        # wraparounds are not kind to neural networks
+        # whereas the angle 2*pi is very close to 0, this isn't true in the network
+        # in theory the network could learn this, but in practice we simplify it
         # when the sensors_angle_components switch is enabled.
         for sensor in self.sensor_info.hinge_vel_names:
             obs_space_dict[sensor] = gymnasium.spaces.Box(-np.inf, np.inf, (1,), dtype=np.float64)
@@ -343,31 +343,31 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
         if self.sensor_info.freejoint_qvel_name:
             sensor = self.sensor_info.freejoint_qvel_name
             obs_space_dict[sensor] = gymnasium.spaces.Box(-np.inf, np.inf, (3,), dtype=np.float64)
-        # Angular positions have wraparound effects, so output something more friendly
+        # angular positions have wraparound effects, so output something more friendly
         if self.sensor_conf.sensors_angle_components:
-            # Single joints are turned into sin(x), cos(x) pairs
-            # These should be easier to learn for neural networks,
-            # Since for angles, small perturbations in angle give small differences in sin/cos
+            # single joints are turned into sin(x), cos(x) pairs
+            # these should be easier to learn for neural networks,
+            # since for angles, small perturbations in angle give small differences in sin/cos
             for sensor in self.sensor_info.hinge_pos_names:
                 obs_space_dict[sensor] = gymnasium.spaces.Box(
                     -np.inf, np.inf, (2,), dtype=np.float64
                 )
-            # Quaternions are turned into 3x3 rotation matrices
-            # Quaternions have a wraparound issue in how they are normalized,
+            # quaternions are turned into 3x3 rotation matrices
+            # quaternions have a wraparound issue in how they are normalized,
             # where the convention is to change the sign so the first element to be positive.
-            # If the first element is close to 0, this can mean small differences in rotation
+            # if the first element is close to 0, this can mean small differences in rotation
             # lead to large differences in value as the latter elements change sign.
-            # This also means that the first element of the quaternion is not expectation zero.
-            # The SO(3) rotation representation would be a good replacement here,
+            # this also means that the first element of the quaternion is not expectation zero.
+            # the SO(3) rotation representation would be a good replacement here,
             # since it smoothly varies between values in all directions (the property we want),
             # but right now we have very little code to support SO(3) rotations.
-            # Instead we use a 3x3 rotation matrix, which if normalized, smoothly varies as well.
+            # instead we use a 3x3 rotation matrix, which if normalized, smoothly varies as well.
             for sensor in self.sensor_info.ballquat_names:
                 obs_space_dict[sensor] = gymnasium.spaces.Box(
                     -np.inf, np.inf, (3, 3), dtype=np.float64
                 )
         else:
-            # Otherwise include the sensor without any processing
+            # otherwise include the sensor without any processing
             for sensor in self.sensor_info.hinge_pos_names:
                 obs_space_dict[sensor] = gymnasium.spaces.Box(
                     -np.inf, np.inf, (1,), dtype=np.float64
@@ -387,8 +387,8 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
         """
         obs = {}
 
-        # Sensors which can be read directly, without processing
-        for sensor in self.sensor_conf.sensors:  # Explicitly listed sensors
+        # sensors which can be read directly, without processing
+        for sensor in self.sensor_conf.sensors:  # explicitly listed sensors
             obs[sensor] = self.get_sensor(sensor)
         for sensor in self.sensor_info.hinge_vel_names:
             obs[sensor] = self.get_sensor(sensor)
@@ -400,15 +400,15 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
         if self.sensor_info.freejoint_qvel_name:
             sensor = self.sensor_info.freejoint_qvel_name
             obs[sensor] = self.get_sensor(sensor)
-        # Process angular position sensors
+        # process angular position sensors
         if self.sensor_conf.sensors_angle_components:
             for sensor in self.sensor_info.hinge_pos_names:
-                theta = float(self.get_sensor(sensor))  # Ensure not 1D, 1-element array
+                theta = float(self.get_sensor(sensor))  # ensure not 1D, 1-element array
                 obs[sensor] = np.array([np.sin(theta), np.cos(theta)])
             for sensor in self.sensor_info.ballquat_names:
                 quat = self.get_sensor(sensor)
                 obs[sensor] = quat2mat(quat)
-        else:  # Otherwise read sensors directly
+        else:  # otherwise read sensors directly
             for sensor in self.sensor_info.hinge_pos_names:
                 obs[sensor] = self.get_sensor(sensor)
             for sensor in self.sensor_info.ballquat_names:

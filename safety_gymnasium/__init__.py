@@ -42,7 +42,7 @@ def combine(tasks, agents, max_episode_steps):
     """Combine tasks and agents together to register environment tasks."""
     for task_name, task_config in tasks.items():
         for robot_name in agents:
-            # Default
+            # default
             env_name = f'{PREFIX}{robot_name}{task_name}-{VERSION}'
             combined_config = deepcopy(task_config)
             combined_config.update({'agent_name': robot_name})
@@ -55,7 +55,7 @@ def combine(tasks, agents, max_episode_steps):
             )
 
             if MAKE_VISION_ENVIRONMENTS:
-                # Vision: note, these environments are experimental! Correct behavior not guaranteed
+                # vision: note, these environments are experimental! Correct behavior not guaranteed
                 vision_env_name = f'{PREFIX}{robot_name}{task_name}Vision-{VERSION}'
                 vision_config = {
                     'observe_vision': True,
@@ -132,8 +132,11 @@ run_tasks = {'Run0': {}}
 combine(run_tasks, robots, max_episode_steps=500)
 
 
-# Safety Velocity
-# ----------------------------------------
+# =============================================================================#
+#                                                                              #
+#       Safety Velocity                                                        #
+#                                                                              #
+# =============================================================================#
 register(
     id='SafetyHalfCheetahVelocity-v4',
     entry_point='safety_gymnasium.tasks.safety_velocity.safety_half_cheetah_velocity:SafetyHalfCheetahVelocityEnv',

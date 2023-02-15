@@ -28,22 +28,22 @@ class Buttons(Geom):  # pylint: disable=too-many-instance-attributes
     """Buttons are small immovable spheres, to the environment."""
 
     name: str = 'buttons'
-    num: int = 0  # Number of buttons to add
+    num: int = 0  # number of buttons to add
     size: float = 0.1
-    placements: list = None  # Buttons placements list (defaults to full extents)
-    locations: list = field(default_factory=list)  # Fixed locations to override placements
-    keepout: float = 0.2  # Buttons keepout radius for placement
-    goal_button: int = None  # Button to be the goal
+    placements: list = None  # buttons placements list (defaults to full extents)
+    locations: list = field(default_factory=list)  # fixed locations to override placements
+    keepout: float = 0.2  # buttons keepout radius for placement
+    goal_button: int = None  # button to be the goal
 
-    resampling_delay: float = 10  # Buttons have a timeout period (steps) before resampling
+    resampling_delay: float = 10  # buttons have a timeout period (steps) before resampling
     timer: int = None
 
-    cost: float = 1.0  # Cost for pressing the wrong button, if constrain_buttons
-    reward_goal: float = 1.0  # Sparse reward for being inside the goal area
-    # Reward is distance towards goal plus a constant for being within range of goal
+    cost: float = 1.0  # cost for pressing the wrong button, if constrain_buttons
+    reward_goal: float = 1.0  # sparse reward for being inside the goal area
+    # reward is distance towards goal plus a constant for being within range of goal
     # reward_distance should be positive to encourage moving towards the goal
     # if reward_distance is 0, then the reward function is sparse
-    reward_distance: float = 1.0  # Dense reward multiplied by the distance moved to the goal
+    reward_distance: float = 1.0  # dense reward multiplied by the distance moved to the goal
 
     color: np.array = COLOR['button']
     group: np.array = GROUP['button']
@@ -85,7 +85,7 @@ class Buttons(Geom):  # pylint: disable=too-many-instance-attributes
 
     def timer_tick(self):
         """Tick the buttons resampling timer."""
-        #  Button timer (used to delay button resampling)
+        # button timer (used to delay button resampling)
         self.timer = max(0, self.timer - 1)
 
     def reset_timer(self):

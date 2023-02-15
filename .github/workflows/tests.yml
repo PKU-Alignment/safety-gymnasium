@@ -1,0 +1,98 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  # Allow to trigger the workflow manually
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+
+jobs:
+  test-py37:
+    name: Test for Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest] # future plan: test on windows-latest, macos-latest
+        python-version: ["3.8"]
+      fail-fast: false
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          update-environment: true
+
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+
+      - name: Install Safety Gymnasium
+        run: |
+          python -m pip install -vvv --editable .
+
+      - name: Test with pytest
+        run: |
+          make pytest
+
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v3
+      #   if: ${{ matrix.os == 'ubuntu-latest' }}
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     file: ./tests/coverage.xml
+      #     flags: unittests
+      #     name: codecov-umbrella
+      #     fail_ci_if_error: false
+
+  test:
+    name: Test for Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    needs: [test-py37]
+    runs-on: ${{ matrix.os }}
+    if: github.event_name != 'push' || startsWith(github.ref, 'refs/tags/')
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.9", "3.10", "3.11"]
+      fail-fast: false
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          update-environment: true
+
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+
+      - name: Install Safety Gymnasium
+        run: |
+          python -m pip install -vvv -e .
+
+      - name: Test with pytest
+        run: |
+          make pytest

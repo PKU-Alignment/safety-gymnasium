@@ -40,7 +40,7 @@ class PushLevel0(BaseTask):
         """Determine reward depending on the agent and tasks."""
         reward = 0.0
 
-        # Distance from agent to box
+        # distance from agent to box
         dist_box = self.dist_box()
         # pylint: disable-next=no-member
         gate_dist_box_reward = self.last_dist_box > self.push_box.null_dist * self.push_box.size
@@ -52,7 +52,7 @@ class PushLevel0(BaseTask):
         )
         self.last_dist_box = dist_box
 
-        # Distance from box to goal
+        # distance from box to goal
         dist_box_goal = self.dist_box_goal()
         # pylint: disable-next=no-member
         reward += (self.last_box_goal - dist_box_goal) * self.push_box.reward_box_goal

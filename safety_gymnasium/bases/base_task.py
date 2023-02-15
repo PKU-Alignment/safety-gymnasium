@@ -177,7 +177,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         """
         super().__init__(config=config)
 
-        self.num_steps = 1000  # Maximum number of environment steps in an episode
+        self.num_steps = 1000  # maximum number of environment steps in an episode
 
         self.lidar_conf = LidarConf()
         self.compass_conf = CompassConf()
@@ -189,7 +189,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         self.observation_space = None
         self.obs_info = ObservationInfo()
 
-        self._is_load_static_geoms = False  # Whether to load static geoms in current task.
+        self._is_load_static_geoms = False  # whether to load static geoms in current task.
 
     def dist_goal(self) -> float:
         """Return the distance from the agent to the goal XY position."""
@@ -199,20 +199,20 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
     def calculate_cost(self) -> dict:
         """Determine costs depending on the agent and obstacles."""
         # pylint: disable-next=no-member
-        mujoco.mj_forward(self.model, self.data)  # Ensure positions and contacts are correct
+        mujoco.mj_forward(self.model, self.data)  # ensure positions and contacts are correct
         cost = {}
 
-        # Calculate constraint violations
+        # calculate constraint violations
         for obstacle in self._obstacles:
             cost.update(obstacle.cal_cost())
 
-        # Sum all costs into single total cost
+        # sum all costs into single total cost
         cost['cost'] = sum(v for k, v in cost.items() if k.startswith('cost_'))
         return cost
 
     def build_observation_space(self) -> gymnasium.spaces.Dict:
         """Construct observation space.  Happens only once during __init__ in Builder."""
-        obs_space_dict = OrderedDict()  # See self.obs()
+        obs_space_dict = OrderedDict()  # see self.obs()
 
         obs_space_dict.update(self.agent.build_sensor_observation_space())
 
@@ -277,7 +277,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         else:
             world_config['agent_rot'] = float(self.agent.rot)
 
-        # process world config via different objects.
+        # process world config via different objects
         world_config.update(
             {
                 'geoms': {},
@@ -316,15 +316,15 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
 
     def build_goal_position(self) -> None:
         """Build a new goal position, maybe with resampling due to hazards."""
-        # Resample until goal is compatible with layout
+        # resample until goal is compatible with layout
         if 'goal' in self.world_info.layout:
             del self.world_info.layout['goal']
-        for _ in range(10000):  # Retries
+        for _ in range(10000):  # retries
             if self.random_generator.sample_goal_position():
                 break
         else:
             raise ResamplingError('Failed to generate goal')
-        # Move goal geom to new layout position
+        # move goal geom to new layout position
         self.world_info.world_config_dict['geoms']['goal']['pos'][:2] = self.world_info.layout[
             'goal'
         ]
@@ -338,13 +338,13 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         assert hasattr(self, object_name), f'object{object_name} does not exist, but you use it!'
         data_obj = getattr(self, object_name)
 
-        if hasattr(data_obj, 'num'):  # Objects with multiplicity
+        if hasattr(data_obj, 'num'):  # objects with multiplicity
             object_fmt = object_name[:-1] + '{i}'
             object_num = getattr(data_obj, 'num', None)
             object_locations = getattr(data_obj, 'locations', [])
             object_placements = getattr(data_obj, 'placements', None)
             object_keepout = getattr(data_obj, 'keepout')
-        else:  # Unique objects
+        else:  # unique objects
             object_fmt = object_name
             object_num = 1
             object_locations = getattr(data_obj, 'locations', [])
@@ -353,7 +353,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         for i in range(object_num):
             if i < len(object_locations):
                 x, y = object_locations[i]  # pylint: disable=invalid-name
-                k = object_keepout + 1e-9  # Epsilon to account for numerical issues
+                k = object_keepout + 1e-9  # epsilon to account for numerical issues
                 placements = [(x - k, y - k, x + k, y + k)]
             else:
                 placements = object_placements
@@ -363,7 +363,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
     def obs(self) -> Union[dict, np.ndarray]:
         """Return the observation of our agent."""
         # pylint: disable-next=no-member
-        mujoco.mj_forward(self.model, self.data)  # Needed to get sensor's data correct
+        mujoco.mj_forward(self.model, self.data)  # need to get sensor's data correct
         obs = {}
 
         obs.update(self.agent.obs_sensor())
@@ -411,7 +411,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         obs = np.zeros(self.lidar_conf.num_bins)
         for i in range(self.lidar_conf.num_bins):
             theta = (i / self.lidar_conf.num_bins) * np.pi * 2
-            vec = np.matmul(mat_t, theta2vec(theta))  # Rotate from ego to world frame
+            vec = np.matmul(mat_t, theta2vec(theta))  # rotate from ego to world frame
             vec = np.asarray(vec, dtype='float64')
             geom_id = np.array([0], dtype='int32')
             dist = mujoco.mj_ray(  # pylint: disable=no-member
@@ -446,9 +446,9 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         for pos in positions:
             pos = np.asarray(pos)
             if pos.shape == (3,):
-                pos = pos[:2]  # Truncate Z coordinate
+                pos = pos[:2]  # truncate Z coordinate
             # pylint: disable-next=invalid-name
-            z = complex(*self._ego_xy(pos))  # X, Y as real, imaginary components
+            z = complex(*self._ego_xy(pos))  # x, y as real, imaginary components
             dist = np.abs(z)
             angle = np.angle(z) % (np.pi * 2)
             bin_size = (np.pi * 2) / self.lidar_conf.num_bins
@@ -459,7 +459,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             else:
                 sensor = max(0, self.lidar_conf.max_dist - dist) / self.lidar_conf.max_dist
             obs[bin] = max(obs[bin], sensor)
-            # Aliasing
+            # aliasing
             if self.lidar_conf.alias:
                 alias = (angle - bin_angle) / bin_size
                 assert 0 <= alias <= 1, f'bad alias {alias}, dist {dist}, angle {angle}, bin {bin}'
@@ -481,14 +481,14 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         """
         pos = np.asarray(pos)
         if pos.shape == (2,):
-            pos = np.concatenate([pos, [0]])  # Add a zero z-coordinate
-        # Get ego vector in world frame
+            pos = np.concatenate([pos, [0]])  # add a zero z-coordinate
+        # get ego vector in world frame
         vec = pos - self.agent.pos
-        # Rotate into frame
+        # rotate into frame
         vec = np.matmul(vec, self.agent.mat)
-        # Truncate
+        # truncate
         vec = vec[: self.compass_conf.shape]
-        # Normalize
+        # normalize
         vec /= np.sqrt(np.sum(np.square(vec))) + 0.001
         assert vec.shape == (self.compass_conf.shape,), f'Bad vec {vec}'
         return vec
@@ -512,7 +512,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         assert pos.shape == (2,), f'Bad pos {pos}'
         agent_3vec = self.agent.pos
         agent_mat = self.agent.mat
-        pos_3vec = np.concatenate([pos, [0]])  # Add a zero z-coordinate
+        pos_3vec = np.concatenate([pos, [0]])  # add a zero z-coordinate
         world_3vec = pos_3vec - agent_3vec
         return np.matmul(world_3vec, agent_mat)[:2]  # only take XY coordinates
 

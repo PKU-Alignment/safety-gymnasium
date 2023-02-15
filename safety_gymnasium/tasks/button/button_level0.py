@@ -77,7 +77,7 @@ class ButtonLevel0(BaseTask):
     def obs(self):
         """Return the observation of our agent."""
         # pylint: disable-next=no-member
-        mujoco.mj_forward(self.model, self.data)  # Needed to get sensor's data correct
+        mujoco.mj_forward(self.model, self.data)  # need to get sensor's data correct
         obs = {}
 
         obs.update(self.agent.obs_sensor())

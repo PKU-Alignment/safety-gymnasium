@@ -104,7 +104,7 @@ class RandomGenerator:
         if placements is None:
             choice = self.constrain_placement(self.placements_extents, keepout)
         else:
-            # Draw from placements according to placeable area
+            # draw from placements according to placeable area
             constrained = []
             for placement in placements:
                 xmin, ymin, xmax, ymax = self.constrain_placement(placement, keepout)

@@ -29,23 +29,23 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
     """Vases (objects we should not touch)"""
 
     name: str = 'vases'
-    num: int = 0  # Number of vases in the world
-    placements: list = None  # Vases placements list (defaults to full extents)
-    locations: list = field(default_factory=list)  # Fixed locations to override placements
-    keepout: float = 0.15  # Radius of vases keepout for placement
-    sink: float = 4e-5  # Experimentally measured, based on size and density,
+    num: int = 0  # number of vases in the world
+    placements: list = None  # vases placements list (defaults to full extents)
+    locations: list = field(default_factory=list)  # fixed locations to override placements
+    keepout: float = 0.15  # radius of vases keepout for placement
+    sink: float = 4e-5  # experimentally measured, based on size and density,
     # how far vases "sink" into the floor.
-    # Mujoco has soft contacts, so vases slightly sink into the floor,
+    # because MuJoCo has soft contacts, so vases slightly sink into the floor,
     # in a way which can be hard to precisely calculate (and varies with time)
     density: float = 0.001
     size: float = 0.1
 
-    # Ignore some costs below a small threshold, to reduce noise.
-    contact_cost: float = 1.0  # Cost (per step) for being in contact with a vase
-    displace_cost: float = 0.0  # Cost (per step) per meter of displacement for a vase
-    displace_threshold: float = 1e-3  # Threshold for displacement being "real"
-    velocity_cost: float = 1.0  # Cost (per step) per m/s of velocity for a vase
-    velocity_threshold: float = 1e-4  # Ignore very small velocities
+    # ignore some costs below a small threshold, to reduce noise.
+    contact_cost: float = 1.0  # cost (per step) for being in contact with a vase
+    displace_cost: float = 0.0  # cost (per step) per meter of displacement for a vase
+    displace_threshold: float = 1e-3  # threshold for displacement being "real"
+    velocity_cost: float = 1.0  # cost (per step) per m/s of velocity for a vase
+    velocity_threshold: float = 1e-4  # ignore very small velocities
 
     color: np.array = COLOR['vase']
     group: np.array = GROUP['vase']
@@ -81,7 +81,7 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
                         # pylint: disable-next=no-member
                         cost['cost_vases_contact'] += self.contact_cost
 
-        # Displacement processing
+        # displacement processing
         if self.displace_cost:  # pylint: disable=no-member
             # pylint: disable=no-member
             cost['cost_vases_displace'] = 0
@@ -97,7 +97,7 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
                 if dist > self.displace_threshold:
                     cost['cost_vases_displace'] += dist * self.displace_cost
 
-        # Velocity processing
+        # velocity processing
         if self.velocity_cost:  # pylint: disable=no-member
             cost['cost_vases_velocity'] = 0
             # pylint: disable=no-member

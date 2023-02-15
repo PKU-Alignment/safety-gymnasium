@@ -33,30 +33,30 @@ class KeyboardViewer(Viewer):  # pylint: disable=too-many-instance-attributes
         """Callback for keyboard events."""
         if action != glfw.RELEASE:
             pass
-        # Switch cameras
+        # switch cameras
         elif key == glfw.KEY_TAB:
             self.cam.fixedcamid += 1
             self.cam.type = mujoco.mjtCamera.mjCAMERA_FIXED  # pylint: disable=no-member
             if self.cam.fixedcamid >= self.model.ncam:
                 self.cam.fixedcamid = -1
                 self.cam.type = mujoco.mjtCamera.mjCAMERA_FREE  # pylint: disable=no-member
-        # Pause simulation
+        # pause simulation
         elif key == glfw.KEY_SPACE and self._paused is not None:
             self._paused = not self._paused
-        # Advances simulation by one step.
+        # advances simulation by one step.
         elif key == glfw.KEY_RIGHT and self._paused is not None:
             self._advance_by_one_step = True
             self._paused = True
-        # Slows down simulation
+        # slows down simulation
         elif key == glfw.KEY_S:
             self._run_speed /= 2.0
-        # Speeds up simulation
+        # speeds up simulation
         elif key == glfw.KEY_F:
             self._run_speed *= 2.0
-        # Turn off / turn on rendering every frame.
+        # turn off / turn on rendering every frame.
         elif key == glfw.KEY_D:
             self._render_every_frame = not self._render_every_frame
-        # Capture screenshot
+        # capture screenshot
         elif key == glfw.KEY_T:
             img = np.zeros(
                 (
@@ -69,33 +69,33 @@ class KeyboardViewer(Viewer):  # pylint: disable=too-many-instance-attributes
             mujoco.mjr_readPixels(img, None, self.viewport, self.con)  # pylint: disable=no-member
             imageio.imwrite(self._image_path % self._image_idx, np.flipud(img))
             self._image_idx += 1
-        # Display contact forces
+        # display contact forces
         elif key == glfw.KEY_C:
             self._contacts = not self._contacts
             # pylint: disable=no-member
             self.vopt.flags[mujoco.mjtVisFlag.mjVIS_CONTACTPOINT] = self._contacts
             self.vopt.flags[mujoco.mjtVisFlag.mjVIS_CONTACTFORCE] = self._contacts
             # pylint: enable=no-member
-        # Display coordinate frames
+        # display coordinate frames
         elif key == glfw.KEY_E:
             self.vopt.frame = 1 - self.vopt.frame
-        # Hide overlay menu
+        # hide overlay menu
         elif key == glfw.KEY_H:
             self._hide_menu = not self._hide_menu
-        # Make transparent
+        # make transparent
         elif key == glfw.KEY_R:
             self._transparent = not self._transparent
             if self._transparent:
                 self.model.geom_rgba[:, 3] /= 5.0
             else:
                 self.model.geom_rgba[:, 3] *= 5.0
-        # Geom group visibility
+        # geom group visibility
         elif key in (glfw.KEY_0, glfw.KEY_1, glfw.KEY_2, glfw.KEY_3, glfw.KEY_4):
             self.vopt.geomgroup[key - glfw.KEY_0] ^= 1
         if key in (glfw.KEY_I, glfw.KEY_J, glfw.KEY_K, glfw.KEY_L):
             self._custom_key_press_callback(key=key, action=action)
 
-        # Quit
+        # quit
         if key == glfw.KEY_ESCAPE:
             print('Pressed ESC')
             print('Quitting.')

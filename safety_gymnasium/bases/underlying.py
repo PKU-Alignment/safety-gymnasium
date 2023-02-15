@@ -19,12 +19,12 @@ from copy import deepcopy
 from dataclasses import dataclass
 from typing import List, Union
 
-import gymnasium
+import gymnasium  # pylint: disable=unused-import
 import mujoco
 import numpy as np
 from gymnasium.envs.mujoco.mujoco_rendering import RenderContextOffscreen
 
-import safety_gymnasium
+import safety_gymnasium  # pylint: disable=unused-import
 from safety_gymnasium import agents
 from safety_gymnasium.assets.color import COLOR
 from safety_gymnasium.assets.free_geoms import FREE_GEOMS_REGISTER
@@ -207,20 +207,20 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         self.viewer = None
         self._viewers = {}
 
-        # Obstacles which are added in environments.
+        # obstacles which are added in environments
         self._geoms = {}
         self._free_geoms = {}
         self._mocaps = {}
 
         # something are parsed from pre-defined configs
         self.agent_name = None
-        self.observe_vision = False  # Observe vision from the agent
+        self.observe_vision = False  # observe vision from the agent
         self.debug = False
         self._parse(config)
-        self.observation_flatten = True  # Flatten observation into a vector
+        self.observation_flatten = True  # flatten observation into a vector
         self.agent = None
         self.action_noise: float = (
-            0.0  # Magnitude of independent per-component gaussian action noise
+            0.0  # magnitude of independent per-component gaussian action noise
         )
         self._build_agent(self.agent_name)
 
@@ -281,7 +281,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
     def reset(self) -> None:
         """Reset the environment."""
         self._build()
-        # Save the layout at reset
+        # save the layout at reset
         self.world_info.reset_layout = deepcopy(self.world_info.layout)
 
     def _build(self) -> None:
@@ -293,10 +293,10 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                 self.placements_conf.extents,
                 self.placements_conf.margin,
             )
-        # Sample object positions
+        # sample object positions
         self.world_info.layout = self.random_generator.build_layout()
 
-        # Build the underlying physics world
+        # build the underlying physics world
         self.world_info.world_config_dict = self._build_world_config(self.world_info.layout)
 
         if self.world is None:
@@ -316,7 +316,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             - The **step** mentioned above is not the same as the **step** in Mujoco sense.
             - The **step** here is the step in episode sense.
         """
-        # Simulate physics forward
+        # simulate physics forward
         if self.debug:
             self.agent.debug()
         else:
@@ -337,7 +337,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                 for mocap in self._mocaps.values():
                     mocap.move()
                 # pylint: disable-next=no-member
-                mujoco.mj_step(self.model, self.data)  # Physics simulation step
+                mujoco.mj_step(self.model, self.data)  # physics simulation step
             except MujocoException as me:  # pylint: disable=invalid-name
                 print('MujocoException', me)
                 exception = True
@@ -346,7 +346,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             return exception
 
         # pylint: disable-next=no-member
-        mujoco.mj_forward(self.model, self.data)  # Needed to get sensor readings correct!
+        mujoco.mj_forward(self.model, self.data)  # need to get sensor readings correct!
         return exception
 
     def update_layout(self) -> None:
@@ -358,7 +358,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         """
         mujoco.mj_forward(self.model, self.data)  # pylint: disable=no-member
         for k in list(self.world_info.layout.keys()):
-            # Mocap objects have to be handled separately
+            # mocap objects have to be handled separately
             if 'gremlin' in k:
                 continue
             self.world_info.layout[k] = self.data.body(k).xpos[:2].copy()
@@ -387,7 +387,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         lidar = self._obs_lidar(poses, group)
         for i, sensor in enumerate(lidar):
             if self.lidar_conf.type == 'pseudo':  # pylint: disable=no-member
-                i += 0.5  # Offset to center of bin
+                i += 0.5  # offset to center of bin
             theta = 2 * np.pi * i / self.lidar_conf.num_bins  # pylint: disable=no-member
             rad = self.render_conf.lidar_radius
             binpos = np.array([np.cos(theta) * rad, np.sin(theta) * rad, offset])
@@ -405,7 +405,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         """Render a compass observation."""
         agent_pos = self.agent.pos
         agent_mat = self.agent.mat
-        # Truncate the compass to only visualize XY component
+        # truncate the compass to only visualize XY component
         compass = np.concatenate([self._obs_compass(pose)[:2] * 0.15, [offset]])
         pos = agent_pos + np.matmul(compass, agent_mat.transpose())
         self.viewer.add_marker(
@@ -424,7 +424,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         z_size = min(size, 0.3)
         pos = np.asarray(pos)
         if pos.shape == (2,):
-            pos = np.r_[pos, 0]  # Z coordinate 0
+            pos = np.r_[pos, 0]  # z coordinate: 0
         self.viewer.add_marker(
             pos=pos,
             size=[size, size, z_size],
@@ -440,7 +440,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         """Render a radial area in the environment."""
         pos = np.asarray(pos)
         if pos.shape == (2,):
-            pos = np.r_[pos, 0]  # Z coordinate 0
+            pos = np.r_[pos, 0]  # z coordinate: 0
         self.viewer.add_marker(
             pos=pos,
             size=size * np.ones(3),
@@ -497,14 +497,14 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
 
         self._get_viewer(mode)
 
-        # Turn all the geom groups on
+        # turn all the geom groups on
         self.viewer.vopt.geomgroup[:] = 1
 
-        # Lidar and Compass markers
+        # lidar and Compass markers
         if self.render_conf.lidar_markers:
             offset = (
                 self.render_conf.lidar_offset_init
-            )  # Height offset for successive lidar indicators
+            )  # height offset for successive lidar indicators
             for obstacle in self._obstacles:
                 if obstacle.is_lidar_observed:
                     self._render_lidar(obstacle.pos, obstacle.color, offset, obstacle.group)
@@ -514,11 +514,11 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                     )
                 offset += self.render_conf.lidar_offset_delta
 
-        # Add indicator for nonzero cost
+        # add indicator for nonzero cost
         if cost.get('cost', 0) > 0:
             self._render_sphere(self.agent.pos, 0.25, COLOR['red'], alpha=0.5)
 
-        # Draw vision pixels
+        # draw vision pixels
         if mode == 'rgb_array':
             self._get_viewer(mode).render(camera_id=camera_id)
             data = self._get_viewer(mode).read_pixels(depth=False)
@@ -528,7 +528,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             return data[::-1, :, :]
         if mode == 'depth_array':
             self._get_viewer(mode).render()
-            # Extract depth part of the read_pixels() tuple
+            # extract depth part of the read_pixels() tuple
             data = self._get_viewer(mode).read_pixels(depth=True)[1]
             # original image is upside-down, so flip it
             self.viewer._markers[:] = []  # pylint: disable=protected-access
@@ -556,7 +556,6 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             else:
                 raise AttributeError(f'Unexpected mode: {mode}')
 
-            # self.viewer_setup()
             self._viewers[mode] = self.viewer
 
         return self.viewer

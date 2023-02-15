@@ -18,7 +18,7 @@ from safety_gymnasium.assets.geoms.apples import Apples
 from safety_gymnasium.assets.geoms.buttons import Buttons
 from safety_gymnasium.assets.geoms.circle import Circle
 
-# Extra geoms (immovable objects) to add to the scene
+# extra geoms (immovable objects) to add to the scene
 from safety_gymnasium.assets.geoms.goal import Goal
 from safety_gymnasium.assets.geoms.hazards import Hazards
 from safety_gymnasium.assets.geoms.oranges import Oranges

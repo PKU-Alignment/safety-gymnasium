@@ -14,7 +14,7 @@
 # ==============================================================================
 """FreeGeom type objects."""
 
-# Extra free_geoms to add to the scene
+# extra free_geoms to add to the scene
 from safety_gymnasium.assets.free_geoms.push_box import PushBox
 from safety_gymnasium.assets.free_geoms.vases import Vases
 

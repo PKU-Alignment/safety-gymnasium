@@ -29,7 +29,7 @@ from safety_gymnasium.utils.common_utils import convert, rot2quat
 from safety_gymnasium.utils.task_utils import get_body_xvelp
 
 
-# Default location to look for xmls folder:
+# default location to look for xmls folder:
 BASE_DIR = os.path.dirname(safety_gymnasium.__file__)
 
 
@@ -52,18 +52,18 @@ class World:  # pylint: disable=too-many-instance-attributes
 
     And contains some apis for interacting with mujoco."""
 
-    # Default configuration (this should not be nested since it gets copied)
+    # default configuration (this should not be nested since it gets copied)
     # *NOTE:* Changes to this configuration should also be reflected in `Builder` configuration
     DEFAULT = {
-        'agent_base': 'assets/xmls/car.xml',  # Which agent XML to use as the base
+        'agent_base': 'assets/xmls/car.xml',  # which agent XML to use as the base
         'agent_xy': np.zeros(2),  # agent XY location
         'agent_rot': 0,  # agent rotation about Z axis
-        'floor_size': [3.5, 3.5, 0.1],  # Used for displaying the floor
-        # FreeGeoms -- this is processed and added by the Builder class
+        'floor_size': [3.5, 3.5, 0.1],  # used for displaying the floor
+        # freeGeoms -- this is processed and added by the Builder class
         'free_geoms': {},  # map from name -> object dict
-        # Geoms -- similar to objects, but they are immovable and fixed in the scene.
+        # geoms -- similar to objects, but they are immovable and fixed in the scene.
         'geoms': {},  # map from name -> geom dict
-        # Mocaps -- mocap objects which are used to control other objects
+        # mocaps -- mocap objects which are used to control other objects
         'mocaps': {},
         'floor_type': 'mat',
     }
@@ -71,7 +71,7 @@ class World:  # pylint: disable=too-many-instance-attributes
     def __init__(self, agent, obstacles, config=None):
         """config - JSON string or dict of configuration.  See self.parse()"""
         if config:
-            self.parse(config)  # Parse configuration
+            self.parse(config)  # parse configuration
 
         self.first_reset = True
 
@@ -102,11 +102,11 @@ class World:  # pylint: disable=too-many-instance-attributes
 
     def build(self):  # pylint: disable=too-many-locals, too-many-branches, too-many-statements
         """Build a world, including generating XML and moving objects."""
-        # Read in the base XML (contains agent, camera, floor, etc)
+        # read in the base XML (contains agent, camera, floor, etc)
         self.agent_base_path = os.path.join(BASE_DIR, self.agent_base)  # pylint: disable=no-member
         with open(self.agent_base_path, encoding='utf-8') as f:  # pylint: disable=invalid-name
             self.agent_base_xml = f.read()
-        self.xml = xmltodict.parse(self.agent_base_xml)  # Nested OrderedDict objects
+        self.xml = xmltodict.parse(self.agent_base_xml)  # nested OrderedDict objects
 
         if 'compiler' not in self.xml['mujoco']:
             compiler = xmltodict.parse(
@@ -126,30 +126,30 @@ class World:  # pylint: disable=too-many-instance-attributes
                 }
             )
 
-        # Convenience accessor for xml dictionary
+        # convenience accessor for xml dictionary
         worldbody = self.xml['mujoco']['worldbody']
 
-        # Move agent position to starting position
+        # move agent position to starting position
         worldbody['body']['@pos'] = convert(
             # pylint: disable-next=no-member
             np.r_[self.agent_xy, self._agent.z_height]
         )
         worldbody['body']['@quat'] = convert(rot2quat(self.agent_rot))  # pylint: disable=no-member
 
-        # We need this because xmltodict skips over single-item lists in the tree
+        # we need this because xmltodict skips over single-item lists in the tree
         worldbody['body'] = [worldbody['body']]
         if 'geom' in worldbody:
             worldbody['geom'] = [worldbody['geom']]
         else:
             worldbody['geom'] = []
-        # Add equality section if missing
+        # add equality section if missing
         if 'equality' not in self.xml['mujoco']:
             self.xml['mujoco']['equality'] = OrderedDict()
         equality = self.xml['mujoco']['equality']
         if 'weld' not in equality:
             equality['weld'] = []
 
-        # Add asset section if missing
+        # add asset section if missing
         if 'asset' not in self.xml['mujoco']:
             self.xml['mujoco']['asset'] = {}
         if 'texture' not in self.xml['mujoco']['asset']:
@@ -202,7 +202,7 @@ class World:  # pylint: disable=too-many-instance-attributes
         material += selected_materials.values()
         mesh += selected_meshes.values()
 
-        # Add light to the XML dictionary
+        # add light to the XML dictionary
         light = xmltodict.parse(
             """<b>
             <light cutoff="100" diffuse="1 1 1" dir="0 0 -1" directional="true"
@@ -211,7 +211,7 @@ class World:  # pylint: disable=too-many-instance-attributes
         )
         worldbody['light'] = light['b']['light']
 
-        # Add floor to the XML dictionary if missing
+        # add floor to the XML dictionary if missing
         if not any(g.get('@name') == 'floor' for g in worldbody['geom']):
             floor = xmltodict.parse(
                 """
@@ -220,7 +220,7 @@ class World:  # pylint: disable=too-many-instance-attributes
             )
             worldbody['geom'].append(floor['geom'])
 
-        # Make sure floor renders the same for every world
+        # make sure floor renders the same for every world
         for g in worldbody['geom']:  # pylint: disable=invalid-name
             if g['@name'] == 'floor':
                 g.update(
@@ -235,7 +235,7 @@ class World:  # pylint: disable=too-many-instance-attributes
                     g.update({'@material': 'village_floor'})
                 else:
                     raise NotImplementedError
-        # Add cameras to the XML dictionary
+        # add cameras to the XML dictionary
         cameras = xmltodict.parse(
             """<b>
             <camera name="fixednear" pos="0 -2 2" zaxis="0 -1 1"/>
@@ -244,7 +244,7 @@ class World:  # pylint: disable=too-many-instance-attributes
         )
         worldbody['camera'] = cameras['b']['camera']
 
-        # Build and add a tracking camera (logic needed to ensure orientation correct)
+        # build and add a tracking camera (logic needed to ensure orientation correct)
         theta = self.agent_rot  # pylint: disable=no-member
         xyaxes = {
             'x1': np.cos(theta),
@@ -281,7 +281,7 @@ class World:  # pylint: disable=too-many-instance-attributes
                 track_camera['b']['camera'],
             ]
 
-        # Add free_geoms to the XML dictionary
+        # add free_geoms to the XML dictionary
         for name, object in self.free_geoms.items():  # pylint: disable=redefined-builtin, no-member
             assert object['name'] == name, f'Inconsistent {name} {object}'
             object = object.copy()  # don't modify original object
@@ -340,17 +340,17 @@ class World:  # pylint: disable=too-many-instance-attributes
                             **{k: convert(v) for k, v in object.items()}
                         )
                     )
-            # Append new body to world, making it a list optionally
-            # Add the object to the world
+            # append new body to world, making it a list optionally
+            # add the object to the world
             worldbody['body'].append(body['body'])
-        # Add mocaps to the XML dictionary
+        # add mocaps to the XML dictionary
         for name, mocap in self.mocaps.items():  # pylint: disable=no-member
-            # Mocap names are suffixed with 'mocap'
+            # mocap names are suffixed with 'mocap'
             assert mocap['name'] == name, f'Inconsistent {name}'
             assert (
                 name.replace('mocap', 'obj') in self.free_geoms  # pylint: disable=no-member
             ), f'missing object for {name}'  # pylint: disable=no-member
-            # Add the object to the world
+            # add the object to the world
             mocap = mocap.copy()  # don't modify original object
             mocap['quat'] = rot2quat(mocap['rot'])
             body = xmltodict.parse(
@@ -365,7 +365,7 @@ class World:  # pylint: disable=too-many-instance-attributes
                 )
             )
             worldbody['body'].append(body['body'])
-            # Add weld to equality list
+            # add weld to equality list
             mocap['body1'] = name
             mocap['body2'] = name.replace('mocap', 'obj')
             weld = xmltodict.parse(
@@ -377,7 +377,7 @@ class World:  # pylint: disable=too-many-instance-attributes
                 )
             )
             equality['weld'].append(weld['weld'])
-        # Add geoms to XML dictionary
+        # add geoms to XML dictionary
         for name, geom in self.geoms.items():  # pylint: disable=no-member
             assert geom['name'] == name, f'Inconsistent {name} {geom}'
             geom = geom.copy()  # don't modify original object
@@ -409,18 +409,18 @@ class World:  # pylint: disable=too-many-instance-attributes
                         **{k: convert(v) for k, v in geom.items()}
                     )
                 )
-            # Append new body to world, making it a list optionally
-            # Add the object to the world
+            # append new body to world, making it a list optionally
+            # add the object to the world
             worldbody['body'].append(body['body'])
 
-        # Instantiate simulator
+        # instantiate simulator
         # print(xmltodict.unparse(self.xml, pretty=True))
         self.xml_string = xmltodict.unparse(self.xml)
 
         model = mujoco.MjModel.from_xml_string(self.xml_string)  # pylint: disable=no-member
         data = mujoco.MjData(model)  # pylint: disable=no-member
 
-        # Recompute simulation intrinsics from new position
+        # recompute simulation intrinsics from new position
         mujoco.mj_forward(model, data)  # pylint: disable=no-member
         self.engine.update(model, data)
 

@@ -21,7 +21,7 @@ from gymnasium.utils.passive_env_checker import check_obs
 
 def env_step_passive_checker(env, action):
     """A passive check for the environment step, investigating the returning data then returning the data unchanged."""
-    # We don't check the action as for some environments then out-of-bounds values can be given
+    # we don't check the action as for some environments then out-of-bounds values can be given
     result = env.step(action)
     assert isinstance(
         result, tuple
