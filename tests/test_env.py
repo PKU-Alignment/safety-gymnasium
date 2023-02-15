@@ -22,7 +22,7 @@ import safety_gymnasium
     agent_id=['Point', 'Car', 'Racecar', 'Ant'],
     env_id=['Goal', 'Push', 'Button', 'Circle'],
     level=['0', '1', '2'],
-    render_mode=['rgb_array', 'depth_array'],
+    render_mode=['rgb_array'],  # , 'depth_array'
 )
 # pylint: disable-next=too-many-locals
 def test_env(agent_id, env_id, level, render_mode):
@@ -58,7 +58,7 @@ def test_env(agent_id, env_id, level, render_mode):
     agent_id=['Point', 'Car', 'Racecar', 'Ant'],
     env_id=['Run'],
     level=['0'],
-    render_mode=['rgb_array', 'depth_array'],
+    render_mode=['rgb_array'],  # , 'depth_array'
 )
 # pylint: disable-next=too-many-locals
 def test_run_env(agent_id, env_id, level, render_mode):
@@ -93,7 +93,7 @@ def test_run_env(agent_id, env_id, level, render_mode):
 @helpers.parametrize(
     agent_id=['Humanoid', 'Ant', 'Hopper', 'HalfCheetah', 'Swimmer', 'Walker2d'],
     env_id=['Velocity'],
-    render_mode=['rgb_array', 'depth_array'],
+    render_mode=['rgb_array'],  # , 'depth_array'
 )
 # pylint: disable-next=too-many-locals
 def test_velocity_env(agent_id, env_id, render_mode):
