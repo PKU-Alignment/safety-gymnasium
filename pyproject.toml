@@ -43,17 +43,21 @@ Documentation = "https://www.safety-gymnasium.com"
 
 [project.optional-dependencies]
 lint = [
-    "isort == 5.12.0",
-    "black == 22.12.0",
-    "pylint == 2.15.10",
+    "isort >= 5.11.0",
+    "black >= 23.1.0",
+    "pylint[spelling] >= 2.15.0",
     "mypy >= 0.990",
     "flake8",
     "flake8-bugbear",
-    "doc8 < 1.0.0a0",
+    "flake8-comprehensions",
+    "flake8-docstrings",
+    "flake8-pyi",
+    "flake8-simplify",
+    "doc8",
     "pydocstyle",
     "pyenchant",
     "pre-commit",
-    "myst_parser",
+    "myst-parser",
 ]
 test = ['pytest', 'pytest-cov', 'pytest-xdist']
 

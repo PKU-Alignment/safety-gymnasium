@@ -15,7 +15,7 @@
 """Env builder."""
 
 from dataclasses import asdict, dataclass
-from typing import Dict, Tuple, Union
+from typing import Dict, Optional, Tuple, Union
 
 import gymnasium
 import numpy as np
@@ -281,7 +281,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
         return cost
 
-    def render(self) -> Union[None, np.ndarray]:
+    def render(self) -> Optional[np.ndarray]:
         """Call underlying :meth:`safety_gymnasium.bases.underlying.Underlying.render` directly.
 
         Width and height in parameters are constant defaults for rendering
