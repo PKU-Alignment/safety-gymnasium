@@ -265,13 +265,12 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
 
     def _build_world_config(self, layout: dict) -> dict:  # pylint: disable=too-many-branches
         """Create a world_config from our own config."""
-        world_config = {}
-
-        world_config['floor_type'] = self.floor_conf.type
-        world_config['floor_size'] = self.floor_conf.size
-
-        world_config['agent_base'] = self.agent.base
-        world_config['agent_xy'] = layout['agent']
+        world_config = {
+            'floor_type': self.floor_conf.type,
+            'floor_size': self.floor_conf.size,
+            'agent_base': self.agent.base,
+            'agent_xy': layout['agent'],
+        }
         if self.agent.rot is None:
             world_config['agent_rot'] = self.random_generator.random_rot()
         else:
@@ -305,9 +304,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
 
         # load all config of meshes in specific environment from .yaml file
         base_dir = os.path.dirname(safety_gymnasium.__file__)
-        with open(
-            os.path.join(base_dir, f'configs/{config_name}.yaml'), 'r', encoding='utf-8'
-        ) as file:
+        with open(os.path.join(base_dir, f'configs/{config_name}.yaml'), encoding='utf-8') as file:
             meshes_config = yaml.load(file, Loader=yaml.FullLoader)
 
         for idx in range(level + 1):
@@ -343,13 +340,13 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             object_num = getattr(data_obj, 'num', None)
             object_locations = getattr(data_obj, 'locations', [])
             object_placements = getattr(data_obj, 'placements', None)
-            object_keepout = getattr(data_obj, 'keepout')
+            object_keepout = data_obj.keepout
         else:  # Unique objects
             object_fmt = object_name
             object_num = 1
             object_locations = getattr(data_obj, 'locations', [])
             object_placements = getattr(data_obj, 'placements', None)
-            object_keepout = getattr(data_obj, 'keepout')
+            object_keepout = data_obj.keepout
         for i in range(object_num):
             if i < len(object_locations):
                 x, y = object_locations[i]  # pylint: disable=invalid-name

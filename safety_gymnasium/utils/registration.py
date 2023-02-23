@@ -20,17 +20,18 @@ import importlib.util
 from typing import Optional, Sequence, Union
 
 from gymnasium import Env, error, logger
-from gymnasium.envs.registration import (  # pylint: disable=unused-import
+from gymnasium.envs.registration import namespace  # noqa: F401 # pylint: disable=unused-import
+from gymnasium.envs.registration import spec  # noqa: F401 # pylint: disable=unused-import
+from gymnasium.envs.registration import (
     EnvSpec,
     _check_version_exists,
     find_highest_version,
     get_env_id,
     load,
-    namespace,
     parse_env_id,
 )
 from gymnasium.envs.registration import register as gymnasium_register
-from gymnasium.envs.registration import registry, spec  # pylint: disable=unused-import
+from gymnasium.envs.registration import registry
 from gymnasium.wrappers import AutoResetWrapper, HumanRendering, OrderEnforcing, RenderCollection
 from gymnasium.wrappers.compatibility import EnvCompatibility
 
