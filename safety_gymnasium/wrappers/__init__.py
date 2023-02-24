@@ -14,5 +14,6 @@
 # ==============================================================================
 """Env wrappers."""
 
+from safety_gymnasium.wrappers.autoreset import SafeAutoResetWrapper
 from safety_gymnasium.wrappers.env_checker import SafePassiveEnvChecker
 from safety_gymnasium.wrappers.time_limit import SafeTimeLimit

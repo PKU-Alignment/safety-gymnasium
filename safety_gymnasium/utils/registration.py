@@ -32,10 +32,10 @@ from gymnasium.envs.registration import (
 )
 from gymnasium.envs.registration import register as gymnasium_register
 from gymnasium.envs.registration import registry
-from gymnasium.wrappers import AutoResetWrapper, HumanRendering, OrderEnforcing, RenderCollection
+from gymnasium.wrappers import HumanRendering, OrderEnforcing, RenderCollection
 from gymnasium.wrappers.compatibility import EnvCompatibility
 
-from safety_gymnasium.wrappers import SafePassiveEnvChecker, SafeTimeLimit
+from safety_gymnasium.wrappers import SafeAutoResetWrapper, SafePassiveEnvChecker, SafeTimeLimit
 
 
 safe_registry = set()
@@ -229,7 +229,7 @@ def make(
 
     # Add the autoreset wrapper
     if autoreset:
-        env = AutoResetWrapper(env)
+        env = SafeAutoResetWrapper(env)
 
     # Add human rendering wrapper
     if apply_human_rendering:
