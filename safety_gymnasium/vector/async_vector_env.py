@@ -188,7 +188,7 @@ def _worker(
                 env.seed(data)
                 pipe.send((None, True))
             elif command == 'render':
-                pipe.send((env.render()))
+                pipe.send(env.render())
             elif command == 'close':
                 pipe.send((None, True))
                 break
@@ -267,7 +267,7 @@ def _worker_shared_memory(
                 write_to_shared_memory(observation_space, index, observation, shared_memory)
                 pipe.send(((None, reward, cost, terminated, truncated, info), True))
             elif command == 'render':
-                pipe.send((env.render()))
+                pipe.send(env.render())
             elif command == 'seed':
                 env.seed(data)
                 pipe.send((None, True))

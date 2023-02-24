@@ -163,7 +163,7 @@ class World:  # pylint: disable=too-many-instance-attributes
         mesh = self.xml['mujoco']['asset']['mesh']
 
         # load all assets config from .yaml file
-        with open(os.path.join(BASE_DIR, 'configs/assets.yaml'), 'r', encoding='utf-8') as file:
+        with open(os.path.join(BASE_DIR, 'configs/assets.yaml'), encoding='utf-8') as file:
             assets_config = yaml.load(file, Loader=yaml.FullLoader)
 
         texture.append(assets_config['textures']['skybox'])
@@ -180,19 +180,19 @@ class World:  # pylint: disable=too-many-instance-attributes
         selected_textures = {}
         selected_materials = {}
         selected_meshes = {}
-        for name, config in self.geoms.items():  # pylint: disable=no-member
+        for config in self.geoms.values():  # pylint: disable=no-member
             if config['type'] == 'mesh':
                 mesh_name = config['mesh']
                 selected_textures[mesh_name] = assets_config['textures'][mesh_name]
                 selected_materials[mesh_name] = assets_config['materials'][mesh_name]
                 selected_meshes[mesh_name] = assets_config['meshes'][mesh_name]
-        for name, config in self.free_geoms.items():  # pylint: disable=no-member
+        for config in self.free_geoms.values():  # pylint: disable=no-member
             if config['type'] == 'mesh':
                 mesh_name = config['mesh']
                 selected_textures[mesh_name] = assets_config['textures'][mesh_name]
                 selected_materials[mesh_name] = assets_config['materials'][mesh_name]
                 selected_meshes[mesh_name] = assets_config['meshes'][mesh_name]
-        for name, config in self.mocaps.items():  # pylint: disable=no-member
+        for config in self.mocaps.values():  # pylint: disable=no-member
             if config['type'] == 'mesh':
                 mesh_name = config['mesh']
                 selected_textures[mesh_name] = assets_config['textures'][mesh_name]
@@ -459,11 +459,11 @@ class World:  # pylint: disable=too-many-instance-attributes
 
     def get_state(self):
         """Returns a copy of the simulator state."""
-        state = {}
-
-        state['time'] = np.copy(self.data.time)
-        state['qpos'] = np.copy(self.data.qpos)
-        state['qvel'] = np.copy(self.data.qvel)
+        state = {
+            'time': np.copy(self.data.time),
+            'qpos': np.copy(self.data.qpos),
+            'qvel': np.copy(self.data.qvel),
+        }
         if self.model.na == 0:
             state['act'] = None
         else:
