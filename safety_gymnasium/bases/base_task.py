@@ -525,7 +525,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
     def specific_step(self) -> None:
         """Each task can define a specific step function.
 
-        It will be called when :meth:`safety_gymnaisum.builder.Builder.step()` is called using env.step().
+        It will be called when :meth:`safety_gymnasium.builder.Builder.step()` is called using env.step().
         For example, you can do specific data modification.
         """
 

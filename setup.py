@@ -52,7 +52,7 @@ try:
         version=version.__version__,
         author='Safety-Gymnasium Team',
         author_email='jiamg.ji@gmail.com',
-        description='Safety-Gymnaisum is a highly scalable and customizable safe reinforcement learning environment library.',
+        description='Safety-Gymnasium is a highly scalable and customizable safe reinforcement learning environment library.',
         url='https://github.com/PKU-MARL/safety-gymnasium',
         python_requires='>=3.8',
         packages=setuptools.find_namespace_packages(
