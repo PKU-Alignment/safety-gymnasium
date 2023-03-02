@@ -31,7 +31,7 @@ dependencies = [
     "xmltodict==0.13.0",
     "pyyaml==6.0",
     "imageio==2.25.0",
-
+    "Jinja2>=3.0.3",
 ]
 dynamic = ["version"]
 
