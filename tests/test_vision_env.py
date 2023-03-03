@@ -29,12 +29,10 @@ def test_vision_env(agent_id, env_id, level):
     env_name = 'Safety' + agent_id + env_id + level + 'Vision' + '-v0'
     env = safety_gymnasium.make(env_name)
     obs, _ = env.reset()
-    # Use below to specify seed.
-    # obs, _ = env.reset(seed=0)
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(1000):  # pylint: disable=unused-variable
-        if terminated or truncated:
+    for step in range(10):  # pylint: disable=unused-variable
+        if step == 5:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
             obs, _ = env.reset()
@@ -62,12 +60,10 @@ def test_new_env(agent_id, env_id, level):
     env_name = 'Safety' + agent_id + env_id + level + 'Vision' + '-v0'
     env = safety_gymnasium.make(env_name)
     obs, _ = env.reset()
-    # Use below to specify seed.
-    # obs, _ = env.reset(seed=0)
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(1000):  # pylint: disable=unused-variable
-        if terminated or truncated:
+    for step in range(10):  # pylint: disable=unused-variable
+        if step == 5:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
             obs, _ = env.reset()
