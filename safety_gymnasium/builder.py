@@ -188,8 +188,8 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         """Take a step and return observation, reward, cost, terminated, truncated, info."""
         assert not self.done, 'Environment must be reset before stepping.'
         action = np.array(action, copy=False)  # cast to ndarray
-        if action.shape != self.action_space.shape: # check action dimension
-            raise ValueError("Action dimension mismatch")
+        if action.shape != self.action_space.shape:  # check action dimension
+            raise ValueError('Action dimension mismatch')
 
         info = {}
 
