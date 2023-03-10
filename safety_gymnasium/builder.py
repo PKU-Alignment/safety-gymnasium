@@ -187,7 +187,9 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
     def step(self, action: np.ndarray) -> Tuple[np.ndarray, float, float, bool, bool, dict]:
         """Take a step and return observation, reward, cost, terminated, truncated, info."""
         assert not self.done, 'Environment must be reset before stepping.'
-        action = np.array(action, copy=False)  # Cast to ndarray
+        action = np.array(action, copy=False)  # cast to ndarray
+        if action.shape != self.action_space.shape:  # check action dimension
+            raise ValueError('Action dimension mismatch')
 
         info = {}
 
@@ -286,6 +288,22 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
         Width and height in parameters are constant defaults for rendering
         frames for humans. (not used for vision)
+
+        The set of supported modes varies per environment. (And some
+        third-party environments may not support rendering at all.)
+        By convention, if render_mode is:
+
+        - None (default): no render is computed.
+        - human: render return None.
+          The environment is continuously rendered in the current display or terminal. Usually for human consumption.
+        - rgb_array: return a single frame representing the current state of the environment.
+          A frame is a numpy.ndarray with shape (x, y, 3) representing RGB values for an x-by-y pixel image.
+        - rgb_array_list: return a list of frames representing the states of the environment since the last reset.
+          Each frame is a numpy.ndarray with shape (x, y, 3), as with `rgb_array`.
+        - depth_array: return a single frame representing the current state of the environment.
+          A frame is a numpy.ndarray with shape (x, y) representing depth values for an x-by-y pixel image.
+        - depth_array_list: return a list of frames representing the states of the environment since the last reset.
+          Each frame is a numpy.ndarray with shape (x, y), as with `depth_array`.
         """
         assert self.render_parameters.mode, 'Please specify the render mode when you make env.'
         assert (
@@ -312,3 +330,8 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
     def done(self) -> bool:
         """Whether this episode is ended."""
         return self.terminated or self.truncated
+
+    @property
+    def render_mode(self) -> str:
+        """The render mode."""
+        return self.render_parameters.mode
