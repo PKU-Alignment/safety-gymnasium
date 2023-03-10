@@ -103,6 +103,7 @@ Render
 
 We completely inherit the excellent API for render in Gymnasium.
 .. Note::
+
     The set of supported modes varies per environment. (And some
     third-party environments may not support rendering at all.)
     By convention, if render_mode is:

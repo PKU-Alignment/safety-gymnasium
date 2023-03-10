@@ -292,6 +292,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         The set of supported modes varies per environment. (And some
         third-party environments may not support rendering at all.)
         By convention, if render_mode is:
+
         - None (default): no render is computed.
         - human: render return None.
           The environment is continuously rendered in the current display or terminal. Usually for human consumption.
