@@ -61,8 +61,7 @@ def combine(tasks, agents, max_episode_steps):
                     'observe_vision': True,
                     'observation_flatten': False,
                 }
-                vision_config = deepcopy(combined_config)
-                vision_config.update(vision_config)
+                vision_config.update(combined_config)
                 register(
                     id=vision_env_name,
                     entry_point='safety_gymnasium.builder:Builder',
