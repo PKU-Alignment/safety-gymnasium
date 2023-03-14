@@ -352,10 +352,11 @@ env = safety_gymnasium.make(env_name)
 
 obs, info = env.reset()
 terminated = False
-
 while not terminated:
     act = env.action_space.sample()
     obs, reward, cost, terminated, truncated, info = env.step(act)
+    if terminated or truncated:
+        break
     env.render()
 ```
 
