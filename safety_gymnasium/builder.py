@@ -152,7 +152,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
     def set_seed(self, seed: int = None) -> None:
         """Set internal random state seeds."""
-        self._seed = np.random.randint(2**32) if seed is None else seed
+        self._seed = np.random.randint(2**32, dtype='int64') if seed is None else seed
         self.task.random_generator.set_random_seed(self._seed)
 
     def reset(
