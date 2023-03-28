@@ -161,7 +161,7 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
         locations: list = None,
         keepout: float = 0.4,
         rot: float = None,
-    ):
+    ) -> None:
         """Initialize the agent.
 
         Args:
@@ -241,7 +241,7 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
         for i in range(self.engine.model.nsensor):
             name = self.engine.model.sensor(i).name
             sensor_id = self.engine.model.sensor(
-                name
+                name,
             ).id  # pylint: disable=redefined-builtin, invalid-name
             self.sensor_info.sensor_dim[name] = self.engine.model.sensor(sensor_id).dim[0]
             sensor_type = self.engine.model.sensor(sensor_id).type
@@ -350,7 +350,10 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
             # Since for angles, small perturbations in angle give small differences in sin/cos
             for sensor in self.sensor_info.hinge_pos_names:
                 obs_space_dict[sensor] = gymnasium.spaces.Box(
-                    -np.inf, np.inf, (2,), dtype=np.float64
+                    -np.inf,
+                    np.inf,
+                    (2,),
+                    dtype=np.float64,
                 )
             # Quaternions are turned into 3x3 rotation matrices
             # Quaternions have a wraparound issue in how they are normalized,
@@ -364,17 +367,26 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
             # Instead we use a 3x3 rotation matrix, which if normalized, smoothly varies as well.
             for sensor in self.sensor_info.ballquat_names:
                 obs_space_dict[sensor] = gymnasium.spaces.Box(
-                    -np.inf, np.inf, (3, 3), dtype=np.float64
+                    -np.inf,
+                    np.inf,
+                    (3, 3),
+                    dtype=np.float64,
                 )
         else:
             # Otherwise include the sensor without any processing
             for sensor in self.sensor_info.hinge_pos_names:
                 obs_space_dict[sensor] = gymnasium.spaces.Box(
-                    -np.inf, np.inf, (1,), dtype=np.float64
+                    -np.inf,
+                    np.inf,
+                    (1,),
+                    dtype=np.float64,
                 )
             for sensor in self.sensor_info.ballquat_names:
                 obs_space_dict[sensor] = gymnasium.spaces.Box(
-                    -np.inf, np.inf, (4,), dtype=np.float64
+                    -np.inf,
+                    np.inf,
+                    (4,),
+                    dtype=np.float64,
                 )
 
         return obs_space_dict

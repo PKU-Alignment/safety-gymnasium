@@ -25,7 +25,7 @@ class ButtonLevel1(ButtonLevel0):
     And while not pressing any of the wrong buttons.
     """
 
-    def __init__(self, config):
+    def __init__(self, config) -> None:
         super().__init__(config=config)
 
         self.placements_conf.extents = [-1.5, -1.5, 1.5, 1.5]

@@ -156,7 +156,10 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         self.task.random_generator.set_random_seed(self._seed)
 
     def reset(
-        self, *, seed: int = None, options: dict = None
+        self,
+        *,
+        seed: int = None,
+        options: dict = None,
     ) -> Tuple[np.ndarray, dict]:  # pylint: disable=arguments-differ
         """Reset the environment and return observations."""
         info = {}
@@ -253,7 +256,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         # Intrinsic reward for uprightness
         if self.task.reward_conf.reward_orientation:
             zalign = quat2zalign(
-                self.task.data.get_body_xquat(self.task.reward_conf.reward_orientation_body)
+                self.task.data.get_body_xquat(self.task.reward_conf.reward_orientation_body),
             )
             reward += self.task.reward_conf.reward_orientation_scale * zalign
 

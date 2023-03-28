@@ -42,7 +42,7 @@ def tile_images(img_nhwc, padding=5):
             img_nhwc.shape[1] + 2 * padding,
             img_nhwc.shape[2] + 2 * padding,
             img_nhwc.shape[3],
-        )
+        ),
     )
     for i in range(img_nhwc.shape[0]):
         new_img_nhwc[i, :, :, :] = np.pad(
@@ -52,13 +52,14 @@ def tile_images(img_nhwc, padding=5):
             constant_values=0,
         )
     new_img_nhwc = np.array(
-        list(new_img_nhwc) + [new_img_nhwc[0] * 0 for _ in range(n_images, new_height * new_width)]
+        list(new_img_nhwc) + [new_img_nhwc[0] * 0 for _ in range(n_images, new_height * new_width)],
     )
     height += 2 * padding
     width += 2 * padding
 
     # adjust the output shape
-    out_image = new_img_nhwc.reshape((new_height, new_width, height, width, n_channels))
-    out_image = out_image.transpose(0, 2, 1, 3, 4)
-    out_image = out_image.reshape((new_height * height, new_width * width, n_channels))
-    return out_image
+    return (
+        new_img_nhwc.reshape((new_height, new_width, height, width, n_channels))
+        .transpose(0, 2, 1, 3, 4)
+        .reshape((new_height * height, new_width * width, n_channels))
+    )

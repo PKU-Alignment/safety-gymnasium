@@ -44,7 +44,7 @@ class Pillars(Geom):  # pylint: disable=too-many-instance-attributes
     # pylint: disable-next=too-many-arguments
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""
-        geom = {
+        return {
             'name': self.name,
             'size': [self.size, self.height],
             'pos': np.r_[xy_pos, self.height],
@@ -53,7 +53,6 @@ class Pillars(Geom):  # pylint: disable=too-many-instance-attributes
             'group': self.group,
             'rgba': self.color,
         }
-        return geom
 
     def cal_cost(self):
         """Contacts processing."""

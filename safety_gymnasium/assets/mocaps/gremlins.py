@@ -50,7 +50,7 @@ class Gremlins(Mocap):  # pylint: disable=too-many-instance-attributes
 
     def get_obj(self, xy_pos, rot):
         """To facilitate get objects config for this object"""
-        obj = {
+        return {
             'name': self.name,
             'size': np.ones(3) * self.size,
             'type': 'box',
@@ -60,11 +60,10 @@ class Gremlins(Mocap):  # pylint: disable=too-many-instance-attributes
             'group': self.group,
             'rgba': self.color,
         }
-        return obj
 
     def get_mocap(self, xy_pos, rot):
         """To facilitate get mocaps config for this object"""
-        mocap = {
+        return {
             'name': self.name,
             'size': np.ones(3) * self.size,
             'type': 'box',
@@ -73,7 +72,6 @@ class Gremlins(Mocap):  # pylint: disable=too-many-instance-attributes
             'group': self.group,
             'rgba': np.array([1, 1, 1, 0.1]) * self.color,
         }
-        return mocap
 
     def cal_cost(self):
         """Contacts processing."""

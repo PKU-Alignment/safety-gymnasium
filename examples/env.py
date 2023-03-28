@@ -35,9 +35,6 @@ def run_random(env_name):
         assert env.observation_space.contains(obs)
         act = env.action_space.sample()
         assert env.action_space.contains(act)
-        # Use the environment's built_in max_episode_steps
-        if hasattr(env, '_max_episode_steps'):  # pylint: disable=unused-variable
-            max_ep_len = env._max_episode_steps  # pylint: disable=unused-variable,protected-access
         # pylint: disable-next=unused-variable
         obs, reward, cost, terminated, truncated, info = env.step(act)
 

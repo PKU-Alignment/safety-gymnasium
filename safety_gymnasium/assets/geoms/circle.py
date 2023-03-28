@@ -40,7 +40,7 @@ class Circle(Geom):  # pylint: disable=too-many-instance-attributes
 
     def get_config(self, xy_pos, rot):  # pylint: disable=unused-argument
         """To facilitate get specific config for this object."""
-        geom = {
+        return {
             'name': 'circle',
             'size': np.array([self.radius, 1e-2]),
             'pos': np.r_[xy_pos, 1e-2],
@@ -51,7 +51,6 @@ class Circle(Geom):  # pylint: disable=too-many-instance-attributes
             'group': GROUP['circle'],
             'rgba': COLOR['circle'] * [1, 1, 1, 0.1],  # transparent
         }
-        return geom
 
     @property
     def pos(self):

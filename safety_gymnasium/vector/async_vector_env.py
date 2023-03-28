@@ -77,20 +77,19 @@ class SafetyAsyncVectorEnv(AsyncVectorEnv):
         self._assert_is_running()
         for pipe in self.parent_pipes:
             pipe.send(('render', None))
-        imgs = [pipe.recv() for pipe in self.parent_pipes]
-        return imgs
+        return [pipe.recv() for pipe in self.parent_pipes]
 
     def render(self):
         """Render the environment."""
         # get the images.
         imgs = self.get_images()
         # tile the images.
-        bigimg = tile_images(imgs)
-        return bigimg
+        return tile_images(imgs)
 
     # pylint: disable-next=too-many-locals
     def step_wait(
-        self, timeout: Optional[Union[int, float]] = None
+        self,
+        timeout: Optional[Union[int, float]] = None,
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, List[dict]]:
         """Wait for the calls to :obj:`step` in each sub-environment to finish.
 
@@ -111,7 +110,7 @@ class SafetyAsyncVectorEnv(AsyncVectorEnv):
         if not self._poll(timeout):
             self._state = AsyncState.DEFAULT
             raise mp.TimeoutError(
-                f'The call to `step_wait` has timed out after {timeout} second(s).'
+                f'The call to `step_wait` has timed out after {timeout} second(s).',
             )
 
         # get the results.
@@ -197,7 +196,7 @@ def _worker(
                 if name in ['reset', 'step', 'seed', 'close']:
                     raise ValueError(
                         f'Trying to call function `{name}` with '
-                        f'`_call`. Use `{name}` directly instead.'
+                        f'`_call`. Use `{name}` directly instead.',
                     )
                 function = getattr(env, name)
                 if callable(function):
@@ -213,13 +212,13 @@ def _worker(
                     (
                         (data[0] == env.observation_space, data[1] == env.action_space),
                         True,
-                    )
+                    ),
                 )
             else:
                 raise RuntimeError(
                     f'Received unknown command `{command}`. Must '
                     'be one of {`reset`, `step`, `seed`, `close`, `render`, `_call`, '
-                    '`_setattr`, `_check_spaces`}.'
+                    '`_setattr`, `_check_spaces`}.',
                 )
     # pylint: disable-next=broad-except
     except (KeyboardInterrupt, Exception):
@@ -279,7 +278,7 @@ def _worker_shared_memory(
                 if name in ['reset', 'step', 'seed', 'close']:
                     raise ValueError(
                         f'Trying to call function `{name}` with '
-                        f'`_call`. Use `{name}` directly instead.'
+                        f'`_call`. Use `{name}` directly instead.',
                     )
                 function = getattr(env, name)
                 if callable(function):
@@ -296,7 +295,7 @@ def _worker_shared_memory(
                 raise RuntimeError(
                     f'Received unknown command `{command}`. Must '
                     'be one of {`reset`, `step`, `seed`, `close`, `render`, `_call`, '
-                    '`_setattr`, `_check_spaces`}.'
+                    '`_setattr`, `_check_spaces`}.',
                 )
     # pylint: disable-next=broad-except
     except (KeyboardInterrupt, Exception):

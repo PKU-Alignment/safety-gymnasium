@@ -24,7 +24,7 @@ from gymnasium.envs.mujoco.mujoco_rendering import Viewer
 class KeyboardViewer(Viewer):  # pylint: disable=too-many-instance-attributes
     """Keyboard viewer."""
 
-    def __init__(self, model, data, custom_key_press_callback):
+    def __init__(self, model, data, custom_key_press_callback) -> None:
         super().__init__(model, data)
         self._custom_key_press_callback = custom_key_press_callback
 

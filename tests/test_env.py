@@ -25,7 +25,7 @@ import safety_gymnasium
     render_mode=['rgb_array', 'depth_array'],
 )
 # pylint: disable-next=too-many-locals
-def test_env(agent_id, env_id, level, render_mode):
+def test_env_render(agent_id, env_id, level, render_mode):
     """Test env."""
     env_name = 'Safety' + agent_id + env_id + level + '-v0'
     env = safety_gymnasium.make(env_name, render_mode=render_mode)
@@ -41,9 +41,6 @@ def test_env(agent_id, env_id, level, render_mode):
         act = env.action_space.sample()
         assert env.action_space.contains(act)
 
-        # Use the environment's built_in max_episode_steps
-        if hasattr(env, '_max_episode_steps'):  # pylint: disable=protected-access
-            max_ep_len = env._max_episode_steps  # pylint: disable=unused-variable,protected-access
         # pylint: disable-next=unused-variable
         obs, reward, cost, terminated, truncated, info = env.step(act)
         ep_ret += reward
@@ -59,7 +56,7 @@ def test_env(agent_id, env_id, level, render_mode):
     render_mode=['rgb_array', 'depth_array'],
 )
 # pylint: disable-next=too-many-locals
-def test_run_env(agent_id, env_id, level, render_mode):
+def test_run_env_render(agent_id, env_id, level, render_mode):
     """Test env."""
     env_name = 'Safety' + agent_id + env_id + level + '-v0'
     env = safety_gymnasium.make(env_name, render_mode=render_mode)
@@ -77,7 +74,7 @@ def test_run_env(agent_id, env_id, level, render_mode):
 
         # Use the environment's built_in max_episode_steps
         if hasattr(env, '_max_episode_steps'):  # pylint: disable=protected-access
-            max_ep_len = env._max_episode_steps  # pylint: disable=unused-variable,protected-access
+            pass  # pylint: disable=unused-variable,protected-access
         # pylint: disable-next=unused-variable
         obs, reward, cost, terminated, truncated, info = env.step(act)
         ep_ret += reward
@@ -92,7 +89,7 @@ def test_run_env(agent_id, env_id, level, render_mode):
     render_mode=['rgb_array', 'depth_array'],
 )
 # pylint: disable-next=too-many-locals
-def test_velocity_env(agent_id, env_id, render_mode):
+def test_velocity_env_render(agent_id, env_id, render_mode):
     """Test env."""
     env_name = 'Safety' + agent_id + env_id + '-v4'
     env = safety_gymnasium.make(env_name, render_mode=render_mode)
@@ -110,7 +107,7 @@ def test_velocity_env(agent_id, env_id, render_mode):
 
         # Use the environment's built_in max_episode_steps
         if hasattr(env, '_max_episode_steps'):  # pylint: disable=protected-access
-            max_ep_len = env._max_episode_steps  # pylint: disable=unused-variable,protected-access
+            pass  # pylint: disable=unused-variable,protected-access
         # pylint: disable-next=unused-variable
         obs, reward, cost, terminated, truncated, info = env.step(act)
         ep_ret += reward
@@ -126,7 +123,7 @@ def test_velocity_env(agent_id, env_id, render_mode):
     render_mode=['rgb_array_list', 'depth_array_list'],
 )
 # pylint: disable-next=too-many-locals
-def test_env(agent_id, env_id, level, render_mode):
+def test_env_render_list(agent_id, env_id, level, render_mode):
     """Test env."""
     env_name = 'Safety' + agent_id + env_id + level + '-v0'
     env = safety_gymnasium.make(env_name, render_mode=render_mode)
@@ -144,7 +141,7 @@ def test_env(agent_id, env_id, level, render_mode):
 
         # Use the environment's built_in max_episode_steps
         if hasattr(env, '_max_episode_steps'):  # pylint: disable=protected-access
-            max_ep_len = env._max_episode_steps  # pylint: disable=unused-variable,protected-access
+            pass  # pylint: disable=unused-variable,protected-access
         # pylint: disable-next=unused-variable
         obs, reward, cost, terminated, truncated, info = env.step(act)
         ep_ret += reward
@@ -160,7 +157,7 @@ def test_env(agent_id, env_id, level, render_mode):
     render_mode=['rgb_array_list', 'depth_array_list'],
 )
 # pylint: disable-next=too-many-locals
-def test_run_env(agent_id, env_id, level, render_mode):
+def test_run_env_render_list(agent_id, env_id, level, render_mode):
     """Test env."""
     env_name = 'Safety' + agent_id + env_id + level + '-v0'
     env = safety_gymnasium.make(env_name, render_mode=render_mode)
@@ -178,7 +175,7 @@ def test_run_env(agent_id, env_id, level, render_mode):
 
         # Use the environment's built_in max_episode_steps
         if hasattr(env, '_max_episode_steps'):  # pylint: disable=protected-access
-            max_ep_len = env._max_episode_steps  # pylint: disable=unused-variable,protected-access
+            pass  # pylint: disable=unused-variable,protected-access
         # pylint: disable-next=unused-variable
         obs, reward, cost, terminated, truncated, info = env.step(act)
         ep_ret += reward
@@ -193,7 +190,7 @@ def test_run_env(agent_id, env_id, level, render_mode):
     render_mode=['rgb_array_list', 'depth_array_list'],
 )
 # pylint: disable-next=too-many-locals
-def test_velocity_env(agent_id, env_id, render_mode):
+def test_velocity_env_render_list(agent_id, env_id, render_mode):
     """Test env."""
     env_name = 'Safety' + agent_id + env_id + '-v4'
     env = safety_gymnasium.make(env_name, render_mode=render_mode)
@@ -211,7 +208,7 @@ def test_velocity_env(agent_id, env_id, render_mode):
 
         # Use the environment's built_in max_episode_steps
         if hasattr(env, '_max_episode_steps'):  # pylint: disable=protected-access
-            max_ep_len = env._max_episode_steps  # pylint: disable=unused-variable,protected-access
+            pass  # pylint: disable=unused-variable,protected-access
         # pylint: disable-next=unused-variable
         obs, reward, cost, terminated, truncated, info = env.step(act)
         ep_ret += reward

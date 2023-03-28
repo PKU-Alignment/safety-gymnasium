@@ -24,12 +24,13 @@ def env_step_passive_checker(env, action):
     # We don't check the action as for some environments then out-of-bounds values can be given
     result = env.step(action)
     assert isinstance(
-        result, tuple
+        result,
+        tuple,
     ), f'Expects step result to be a tuple, actual type: {type(result)}'
     if len(result) == 5:
         logger.deprecation(
             'Core environment is written in old step API which returns one bool instead of two. '
-            'It is recommended to rewrite the environment with new step API. '
+            'It is recommended to rewrite the environment with new step API.',
         )
         obs, reward, cost, done, info = result
 
@@ -41,23 +42,24 @@ def env_step_passive_checker(env, action):
         # np.bool is actual python bool not np boolean type, therefore bool_ or bool8
         if not isinstance(terminated, (bool, np.bool_)):
             logger.warn(
-                f'Expects `terminated` signal to be a boolean, actual type: {type(terminated)}'
+                f'Expects `terminated` signal to be a boolean, actual type: {type(terminated)}',
             )
         if not isinstance(truncated, (bool, np.bool_)):
             logger.warn(
-                f'Expects `truncated` signal to be a boolean, actual type: {type(truncated)}'
+                f'Expects `truncated` signal to be a boolean, actual type: {type(truncated)}',
             )
     else:
         raise error.Error(
             f'Expected `Env.step` to return a four or five element tuple,\
-            actual number of elements returned: {len(result)}.'
+            actual number of elements returned: {len(result)}.',
         )
 
     check_obs(obs, env.observation_space, 'step')
     check_reward_cost(reward=reward, cost=cost)
 
     assert isinstance(
-        info, dict
+        info,
+        dict,
     ), f'The `info` returned by `step()` must be a python dictionary, actual type: {type(info)}'
 
     return result
@@ -68,7 +70,7 @@ def check_reward_cost(reward, cost):
     if not (np.issubdtype(type(reward), np.integer) or np.issubdtype(type(reward), np.floating)):
         logger.warn(
             f'The reward returned by `step()` must be a float,\
-            int, np.integer or np.floating, actual type: {type(reward)}'
+            int, np.integer or np.floating, actual type: {type(reward)}',
         )
     else:
         if np.isnan(reward):
@@ -79,7 +81,7 @@ def check_reward_cost(reward, cost):
     if not (np.issubdtype(type(cost), np.integer) or np.issubdtype(type(cost), np.floating)):
         logger.warn(
             f'The cost returned by `step()` must be a float,\
-            int, np.integer or np.floating, actual type: {type(cost)}'
+            int, np.integer or np.floating, actual type: {type(cost)}',
         )
     else:
         if np.isnan(cost):

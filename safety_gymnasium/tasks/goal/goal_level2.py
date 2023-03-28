@@ -20,7 +20,7 @@ from safety_gymnasium.tasks.goal.goal_level1 import GoalLevel1
 class GoalLevel2(GoalLevel1):
     """An agent must navigate to a goal while avoiding more hazards and vases."""
 
-    def __init__(self, config):
+    def __init__(self, config) -> None:
         super().__init__(config=config)
         # pylint: disable=no-member
 

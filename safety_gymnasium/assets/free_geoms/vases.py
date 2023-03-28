@@ -54,7 +54,7 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
 
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""
-        obj = {
+        return {
             'name': self.name,
             'size': np.ones(3) * self.size,
             'type': 'box',
@@ -64,7 +64,6 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
             'group': self.group,
             'rgba': self.color,
         }
-        return obj
 
     def cal_cost(self):
         """Contacts processing."""
@@ -91,9 +90,9 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
                 dist = np.sqrt(
                     np.sum(
                         np.square(
-                            self.data.get_body_xpos(name)[:2] - self.world_info.reset_layout[name]
-                        )
-                    )
+                            self.data.get_body_xpos(name)[:2] - self.world_info.reset_layout[name],
+                        ),
+                    ),
                 )
                 if dist > self.displace_threshold:
                     cost['cost_vases_displace'] += dist * self.displace_cost
@@ -105,7 +104,7 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
             for i in range(self.num):
                 name = f'vase{i}'
                 vel = np.sqrt(
-                    np.sum(np.square(get_body_xvelp(self.engine.model, self.engine.data, name)))
+                    np.sum(np.square(get_body_xvelp(self.engine.model, self.engine.data, name))),
                 )
                 if vel >= self.velocity_threshold:
                     cost['cost_vases_velocity'] += vel * self.velocity_cost

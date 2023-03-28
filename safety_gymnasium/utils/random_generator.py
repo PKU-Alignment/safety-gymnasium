@@ -56,7 +56,7 @@ class RandomGenerator:
         specific environment, and we just utilize these to generate randomness here.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the random number generator."""
         self.random_generator: np.random.RandomState = None  # pylint: disable=no-member
         self.placements: dict = None
@@ -65,7 +65,10 @@ class RandomGenerator:
         self.layout: Dict[str, dict] = None
 
     def set_placements_info(
-        self, placements: dict, placements_extents: list, placements_margin: float
+        self,
+        placements: dict,
+        placements_extents: list,
+        placements_margin: float,
     ) -> None:
         """Set the placements information from task for each type of objects."""
         self.placements = placements
@@ -120,7 +123,7 @@ class RandomGenerator:
                 choice = constrained[self.random_generator.choice(len(constrained), p=probs)]
         xmin, ymin, xmax, ymax = choice
         return np.array(
-            [self.random_generator.uniform(xmin, xmax), self.random_generator.uniform(ymin, ymax)]
+            [self.random_generator.uniform(xmin, xmax), self.random_generator.uniform(ymin, ymax)],
         )
 
     def sample_layout(self) -> bool:
@@ -171,8 +174,7 @@ class RandomGenerator:
 
     def generate_rots(self, num: int = 1) -> List[float]:
         """Generate the rotations of the obstacle."""
-        rots = [self.random_rot() for _ in range(num)]
-        return rots
+        return [self.random_rot() for _ in range(num)]
 
     def randn(self, *args, **kwargs) -> np.ndarray:
         """Wrapper for :meth:`np.random.RandomState.randn`."""

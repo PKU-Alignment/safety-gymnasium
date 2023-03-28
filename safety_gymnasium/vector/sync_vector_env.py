@@ -48,8 +48,7 @@ class SafetySyncVectorEnv(SyncVectorEnv):
         # get the images.
         imgs = self.get_images()
         # tile the images.
-        bigimg = tile_images(imgs)
-        return bigimg
+        return tile_images(imgs)
 
     def step_wait(
         self,
@@ -74,7 +73,9 @@ class SafetySyncVectorEnv(SyncVectorEnv):
             observations.append(observation)
             infos = self._add_info(infos, info, i)
         self.observations = concatenate(
-            self.single_observation_space, observations, self.observations
+            self.single_observation_space,
+            observations,
+            self.observations,
         )
 
         return (

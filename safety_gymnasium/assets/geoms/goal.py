@@ -67,7 +67,7 @@ class Goal(Geom):  # pylint: disable=too-many-instance-attributes
                     'mesh': 'flower_bush',
                     'material': 'flower_bush',
                     'euler': [np.pi / 2, 0, 0],
-                }
+                },
             )
         return geom
 
