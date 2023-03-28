@@ -14,8 +14,9 @@
 # ==============================================================================
 """Env builder."""
 
+from __future__ import annotations
+
 from dataclasses import asdict, dataclass
-from typing import Dict, Optional, Tuple, Union
 
 import gymnasium
 import numpy as np
@@ -160,7 +161,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         *,
         seed: int = None,
         options: dict = None,
-    ) -> Tuple[np.ndarray, dict]:  # pylint: disable=arguments-differ
+    ) -> tuple[np.ndarray, dict]:  # pylint: disable=arguments-differ
         """Reset the environment and return observations."""
         info = {}
 
@@ -187,7 +188,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         # Return an observation
         return (self.task.obs(), info)
 
-    def step(self, action: np.ndarray) -> Tuple[np.ndarray, float, float, bool, bool, dict]:
+    def step(self, action: np.ndarray) -> tuple[np.ndarray, float, float, bool, bool, dict]:
         """Take a step and return observation, reward, cost, terminated, truncated, info."""
         assert not self.done, 'Environment must be reset before stepping.'
         action = np.array(action, copy=False)  # cast to ndarray
@@ -286,7 +287,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
         return cost
 
-    def render(self) -> Optional[np.ndarray]:
+    def render(self) -> np.ndarray | None:
         """Call underlying :meth:`safety_gymnasium.bases.underlying.Underlying.render` directly.
 
         Width and height in parameters are constant defaults for rendering
@@ -320,12 +321,12 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         return self.task.action_space
 
     @property
-    def observation_space(self) -> Union[gymnasium.spaces.Box, gymnasium.spaces.Dict]:
+    def observation_space(self) -> gymnasium.spaces.Box | gymnasium.spaces.Dict:
         """Helper to get observation space."""
         return self.task.observation_space
 
     @property
-    def obs_space_dict(self) -> Dict[str, gymnasium.spaces.Box]:
+    def obs_space_dict(self) -> dict[str, gymnasium.spaces.Box]:
         """Helper to get observation space dictionary."""
         return self.task.obs_info.obs_space_dict
 

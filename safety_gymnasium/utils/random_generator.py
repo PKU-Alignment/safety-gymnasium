@@ -14,7 +14,7 @@
 # ==============================================================================
 """Random generator."""
 
-from typing import Dict, List, Tuple
+from __future__ import annotations
 
 import numpy as np
 
@@ -62,7 +62,7 @@ class RandomGenerator:
         self.placements: dict = None
         self.placements_extents: list = None
         self.placements_margin: float = None
-        self.layout: Dict[str, dict] = None
+        self.layout: dict[str, dict] = None
 
     def set_placements_info(
         self,
@@ -167,12 +167,12 @@ class RandomGenerator:
         self.layout['goal'] = goal_xy
         return True
 
-    def constrain_placement(self, placement: dict, keepout: float) -> Tuple[float]:
+    def constrain_placement(self, placement: dict, keepout: float) -> tuple[float]:
         """Helper function to constrain a single placement by the keepout radius."""
         xmin, ymin, xmax, ymax = placement
         return (xmin + keepout, ymin + keepout, xmax - keepout, ymax - keepout)
 
-    def generate_rots(self, num: int = 1) -> List[float]:
+    def generate_rots(self, num: int = 1) -> list[float]:
         """Generate the rotations of the obstacle."""
         return [self.random_rot() for _ in range(num)]
 

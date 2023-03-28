@@ -14,11 +14,13 @@
 # ==============================================================================
 """An async vector environment."""
 
+from __future__ import annotations
+
 import multiprocessing as mp
 import sys
 from copy import deepcopy
 from multiprocessing import connection
-from typing import List, Optional, Sequence, Tuple, Union
+from typing import Sequence
 
 import gymnasium
 import numpy as np
@@ -39,13 +41,13 @@ class SafetyAsyncVectorEnv(AsyncVectorEnv):
     def __init__(
         self,
         env_fns: Sequence[callable],
-        observation_space: Optional[gymnasium.Space] = None,
-        action_space: Optional[gymnasium.Space] = None,
+        observation_space: gymnasium.Space | None = None,
+        action_space: gymnasium.Space | None = None,
         shared_memory: bool = True,
         copy: bool = True,
-        context: Optional[str] = None,
+        context: str | None = None,
         daemon: bool = True,
-        worker: Optional[callable] = None,
+        worker: callable | None = None,
     ) -> None:
         """Initialize the async vector environment.
 
@@ -89,8 +91,8 @@ class SafetyAsyncVectorEnv(AsyncVectorEnv):
     # pylint: disable-next=too-many-locals
     def step_wait(
         self,
-        timeout: Optional[Union[int, float]] = None,
-    ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, List[dict]]:
+        timeout: int | float | None = None,
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, list[dict]]:
         """Wait for the calls to :obj:`step` in each sub-environment to finish.
 
         Args:

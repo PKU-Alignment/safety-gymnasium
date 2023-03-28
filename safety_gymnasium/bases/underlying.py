@@ -14,10 +14,11 @@
 # ==============================================================================
 """Base mujoco task."""
 
+from __future__ import annotations
+
 import abc
 from copy import deepcopy
 from dataclasses import dataclass
-from typing import List, Union
 
 import gymnasium
 import mujoco
@@ -559,10 +560,10 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
     def _get_viewer(
         self,
         mode: str,
-    ) -> Union[
-        'safety_gymnasium.utils.keyboard_viewer.KeyboardViewer',
-        'gymnasium.envs.mujoco.mujoco_rendering.RenderContextOffscreen',
-    ]:
+    ) -> (
+        safety_gymnasium.utils.keyboard_viewer.KeyboardViewer
+        | gymnasium.envs.mujoco.mujoco_rendering.RenderContextOffscreen
+    ):
         self.viewer = self._viewers.get(mode)
         if self.viewer is None:
             if mode == 'human':
@@ -622,7 +623,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         return self.world.data
 
     @property
-    def _obstacles(self) -> List[Union[Geom, FreeGeom, Mocap]]:
+    def _obstacles(self) -> list[Geom | FreeGeom | Mocap]:
         """Get the obstacles in the task.
 
         Combine all types of object in current environment together into single list

@@ -14,11 +14,12 @@
 # ==============================================================================
 """Base task."""
 
+from __future__ import annotations
+
 import abc
 import os
 from collections import OrderedDict
 from dataclasses import dataclass
-from typing import Union
 
 import gymnasium
 import mujoco
@@ -366,7 +367,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             placements_dict[object_fmt.format(i=i)] = (placements, object_keepout)
         return placements_dict
 
-    def obs(self) -> Union[dict, np.ndarray]:
+    def obs(self) -> dict | np.ndarray:
         """Return the observation of our agent."""
         # pylint: disable-next=no-member
         mujoco.mj_forward(self.model, self.data)  # Needed to get sensor's data correct
@@ -391,7 +392,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             obs = gymnasium.spaces.utils.flatten(self.obs_info.obs_space_dict, obs)
         return obs
 
-    def _obs_lidar(self, positions: Union[np.ndarray, list], group: int) -> np.ndarray:
+    def _obs_lidar(self, positions: np.ndarray | list, group: int) -> np.ndarray:
         """Calculate and return a lidar observation.
 
         See sub methods for implementation.

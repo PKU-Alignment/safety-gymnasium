@@ -14,10 +14,11 @@
 # ==============================================================================
 """Base class for agents."""
 
+from __future__ import annotations
+
 import abc
 import os
 from dataclasses import dataclass, field
-from typing import Dict
 
 import glfw
 import gymnasium
@@ -391,7 +392,7 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
 
         return obs_space_dict
 
-    def obs_sensor(self) -> Dict[str, np.ndarray]:
+    def obs_sensor(self) -> dict[str, np.ndarray]:
         """Get observations of all sensor types.
 
         Returns:

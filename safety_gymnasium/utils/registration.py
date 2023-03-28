@@ -14,10 +14,12 @@
 # ==============================================================================
 """Register and make environments."""
 
+from __future__ import annotations
+
 import copy
 import importlib
 import importlib.util
-from typing import Optional, Sequence, Union
+from typing import Sequence
 
 from gymnasium import Env, error, logger
 from gymnasium.envs.registration import namespace  # noqa: F401 # pylint: disable=unused-import
@@ -49,11 +51,11 @@ def register(**kwargs):
 
 # pylint: disable-next=too-many-arguments,too-many-branches,too-many-statements,too-many-locals
 def make(
-    id: Union[str, EnvSpec],  # pylint: disable=invalid-name,redefined-builtin
-    max_episode_steps: Optional[int] = None,
+    id: str | EnvSpec,  # pylint: disable=invalid-name,redefined-builtin
+    max_episode_steps: int | None = None,
     autoreset: bool = False,
-    apply_api_compatibility: Optional[bool] = None,
-    disable_env_checker: Optional[bool] = None,
+    apply_api_compatibility: bool | None = None,
+    disable_env_checker: bool | None = None,
     **kwargs,
 ) -> Env:
     """Create an environment according to the given ID.
