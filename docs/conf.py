@@ -5,10 +5,8 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-import os
 import pathlib
 import sys
-from typing import Any, Dict
 
 
 ROOT_DIR = pathlib.Path(__file__).absolute().parent.parent.parent
@@ -58,13 +56,14 @@ html_title = 'Safety Gymnasium Documentation'
 html_baseurl = 'https://safety_gymnasium.com'
 html_copy_source = False
 # html_favicon = '_static/images/favicon.png'
-html_context: Dict[str, Any] = {}
-html_context['conf_py_path'] = '/docs/'
-html_context['display_github'] = False
-html_context['github_user'] = 'PKU-MARL'
-html_context['github_repo'] = 'Safety Gymnasium'
-html_context['github_version'] = 'main'
-html_context['slug'] = 'safety gymnasium'
+html_context = {
+    'conf_py_path': '/docs/',
+    'display_github': False,
+    'github_user': 'PKU-MARL',
+    'github_repo': 'Safety Gymnasium',
+    'github_version': 'main',
+    'slug': 'safety gymnasium',
+}
 
 html_static_path = ['_static']
 html_css_files = []

@@ -52,6 +52,9 @@ py-format-install:
 	$(call check_pip_install,isort)
 	$(call check_pip_install_extra,black,black[jupyter])
 
+ruff-install:
+	$(call check_pip_install,ruff)
+
 mypy-install:
 	$(call check_pip_install,mypy)
 
@@ -104,6 +107,12 @@ py-format: py-format-install
 	$(PYTHON) -m isort --project $(PROJECT_NAME) --check $(PYTHON_FILES) && \
 	$(PYTHON) -m black --check $(PYTHON_FILES)
 
+ruff: ruff-install
+	$(PYTHON) -m ruff check .
+
+ruff-fix: ruff-install
+	$(PYTHON) -m ruff check . --fix --exit-non-zero-on-fix
+
 mypy: mypy-install
 	$(PYTHON) -m mypy $(PROJECT_PATH)
 
@@ -133,16 +142,18 @@ clean-docs:
 
 # TODO: add mypy when ready
 # TODO: add docstyle when ready
-lint: flake8 py-format pylint addlicense spelling
+lint: ruff flake8 py-format pylint addlicense spelling
 
-format: py-format-install addlicense-install
+format: py-format-install ruff-install addlicense-install
 	$(PYTHON) -m isort --project $(PROJECT_NAME) $(PYTHON_FILES)
 	$(PYTHON) -m black $(PYTHON_FILES)
+	$(PYTHON) -m ruff check . --fix --exit-zero
 	addlicense -c $(COPYRIGHT) -ignore tests/coverage.xml -l apache -y 2022 $(SOURCE_FOLDERS)
 
 clean-py:
 	find . -type f -name  '*.py[co]' -delete
 	find . -depth -type d -name "__pycache__" -exec rm -r "{}" +
+	find . -depth -type d -name ".ruff_cache" -exec rm -r "{}" +
 	find . -depth -type d -name ".mypy_cache" -exec rm -r "{}" +
 	find . -depth -type d -name ".pytest_cache" -exec rm -r "{}" +
 	rm tests/.coverage

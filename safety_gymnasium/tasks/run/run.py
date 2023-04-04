@@ -23,7 +23,7 @@ from safety_gymnasium.bases.base_task import BaseTask
 class RunLevel0(BaseTask):
     """An agent must run as far as possible while avoid going outside the boundary."""
 
-    def __init__(self, config):
+    def __init__(self, config) -> None:
         super().__init__(config=config)
 
         self.num_steps = 500
@@ -31,7 +31,7 @@ class RunLevel0(BaseTask):
         self.floor_conf.size = [17.5, 17.5, 0.1]
 
         self.agent.placements = [
-            (-0.2, self.floor_conf.size[0] - 1, 0.2, self.floor_conf.size[0] - 1)
+            (-0.2, self.floor_conf.size[0] - 1, 0.2, self.floor_conf.size[0] - 1),
         ]
         self.agent.keepout = 0
 

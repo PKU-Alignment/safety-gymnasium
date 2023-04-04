@@ -14,10 +14,11 @@
 # ==============================================================================
 """Base mujoco task."""
 
+from __future__ import annotations
+
 import abc
 from copy import deepcopy
 from dataclasses import dataclass
-from typing import List, Union
 
 import gymnasium
 import mujoco
@@ -185,7 +186,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
     - :attr:`_obstacles` (list): All types of object in current environment.
     """
 
-    def __init__(self, config: dict = None):
+    def __init__(self, config: dict = None) -> None:
         """Initialize the engine.
 
         Args:
@@ -330,8 +331,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         exception = False
         for _ in range(
             self.random_generator.binomial(
-                self.sim_conf.frameskip_binom_n, self.sim_conf.frameskip_binom_p
-            )
+                self.sim_conf.frameskip_binom_n,
+                self.sim_conf.frameskip_binom_p,
+            ),
         ):
             try:
                 for mocap in self._mocaps.values():
@@ -379,7 +381,11 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             raise NotImplementedError
 
     def _render_lidar(
-        self, poses: np.ndarray, color: np.ndarray, offset: float, group: int
+        self,
+        poses: np.ndarray,
+        color: np.ndarray,
+        offset: float,
+        group: int,
     ) -> None:
         """Render the lidar observation."""
         agent_pos = self.agent.pos
@@ -418,7 +424,12 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
 
     # pylint: disable-next=too-many-arguments
     def _render_area(
-        self, pos: np.ndarray, size: float, color: np.ndarray, label: str = '', alpha: float = 0.1
+        self,
+        pos: np.ndarray,
+        size: float,
+        color: np.ndarray,
+        label: str = '',
+        alpha: float = 0.1,
     ) -> None:
         """Render a radial area in the environment."""
         z_size = min(size, 0.3)
@@ -435,7 +446,12 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
 
     # pylint: disable-next=too-many-arguments
     def _render_sphere(
-        self, pos: np.ndarray, size: float, color: np.ndarray, label: str = '', alpha: float = 0.1
+        self,
+        pos: np.ndarray,
+        size: float,
+        color: np.ndarray,
+        label: str = '',
+        alpha: float = 0.1,
     ) -> None:
         """Render a radial area in the environment."""
         pos = np.asarray(pos)
@@ -480,7 +496,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         }:
             if camera_id is not None and camera_name is not None:
                 raise ValueError(
-                    'Both `camera_id` and `camera_name` cannot be' + ' specified at the same time.'
+                    'Both `camera_id` and `camera_name` cannot be specified at the same time.',
                 )
 
             no_camera_specified = camera_name is None and camera_id is None
@@ -510,7 +526,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                     self._render_lidar(obstacle.pos, obstacle.color, offset, obstacle.group)
                 if hasattr(obstacle, 'is_comp_observed') and obstacle.is_comp_observed:
                     self._render_compass(
-                        getattr(self, obstacle.name + '_pos'), obstacle.color, offset
+                        getattr(self, obstacle.name + '_pos'),
+                        obstacle.color,
+                        offset,
                     )
                 offset += self.render_conf.lidar_offset_delta
 
@@ -540,16 +558,19 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         raise NotImplementedError(f'Render mode {mode} is not implemented.')
 
     def _get_viewer(
-        self, mode: str
-    ) -> Union[
-        'safety_gymnasium.utils.keyboard_viewer.KeyboardViewer',
-        'gymnasium.envs.mujoco.mujoco_rendering.RenderContextOffscreen',
-    ]:
+        self,
+        mode: str,
+    ) -> (
+        safety_gymnasium.utils.keyboard_viewer.KeyboardViewer
+        | gymnasium.envs.mujoco.mujoco_rendering.RenderContextOffscreen
+    ):
         self.viewer = self._viewers.get(mode)
         if self.viewer is None:
             if mode == 'human':
                 self.viewer = KeyboardViewer(
-                    self.model, self.data, self.agent.keyboard_control_callback
+                    self.model,
+                    self.data,
+                    self.agent.keyboard_control_callback,
                 )
             elif mode in {'rgb_array', 'depth_array'}:
                 self.viewer = RenderContextOffscreen(self.model, self.data)
@@ -602,7 +623,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         return self.world.data
 
     @property
-    def _obstacles(self) -> List[Union[Geom, FreeGeom, Mocap]]:
+    def _obstacles(self) -> list[Geom | FreeGeom | Mocap]:
         """Get the obstacles in the task.
 
         Combine all types of object in current environment together into single list

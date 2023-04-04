@@ -23,7 +23,7 @@ from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 class SafetyHumanoidVelocityEnv(HumanoidEnv):
     """Humanoid environment with a safety constraint on velocity."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         self._velocity_threshold = 2.3475
         self.model.light(0).castshadow = False

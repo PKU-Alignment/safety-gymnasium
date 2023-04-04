@@ -23,7 +23,7 @@ class ButtonLevel2(ButtonLevel1):
     And while not pressing any of the wrong buttons.
     """
 
-    def __init__(self, config):
+    def __init__(self, config) -> None:
         super().__init__(config=config)
         # pylint: disable=no-member
         self.placements_conf.extents = [-1.8, -1.8, 1.8, 1.8]

@@ -52,7 +52,7 @@ class Buttons(Geom):  # pylint: disable=too-many-instance-attributes
 
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""
-        geom = {
+        return {
             'name': self.name,
             'size': np.ones(3) * self.size,
             'pos': np.r_[xy_pos, self.size],
@@ -61,13 +61,12 @@ class Buttons(Geom):  # pylint: disable=too-many-instance-attributes
             'group': self.group,
             'rgba': self.color,
         }
-        return geom
 
     def cal_cost(self):
         """Contacts processing."""
         assert (
             self.goal_button is not None
-        ), 'Please make sure this method can get infomation about goal button.'
+        ), 'Please make sure this method can get information about goal button.'
         cost = {}
         buttons_constraints_active = self.timer == 0
         if not self.is_constrained or not buttons_constraints_active:

@@ -34,9 +34,14 @@ class Racecar(BaseAgent):
         locations: list = None,
         keepout: float = 0.4,
         rot: float = None,
-    ):
+    ) -> None:
         super().__init__(
-            self.__class__.__name__, random_generator, placements, locations, keepout, rot
+            self.__class__.__name__,
+            random_generator,
+            placements,
+            locations,
+            keepout,
+            rot,
         )
 
     def is_alive(self):
