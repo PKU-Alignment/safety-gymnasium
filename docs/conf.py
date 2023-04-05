@@ -59,7 +59,7 @@ html_copy_source = False
 html_context = {
     'conf_py_path': '/docs/',
     'display_github': False,
-    'github_user': 'PKU-MARL',
+    'github_user': 'OmniSafeAI',
     'github_repo': 'Safety Gymnasium',
     'github_version': 'main',
     'slug': 'safety gymnasium',
