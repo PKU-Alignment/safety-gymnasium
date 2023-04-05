@@ -188,11 +188,12 @@ def test_run_env_render_list(agent_id, env_id, level, render_mode):
     agent_id=['Humanoid', 'Ant', 'Hopper', 'HalfCheetah', 'Swimmer', 'Walker2d'],
     env_id=['Velocity'],
     render_mode=['rgb_array_list', 'depth_array_list'],
+    version=['v0', 'v1'],
 )
 # pylint: disable-next=too-many-locals
-def test_velocity_env_render_list(agent_id, env_id, render_mode):
+def test_velocity_env_render_list(agent_id, env_id, render_mode, version):
     """Test env."""
-    env_name = 'Safety' + agent_id + env_id + '-v4'
+    env_name = 'Safety' + agent_id + env_id + '-' + version
     env = safety_gymnasium.make(env_name, render_mode=render_mode)
     obs, _ = env.reset()
     terminated, truncated = False, False
