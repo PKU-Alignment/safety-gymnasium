@@ -87,7 +87,7 @@ def test_run_env_render(agent_id, env_id, level, render_mode):
     agent_id=['Humanoid', 'Ant', 'Hopper', 'HalfCheetah', 'Swimmer', 'Walker2d'],
     env_id=['Velocity'],
     render_mode=['rgb_array', 'depth_array'],
-    version=['v0', 'v1']
+    version=['v0', 'v1'],
 )
 # pylint: disable-next=too-many-locals
 def test_velocity_env_render(agent_id, env_id, render_mode, version):
