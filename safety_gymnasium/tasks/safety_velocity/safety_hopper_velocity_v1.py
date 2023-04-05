@@ -14,7 +14,9 @@
 # ==============================================================================
 """Hopper environment with a safety constraint on velocity."""
 
-from .safety_hopper_velocity_v0 import SafetyHopperVelocityEnv as HopperEnv
+from safety_gymnasium.tasks.safety_velocity.safety_hopper_velocity_v0 import (
+    SafetyHopperVelocityEnv as HopperEnv,
+)
 
 
 class SafetyHopperVelocityEnv(HopperEnv):

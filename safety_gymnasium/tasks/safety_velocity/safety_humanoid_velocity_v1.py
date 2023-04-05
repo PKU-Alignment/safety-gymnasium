@@ -14,7 +14,9 @@
 # ==============================================================================
 """Humanoid environment with a safety constraint on velocity."""
 
-from .safety_humanoid_velocity_v0 import SafetyHumanoidVelocityEnv as HumanoidEnv
+from safety_gymnasium.tasks.safety_velocity.safety_humanoid_velocity_v0 import (
+    SafetyHumanoidVelocityEnv as HumanoidEnv,
+)
 
 
 class SafetyHumanoidVelocityEnv(HumanoidEnv):

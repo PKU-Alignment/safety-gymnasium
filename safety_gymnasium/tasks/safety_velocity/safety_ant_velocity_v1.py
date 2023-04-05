@@ -14,7 +14,9 @@
 # ==============================================================================
 """Ant environment with a safety constraint on velocity."""
 
-from .safety_ant_velocity_v0 import SafetyAntVelocityEnv as AntEnv
+from safety_gymnasium.tasks.safety_velocity.safety_ant_velocity_v0 import (
+    SafetyAntVelocityEnv as AntEnv,
+)
 
 
 class SafetyAntVelocityEnv(AntEnv):

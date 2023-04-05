@@ -14,7 +14,9 @@
 # ==============================================================================
 """HalfCheetah environment with a safety constraint on velocity."""
 
-from .safety_half_cheetah_velocity_v0 import SafetyHalfCheetahVelocityEnv as HalfCheetahEnv
+from safety_gymnasium.tasks.safety_velocity.safety_half_cheetah_velocity_v0 import (
+    SafetyHalfCheetahVelocityEnv as HalfCheetahEnv,
+)
 
 
 class SafetyHalfCheetahVelocityEnv(HalfCheetahEnv):

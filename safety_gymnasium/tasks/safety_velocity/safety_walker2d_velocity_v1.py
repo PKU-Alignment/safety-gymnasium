@@ -14,8 +14,9 @@
 # ==============================================================================
 """Walker2d environment with a safety constraint on velocity."""
 
-from .safety_walker2d_velocity_v0 import SafetyWalker2dVelocityEnv as Walker2dEnv
-
+from safety_gymnasium.tasks.safety_velocity.safety_walker2d_velocity_v0 import (
+    SafetyWalker2dVelocityEnv as Walker2dEnv,
+)
 
 
 class SafetyWalker2dVelocityEnv(Walker2dEnv):

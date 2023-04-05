@@ -15,8 +15,10 @@
 """Swimmer environment with a safety constraint on velocity."""
 
 import numpy as np
-from .safety_swimmer_velocity_v0 import SafetySwimmerVelocityEnv as SwimmerEnv
 
+from safety_gymnasium.tasks.safety_velocity.safety_swimmer_velocity_v0 import (
+    SafetySwimmerVelocityEnv as SwimmerEnv,
+)
 from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 
 
