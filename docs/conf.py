@@ -12,10 +12,10 @@ import sys
 ROOT_DIR = pathlib.Path(__file__).absolute().parent.parent.parent
 sys.path.insert(0, str(ROOT_DIR / 'safety_gymnasium'))
 
-project = 'safety_gymnasium'
-copyright = '2023, pku_marl'
-author = 'pku_marl'
-release = '0.0.1'
+project = 'Safety-Gymnasium'
+copyright = '2023, OmniSafeAI'
+author = 'OmniSafeAI'
+release = '0.2.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
