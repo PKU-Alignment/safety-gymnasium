@@ -29,8 +29,10 @@ def env_step_passive_checker(env, action):
     ), f'Expects step result to be a tuple, actual type: {type(result)}'
     if len(result) == 5:
         logger.deprecation(
-            'Core environment is written in old step API which returns one bool instead of two. '
-            'It is recommended to rewrite the environment with new step API.',
+            (
+                'Core environment is written in old step API which returns one bool instead of two.'
+                ' It is recommended to rewrite the environment with new step API.'
+            ),
         )
         obs, reward, cost, done, info = result
 
@@ -50,8 +52,10 @@ def env_step_passive_checker(env, action):
             )
     else:
         raise error.Error(
-            f'Expected `Env.step` to return a four or five element tuple,\
-            actual number of elements returned: {len(result)}.',
+            (
+                'Expected `Env.step` to return a four or five element tuple, '
+                f'actual number of elements returned: {len(result)}.'
+            ),
         )
 
     check_obs(obs, env.observation_space, 'step')
@@ -69,8 +73,10 @@ def check_reward_cost(reward, cost):
     """Check out the type and the value of the reward and cost."""
     if not (np.issubdtype(type(reward), np.integer) or np.issubdtype(type(reward), np.floating)):
         logger.warn(
-            f'The reward returned by `step()` must be a float,\
-            int, np.integer or np.floating, actual type: {type(reward)}',
+            (
+                'The reward returned by `step()` must be a float, int, np.integer or np.floating, '
+                f'actual type: {type(reward)}'
+            ),
         )
     else:
         if np.isnan(reward):
@@ -80,8 +86,10 @@ def check_reward_cost(reward, cost):
 
     if not (np.issubdtype(type(cost), np.integer) or np.issubdtype(type(cost), np.floating)):
         logger.warn(
-            f'The cost returned by `step()` must be a float,\
-            int, np.integer or np.floating, actual type: {type(cost)}',
+            (
+                'The cost returned by `step()` must be a float, int, np.integer or np.floating, '
+                f'actual type: {type(cost)}'
+            ),
         )
     else:
         if np.isnan(cost):
