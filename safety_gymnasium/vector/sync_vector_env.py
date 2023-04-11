@@ -14,8 +14,10 @@
 # ==============================================================================
 """The sync vectorized environment."""
 
+from __future__ import annotations
+
 from copy import deepcopy
-from typing import Callable, Iterator, List, Tuple
+from typing import Callable, Iterator
 
 import numpy as np
 from gymnasium import Env
@@ -48,12 +50,11 @@ class SafetySyncVectorEnv(SyncVectorEnv):
         # get the images.
         imgs = self.get_images()
         # tile the images.
-        bigimg = tile_images(imgs)
-        return bigimg
+        return tile_images(imgs)
 
     def step_wait(
         self,
-    ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, List[dict]]:
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, list[dict]]:
         """Steps through each of the environments returning the batched results."""
         observations, infos = [], {}
         for i, (env, action) in enumerate(zip(self.envs, self._actions)):
@@ -74,7 +75,9 @@ class SafetySyncVectorEnv(SyncVectorEnv):
             observations.append(observation)
             infos = self._add_info(infos, info, i)
         self.observations = concatenate(
-            self.single_observation_space, observations, self.observations
+            self.single_observation_space,
+            observations,
+            self.observations,
         )
 
         return (
@@ -86,6 +89,6 @@ class SafetySyncVectorEnv(SyncVectorEnv):
             infos,
         )
 
-    def get_images(self) -> List[np.ndarray]:
+    def get_images(self) -> list[np.ndarray]:
         """Get images from child environments."""
         return [env.render('rgb_array') for env in self.envs]

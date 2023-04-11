@@ -12,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Hopper environment with a safety constraint on velocity."""
+"""HalfCheetah environment with a safety constraint on velocity."""
 
-from gymnasium.envs.mujoco.hopper_v4 import HopperEnv
+from gymnasium.envs.mujoco.half_cheetah_v4 import HalfCheetahEnv
 
 from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 
 
-class SafetyHopperVelocityEnv(HopperEnv):
-    """Hopper environment with a safety constraint on velocity."""
+class SafetyHalfCheetahVelocityEnv(HalfCheetahEnv):
+    """HalfCheetah environment with a safety constraint on velocity."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
-        self._velocity_threshold = 0.37315
+        self._velocity_threshold = 2.8795
         self.model.light(0).castshadow = False
 
     def step(self, action):
@@ -36,17 +36,15 @@ class SafetyHopperVelocityEnv(HopperEnv):
         ctrl_cost = self.control_cost(action)
 
         forward_reward = self._forward_reward_weight * x_velocity
-        healthy_reward = self.healthy_reward
-
-        rewards = forward_reward + healthy_reward
-        costs = ctrl_cost
 
         observation = self._get_obs()
-        reward = rewards - costs
-        terminated = self.terminated
+        reward = forward_reward - ctrl_cost
+        terminated = False
         info = {
             'x_position': x_position_after,
             'x_velocity': x_velocity,
+            'reward_run': forward_reward,
+            'reward_ctrl': -ctrl_cost,
         }
 
         cost = float(x_velocity > self._velocity_threshold)

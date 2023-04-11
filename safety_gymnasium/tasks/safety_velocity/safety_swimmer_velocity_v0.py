@@ -12,54 +12,59 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Walker2d environment with a safety constraint on velocity."""
+"""Swimmer environment with a safety constraint on velocity."""
 
-from gymnasium.envs.mujoco.walker2d_v4 import Walker2dEnv
+import numpy as np
+from gymnasium.envs.mujoco.swimmer_v4 import SwimmerEnv
 
 from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 
 
-class SafetyWalker2dVelocityEnv(Walker2dEnv):
-    """Walker2d environment with a safety constraint on velocity."""
+class SafetySwimmerVelocityEnv(SwimmerEnv):
+    """Swimmer environment with a safety constraint on velocity."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
-        self._velocity_threshold = 1.7075
+        self._velocity_threshold = 0.04845
         self.model.light(0).castshadow = False
 
     def step(self, action):
-        x_position_before = self.data.qpos[0]
+        xy_position_before = self.data.qpos[0:2].copy()
         self.do_simulation(action, self.frame_skip)
-        x_position_after = self.data.qpos[0]
-        x_velocity = (x_position_after - x_position_before) / self.dt
+        xy_position_after = self.data.qpos[0:2].copy()
+
+        xy_velocity = (xy_position_after - xy_position_before) / self.dt
+        x_velocity, y_velocity = xy_velocity
+
+        forward_reward = self._forward_reward_weight * x_velocity
 
         ctrl_cost = self.control_cost(action)
 
-        forward_reward = self._forward_reward_weight * x_velocity
-        healthy_reward = self.healthy_reward
-
-        rewards = forward_reward + healthy_reward
-        costs = ctrl_cost
-
         observation = self._get_obs()
-        reward = rewards - costs
-        terminated = self.terminated
+        reward = forward_reward - ctrl_cost
         info = {
-            'x_position': x_position_after,
+            'reward_fwd': forward_reward,
+            'reward_ctrl': -ctrl_cost,
+            'x_position': xy_position_after[0],
+            'y_position': xy_position_after[1],
+            'distance_from_origin': np.linalg.norm(xy_position_after, ord=2),
             'x_velocity': x_velocity,
+            'y_velocity': y_velocity,
+            'forward_reward': forward_reward,
         }
 
-        cost = float(x_velocity > self._velocity_threshold)
+        velocity = np.sqrt(x_velocity**2 + y_velocity**2)
+        cost = float(velocity > self._velocity_threshold)
 
         if self.viewer:
             clear_viewer(self.viewer)
             add_velocity_marker(
                 viewer=self.viewer,
                 pos=self.get_body_com('torso')[:3].copy(),
-                vel=x_velocity,
+                vel=velocity,
                 cost=cost,
                 velocity_threshold=self._velocity_threshold,
             )
         if self.render_mode == 'human':
             self.render()
-        return observation, reward, cost, terminated, False, info
+        return observation, reward, cost, False, False, info

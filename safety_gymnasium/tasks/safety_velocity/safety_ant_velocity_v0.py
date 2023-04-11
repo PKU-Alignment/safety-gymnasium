@@ -12,39 +12,43 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Swimmer environment with a safety constraint on velocity."""
+"""Ant environment with a safety constraint on velocity."""
 
 import numpy as np
-from gymnasium.envs.mujoco.swimmer_v4 import SwimmerEnv
+from gymnasium.envs.mujoco.ant_v4 import AntEnv
 
 from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 
 
-class SafetySwimmerVelocityEnv(SwimmerEnv):
-    """Swimmer environment with a safety constraint on velocity."""
+class SafetyAntVelocityEnv(AntEnv):
+    """Ant environment with a safety constraint on velocity."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
-        self._velocity_threshold = 0.04845
+        self._velocity_threshold = 2.5745
         self.model.light(0).castshadow = False
 
-    def step(self, action):
-        xy_position_before = self.data.qpos[0:2].copy()
+    def step(self, action):  # pylint: disable=too-many-locals
+        xy_position_before = self.get_body_com('torso')[:2].copy()
         self.do_simulation(action, self.frame_skip)
-        xy_position_after = self.data.qpos[0:2].copy()
+        xy_position_after = self.get_body_com('torso')[:2].copy()
 
         xy_velocity = (xy_position_after - xy_position_before) / self.dt
         x_velocity, y_velocity = xy_velocity
 
-        forward_reward = self._forward_reward_weight * x_velocity
+        forward_reward = x_velocity
+        healthy_reward = self.healthy_reward
 
-        ctrl_cost = self.control_cost(action)
+        rewards = forward_reward + healthy_reward
 
+        costs = ctrl_cost = self.control_cost(action)
+
+        terminated = self.terminated
         observation = self._get_obs()
-        reward = forward_reward - ctrl_cost
         info = {
-            'reward_fwd': forward_reward,
+            'reward_forward': forward_reward,
             'reward_ctrl': -ctrl_cost,
+            'reward_survive': healthy_reward,
             'x_position': xy_position_after[0],
             'y_position': xy_position_after[1],
             'distance_from_origin': np.linalg.norm(xy_position_after, ord=2),
@@ -52,6 +56,12 @@ class SafetySwimmerVelocityEnv(SwimmerEnv):
             'y_velocity': y_velocity,
             'forward_reward': forward_reward,
         }
+        if self._use_contact_forces:
+            contact_cost = self.contact_cost
+            costs += contact_cost
+            info['reward_ctrl'] = -contact_cost
+
+        reward = rewards - costs
 
         velocity = np.sqrt(x_velocity**2 + y_velocity**2)
         cost = float(velocity > self._velocity_threshold)
@@ -67,4 +77,4 @@ class SafetySwimmerVelocityEnv(SwimmerEnv):
             )
         if self.render_mode == 'human':
             self.render()
-        return observation, reward, cost, False, False, info
+        return observation, reward, cost, terminated, False, info

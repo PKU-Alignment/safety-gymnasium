@@ -71,11 +71,11 @@ class Apples(Geom):  # pylint: disable=too-many-instance-attributes
                     'mesh': 'apple',
                     'material': 'apple',
                     'euler': [np.pi / 2, 0, 0],
-                }
+                },
             )
         return geom
 
     @property
     def pos(self):
-        '''Helper to get goal position from layout'''
+        """Helper to get goal position from layout"""
         return [self.engine.data.body(f'apple{i}').xpos.copy() for i in range(self.num)]
