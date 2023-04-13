@@ -54,7 +54,6 @@ class SafetySwimmerVelocityEnv(SwimmerEnv):
             'forward_reward': forward_reward,
         }
 
-        velocity = np.sqrt(x_velocity**2 + y_velocity**2)
         cost = float(x_velocity > self._velocity_threshold)
 
         if self.mujoco_renderer.viewer:
