@@ -49,15 +49,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools wheel
 
-      - name: Update .bashrc
+      - name: Set MUJOCO_GL
         run: |
-          echo "export MUJOCO_GL=osmesa" >> ~/.bashrc
-          source ~/.bashrc
-
-      - name: Set `SETUPTOOLS_ENABLE_FEATURES`
-        if: ${{ matrix.python-version == '3.8' && matrix.os == 'windows-latest' }}
-        run: |
-          Write-Output 'SETUPTOOLS_ENABLE_FEATURES="legacy-editable"' | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+          echo "MUJOCO_GL=osmesa" >> "${GITHUB_ENV}"
 
       - name: Install Safety-Gymnasium
         run: |
@@ -96,10 +90,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools wheel
 
-      - name: Update .bashrc
+      - name: Set MUJOCO_GL
         run: |
-          echo "export MUJOCO_GL=osmesa" >> ~/.bashrc
-          source ~/.bashrc
+          echo "MUJOCO_GL=osmesa" >> "${GITHUB_ENV}"
 
       - name: Install Safety-Gymnasium
         run: |
