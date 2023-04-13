@@ -31,7 +31,7 @@ def test_vision_env(agent_id, env_id, level):
     obs, _ = env.reset()
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(4):  # pylint: disable=unused-variable
+    for step in range(4):
         if step == 2:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
@@ -59,7 +59,7 @@ def test_new_env(agent_id, env_id, level):
     obs, _ = env.reset()
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(4):  # pylint: disable=unused-variable
+    for step in range(4):
         if step == 2:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0

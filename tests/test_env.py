@@ -33,7 +33,7 @@ def test_env_render(agent_id, env_id, level, render_mode):
     obs, _ = env.reset()
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(4):  # pylint: disable=unused-variable
+    for step in range(4):
         if step == 2:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
@@ -64,7 +64,7 @@ def test_run_env_render(agent_id, env_id, level, render_mode):
     obs, _ = env.reset()
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(4):  # pylint: disable=unused-variable
+    for step in range(4):
         if step == 2:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
@@ -98,7 +98,7 @@ def test_velocity_env_render(agent_id, env_id, render_mode, version):
     obs, _ = env.reset()
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(4):  # pylint: disable=unused-variable
+    for step in range(4):
         if step == 2:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
@@ -132,7 +132,7 @@ def test_env_render_list(agent_id, env_id, level, render_mode):
     obs, _ = env.reset()
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(4):  # pylint: disable=unused-variable
+    for step in range(4):
         if step == 2:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
@@ -166,7 +166,7 @@ def test_run_env_render_list(agent_id, env_id, level, render_mode):
     obs, _ = env.reset()
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(4):  # pylint: disable=unused-variable
+    for step in range(4):
         if step == 2:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
@@ -200,7 +200,7 @@ def test_velocity_env_render_list(agent_id, env_id, render_mode, version):
     obs, _ = env.reset()
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(4):  # pylint: disable=unused-variable
+    for step in range(4):
         if step == 2:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0

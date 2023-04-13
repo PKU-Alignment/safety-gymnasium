@@ -18,10 +18,10 @@ import glfw
 import imageio
 import mujoco
 import numpy as np
-from gymnasium.envs.mujoco.mujoco_rendering import Viewer
+from gymnasium.envs.mujoco.mujoco_rendering import WindowViewer
 
 
-class KeyboardViewer(Viewer):  # pylint: disable=too-many-instance-attributes
+class KeyboardViewer(WindowViewer):  # pylint: disable=too-many-instance-attributes
     """Keyboard viewer."""
 
     def __init__(self, model, data, custom_key_press_callback) -> None:
