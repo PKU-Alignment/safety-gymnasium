@@ -57,12 +57,12 @@ class SafetySwimmerVelocityEnv(SwimmerEnv):
         velocity = np.sqrt(x_velocity**2 + y_velocity**2)
         cost = float(x_velocity > self._velocity_threshold)
 
-        if self.viewer:
-            clear_viewer(self.viewer)
+        if self.mujoco_renderer.viewer:
+            clear_viewer(self.mujoco_renderer.viewer)
             add_velocity_marker(
-                viewer=self.viewer,
+                viewer=self.mujoco_renderer.viewer,
                 pos=self.get_body_com('torso')[:3].copy(),
-                vel=velocity,
+                vel=x_velocity,
                 cost=cost,
                 velocity_threshold=self._velocity_threshold,
             )
