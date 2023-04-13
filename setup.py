@@ -39,7 +39,7 @@ try:
             VERSION_FILE.write_text(
                 data=re.sub(
                     r"""__version__\s*=\s*('[^']+'|"[^"]+")""",
-                    f"__version__ = '{version.__version__}'",
+                    f'__version__ = {version.__version__!r}',
                     string=VERSION_CONTENT,
                 ),
                 encoding='UTF-8',
@@ -52,8 +52,8 @@ try:
         version=version.__version__,
         author='Safety-Gymnasium Team',
         author_email='jiamg.ji@gmail.com',
-        description='Safety-Gymnaisum is a highly scalable and customizable safe reinforcement learning environment library.',
-        url='https://github.com/PKU-MARL/safety-gymnasium',
+        description='Safety-Gymnasium is a highly scalable and customizable safe reinforcement learning environment library.',
+        url='https://github.com/OmniSafeAI/safety-gymnasium',
         python_requires='>=3.8',
         packages=setuptools.find_namespace_packages(
             include=['safety_gymnasium', 'safety_gymnasium.*'],

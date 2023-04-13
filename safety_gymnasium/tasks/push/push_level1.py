@@ -24,7 +24,7 @@ class PushLevel1(PushLevel0):
     One pillar is present in the scene, but the agent is not penalized for hitting it.
     """
 
-    def __init__(self, config):
+    def __init__(self, config) -> None:
         super().__init__(config=config)
 
         self.placements_conf.extents = [-1.5, -1.5, 1.5, 1.5]

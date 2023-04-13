@@ -21,7 +21,7 @@ from safety_gymnasium.bases.base_task import BaseTask
 class GoalLevel0(BaseTask):
     """An agent must navigate to a goal."""
 
-    def __init__(self, config):
+    def __init__(self, config) -> None:
         super().__init__(config=config)
 
         self.placements_conf.extents = [-1, -1, 1, 1]

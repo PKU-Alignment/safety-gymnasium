@@ -14,27 +14,30 @@
 # ==============================================================================
 """Register and make environments."""
 
+from __future__ import annotations
+
 import copy
 import importlib
 import importlib.util
-from typing import Optional, Sequence, Union
+from typing import Sequence
 
 from gymnasium import Env, error, logger
-from gymnasium.envs.registration import (  # pylint: disable=unused-import
+from gymnasium.envs.registration import namespace  # noqa: F401 # pylint: disable=unused-import
+from gymnasium.envs.registration import spec  # noqa: F401 # pylint: disable=unused-import
+from gymnasium.envs.registration import (
     EnvSpec,
     _check_version_exists,
     find_highest_version,
     get_env_id,
     load,
-    namespace,
     parse_env_id,
 )
 from gymnasium.envs.registration import register as gymnasium_register
-from gymnasium.envs.registration import registry, spec  # pylint: disable=unused-import
-from gymnasium.wrappers import AutoResetWrapper, HumanRendering, OrderEnforcing, RenderCollection
+from gymnasium.envs.registration import registry
+from gymnasium.wrappers import HumanRendering, OrderEnforcing, RenderCollection
 from gymnasium.wrappers.compatibility import EnvCompatibility
 
-from safety_gymnasium.wrappers import SafePassiveEnvChecker, SafeTimeLimit
+from safety_gymnasium.wrappers import SafeAutoResetWrapper, SafePassiveEnvChecker, SafeTimeLimit
 
 
 safe_registry = set()
@@ -48,11 +51,11 @@ def register(**kwargs):
 
 # pylint: disable-next=too-many-arguments,too-many-branches,too-many-statements,too-many-locals
 def make(
-    id: Union[str, EnvSpec],  # pylint: disable=invalid-name,redefined-builtin
-    max_episode_steps: Optional[int] = None,
+    id: str | EnvSpec,  # pylint: disable=invalid-name,redefined-builtin
+    max_episode_steps: int | None = None,
     autoreset: bool = False,
-    apply_api_compatibility: Optional[bool] = None,
-    disable_env_checker: Optional[bool] = None,
+    apply_api_compatibility: bool | None = None,
+    disable_env_checker: bool | None = None,
     **kwargs,
 ) -> Env:
     """Create an environment according to the given ID.
@@ -90,7 +93,7 @@ def make(
             except ModuleNotFoundError as ex:
                 raise ModuleNotFoundError(
                     f'{ex}. Environment registration via importing a module failed. '
-                    f"Check whether '{module}' contains env registration and can be imported."
+                    f"Check whether '{module}' contains env registration and can be imported.",
                 ) from ex
         spec_ = registry.get(id)
 
@@ -99,7 +102,7 @@ def make(
         if version is not None and latest_version is not None and latest_version > version:
             logger.warn(
                 f'The environment {id} is out of date. You should consider '
-                f'upgrading to version `v{latest_version}`.'
+                f'upgrading to version `v{latest_version}`.',
             )
         if version is None and latest_version is not None:
             version = latest_version
@@ -107,7 +110,7 @@ def make(
             spec_ = registry.get(new_env_id)
             logger.warn(
                 f'Using the latest versioned environment `{new_env_id}` '
-                f'instead of the unversioned environment `{id}`.'
+                f'instead of the unversioned environment `{id}`.',
             )
 
         if spec_ is None:
@@ -121,7 +124,7 @@ def make(
 
     if spec_.entry_point is None:
         raise error.Error(f'{spec_.id} registered but entry_point is not specified')
-    if callable(spec_.entry_point):
+    if callable(spec_.entry_point):  # noqa: SIM108
         env_creator = spec_.entry_point
     else:
         # Assume it's a string
@@ -135,7 +138,8 @@ def make(
     # see if the HumanRendering wrapper needs to be applied
     if mode is not None and hasattr(env_creator, 'metadata'):
         assert isinstance(
-            env_creator.metadata, dict
+            env_creator.metadata,
+            dict,
         ), f'Expect the environment creator ({env_creator}) metadata to be dict,\
                 actual type: {type(env_creator.metadata)}'
 
@@ -144,7 +148,7 @@ def make(
             if not isinstance(render_modes, Sequence):
                 logger.warn(
                     f'Expects the environment metadata render_modes to be a Sequence (tuple or list),\
-                        actual type: {type(render_modes)}'
+                        actual type: {type(render_modes)}',
                 )
 
             # Apply the `HumanRendering` wrapper, if the mode=="human" but "human" not in render_modes
@@ -155,7 +159,7 @@ def make(
             ):
                 logger.warn(
                     "You are trying to use 'human' rendering for an environment that doesn't natively support it. "
-                    'The HumanRendering wrapper is being applied to your environment.'
+                    'The HumanRendering wrapper is being applied to your environment.',
                 )
                 apply_human_rendering = True
                 if 'rgb_array' in render_modes:
@@ -172,12 +176,12 @@ def make(
             elif mode not in render_modes:
                 logger.warn(
                     f'The environment is being initialised with mode ({mode})\
-                        that is not in the possible render_modes ({render_modes}).'
+                        that is not in the possible render_modes ({render_modes}).',
                 )
         else:
             logger.warn(
                 f"The environment creator metadata doesn't include `render_modes`,\
-                    contains: {list(env_creator.metadata.keys())}"
+                    contains: {list(env_creator.metadata.keys())}",
             )
 
     if apply_api_compatibility is True or (
@@ -195,7 +199,7 @@ def make(
             raise error.Error(
                 f"You passed render_mode='human' although {id} doesn't implement human-rendering natively. "
                 'Gym tried to apply the HumanRendering wrapper but it looks like your environment is using the old '
-                'rendering API, which is not supported by the HumanRendering wrapper.'
+                'rendering API, which is not supported by the HumanRendering wrapper.',
             ) from ex
         raise
 
@@ -228,7 +232,7 @@ def make(
 
     # Add the autoreset wrapper
     if autoreset:
-        env = AutoResetWrapper(env)
+        env = SafeAutoResetWrapper(env)
 
     # Add human rendering wrapper
     if apply_human_rendering:

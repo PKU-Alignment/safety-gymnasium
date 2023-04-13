@@ -120,7 +120,7 @@ class BaseObject(abc.ABC):
             assert len(rots) == 1, 'The number of rotations should be 1.'
             config[self.type][self.name] = self.get_config(xy_pos=layout[self.name], rot=rots[0])
 
-    def _specific_agent_config(self) -> None:
+    def _specific_agent_config(self) -> None:  # noqa: B027
         """Modify properties according to specific agent.
 
         Note:

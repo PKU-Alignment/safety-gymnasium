@@ -12,8 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Env wrappers."""
+"""Hopper environment with a safety constraint on velocity."""
 
-from safety_gymnasium.wrappers.autoreset import SafeAutoResetWrapper
-from safety_gymnasium.wrappers.env_checker import SafePassiveEnvChecker
-from safety_gymnasium.wrappers.time_limit import SafeTimeLimit
+from safety_gymnasium.tasks.safety_velocity.safety_hopper_velocity_v0 import (
+    SafetyHopperVelocityEnv as HopperEnv,
+)
+
+
+class SafetyHopperVelocityEnv(HopperEnv):
+    """Hopper environment with a safety constraint on velocity."""
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+        self._velocity_threshold = 0.7402

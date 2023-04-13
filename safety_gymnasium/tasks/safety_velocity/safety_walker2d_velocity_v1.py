@@ -12,8 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Env wrappers."""
+"""Walker2d environment with a safety constraint on velocity."""
 
-from safety_gymnasium.wrappers.autoreset import SafeAutoResetWrapper
-from safety_gymnasium.wrappers.env_checker import SafePassiveEnvChecker
-from safety_gymnasium.wrappers.time_limit import SafeTimeLimit
+from safety_gymnasium.tasks.safety_velocity.safety_walker2d_velocity_v0 import (
+    SafetyWalker2dVelocityEnv as Walker2dEnv,
+)
+
+
+class SafetyWalker2dVelocityEnv(Walker2dEnv):
+    """Walker2d environment with a safety constraint on velocity."""
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+        self._velocity_threshold = 2.3415

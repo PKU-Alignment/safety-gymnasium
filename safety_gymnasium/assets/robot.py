@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(safety_gymnasium.__file__)
 
 @dataclass
 class Robot:  # pylint: disable=too-many-instance-attributes
-    '''Simple utility class for getting mujoco-specific info about a robot.'''
+    """Simple utility class for getting mujoco-specific info about a robot."""
 
     path: InitVar[str]
 
@@ -37,7 +37,7 @@ class Robot:  # pylint: disable=too-many-instance-attributes
     base: str = 'assets/xmls/car.xml'  # Which robot XML to use as the base
     rot: float = None  # Override robot starting angle
 
-    def __post_init__(self, path):
+    def __post_init__(self, path) -> None:
         self.base = path
         base_path = os.path.join(BASE_DIR, path)
         self.model = mujoco.MjModel.from_xml_path(base_path)  # pylint: disable=no-member

@@ -38,14 +38,22 @@ check_pip_install_extra = $(PYTHON) -m pip show $(1) &>/dev/null || (cd && $(PYT
 
 pylint-install:
 	$(call check_pip_install_extra,pylint,pylint[spelling])
+	$(call check_pip_install,pyenchant)
 
 flake8-install:
 	$(call check_pip_install,flake8)
-	$(call check_pip_install_extra,flake8-bugbear,flake8-bugbear)
+	$(call check_pip_install,flake8-bugbear)
+	$(call check_pip_install,flake8-comprehensions)
+	$(call check_pip_install,flake8-docstrings)
+	$(call check_pip_install,flake8-pyi)
+	$(call check_pip_install,flake8-simplify)
 
 py-format-install:
 	$(call check_pip_install,isort)
-	$(call check_pip_install,black)
+	$(call check_pip_install_extra,black,black[jupyter])
+
+ruff-install:
+	$(call check_pip_install,ruff)
 
 mypy-install:
 	$(call check_pip_install,mypy)
@@ -55,8 +63,8 @@ pre-commit-install:
 	$(PYTHON) -m pre_commit install --install-hooks
 
 docs-install:
-	$(call check_pip_install,pydocstyle)
-	$(call check_pip_install_extra,doc8,"doc8<1.0.0a0")
+	$(call check_pip_install_extra,pydocstyle,pydocstyle[toml])
+	$(call check_pip_install,doc8)
 	$(call check_pip_install,sphinx)
 	$(call check_pip_install,sphinx-autoapi)
 	$(call check_pip_install,sphinx-autobuild)
@@ -72,7 +80,7 @@ pytest-install:
 
 go-install:
 	# requires go >= 1.16
-	command -v go || (sudo apt-get install -y golang-1.16 && sudo ln -sf /usr/lib/go-1.16/bin/go /usr/bin/go)
+	command -v go || (sudo apt-get install -y golang && sudo ln -sf /usr/lib/go/bin/go /usr/bin/go)
 
 addlicense-install: go-install
 	command -v addlicense || go install github.com/google/addlicense@latest
@@ -91,11 +99,17 @@ pylint: pylint-install
 	$(PYTHON) -m pylint $(PROJECT_PATH)
 
 flake8: flake8-install
-	$(PYTHON) -m flake8 $(PYTHON_FILES) --count --select=E9,F63,F7,F82,E225,E251 --show-source --statistics
+	$(PYTHON) -m flake8 --count --show-source --statistics
 
 py-format: py-format-install
 	$(PYTHON) -m isort --project $(PROJECT_NAME) --check $(PYTHON_FILES) && \
 	$(PYTHON) -m black --check $(PYTHON_FILES)
+
+ruff: ruff-install
+	$(PYTHON) -m ruff check .
+
+ruff-fix: ruff-install
+	$(PYTHON) -m ruff check . --fix --exit-non-zero-on-fix
 
 mypy: mypy-install
 	$(PYTHON) -m mypy $(PROJECT_PATH)
@@ -106,7 +120,7 @@ pre-commit: pre-commit-install
 # Documentation
 
 addlicense: addlicense-install
-	addlicense -c $(COPYRIGHT) -ignore tests/coverage.xml -l apache -y 2022 -check $(SOURCE_FOLDERS)
+	addlicense -c $(COPYRIGHT) -ignore tests/coverage.xml -l apache -y 2022-$(shell date +"%Y") -check $(SOURCE_FOLDERS)
 
 docstyle: docs-install
 	make -C docs clean
@@ -126,16 +140,18 @@ clean-docs:
 
 # TODO: add mypy when ready
 # TODO: add docstyle when ready
-lint: flake8 py-format pylint addlicense spelling
+lint: ruff flake8 py-format pylint addlicense spelling
 
-format: py-format-install addlicense-install
+format: py-format-install ruff-install addlicense-install
 	$(PYTHON) -m isort --project $(PROJECT_NAME) $(PYTHON_FILES)
 	$(PYTHON) -m black $(PYTHON_FILES)
+	$(PYTHON) -m ruff check . --fix --exit-zero
 	addlicense -c $(COPYRIGHT) -ignore tests/coverage.xml -l apache -y 2022 $(SOURCE_FOLDERS)
 
 clean-py:
 	find . -type f -name  '*.py[co]' -delete
 	find . -depth -type d -name "__pycache__" -exec rm -r "{}" +
+	find . -depth -type d -name ".ruff_cache" -exec rm -r "{}" +
 	find . -depth -type d -name ".mypy_cache" -exec rm -r "{}" +
 	find . -depth -type d -name ".pytest_cache" -exec rm -r "{}" +
 	rm tests/.coverage

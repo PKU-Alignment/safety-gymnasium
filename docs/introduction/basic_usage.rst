@@ -9,7 +9,7 @@ Installation
     # From the Python Package Index (PyPI)
     pip install safety-gymnasium
     # From the source code
-    git clone git@github.com:PKU-MARL/safety-gymnasium.git
+    git clone git@github.com:OmniSafeAI/safety-gymnasium.git
     cd Safety-Gymnasium
     pip install -e .
 
@@ -59,20 +59,33 @@ Observation Space
     env = safety_gymnasium.make('SafetyPointCircle0-v0', render_mode='human')
     obs, info = env.reset()
     print(env.observation_space)
-    # Box(-inf, inf, (28,), float64)
+    '''
+    Box([-inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf   0.   0.
+    0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.],
+    [inf inf inf inf inf inf inf inf inf inf inf inf  1.  1.  1.  1.  1.  1.
+    1.  1.  1.  1.  1.  1.  1.  1.  1.  1.], (28,), float64)
+    '''
+
+
     print(env.obs_space_dict)
     '''
-    OrderedDict([
-        ('accelerometer', Box(-inf, inf, (3,), float64)),
-        ('velocimeter', Box(-inf, inf, (3,), float64)),
-        ('gyro', Box(-inf, inf, (3,), float64)),
-        ('magnetometer', Box(-inf, inf, (3,), float64)),
-        ('circle_lidar', Box(0.0, 1.0, (16,), float64))
-        ])
+    Dict('accelerometer': Box(-inf, inf, (3,), float64),
+         'velocimeter': Box(-inf, inf, (3,), float64),
+         'gyro': Box(-inf, inf, (3,), float64),
+         'magnetometer': Box(-inf, inf, (3,), float64),
+         'circle_lidar': Box(0.0, 1.0, (16,), float64))
     '''
-    # position of each part in the obs array
-    print(sorted(env.obs_space_dict))
-	# ['accelerometer', 'circle_lidar', 'gyro', 'magnetometer', 'velocimeter']
+
+
+    # position of each part in the obs is as same as it appears in the Dict above.
+    print(obs)
+    '''
+	[0.         0.         9.81       0.         0.         0.
+    0.         0.         0.         0.36647163 0.34014489 0.
+    0.         0.         0.         0.         0.         0.
+    0.         0.         0.         0.         0.         0.08518475
+    0.93364224 0.84845749 0.         0.        ]
+    '''
 
 
 Action Space
@@ -84,3 +97,24 @@ Action Space
     obs, info = env.reset()
     print(env.action_space)
     # Box(-1.0, 1.0, (2,), float64)
+
+Render
+------
+
+We completely inherit the excellent API for render in Gymnasium.
+.. Note::
+
+    The set of supported modes varies per environment. (And some
+    third-party environments may not support rendering at all.)
+    By convention, if render_mode is:
+    - None (default): no render is computed.
+    - human: render return None.
+        The environment is continuously rendered in the current display or terminal. Usually for human consumption.
+    - rgb_array: return a single frame representing the current state of the environment.
+        A frame is a numpy.ndarray with shape (x, y, 3) representing RGB values for an x-by-y pixel image.
+    - rgb_array_list: return a list of frames representing the states of the environment since the last reset.
+        Each frame is a numpy.ndarray with shape (x, y, 3), as with `rgb_array`.
+    - depth_array: return a single frame representing the current state of the environment.
+        A frame is a numpy.ndarray with shape (x, y) representing depth values for an x-by-y pixel image.
+    - depth_array_list: return a list of frames representing the states of the environment since the last reset.
+        Each frame is a numpy.ndarray with shape (x, y), as with `depth_array`.

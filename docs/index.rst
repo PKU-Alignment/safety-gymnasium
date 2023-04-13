@@ -34,7 +34,7 @@ Safety Gymnasium is a standard API for safe reinforcement learning, and a divers
 
 .. toctree::
    :hidden:
-   :caption: COMPONETS OF ENVIRONMENTS
+   :caption: COMPONENTS OF ENVIRONMENTS
 
    components_of_environments/agents
    components_of_environments/objects
@@ -61,6 +61,6 @@ Safety Gymnasium is a standard API for safe reinforcement learning, and a divers
    :hidden:
    :caption: Development
 
-`Github <https://github.com/PKU-MARL/safety-gymnasium>`__
+`Github <https://github.com/OmniSafeAI/safety-gymnasium>`__
 
-`Contribute to the Docs <https://github.com/PKU-MARL/safety-gymnasium/blob/main/CONTRIBUTING.md>`__
+`Contribute to the Docs <https://github.com/OmniSafeAI/safety-gymnasium/blob/main/CONTRIBUTING.md>`__

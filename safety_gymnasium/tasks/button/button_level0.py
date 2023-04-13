@@ -26,7 +26,7 @@ from safety_gymnasium.bases.base_task import BaseTask
 class ButtonLevel0(BaseTask):
     """An agent must press a goal button."""
 
-    def __init__(self, config):
+    def __init__(self, config) -> None:
         super().__init__(config=config)
 
         self.placements_conf.extents = [-1, -1, 1, 1]
@@ -95,7 +95,7 @@ class ButtonLevel0(BaseTask):
             obs['vision'] = self._obs_vision()
 
         assert self.obs_info.obs_space_dict.contains(
-            obs
+            obs,
         ), f'Bad obs {obs} {self.obs_info.obs_space_dict}'
 
         if self.observation_flatten:
@@ -109,7 +109,8 @@ class ButtonLevel0(BaseTask):
             geom_ids = [contact.geom1, contact.geom2]
             geom_names = sorted([self.model.geom(g).name for g in geom_ids])
             # pylint: disable-next=no-member
-            if any(n == f'button{self.buttons.goal_button}' for n in geom_names):
-                if any(n in self.agent.body_info.geom_names for n in geom_names):
-                    return True
+            if any(n == f'button{self.buttons.goal_button}' for n in geom_names) and any(
+                n in self.agent.body_info.geom_names for n in geom_names
+            ):
+                return True
         return False

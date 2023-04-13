@@ -14,7 +14,9 @@
 # ==============================================================================
 """The vectorized safety gymnasium wrapper."""
 
-from typing import Iterable, List, Optional, Union
+from __future__ import annotations
+
+from typing import Iterable
 
 import gymnasium
 from gymnasium.vector.vector_env import VectorEnv
@@ -31,8 +33,8 @@ def make(
     env_id: str,
     num_envs: int = 1,
     asynchronous: bool = True,
-    wrappers: Optional[Union[callable, List[callable]]] = None,
-    disable_env_checker: Optional[bool] = None,
+    wrappers: callable | list[callable] | None = None,
+    disable_env_checker: bool | None = None,
     **kwargs,
 ) -> VectorEnv:
     """Create a vectorized environment from multiple copies of an environment, from its id.

@@ -27,17 +27,46 @@ import safety_gymnasium
     render_mode=['rgb_array', 'depth_array'],
 )
 # pylint: disable-next=too-many-locals
-def test_env(agent_id, env_id, level, render_mode):
+def test_env_render(agent_id, env_id, level, render_mode):
     """Test env."""
     env_name = 'Safety' + agent_id + env_id + level + '-v0'
     env = safety_gymnasium.make(env_name, render_mode=render_mode)
     obs, _ = env.reset()
-    # Use below to specify seed.
-    # obs, _ = env.reset(seed=0)
     terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
-    for step in range(10):  # pylint: disable=unused-variable
-        if terminated or truncated:
+    for step in range(4):  # pylint: disable=unused-variable
+        if step == 2:
+            print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
+            ep_ret, ep_cost = 0, 0
+            obs, _ = env.reset()
+        assert env.observation_space.contains(obs)
+        act = env.action_space.sample()
+        assert env.action_space.contains(act)
+
+        # pylint: disable-next=unused-variable
+        obs, reward, cost, terminated, truncated, info = env.step(act)
+        ep_ret += reward
+        ep_cost += cost
+
+        env.render()
+
+
+@helpers.parametrize(
+    agent_id=['Point', 'Car', 'Racecar', 'Ant'],
+    env_id=['Run'],
+    level=['0'],
+    render_mode=['rgb_array', 'depth_array'],
+)
+# pylint: disable-next=too-many-locals
+def test_run_env_render(agent_id, env_id, level, render_mode):
+    """Test env."""
+    env_name = 'Safety' + agent_id + env_id + level + '-v0'
+    env = safety_gymnasium.make(env_name, render_mode=render_mode)
+    obs, _ = env.reset()
+    terminated, truncated = False, False
+    ep_ret, ep_cost = 0, 0
+    for step in range(4):  # pylint: disable=unused-variable
+        if step == 2:
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
             obs, _ = env.reset()
@@ -47,10 +76,146 @@ def test_env(agent_id, env_id, level, render_mode):
 
         # Use the environment's built_in max_episode_steps
         if hasattr(env, '_max_episode_steps'):  # pylint: disable=protected-access
-            max_ep_len = env._max_episode_steps  # pylint: disable=unused-variable,protected-access
+            pass  # pylint: disable=unused-variable,protected-access
         # pylint: disable-next=unused-variable
         obs, reward, cost, terminated, truncated, info = env.step(act)
         ep_ret += reward
         ep_cost += cost
 
         env.render()
+
+
+@helpers.parametrize(
+    agent_id=['Humanoid', 'Ant', 'Hopper', 'HalfCheetah', 'Swimmer', 'Walker2d'],
+    env_id=['Velocity'],
+    render_mode=['rgb_array', 'depth_array'],
+    version=['v0', 'v1'],
+)
+# pylint: disable-next=too-many-locals
+def test_velocity_env_render(agent_id, env_id, render_mode, version):
+    """Test env."""
+    env_name = 'Safety' + agent_id + env_id + '-' + version
+    env = safety_gymnasium.make(env_name, render_mode=render_mode)
+    obs, _ = env.reset()
+    terminated, truncated = False, False
+    ep_ret, ep_cost = 0, 0
+    for step in range(4):  # pylint: disable=unused-variable
+        if step == 2:
+            print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
+            ep_ret, ep_cost = 0, 0
+            obs, _ = env.reset()
+        assert env.observation_space.contains(obs)
+        act = env.action_space.sample()
+        assert env.action_space.contains(act)
+
+        # Use the environment's built_in max_episode_steps
+        if hasattr(env, '_max_episode_steps'):  # pylint: disable=protected-access
+            pass  # pylint: disable=unused-variable,protected-access
+        # pylint: disable-next=unused-variable
+        obs, reward, cost, terminated, truncated, info = env.step(act)
+        ep_ret += reward
+        ep_cost += cost
+
+        env.render()
+
+
+@helpers.parametrize(
+    agent_id=['Point', 'Car', 'Racecar', 'Ant'],
+    env_id=['Goal', 'Push', 'Button', 'Circle'],
+    level=['0', '1', '2'],
+    render_mode=['rgb_array_list', 'depth_array_list'],
+)
+# pylint: disable-next=too-many-locals
+def test_env_render_list(agent_id, env_id, level, render_mode):
+    """Test env."""
+    env_name = 'Safety' + agent_id + env_id + level + '-v0'
+    env = safety_gymnasium.make(env_name, render_mode=render_mode)
+    obs, _ = env.reset()
+    terminated, truncated = False, False
+    ep_ret, ep_cost = 0, 0
+    for step in range(4):  # pylint: disable=unused-variable
+        if step == 2:
+            print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
+            ep_ret, ep_cost = 0, 0
+            obs, _ = env.reset()
+        assert env.observation_space.contains(obs)
+        act = env.action_space.sample()
+        assert env.action_space.contains(act)
+
+        # Use the environment's built_in max_episode_steps
+        if hasattr(env, '_max_episode_steps'):  # pylint: disable=protected-access
+            pass  # pylint: disable=unused-variable,protected-access
+        # pylint: disable-next=unused-variable
+        obs, reward, cost, terminated, truncated, info = env.step(act)
+        ep_ret += reward
+        ep_cost += cost
+
+    assert isinstance(env.render(), list)
+
+
+@helpers.parametrize(
+    agent_id=['Point', 'Car', 'Racecar', 'Ant'],
+    env_id=['Run'],
+    level=['0'],
+    render_mode=['rgb_array_list', 'depth_array_list'],
+)
+# pylint: disable-next=too-many-locals
+def test_run_env_render_list(agent_id, env_id, level, render_mode):
+    """Test env."""
+    env_name = 'Safety' + agent_id + env_id + level + '-v0'
+    env = safety_gymnasium.make(env_name, render_mode=render_mode)
+    obs, _ = env.reset()
+    terminated, truncated = False, False
+    ep_ret, ep_cost = 0, 0
+    for step in range(4):  # pylint: disable=unused-variable
+        if step == 2:
+            print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
+            ep_ret, ep_cost = 0, 0
+            obs, _ = env.reset()
+        assert env.observation_space.contains(obs)
+        act = env.action_space.sample()
+        assert env.action_space.contains(act)
+
+        # Use the environment's built_in max_episode_steps
+        if hasattr(env, '_max_episode_steps'):  # pylint: disable=protected-access
+            pass  # pylint: disable=unused-variable,protected-access
+        # pylint: disable-next=unused-variable
+        obs, reward, cost, terminated, truncated, info = env.step(act)
+        ep_ret += reward
+        ep_cost += cost
+
+    assert isinstance(env.render(), list)
+
+
+@helpers.parametrize(
+    agent_id=['Humanoid', 'Ant', 'Hopper', 'HalfCheetah', 'Swimmer', 'Walker2d'],
+    env_id=['Velocity'],
+    render_mode=['rgb_array_list', 'depth_array_list'],
+    version=['v0', 'v1'],
+)
+# pylint: disable-next=too-many-locals
+def test_velocity_env_render_list(agent_id, env_id, render_mode, version):
+    """Test env."""
+    env_name = 'Safety' + agent_id + env_id + '-' + version
+    env = safety_gymnasium.make(env_name, render_mode=render_mode)
+    obs, _ = env.reset()
+    terminated, truncated = False, False
+    ep_ret, ep_cost = 0, 0
+    for step in range(4):  # pylint: disable=unused-variable
+        if step == 2:
+            print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
+            ep_ret, ep_cost = 0, 0
+            obs, _ = env.reset()
+        assert env.observation_space.contains(obs)
+        act = env.action_space.sample()
+        assert env.action_space.contains(act)
+
+        # Use the environment's built_in max_episode_steps
+        if hasattr(env, '_max_episode_steps'):  # pylint: disable=protected-access
+            pass  # pylint: disable=unused-variable,protected-access
+        # pylint: disable-next=unused-variable
+        obs, reward, cost, terminated, truncated, info = env.step(act)
+        ep_ret += reward
+        ep_cost += cost
+
+    assert isinstance(env.render(), list)

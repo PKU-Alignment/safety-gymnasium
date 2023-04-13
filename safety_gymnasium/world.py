@@ -68,7 +68,7 @@ class World:  # pylint: disable=too-many-instance-attributes
         'floor_type': 'mat',
     }
 
-    def __init__(self, agent, obstacles, config=None):
+    def __init__(self, agent, obstacles, config=None) -> None:
         """config - JSON string or dict of configuration.  See self.parse()"""
         if config:
             self.parse(config)  # Parse configuration
@@ -110,11 +110,11 @@ class World:  # pylint: disable=too-many-instance-attributes
 
         if 'compiler' not in self.xml['mujoco']:
             compiler = xmltodict.parse(
-                f'''<compiler
+                f"""<compiler
                 angle="radian"
                 meshdir="{BASE_DIR}/assets/meshes"
                 texturedir="{BASE_DIR}/assets/textures"
-                />'''
+                />""",
             )
             self.xml['mujoco']['compiler'] = compiler['compiler']
         else:
@@ -123,7 +123,7 @@ class World:  # pylint: disable=too-many-instance-attributes
                     '@angle': 'radian',
                     '@meshdir': os.path.join(BASE_DIR, 'assets', 'meshes'),
                     '@texturedir': os.path.join(BASE_DIR, 'assets', 'textures'),
-                }
+                },
             )
 
         # Convenience accessor for xml dictionary
@@ -132,7 +132,7 @@ class World:  # pylint: disable=too-many-instance-attributes
         # Move agent position to starting position
         worldbody['body']['@pos'] = convert(
             # pylint: disable-next=no-member
-            np.r_[self.agent_xy, self._agent.z_height]
+            np.r_[self.agent_xy, self._agent.z_height],
         )
         worldbody['body']['@quat'] = convert(rot2quat(self.agent_rot))  # pylint: disable=no-member
 
@@ -164,7 +164,7 @@ class World:  # pylint: disable=too-many-instance-attributes
 
         # load all assets config from .yaml file
         with open(os.path.join(BASE_DIR, 'configs/assets.yaml'), encoding='utf-8') as file:
-            assets_config = yaml.load(file, Loader=yaml.FullLoader)
+            assets_config = yaml.load(file, Loader=yaml.FullLoader)  # noqa: S506
 
         texture.append(assets_config['textures']['skybox'])
 
@@ -180,19 +180,19 @@ class World:  # pylint: disable=too-many-instance-attributes
         selected_textures = {}
         selected_materials = {}
         selected_meshes = {}
-        for name, config in self.geoms.items():  # pylint: disable=no-member
+        for config in self.geoms.values():  # pylint: disable=no-member
             if config['type'] == 'mesh':
                 mesh_name = config['mesh']
                 selected_textures[mesh_name] = assets_config['textures'][mesh_name]
                 selected_materials[mesh_name] = assets_config['materials'][mesh_name]
                 selected_meshes[mesh_name] = assets_config['meshes'][mesh_name]
-        for name, config in self.free_geoms.items():  # pylint: disable=no-member
+        for config in self.free_geoms.values():  # pylint: disable=no-member
             if config['type'] == 'mesh':
                 mesh_name = config['mesh']
                 selected_textures[mesh_name] = assets_config['textures'][mesh_name]
                 selected_materials[mesh_name] = assets_config['materials'][mesh_name]
                 selected_meshes[mesh_name] = assets_config['meshes'][mesh_name]
-        for name, config in self.mocaps.items():  # pylint: disable=no-member
+        for config in self.mocaps.values():  # pylint: disable=no-member
             if config['type'] == 'mesh':
                 mesh_name = config['mesh']
                 selected_textures[mesh_name] = assets_config['textures'][mesh_name]
@@ -207,7 +207,7 @@ class World:  # pylint: disable=too-many-instance-attributes
             """<b>
             <light cutoff="100" diffuse="1 1 1" dir="0 0 -1" directional="true"
                 exponent="1" pos="0 0 0.5" specular="0 0 0" castshadow="false"/>
-            </b>"""
+            </b>""",
         )
         worldbody['light'] = light['b']['light']
 
@@ -216,7 +216,7 @@ class World:  # pylint: disable=too-many-instance-attributes
             floor = xmltodict.parse(
                 """
                 <geom name="floor" type="plane" condim="6"/>
-                """
+                """,
             )
             worldbody['geom'].append(floor['geom'])
 
@@ -227,7 +227,7 @@ class World:  # pylint: disable=too-many-instance-attributes
                     {
                         '@size': convert(self.floor_size),  # pylint: disable=no-member
                         '@rgba': '1 1 1 1',
-                    }
+                    },
                 )
                 if self.floor_type == 'mat':  # pylint: disable=no-member
                     g.update({'@material': 'matplane'})
@@ -240,7 +240,7 @@ class World:  # pylint: disable=too-many-instance-attributes
             """<b>
             <camera name="fixednear" pos="0 -2 2" zaxis="0 -1 1"/>
             <camera name="fixedfar" pos="0 -5 5" zaxis="0 -1 1"/>
-            </b>"""
+            </b>""",
         )
         worldbody['camera'] = cameras['b']['camera']
 
@@ -255,8 +255,8 @@ class World:  # pylint: disable=too-many-instance-attributes
             'y3': 1,
         }
         pos = {
-            'xp': -2 * np.sin(theta),
-            'yp': -2 * np.cos(theta),
+            'xp': 0 * np.cos(theta) + (-2) * np.sin(theta),
+            'yp': 0 * (-np.sin(theta)) + (-2) * np.cos(theta),
             'zp': 2,
         }
         track_camera = xmltodict.parse(
@@ -264,17 +264,18 @@ class World:  # pylint: disable=too-many-instance-attributes
             <camera name="track" mode="track" pos="{xp} {yp} {zp}"
                 xyaxes="{x1} {x2} {x3} {y1} {y2} {y3}"/>
             </b>""".format(
-                **pos, **xyaxes
-            )
+                **pos,
+                **xyaxes,
+            ),
         )
         if 'camera' in worldbody['body'][0]:
             if isinstance(worldbody['body'][0]['camera'], list):
                 worldbody['body'][0]['camera'] = worldbody['body'][0]['camera'] + [
-                    track_camera['b']['camera']
+                    track_camera['b']['camera'],
                 ]
             else:
                 worldbody['body'][0]['camera'] = [worldbody['body'][0]['camera']] + [
-                    track_camera['b']['camera']
+                    track_camera['b']['camera'],
                 ]
         else:
             worldbody['body'][0]['camera'] = [
@@ -294,7 +295,7 @@ class World:  # pylint: disable=too-many-instance-attributes
                 object['y'] = dim
                 body = xmltodict.parse(
                     # pylint: disable-next=consider-using-f-string
-                    '''
+                    """
                     <body name="{name}" pos="{pos}" quat="{quat}">
                         <freejoint name="{name}"/>
                         <geom name="{name}" type="{type}" size="{size}" density="{density}"
@@ -308,37 +309,37 @@ class World:  # pylint: disable=too-many-instance-attributes
                         <geom name="col4" type="{type}" size="{width} {width} {dim}" density="{density}"
                             rgba="{rgba}" group="{group}" pos="-{x} -{y} 0"/>
                     </body>
-                '''.format(
-                        **{k: convert(v) for k, v in object.items()}
-                    )
+                """.format(
+                        **{k: convert(v) for k, v in object.items()},
+                    ),
                 )
             else:
                 if object['type'] == 'mesh':
                     body = xmltodict.parse(
                         # pylint: disable-next=consider-using-f-string
-                        '''
+                        """
                         <body name="{name}" pos="{pos}" euler="{euler}" >
                             <freejoint name="{name}"/>
                             <geom name="{name}" type="mesh" mesh="{mesh}" material="{material}" density="{density}"
                                 rgba="{rgba}" group="{group}" condim="6" />
                         </body>
-                    '''.format(
-                            **{k: convert(v) for k, v in object.items()}
-                        )
+                    """.format(
+                            **{k: convert(v) for k, v in object.items()},
+                        ),
                     )
                 else:
                     object['quat'] = rot2quat(object['rot'])
                     body = xmltodict.parse(
                         # pylint: disable-next=consider-using-f-string
-                        '''
+                        """
                         <body name="{name}" pos="{pos}" quat="{quat}">
                             <freejoint name="{name}"/>
                             <geom name="{name}" type="{type}" size="{size}" density="{density}"
                                 rgba="{rgba}" group="{group}"/>
                         </body>
-                    '''.format(
-                            **{k: convert(v) for k, v in object.items()}
-                        )
+                    """.format(
+                            **{k: convert(v) for k, v in object.items()},
+                        ),
                     )
             # Append new body to world, making it a list optionally
             # Add the object to the world
@@ -361,8 +362,8 @@ class World:  # pylint: disable=too-many-instance-attributes
                         pos="{pos}" quat="{quat}" contype="0" conaffinity="0" group="{group}"/>
                 </body>
             """.format(
-                    **{k: convert(v) for k, v in mocap.items()}
-                )
+                    **{k: convert(v) for k, v in mocap.items()},
+                ),
             )
             worldbody['body'].append(body['body'])
             # Add weld to equality list
@@ -373,8 +374,8 @@ class World:  # pylint: disable=too-many-instance-attributes
                 """
                 <weld name="{name}" body1="{body1}" body2="{body2}" solref=".02 1.5"/>
             """.format(
-                    **{k: convert(v) for k, v in mocap.items()}
-                )
+                    **{k: convert(v) for k, v in mocap.items()},
+                ),
             )
             equality['weld'].append(weld['weld'])
         # Add geoms to XML dictionary
@@ -386,28 +387,28 @@ class World:  # pylint: disable=too-many-instance-attributes
             if geom['type'] == 'mesh':
                 body = xmltodict.parse(
                     # pylint: disable-next=consider-using-f-string
-                    '''
+                    """
                     <body name="{name}" pos="{pos}" euler="{euler}">
                         <geom name="{name}" type="mesh" mesh="{mesh}" material="{material}"
                         rgba="1 1 1 1" group="{group}" contype="{contype}"
                         conaffinity="{conaffinity}"/>
                     </body>
-                '''.format(
-                        **{k: convert(v) for k, v in geom.items()}
-                    )
+                """.format(
+                        **{k: convert(v) for k, v in geom.items()},
+                    ),
                 )
             else:
                 geom['quat'] = rot2quat(geom['rot'])
                 body = xmltodict.parse(
                     # pylint: disable-next=consider-using-f-string
-                    '''
+                    """
                     <body name="{name}" pos="{pos}" quat="{quat}">
                         <geom name="{name}" type="{type}" size="{size}" rgba="{rgba}"
                         group="{group}" contype="{contype}" conaffinity="{conaffinity}"/>
                     </body>
-                '''.format(
-                        **{k: convert(v) for k, v in geom.items()}
-                    )
+                """.format(
+                        **{k: convert(v) for k, v in geom.items()},
+                    ),
                 )
             # Append new body to world, making it a list optionally
             # Add the object to the world
@@ -459,11 +460,11 @@ class World:  # pylint: disable=too-many-instance-attributes
 
     def get_state(self):
         """Returns a copy of the simulator state."""
-        state = {}
-
-        state['time'] = np.copy(self.data.time)
-        state['qpos'] = np.copy(self.data.qpos)
-        state['qvel'] = np.copy(self.data.qvel)
+        state = {
+            'time': np.copy(self.data.time),
+            'qpos': np.copy(self.data.qpos),
+            'qvel': np.copy(self.data.qvel),
+        }
         if self.model.na == 0:
             state['act'] = None
         else:

@@ -14,8 +14,9 @@
 # ==============================================================================
 """Env builder."""
 
+from __future__ import annotations
+
 from dataclasses import asdict, dataclass
-from typing import Dict, Tuple, Union
 
 import gymnasium
 import numpy as np
@@ -156,8 +157,11 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         self.task.random_generator.set_random_seed(self._seed)
 
     def reset(
-        self, *, seed: int = None, options: dict = None
-    ) -> Tuple[np.ndarray, dict]:  # pylint: disable=arguments-differ
+        self,
+        *,
+        seed: int = None,
+        options: dict = None,
+    ) -> tuple[np.ndarray, dict]:  # pylint: disable=arguments-differ
         """Reset the environment and return observations."""
         info = {}
 
@@ -184,10 +188,12 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         # Return an observation
         return (self.task.obs(), info)
 
-    def step(self, action: np.ndarray) -> Tuple[np.ndarray, float, float, bool, bool, dict]:
+    def step(self, action: np.ndarray) -> tuple[np.ndarray, float, float, bool, bool, dict]:
         """Take a step and return observation, reward, cost, terminated, truncated, info."""
         assert not self.done, 'Environment must be reset before stepping.'
-        action = np.array(action, copy=False)  # Cast to ndarray
+        action = np.array(action, copy=False)  # cast to ndarray
+        if action.shape != self.action_space.shape:  # check action dimension
+            raise ValueError('Action dimension mismatch')
 
         info = {}
 
@@ -251,7 +257,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         # Intrinsic reward for uprightness
         if self.task.reward_conf.reward_orientation:
             zalign = quat2zalign(
-                self.task.data.get_body_xquat(self.task.reward_conf.reward_orientation_body)
+                self.task.data.get_body_xquat(self.task.reward_conf.reward_orientation_body),
             )
             reward += self.task.reward_conf.reward_orientation_scale * zalign
 
@@ -281,11 +287,27 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
         return cost
 
-    def render(self) -> Union[None, np.ndarray]:
+    def render(self) -> np.ndarray | None:
         """Call underlying :meth:`safety_gymnasium.bases.underlying.Underlying.render` directly.
 
         Width and height in parameters are constant defaults for rendering
         frames for humans. (not used for vision)
+
+        The set of supported modes varies per environment. (And some
+        third-party environments may not support rendering at all.)
+        By convention, if render_mode is:
+
+        - None (default): no render is computed.
+        - human: render return None.
+          The environment is continuously rendered in the current display or terminal. Usually for human consumption.
+        - rgb_array: return a single frame representing the current state of the environment.
+          A frame is a numpy.ndarray with shape (x, y, 3) representing RGB values for an x-by-y pixel image.
+        - rgb_array_list: return a list of frames representing the states of the environment since the last reset.
+          Each frame is a numpy.ndarray with shape (x, y, 3), as with `rgb_array`.
+        - depth_array: return a single frame representing the current state of the environment.
+          A frame is a numpy.ndarray with shape (x, y) representing depth values for an x-by-y pixel image.
+        - depth_array_list: return a list of frames representing the states of the environment since the last reset.
+          Each frame is a numpy.ndarray with shape (x, y), as with `depth_array`.
         """
         assert self.render_parameters.mode, 'Please specify the render mode when you make env.'
         assert (
@@ -299,12 +321,12 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         return self.task.action_space
 
     @property
-    def observation_space(self) -> Union[gymnasium.spaces.Box, gymnasium.spaces.Dict]:
+    def observation_space(self) -> gymnasium.spaces.Box | gymnasium.spaces.Dict:
         """Helper to get observation space."""
         return self.task.observation_space
 
     @property
-    def obs_space_dict(self) -> Dict[str, gymnasium.spaces.Box]:
+    def obs_space_dict(self) -> dict[str, gymnasium.spaces.Box]:
         """Helper to get observation space dictionary."""
         return self.task.obs_info.obs_space_dict
 
@@ -312,3 +334,8 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
     def done(self) -> bool:
         """Whether this episode is ended."""
         return self.terminated or self.truncated
+
+    @property
+    def render_mode(self) -> str:
+        """The render mode."""
+        return self.render_parameters.mode

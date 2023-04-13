@@ -14,11 +14,12 @@
 # ==============================================================================
 """Base task."""
 
+from __future__ import annotations
+
 import abc
 import os
 from collections import OrderedDict
 from dataclasses import dataclass
-from typing import Union
 
 import gymnasium
 import mujoco
@@ -121,7 +122,7 @@ class ObservationInfo:
 
 
 class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-many-public-methods
-    r"""Base task class for defining some common characteristic and Mechanism.
+    r"""Base task class for defining some common characteristic and mechanism.
 
     Methods:
 
@@ -168,7 +169,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
       and it is implemented in different task.
     """
 
-    def __init__(self, config: dict):  # pylint: disable-next=too-many-statements
+    def __init__(self, config: dict) -> None:  # pylint: disable-next=too-many-statements
         """Initialize the task.
 
         Args:
@@ -220,24 +221,36 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             if obstacle.is_lidar_observed:
                 name = obstacle.name + '_' + 'lidar'
                 obs_space_dict[name] = gymnasium.spaces.Box(
-                    0.0, 1.0, (self.lidar_conf.num_bins,), dtype=np.float64
+                    0.0,
+                    1.0,
+                    (self.lidar_conf.num_bins,),
+                    dtype=np.float64,
                 )
             if hasattr(obstacle, 'is_comp_observed') and obstacle.is_comp_observed:
-                gymnasium.spaces.Box(-1.0, 1.0, (self.compass_conf.shape,), dtype=np.float64)
+                name = obstacle.name + '_' + 'comp'
+                obs_space_dict[name] = gymnasium.spaces.Box(
+                    -1.0,
+                    1.0,
+                    (self.compass_conf.shape,),
+                    dtype=np.float64,
+                )
 
         if self.observe_vision:
             width, height = self.vision_env_conf.vision_size
             rows, cols = height, width
             self.vision_env_conf.vision_size = (rows, cols)
             obs_space_dict['vision'] = gymnasium.spaces.Box(
-                0, 255, self.vision_env_conf.vision_size + (3,), dtype=np.uint8
+                0,
+                255,
+                (*self.vision_env_conf.vision_size, 3),
+                dtype=np.uint8,
             )
 
         self.obs_info.obs_space_dict = gymnasium.spaces.Dict(obs_space_dict)
 
         if self.observation_flatten:
             self.observation_space = gymnasium.spaces.utils.flatten_space(
-                self.obs_info.obs_space_dict
+                self.obs_info.obs_space_dict,
             )
         else:
             self.observation_space = self.obs_info.obs_space_dict
@@ -262,13 +275,12 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
 
     def _build_world_config(self, layout: dict) -> dict:  # pylint: disable=too-many-branches
         """Create a world_config from our own config."""
-        world_config = {}
-
-        world_config['floor_type'] = self.floor_conf.type
-        world_config['floor_size'] = self.floor_conf.size
-
-        world_config['agent_base'] = self.agent.base
-        world_config['agent_xy'] = layout['agent']
+        world_config = {
+            'floor_type': self.floor_conf.type,
+            'floor_size': self.floor_conf.size,
+            'agent_base': self.agent.base,
+            'agent_xy': layout['agent'],
+        }
         if self.agent.rot is None:
             world_config['agent_rot'] = self.random_generator.random_rot()
         else:
@@ -280,7 +292,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
                 'geoms': {},
                 'free_geoms': {},
                 'mocaps': {},
-            }
+            },
         )
         for obstacle in self._obstacles:
             num = obstacle.num if hasattr(obstacle, 'num') else 1
@@ -303,7 +315,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         # load all config of meshes in specific environment from .yaml file
         base_dir = os.path.dirname(safety_gymnasium.__file__)
         with open(os.path.join(base_dir, f'configs/{config_name}.yaml'), encoding='utf-8') as file:
-            meshes_config = yaml.load(file, Loader=yaml.FullLoader)
+            meshes_config = yaml.load(file, Loader=yaml.FullLoader)  # noqa: S506
 
         for idx in range(level + 1):
             for group in meshes_config[idx].values():
@@ -338,13 +350,13 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             object_num = getattr(data_obj, 'num', None)
             object_locations = getattr(data_obj, 'locations', [])
             object_placements = getattr(data_obj, 'placements', None)
-            object_keepout = getattr(data_obj, 'keepout')
+            object_keepout = data_obj.keepout
         else:  # Unique objects
             object_fmt = object_name
             object_num = 1
             object_locations = getattr(data_obj, 'locations', [])
             object_placements = getattr(data_obj, 'placements', None)
-            object_keepout = getattr(data_obj, 'keepout')
+            object_keepout = data_obj.keepout
         for i in range(object_num):
             if i < len(object_locations):
                 x, y = object_locations[i]  # pylint: disable=invalid-name
@@ -355,7 +367,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             placements_dict[object_fmt.format(i=i)] = (placements, object_keepout)
         return placements_dict
 
-    def obs(self) -> Union[dict, np.ndarray]:
+    def obs(self) -> dict | np.ndarray:
         """Return the observation of our agent."""
         # pylint: disable-next=no-member
         mujoco.mj_forward(self.model, self.data)  # Needed to get sensor's data correct
@@ -373,14 +385,14 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             obs['vision'] = self._obs_vision()
 
         assert self.obs_info.obs_space_dict.contains(
-            obs
+            obs,
         ), f'Bad obs {obs} {self.obs_info.obs_space_dict}'
 
         if self.observation_flatten:
             obs = gymnasium.spaces.utils.flatten(self.obs_info.obs_space_dict, obs)
         return obs
 
-    def _obs_lidar(self, positions: Union[np.ndarray, list], group: int) -> np.ndarray:
+    def _obs_lidar(self, positions: np.ndarray | list, group: int) -> np.ndarray:
         """Calculate and return a lidar observation.
 
         See sub methods for implementation.
@@ -410,7 +422,14 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             vec = np.asarray(vec, dtype='float64')
             geom_id = np.array([0], dtype='int32')
             dist = mujoco.mj_ray(  # pylint: disable=no-member
-                self.model, self.data, pos, vec, grp, 1, body, geom_id
+                self.model,
+                self.data,
+                pos,
+                vec,
+                grp,
+                1,
+                body,
+                geom_id,
             )
             if dist >= 0:
                 obs[i] = np.exp(-dist)
@@ -495,12 +514,11 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             This is a 3D array of shape (rows, cols, channels).
             The channels are RGB, in that order.
             If you are on a headless machine, you may need to checkout this:
-            URL: `issue <https://github.com/PKU-MARL/Safety Gymnasium/issues/27>`_
+            URL: `issue <https://github.com/OmniSafeAI/Safety Gymnasium/issues/27>`_
         """
         rows, cols = self.vision_env_conf.vision_size
         width, height = cols, rows
-        vision = self.render(width, height, mode='rgb_array', camera_name='vision', cost={})
-        return vision
+        return self.render(width, height, mode='rgb_array', camera_name='vision', cost={})
 
     def _ego_xy(self, pos: np.ndarray) -> np.ndarray:
         """Return the egocentric XY vector to a position from the agent."""
@@ -523,7 +541,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
     def specific_step(self) -> None:
         """Each task can define a specific step function.
 
-        It will be called when :meth:`safety_gymnaisum.builder.Builder.step()` is called using env.step().
+        It will be called when :meth:`safety_gymnasium.builder.Builder.step()` is called using env.step().
         For example, you can do specific data modification.
         """
 

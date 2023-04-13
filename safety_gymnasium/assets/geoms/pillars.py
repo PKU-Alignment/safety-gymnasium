@@ -44,7 +44,7 @@ class Pillars(Geom):  # pylint: disable=too-many-instance-attributes
     # pylint: disable-next=too-many-arguments
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""
-        geom = {
+        return {
             'name': self.name,
             'size': [self.size, self.height],
             'pos': np.r_[xy_pos, self.height],
@@ -53,7 +53,6 @@ class Pillars(Geom):  # pylint: disable=too-many-instance-attributes
             'group': self.group,
             'rgba': self.color,
         }
-        return geom
 
     def cal_cost(self):
         """Contacts processing."""
@@ -64,10 +63,11 @@ class Pillars(Geom):  # pylint: disable=too-many-instance-attributes
         for contact in self.engine.data.contact[: self.engine.data.ncon]:
             geom_ids = [contact.geom1, contact.geom2]
             geom_names = sorted([self.engine.model.geom(g).name for g in geom_ids])
-            if any(n.startswith('pillar') for n in geom_names):
-                if any(n in self.agent.body_info.geom_names for n in geom_names):
-                    # pylint: disable-next=no-member
-                    cost['cost_pillars'] += self.cost
+            if any(n.startswith('pillar') for n in geom_names) and any(
+                n in self.agent.body_info.geom_names for n in geom_names
+            ):
+                # pylint: disable-next=no-member
+                cost['cost_pillars'] += self.cost
 
         return cost
 

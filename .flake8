@@ -1,0 +1,29 @@
+[flake8]
+max-line-length = 120
+max-doc-length = 100
+select = B,C,E,F,W,Y,SIM
+ignore =
+    # E203: whitespace before ':'
+    # W503: line break before binary operator
+    # W504: line break after binary operator
+    # format by black
+    E203,W503,W504,
+    # E501: line too long
+    # W505: doc line too long
+    # too long docstring due to long example blocks
+    E501,W505,
+per-file-ignores =
+    # F401: module imported but unused
+    # intentionally unused imports
+    __init__.py: F401
+exclude =
+    .git,
+    .vscode,
+    venv,
+    third-party,
+    __pycache__,
+    docs/conf.py,
+    build,
+    dist,
+    tests,
+    examples

@@ -39,7 +39,7 @@ class Sigwalls(Geom):  # pylint: disable=too-many-instance-attributes
     is_lidar_observed: bool = False
     is_constrained: bool = False
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         assert self.num in (2, 4), 'Sigwalls are specific for Circle and Run tasks.'
         assert (
             self.locate_factor >= 0

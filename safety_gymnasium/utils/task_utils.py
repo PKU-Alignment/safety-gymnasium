@@ -23,8 +23,7 @@ import numpy as np
 def get_task_class_name(task_id):
     """Help to translate task_id into task_class_name."""
     class_name = re.findall('[A-Z][^A-Z]*', task_id.split('-')[0])[-1]
-    class_name = class_name[:-1] + 'Level' + class_name[-1]
-    return class_name
+    return class_name[:-1] + 'Level' + class_name[-1]
 
 
 def quat2mat(quat):
@@ -54,8 +53,7 @@ def get_body_jacp(model, data, name, jacp=None):
 def get_body_xvelp(model, data, name):
     """Get specific body's Cartesian velocity."""
     jacp = get_body_jacp(model, data, name).reshape((3, model.nv))
-    xvelp = np.dot(jacp, data.qvel)
-    return xvelp
+    return np.dot(jacp, data.qvel)
 
 
 def add_velocity_marker(viewer, pos, vel, cost, velocity_threshold):

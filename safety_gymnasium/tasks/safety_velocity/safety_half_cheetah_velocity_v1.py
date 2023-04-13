@@ -12,8 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Env wrappers."""
+"""HalfCheetah environment with a safety constraint on velocity."""
 
-from safety_gymnasium.wrappers.autoreset import SafeAutoResetWrapper
-from safety_gymnasium.wrappers.env_checker import SafePassiveEnvChecker
-from safety_gymnasium.wrappers.time_limit import SafeTimeLimit
+from safety_gymnasium.tasks.safety_velocity.safety_half_cheetah_velocity_v0 import (
+    SafetyHalfCheetahVelocityEnv as HalfCheetahEnv,
+)
+
+
+class SafetyHalfCheetahVelocityEnv(HalfCheetahEnv):
+    """HalfCheetah environment with a safety constraint on velocity."""
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+        self._velocity_threshold = 3.2096

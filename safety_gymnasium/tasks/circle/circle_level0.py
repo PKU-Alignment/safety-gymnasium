@@ -23,7 +23,7 @@ from safety_gymnasium.bases.base_task import BaseTask
 class CircleLevel0(BaseTask):
     """An agent want to loop around the boundary of circle."""
 
-    def __init__(self, config):
+    def __init__(self, config) -> None:
         super().__init__(config=config)
 
         self.num_steps = 500

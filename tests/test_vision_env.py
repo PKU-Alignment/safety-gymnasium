@@ -13,3 +13,63 @@
 # limitations under the License.
 # ==============================================================================
 """Test vision environments."""
+
+import helpers
+import safety_gymnasium
+
+
+@helpers.parametrize(
+    agent_id=['Point', 'Car', 'Racecar', 'Ant'],
+    env_id=['Goal', 'Push', 'Button'],
+    level=['0', '1', '2'],
+)
+# pylint: disable-next=too-many-locals
+def test_vision_env(agent_id, env_id, level):
+    """Test vision env."""
+    env_name = 'Safety' + agent_id + env_id + level + 'Vision' + '-v0'
+    env = safety_gymnasium.make(env_name)
+    obs, _ = env.reset()
+    terminated, truncated = False, False
+    ep_ret, ep_cost = 0, 0
+    for step in range(4):  # pylint: disable=unused-variable
+        if step == 2:
+            print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
+            ep_ret, ep_cost = 0, 0
+            obs, _ = env.reset()
+        assert env.observation_space.contains(obs)
+        act = env.action_space.sample()
+        assert env.action_space.contains(act)
+        # pylint: disable-next=unused-variable
+        obs, reward, cost, terminated, truncated, info = env.step(act)
+
+        ep_ret += reward
+        ep_cost += cost
+
+
+@helpers.parametrize(
+    agent_id=['Point', 'Car', 'Racecar', 'Ant'],
+    env_id=['Run'],
+    level=['0'],
+)
+# pylint: disable-next=too-many-locals
+def test_new_env(agent_id, env_id, level):
+    """Test env."""
+    env_name = 'Safety' + agent_id + env_id + level + 'Vision' + '-v0'
+    env = safety_gymnasium.make(env_name)
+    obs, _ = env.reset()
+    terminated, truncated = False, False
+    ep_ret, ep_cost = 0, 0
+    for step in range(4):  # pylint: disable=unused-variable
+        if step == 2:
+            print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
+            ep_ret, ep_cost = 0, 0
+            obs, _ = env.reset()
+        assert env.observation_space.contains(obs)
+        act = env.action_space.sample()
+        assert env.action_space.contains(act)
+
+        # pylint: disable-next=unused-variable
+        obs, reward, cost, terminated, truncated, info = env.step(act)
+
+        ep_ret += reward
+        ep_cost += cost

@@ -12,41 +12,49 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""HalfCheetah environment with a safety constraint on velocity."""
+"""Swimmer environment with a safety constraint on velocity."""
 
-from gymnasium.envs.mujoco.half_cheetah_v4 import HalfCheetahEnv
+import numpy as np
 
+from safety_gymnasium.tasks.safety_velocity.safety_swimmer_velocity_v0 import (
+    SafetySwimmerVelocityEnv as SwimmerEnv,
+)
 from safety_gymnasium.utils.task_utils import add_velocity_marker, clear_viewer
 
 
-class SafetyHalfCheetahVelocityEnv(HalfCheetahEnv):
-    """HalfCheetah environment with a safety constraint on velocity."""
+class SafetySwimmerVelocityEnv(SwimmerEnv):
+    """Swimmer environment with a safety constraint on velocity."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
-        self._velocity_threshold = 2.8795
-        self.model.light(0).castshadow = False
+        self._velocity_threshold = 0.2282
 
     def step(self, action):
-        x_position_before = self.data.qpos[0]
+        xy_position_before = self.data.qpos[0:2].copy()
         self.do_simulation(action, self.frame_skip)
-        x_position_after = self.data.qpos[0]
-        x_velocity = (x_position_after - x_position_before) / self.dt
+        xy_position_after = self.data.qpos[0:2].copy()
 
-        ctrl_cost = self.control_cost(action)
+        xy_velocity = (xy_position_after - xy_position_before) / self.dt
+        x_velocity, y_velocity = xy_velocity
 
         forward_reward = self._forward_reward_weight * x_velocity
 
+        ctrl_cost = self.control_cost(action)
+
         observation = self._get_obs()
         reward = forward_reward - ctrl_cost
-        terminated = False
         info = {
-            'x_position': x_position_after,
-            'x_velocity': x_velocity,
-            'reward_run': forward_reward,
+            'reward_fwd': forward_reward,
             'reward_ctrl': -ctrl_cost,
+            'x_position': xy_position_after[0],
+            'y_position': xy_position_after[1],
+            'distance_from_origin': np.linalg.norm(xy_position_after, ord=2),
+            'x_velocity': x_velocity,
+            'y_velocity': y_velocity,
+            'forward_reward': forward_reward,
         }
 
+        velocity = np.sqrt(x_velocity**2 + y_velocity**2)
         cost = float(x_velocity > self._velocity_threshold)
 
         if self.viewer:
@@ -54,10 +62,10 @@ class SafetyHalfCheetahVelocityEnv(HalfCheetahEnv):
             add_velocity_marker(
                 viewer=self.viewer,
                 pos=self.get_body_com('torso')[:3].copy(),
-                vel=x_velocity,
+                vel=velocity,
                 cost=cost,
                 velocity_threshold=self._velocity_threshold,
             )
         if self.render_mode == 'human':
             self.render()
-        return observation, reward, cost, terminated, False, info
+        return observation, reward, cost, False, False, info
