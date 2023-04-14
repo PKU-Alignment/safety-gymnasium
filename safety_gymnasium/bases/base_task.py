@@ -514,7 +514,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             This is a 3D array of shape (rows, cols, channels).
             The channels are RGB, in that order.
             If you are on a headless machine, you may need to checkout this:
-            URL: `issue <https://github.com/PKU-MARL/Safety Gymnasium/issues/27>`_
+            URL: `issue <https://github.com/OmniSafeAI/Safety Gymnasium/issues/27>`_
         """
         rows, cols = self.vision_env_conf.vision_size
         width, height = cols, rows

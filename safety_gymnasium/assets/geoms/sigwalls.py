@@ -43,8 +43,7 @@ class Sigwalls(Geom):  # pylint: disable=too-many-instance-attributes
         assert self.num in (2, 4), 'Sigwalls are specific for Circle and Run tasks.'
         assert (
             self.locate_factor >= 0
-        ), 'For cost calculation, the locate_factor\
-                                         must be greater than or equal to zero.'
+        ), 'For cost calculation, the locate_factor must be greater than or equal to zero.'
         self.locations: list = [
             (self.locate_factor, 0),
             (-self.locate_factor, 0),
