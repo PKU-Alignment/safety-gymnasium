@@ -57,30 +57,37 @@ Further, to facilitate the progress of community research, we redesigned [Safety
 Here is a list of all the environments we support for now; some are being tested in our baselines, and we will gradually disclose it in the later updates.
 
 <table border="1">
-  <tr>
-    <th>Category</th>
-    <th>Task</th>
-    <th>Agent</th>
-  </tr>
-  <tr>
-    <td rowspan="4">Safe Navigation</td>
-    <td>Goal[012]</td>
-    <td rowspan="4">Point, Car, Racecar, Ant</td>
-  </tr>
-  <tr>
-    <td>Button[012]</td>
-  </tr>
-  <tr>
-    <td>Push[012]</td>
-  </tr>
-  <tr>
-    <td>Circle[012]</td>
-  </tr>
-  <tr>
-    <td>Safe Velocity</td>
-    <td>Velocity</td>
-    <td>HalfCheetah, Hopper, Swimmer, Walker2d, Ant, Humanoid</td>
-  </tr>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Task</th>
+            <th>Agent</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="4">Safe Navigation</td>
+            <td>Goal[012]</td>
+            <td rowspan="4">Point, Car, Racecar, Ant</td>
+            <td rowspan="4">SafetyPointGoal1-v0</td>
+        </tr>
+        <tr>
+            <td>Button[012]</td>
+        </tr>
+        <tr>
+            <td>Push[012]</td>
+        </tr>
+        <tr>
+            <td>Circle[012]</td>
+        </tr>
+        <tr>
+            <td>Velocity</td>
+            <td>Velocity</td>
+            <td>HalfCheetah, Hopper, Swimmer, Walker2d, Ant, Humanoid</td>
+            <td>SafetyAntVelocity-v1</td>
+        </tr>
+    </tbody>
 </table>
 
 Here are some pictures about tasks in Safe Navigation.
@@ -378,6 +385,15 @@ git clone git@github.com:PKU-MARL/safety-gymnasium.git
 cd Safety-Gymnasium
 pip install -e .
 ```
+
+### Important Notes
+- If you failed to render on your server, try below:
+  ```bash
+  echo "export MUJOCO_GL=osmesa" >> ~/.bashrc.
+  source ~/.bashrc.
+  apt-get install libosmesa6-dev
+  apt-get install python3-opengl
+  ```
 
 --------------------------------------------------------------------------------
 
