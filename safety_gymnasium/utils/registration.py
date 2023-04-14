@@ -92,8 +92,10 @@ def make(
                 importlib.import_module(module)
             except ModuleNotFoundError as ex:
                 raise ModuleNotFoundError(
-                    f'{ex}. Environment registration via importing a module failed. '
-                    f"Check whether '{module}' contains env registration and can be imported.",
+                    (
+                        f'{ex}. Environment registration via importing a module failed. '
+                        f"Check whether '{module}' contains env registration and can be imported."
+                    ),
                 ) from ex
         spec_ = registry.get(id)
 
@@ -101,16 +103,20 @@ def make(
         latest_version = find_highest_version(name_space, name)
         if version is not None and latest_version is not None and latest_version > version:
             logger.warn(
-                f'The environment {id} is out of date. You should consider '
-                f'upgrading to version `v{latest_version}`.',
+                (
+                    f'The environment {id} is out of date. You should consider '
+                    f'upgrading to version `v{latest_version}`.'
+                ),
             )
         if version is None and latest_version is not None:
             version = latest_version
             new_env_id = get_env_id(name_space, name, version)
             spec_ = registry.get(new_env_id)
             logger.warn(
-                f'Using the latest versioned environment `{new_env_id}` '
-                f'instead of the unversioned environment `{id}`.',
+                (
+                    f'Using the latest versioned environment `{new_env_id}` '
+                    f'instead of the unversioned environment `{id}`.'
+                ),
             )
 
         if spec_ is None:
@@ -140,15 +146,19 @@ def make(
         assert isinstance(
             env_creator.metadata,
             dict,
-        ), f'Expect the environment creator ({env_creator}) metadata to be dict,\
-                actual type: {type(env_creator.metadata)}'
+        ), (
+            f'Expect the environment creator ({env_creator}) metadata to be dict, '
+            f'actual type: {type(env_creator.metadata)}'
+        )
 
         if 'render_modes' in env_creator.metadata:
             render_modes = env_creator.metadata['render_modes']
             if not isinstance(render_modes, Sequence):
                 logger.warn(
-                    f'Expects the environment metadata render_modes to be a Sequence (tuple or list),\
-                        actual type: {type(render_modes)}',
+                    (
+                        'Expects the environment metadata render_modes to be a Sequence (tuple or list), '
+                        f'actual type: {type(render_modes)}'
+                    ),
                 )
 
             # Apply the `HumanRendering` wrapper, if the mode=="human" but "human" not in render_modes
@@ -158,8 +168,11 @@ def make(
                 and ('rgb_array' in render_modes or 'rgb_array_list' in render_modes)
             ):
                 logger.warn(
-                    "You are trying to use 'human' rendering for an environment that doesn't natively support it. "
-                    'The HumanRendering wrapper is being applied to your environment.',
+                    (
+                        "You are trying to use 'human' rendering for an environment that doesn't "
+                        'natively support it. The HumanRendering wrapper is being applied to your '
+                        'environment.'
+                    ),
                 )
                 apply_human_rendering = True
                 if 'rgb_array' in render_modes:
@@ -175,13 +188,17 @@ def make(
                 apply_render_collection = True
             elif mode not in render_modes:
                 logger.warn(
-                    f'The environment is being initialised with mode ({mode})\
-                        that is not in the possible render_modes ({render_modes}).',
+                    (
+                        f'The environment is being initialised with mode ({mode}) '
+                        f'that is not in the possible render_modes ({render_modes}).'
+                    ),
                 )
         else:
             logger.warn(
-                f"The environment creator metadata doesn't include `render_modes`,\
-                    contains: {list(env_creator.metadata.keys())}",
+                (
+                    "The environment creator metadata doesn't include `render_modes`, "
+                    f'contains: {list(env_creator.metadata.keys())}'
+                ),
             )
 
     if apply_api_compatibility is True or (
@@ -197,9 +214,12 @@ def make(
     except TypeError as ex:
         if "got an unexpected keyword argument 'render_mode'" in str(ex) and apply_human_rendering:
             raise error.Error(
-                f"You passed render_mode='human' although {id} doesn't implement human-rendering natively. "
-                'Gym tried to apply the HumanRendering wrapper but it looks like your environment is using the old '
-                'rendering API, which is not supported by the HumanRendering wrapper.',
+                (
+                    f"You passed render_mode='human' although {id} doesn't implement "
+                    'human-rendering natively. Gym tried to apply the HumanRendering wrapper but '
+                    'it looks like your environment is using the old rendering API, which is not '
+                    'supported by the HumanRendering wrapper.'
+                ),
             ) from ex
         raise
 
