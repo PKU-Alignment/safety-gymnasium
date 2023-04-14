@@ -20,8 +20,8 @@ import safety_gymnasium
 
 
 @helpers.parametrize(
-    agent_id=['Point'],
-    env_id=['Goal'],
+    agent_id=['Point', 'Car', 'Racecar', 'Ant'],
+    env_id=['Goal', 'Push', 'Button', 'Circle'],
     level=['0', '1', '2'],
     render_mode=['rgb_array', 'depth_array'],
 )
