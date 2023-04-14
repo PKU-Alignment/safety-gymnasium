@@ -197,8 +197,10 @@ def _worker(
                 name, args, kwargs = data
                 if name in ['reset', 'step', 'seed', 'close']:
                     raise ValueError(
-                        f'Trying to call function `{name}` with '
-                        f'`_call`. Use `{name}` directly instead.',
+                        (
+                            f'Trying to call function `{name}` with `_call`. '
+                            f'Use `{name}` directly instead.'
+                        ),
                     )
                 function = getattr(env, name)
                 if callable(function):
@@ -218,9 +220,11 @@ def _worker(
                 )
             else:
                 raise RuntimeError(
-                    f'Received unknown command `{command}`. Must '
-                    'be one of {`reset`, `step`, `seed`, `close`, `render`, `_call`, '
-                    '`_setattr`, `_check_spaces`}.',
+                    (
+                        f'Received unknown command `{command}`. '
+                        'Must be one of {`reset`, `step`, `seed`, `close`, `render`, `_call`, '
+                        '`_setattr`, `_check_spaces`}.'
+                    ),
                 )
     # pylint: disable-next=broad-except
     except (KeyboardInterrupt, Exception):
@@ -279,8 +283,10 @@ def _worker_shared_memory(
                 name, args, kwargs = data
                 if name in ['reset', 'step', 'seed', 'close']:
                     raise ValueError(
-                        f'Trying to call function `{name}` with '
-                        f'`_call`. Use `{name}` directly instead.',
+                        (
+                            f'Trying to call function `{name}` with `_call`. '
+                            f'Use `{name}` directly instead.'
+                        ),
                     )
                 function = getattr(env, name)
                 if callable(function):
@@ -295,9 +301,11 @@ def _worker_shared_memory(
                 pipe.send(((data[0] == observation_space, data[1] == env.action_space), True))
             else:
                 raise RuntimeError(
-                    f'Received unknown command `{command}`. Must '
-                    'be one of {`reset`, `step`, `seed`, `close`, `render`, `_call`, '
-                    '`_setattr`, `_check_spaces`}.',
+                    (
+                        f'Received unknown command `{command}`. '
+                        'Must be one of {`reset`, `step`, `seed`, `close`, `render`, `_call`, '
+                        '`_setattr`, `_check_spaces`}.'
+                    ),
                 )
     # pylint: disable-next=broad-except
     except (KeyboardInterrupt, Exception):
