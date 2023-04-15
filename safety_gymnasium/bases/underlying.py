@@ -23,7 +23,7 @@ from dataclasses import dataclass
 import gymnasium
 import mujoco
 import numpy as np
-from gymnasium.envs.mujoco.mujoco_rendering import RenderContextOffscreen
+from gymnasium.envs.mujoco.mujoco_rendering import OffScreenViewer
 
 import safety_gymnasium
 from safety_gymnasium import agents
@@ -537,21 +537,13 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             self._render_sphere(self.agent.pos, 0.25, COLOR['red'], alpha=0.5)
 
         # Draw vision pixels
-        if mode == 'rgb_array':
-            self._get_viewer(mode).render(camera_id=camera_id)
-            data = self._get_viewer(mode).read_pixels(depth=False)
-            # original image is upside-down, so flip it
-            self.viewer._markers[:] = []  # pylint: disable=protected-access
-            self.viewer._overlays.clear()  # pylint: disable=protected-access
-            return data[::-1, :, :]
-        if mode == 'depth_array':
-            self._get_viewer(mode).render()
+        if mode in {'rgb_array', 'depth_array'}:
             # Extract depth part of the read_pixels() tuple
-            data = self._get_viewer(mode).read_pixels(depth=True)[1]
+            data = self._get_viewer(mode).render(render_mode=mode, camera_id=camera_id)
             # original image is upside-down, so flip it
             self.viewer._markers[:] = []  # pylint: disable=protected-access
             self.viewer._overlays.clear()  # pylint: disable=protected-access
-            return data[::-1, :]
+            return data
         if mode == 'human':
             self._get_viewer(mode).render()
             return None
@@ -573,7 +565,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                     self.agent.keyboard_control_callback,
                 )
             elif mode in {'rgb_array', 'depth_array'}:
-                self.viewer = RenderContextOffscreen(self.model, self.data)
+                self.viewer = OffScreenViewer(self.model, self.data)
             else:
                 raise AttributeError(f'Unexpected mode: {mode}')
 

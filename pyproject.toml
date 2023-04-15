@@ -25,12 +25,12 @@ classifiers = [
     'Topic :: Software Development :: Libraries :: Python Modules',
 ]
 dependencies = [
-    "gymnasium==0.26.3",
+    "gymnasium==0.28.1",
     "pygame==2.1.0",
     "mujoco==2.3.0",
-    "xmltodict==0.13.0",
-    "pyyaml==6.0",
-    "imageio==2.25.0",
+    "xmltodict~=0.13.0",
+    "pyyaml~=6.0",
+    "imageio~=2.27.0",
 
 ]
 dynamic = ["version"]
