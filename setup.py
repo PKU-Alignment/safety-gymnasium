@@ -19,7 +19,6 @@ import pathlib
 import re
 import sys
 
-import setuptools
 from setuptools import setup
 
 
@@ -48,17 +47,8 @@ try:
             VERSION_CONTENT = None
 
     setup(
-        name='safety_gymnasium',
+        name='safety-gymnasium',
         version=version.__version__,
-        author='Safety-Gymnasium Team',
-        author_email='jiamg.ji@gmail.com',
-        description='Safety-Gymnasium is a highly scalable and customizable safe reinforcement learning environment library.',
-        url='https://github.com/OmniSafeAI/safety-gymnasium',
-        python_requires='>=3.8',
-        packages=setuptools.find_namespace_packages(
-            include=['safety_gymnasium', 'safety_gymnasium.*'],
-        ),
-        include_package_data=True,
     )
 finally:
     if VERSION_CONTENT is not None:

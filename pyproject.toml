@@ -5,7 +5,7 @@ requires = ["setuptools >= 60.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "safety_gymnasium"
+name = "safety-gymnasium"
 description = "A highly scalable and customizable safe reinforcement learning environment."
 readme = "README.md"
 requires-python = ">= 3.8"
@@ -20,18 +20,17 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-    'Intended Audience :: Science/Research',
-    'Topic :: Scientific/Engineering :: Artificial Intelligence',
-    'Topic :: Software Development :: Libraries :: Python Modules',
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "gymnasium==0.28.1",
-    "pygame==2.1.0",
-    "mujoco==2.3.0",
-    "xmltodict~=0.13.0",
-    "pyyaml~=6.0",
-    "imageio~=2.27.0",
-
+    "gymnasium == 0.28.1",
+    "pygame == 2.1.0",
+    "mujoco == 2.3.0",
+    "xmltodict >= 0.13.0",
+    "pyyaml >= 6.0",
+    "imageio >= 2.27.0",
 ]
 dynamic = ["version"]
 
@@ -59,7 +58,10 @@ lint = [
     "pre-commit",
     "myst-parser",
 ]
-test = ['pytest', 'pytest-cov', 'pytest-xdist']
+test = ["pytest", "pytest-cov", "pytest-xdist"]
+
+[tool.setuptools]
+include-package-data = true
 
 [tool.setuptools.packages.find]
 include = ["safety_gymnasium", "safety_gymnasium.*"]
