@@ -14,7 +14,6 @@
 # ==============================================================================
 """Test environments."""
 
-
 import helpers
 import safety_gymnasium
 
