@@ -8,9 +8,10 @@ Installation
 
     # From the Python Package Index (PyPI)
     pip install safety-gymnasium
+
     # From the source code
     git clone git@github.com:OmniSafeAI/safety-gymnasium.git
-    cd Safety-Gymnasium
+    cd safety-gymnasium
     pip install -e .
 
 
