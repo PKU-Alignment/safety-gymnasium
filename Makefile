@@ -1,6 +1,6 @@
 print-%  : ; @echo $* = $($*)
 PROJECT_NAME   = safety_gymnasium
-COPYRIGHT      = "Safety Gymnasium Team. All Rights Reserved."
+COPYRIGHT      = "OmniSafe AI Team. All Rights Reserved."
 PROJECT_PATH   = $(PROJECT_NAME)
 SHELL          = /bin/bash
 SOURCE_FOLDERS = $(PROJECT_PATH) examples tests docs
