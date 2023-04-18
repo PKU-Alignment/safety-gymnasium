@@ -1,0 +1,3 @@
+pytes
+pytest-cov
+pytest-xdist
