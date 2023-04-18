@@ -48,9 +48,8 @@ def with_gymnasium_wrappers(
         >>> env = safety_gymnasium.wrappers.with_gymnasium_wrappers(
         ...     safety_gymnasium.make(...),
         ...     gymnasium.wrappers.SomeWrapper1,
-        ...     functools.partial(gymnasium.wrappers.SomeWrapper1, kwarg1=..., ...),
+        ...     functools.partial(gymnasium.wrappers.SomeWrapper2, kwarg1=..., kwarg2=...),
         ... )
-
     """
     for wrapper in (SafetyGymnasium2Gymnasium, *wrappers, Gymnasium2SafetyGymnasium):
         if not callable(wrapper):  # wrapper class or a partial function
