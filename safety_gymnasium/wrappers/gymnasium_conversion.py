@@ -23,6 +23,9 @@ class SafetyGymnasium2Gymnasium(gymnasium.Wrapper):
 
     def step(self, action: ActType):
         obs, reward, cost, terminated, truncated, info = super().step(action)
+        assert (
+            'cost' not in info
+        ), 'The info dict already contains a cost. Overwriting it may cause unexpected behavior.'
         info['cost'] = cost
         return obs, reward, terminated, truncated, info
 
@@ -32,6 +35,9 @@ class Gymnasium2SafetyGymnasium(gymnasium.Wrapper):
 
     def step(self, action: ActType):
         obs, reward, terminated, truncated, info = super().step(action)
+        assert (
+            'cost' in info
+        ), 'The info dict does not contain a cost. This is required for Safety-Gymnasium.'
         cost = info['cost']
         return obs, reward, cost, terminated, truncated, info
 
