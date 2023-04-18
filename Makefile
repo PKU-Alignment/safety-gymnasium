@@ -148,7 +148,7 @@ format: py-format-install ruff-install addlicense-install
 	$(PYTHON) -m isort --project $(PROJECT_NAME) $(PYTHON_FILES)
 	$(PYTHON) -m black $(PYTHON_FILES)
 	$(PYTHON) -m ruff check . --fix --exit-zero
-	addlicense -c $(COPYRIGHT) -ignore tests/coverage.xml -l apache -y 2022 $(SOURCE_FOLDERS)
+	addlicense -c $(COPYRIGHT) -ignore tests/coverage.xml -l apache -y 2022-$(shell date +"%Y") $(SOURCE_FOLDERS)
 
 clean-py:
 	find . -type f -name  '*.py[co]' -delete
