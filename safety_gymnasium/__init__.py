@@ -1,4 +1,4 @@
-# Copyright 2022 Safety Gymnasium Team. All Rights Reserved.
+# Copyright 2022-2023 OmniSafe AI Team. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Safety Gymnasium Environments."""
+"""Safety-Gymnasium Environments."""
 
 import copy
 

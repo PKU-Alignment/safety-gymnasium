@@ -1,4 +1,4 @@
-# Copyright 2022 Safety Gymnasium Team. All Rights Reserved.
+# Copyright 2022-2023 OmniSafe AI Team. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -514,7 +514,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             This is a 3D array of shape (rows, cols, channels).
             The channels are RGB, in that order.
             If you are on a headless machine, you may need to checkout this:
-            URL: `issue <https://github.com/OmniSafeAI/Safety Gymnasium/issues/27>`_
+            URL: `issue <https://github.com/OmniSafeAI/safety-gymnasium/issues/27>`_
         """
         rows, cols = self.vision_env_conf.vision_size
         width, height = cols, rows
