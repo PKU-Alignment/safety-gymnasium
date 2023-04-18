@@ -16,8 +16,8 @@
 
 import copy
 
-from gymnasium import make as make_gymnasium
-from gymnasium import register as register_gymnasium
+from gymnasium import make as gymnasium_make
+from gymnasium import register as gymnasium_register
 
 from safety_gymnasium import vector, wrappers
 from safety_gymnasium.utils.registration import make, register
@@ -27,8 +27,8 @@ from safety_gymnasium.version import __version__
 __all__ = [
     'register',
     'make',
-    'make_gymnasium',
-    'register_gymnasium',
+    'gymnasium_make',
+    'gymnasium_register',
 ]
 
 VERSION = 'v0'
@@ -67,7 +67,7 @@ def __register_helper(env_id, entry_point, spec_kwargs=None, **kwargs):
         kwargs=spec_kwargs,
         **kwargs,
     )
-    register_gymnasium(
+    gymnasium_register(
         id=f'{env_name}Gymnasium{dash}{version}',
         entry_point='safety_gymnasium.__init__:make_gymnasium_environment',
         kwargs={'env_id': f'{env_name}Gymnasium{dash}{version}', **copy.deepcopy(spec_kwargs)},
