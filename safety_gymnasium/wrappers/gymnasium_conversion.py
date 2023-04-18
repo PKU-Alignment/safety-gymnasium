@@ -36,7 +36,9 @@ class Gymnasium2SafetyGymnasium(gymnasium.Wrapper):
     def step(self, action: ActType):
         obs, reward, terminated, truncated, info = super().step(action)
         if 'cost' not in info:
-            raise ValueError('The info dict does not contain a cost. This is required for Safety-Gymnasium.')
+            raise ValueError(
+                'The info dict does not contain a cost which is required by Safety-Gymnasium.',
+            )
         cost = info['cost']
         return obs, reward, cost, terminated, truncated, info
 
