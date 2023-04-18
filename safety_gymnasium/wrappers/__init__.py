@@ -16,4 +16,17 @@
 
 from safety_gymnasium.wrappers.autoreset import SafeAutoResetWrapper
 from safety_gymnasium.wrappers.env_checker import SafePassiveEnvChecker
+from safety_gymnasium.wrappers.gymnasium_conversation import (
+    Gymnasium2SafetyGymnasium,
+    SafetyGymnasium2Gymnasium,
+)
 from safety_gymnasium.wrappers.time_limit import SafeTimeLimit
+
+
+__all__ = [
+    'SafeAutoResetWrapper',
+    'SafePassiveEnvChecker',
+    'SafeTimeLimit',
+    'SafetyGymnasium2Gymnasium',
+    'Gymnasium2SafetyGymnasium',
+]
