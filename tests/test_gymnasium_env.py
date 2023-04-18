@@ -26,7 +26,7 @@ import safety_gymnasium
     level=['0'],
 )
 def test_navigation_env(agent_id, env_id, level):
-    """Test Safety-Gymnasium2Gymnasium env."""
+    """Test SafetyGymnasium2Gymnasium env."""
     env_name = 'Safety' + agent_id + env_id + level + 'Gymnasium' + '-v0'
     env = gymnasium.make(env_name)
     obs, _ = env.reset()
