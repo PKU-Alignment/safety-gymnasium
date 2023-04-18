@@ -2,6 +2,7 @@ furo
 sphinx
 myst-parser
 sphinx-autobuild
+sphinx-copybutton
 sphinx-design
 moviepy
 pygame
