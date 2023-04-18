@@ -59,7 +59,7 @@ def __register_helper(env_id, entry_point, spec_kwargs=None, **kwargs):
     )
     gymnasium_register(
         id=f'{env_name}Gymnasium{dash}{version}',
-        entry_point='safety_gymnasium.wrappers.gymnasium_conversation:make_gymnasium_environment',
+        entry_point='safety_gymnasium.wrappers.gymnasium_conversion:make_gymnasium_environment',
         kwargs={'env_id': f'{env_name}Gymnasium{dash}{version}', **copy.deepcopy(spec_kwargs)},
         **kwargs,
     )

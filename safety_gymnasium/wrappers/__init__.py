@@ -20,7 +20,7 @@ import gymnasium
 
 from safety_gymnasium.wrappers.autoreset import SafeAutoResetWrapper
 from safety_gymnasium.wrappers.env_checker import SafePassiveEnvChecker
-from safety_gymnasium.wrappers.gymnasium_conversation import (
+from safety_gymnasium.wrappers.gymnasium_conversion import (
     Gymnasium2SafetyGymnasium,
     SafetyGymnasium2Gymnasium,
 )
