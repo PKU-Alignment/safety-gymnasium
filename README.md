@@ -396,12 +396,30 @@ import safety_gymnasium
 def make_safe_env(env_id):
     safe_env = safety_gymnasium.make(env_id)
     env = safety_gymnasium.wrappers.SafetyGymnasium2Gymnasium(safe_env)
-    env = gymnasium.wrappers.Wrapper1(env)
-    env = gymnasium.wrappers.Wrapper2(env)
+    env = gymnasium.wrappers.SomeWrapper1(env)
+    env = gymnasium.wrappers.SomeWrapper2(env, argname1=arg1, argname2=arg2)
     ...
-    env = gymnasium.wrappers.WrapperN(env)
+    env = gymnasium.wrappers.SomeWrapperN(env)
     safe_env = safety_gymnasium.wrappers.Gymnasium2SafetyGymnasium(env)
     return safe_env
+```
+
+or
+
+```python
+import functools
+
+import gymnasium
+import safety_gymnasium
+
+def make_safe_env(env_id):
+    return safety_gymnasium.wrappers.with_gymnasium_wrappers(
+        safety_gymnasium.make(env_id),
+        gymnasium.wrappers.SomeWrapper1,
+        functools.partial(gymnasium.wrappers.SomeWrapper2, argname1=arg1, argname2=arg2),
+        ...,
+        gymnasium.wrappers.SomeWrapperN,
+    )
 ```
 
 In addition, for all Safety-Gymnasium environments, we also provide corresponding Gymnasium environments with a suffix `Gymnasium` in the environment id. For example:

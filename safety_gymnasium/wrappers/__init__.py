@@ -46,9 +46,11 @@ def with_gymnasium_wrappers(
     Example::
 
         >>> env = safety_gymnasium.wrappers.with_gymnasium_wrappers(
-        ...     safety_gymnasium.make(...),
+        ...     safety_gymnasium.make(env_id),
         ...     gymnasium.wrappers.SomeWrapper1,
-        ...     functools.partial(gymnasium.wrappers.SomeWrapper2, kwarg1=..., kwarg2=...),
+        ...     functools.partial(gymnasium.wrappers.SomeWrapper2, argname1=arg1, argname2=arg2),
+        ...     ...,
+        ...     gymnasium.wrappers.SomeWrapperN,
         ... )
     """
     for wrapper in (SafetyGymnasium2Gymnasium, *wrappers, Gymnasium2SafetyGymnasium):
