@@ -15,6 +15,7 @@
 """Wrappers for converting between Safety-Gymnasium and Gymnasium environments."""
 
 import gymnasium
+from gymnasium import logger
 from gymnasium.core import ActType
 
 
@@ -23,9 +24,11 @@ class SafetyGymnasium2Gymnasium(gymnasium.Wrapper):
 
     def step(self, action: ActType):
         obs, reward, cost, terminated, truncated, info = super().step(action)
-        assert (
-            'cost' not in info
-        ), 'The info dict already contains a cost. Overwriting it may cause unexpected behavior.'
+        if 'cost' in info:
+            logger.warn(
+                'The info dict already contains a cost. '
+                'Overwriting it may cause unexpected behavior.',
+            )
         info['cost'] = cost
         return obs, reward, terminated, truncated, info
 
@@ -35,11 +38,12 @@ class Gymnasium2SafetyGymnasium(gymnasium.Wrapper):
 
     def step(self, action: ActType):
         obs, reward, terminated, truncated, info = super().step(action)
-        if 'cost' not in info:
+        try:
+            cost = info['cost']
+        except KeyError as ex:
             raise ValueError(
                 'The info dict does not contain a cost which is required by Safety-Gymnasium.',
-            )
-        cost = info['cost']
+            ) from ex
         return obs, reward, cost, terminated, truncated, info
 
 
