@@ -36,13 +36,10 @@ ROBOT_NAMES = ('Point', 'Car', 'Racecar', 'Ant')
 MAKE_VISION_ENVIRONMENTS = True
 MAKE_DEBUG_ENVIRONMENTS = True
 
-# ============================================================================ #
-#                                                                              #
-#    Helper Class for Easy Registration                                        #
-#                                                                              #
-# ============================================================================ #
+# ========================================
+# Helper Methods for Easy Registration
+# ========================================
 
-"""Base used to allow for convenient hierarchies of environments"""
 PREFIX = 'Safety'
 
 robots = ROBOT_NAMES
@@ -81,8 +78,8 @@ def __register_helper(env_id, entry_point, spec_kwargs=None, **kwargs):
 def __combine(tasks, agents, max_episode_steps):
     """Combine tasks and agents together to register environment tasks."""
     for task_name, task_config in tasks.items():
+        # Vector inputs
         for robot_name in agents:
-            # Default
             env_id = f'{PREFIX}{robot_name}{task_name}-{VERSION}'
             combined_config = copy.deepcopy(task_config)
             combined_config.update({'agent_name': robot_name})
@@ -95,7 +92,7 @@ def __combine(tasks, agents, max_episode_steps):
             )
 
             if MAKE_VISION_ENVIRONMENTS:
-                # Vision: note, these environments are experimental! Correct behavior not guaranteed
+                # Vision inputs
                 vision_env_name = f'{PREFIX}{robot_name}{task_name}Vision-{VERSION}'
                 vision_config = {
                     'observe_vision': True,
@@ -110,6 +107,7 @@ def __combine(tasks, agents, max_episode_steps):
                 )
 
             if MAKE_DEBUG_ENVIRONMENTS and robot_name in ['Point', 'Car', 'Racecar']:
+                # Keyboard inputs for debugging
                 debug_env_name = f'{PREFIX}{robot_name}{task_name}Debug-{VERSION}'
                 debug_config = copy.deepcopy(combined_config)
                 debug_config.update({'debug': True})
@@ -121,58 +119,44 @@ def __combine(tasks, agents, max_episode_steps):
                 )
 
 
-# ============================================================================ #
-#                                                                              #
-#    Button Environments                                                       #
-#                                                                              #
-# ============================================================================ #
+# ----------------------------------------
+# Safety Navigation
+# ----------------------------------------
 
+# Button Environments
+# ----------------------------------------
 button_tasks = {'Button0': {}, 'Button1': {}, 'Button2': {}}
 __combine(button_tasks, robots, max_episode_steps=1000)
 
 
-# ============================================================================ #
-#                                                                              #
-#    Push Environments                                                         #
-#                                                                              #
-# ============================================================================ #
-
+# Push Environments
+# ----------------------------------------
 push_tasks = {'Push0': {}, 'Push1': {}, 'Push2': {}}
 __combine(push_tasks, robots, max_episode_steps=1000)
 
 
-# ============================================================================ #
-#                                                                              #
-#    Goal Environments                                                         #
-#                                                                              #
-# ============================================================================ #
-
+# Goal Environments
+# ----------------------------------------
 goal_tasks = {'Goal0': {}, 'Goal1': {}, 'Goal2': {}}
 __combine(goal_tasks, robots, max_episode_steps=1000)
 
 
-# ============================================================================ #
-#                                                                              #
-#    Circle Environments                                                       #
-#                                                                              #
-# ============================================================================ #
-
+# Circle Environments
+# ----------------------------------------
 circle_tasks = {'Circle0': {}, 'Circle1': {}, 'Circle2': {}}
 __combine(circle_tasks, robots, max_episode_steps=500)
 
 
-# ============================================================================ #
-#                                                                              #
-#    Run Environments                                                          #
-#                                                                              #
-# ============================================================================ #
-
+# Run Environments
+# ----------------------------------------
 run_tasks = {'Run0': {}}
 __combine(run_tasks, robots, max_episode_steps=500)
 
 
+# ----------------------------------------
 # Safety Velocity
 # ----------------------------------------
+
 __register_helper(
     env_id='SafetyHalfCheetahVelocity-v0',
     entry_point='safety_gymnasium.tasks.safety_velocity.safety_half_cheetah_velocity_v0:SafetyHalfCheetahVelocityEnv',
