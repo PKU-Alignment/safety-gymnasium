@@ -45,16 +45,6 @@ PREFIX = 'Safety'
 robots = ROBOT_NAMES
 
 
-def make_gymnasium_environment(env_id, *args, **kwargs):
-    """Make a Gymnasium environment."""
-    env_name, _, version = env_id.partition('-')
-    if not env_name.endswith('Gymnasium'):
-        raise ValueError(f'Environment {env_id} is not a Gymnasium environment.')
-    env_name = env_name[: -len('Gymnasium')]
-    safe_env = make(f'{env_name}-{version}', *args, **kwargs)
-    return wrappers.SafetyGymnasium2Gymnasium(safe_env)
-
-
 def __register_helper(env_id, entry_point, spec_kwargs=None, **kwargs):
     """Register a environment to both Safety-Gymnasium and Gymnasium registry."""
     env_name, dash, version = env_id.partition('-')
@@ -69,7 +59,7 @@ def __register_helper(env_id, entry_point, spec_kwargs=None, **kwargs):
     )
     gymnasium_register(
         id=f'{env_name}Gymnasium{dash}{version}',
-        entry_point='safety_gymnasium.__init__:make_gymnasium_environment',
+        entry_point='safety_gymnasium.wrappers.gymnasium_conversation:make_gymnasium_environment',
         kwargs={'env_id': f'{env_name}Gymnasium{dash}{version}', **copy.deepcopy(spec_kwargs)},
         **kwargs,
     )

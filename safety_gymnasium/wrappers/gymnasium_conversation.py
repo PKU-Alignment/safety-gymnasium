@@ -34,3 +34,16 @@ class Gymnasium2SafetyGymnasium(gymnasium.Wrapper):
         obs, reward, terminated, truncated, info = super().step(action)
         cost = info['cost']
         return obs, reward, cost, terminated, truncated, info
+
+
+def make_gymnasium_environment(env_id, *args, **kwargs):
+    """Make a Gymnasium environment."""
+
+    from safety_gymnasium.utils.registration import make  # pylint: disable=import-outside-toplevel
+
+    env_name, _, version = env_id.partition('-')
+    if not env_name.endswith('Gymnasium'):
+        raise ValueError(f'Environment {env_id} is not a Gymnasium environment.')
+    env_name = env_name[: -len('Gymnasium')]
+    safe_env = make(f'{env_name}-{version}', *args, **kwargs)
+    return SafetyGymnasium2Gymnasium(safe_env)
