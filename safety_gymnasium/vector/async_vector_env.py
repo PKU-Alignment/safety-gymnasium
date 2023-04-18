@@ -1,4 +1,4 @@
-# Copyright 2022 Safety Gymnasium Team. All Rights Reserved.
+# Copyright 2022-2023 OmniSafe AI Team. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ __all__ = ['AsyncVectorEnv']
 
 
 class SafetyAsyncVectorEnv(AsyncVectorEnv):
-    """The async vectorized environment for safety gymnasium."""
+    """The async vectorized environment for Safety-Gymnasium."""
 
     # pylint: disable-next=too-many-arguments
     def __init__(

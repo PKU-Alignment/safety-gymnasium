@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Please do your best to make the issue as easy to act on as possible, and only submit here if there is clearly a problem with Safety Gymnasium (ask in [Discussions](https://github.com/OmniSafeAI/safety-gymnasium/discussions) first if unsure).
+        Please do your best to make the issue as easy to act on as possible, and only submit here if there is clearly a problem with Safety-Gymnasium (ask in [Discussions](https://github.com/OmniSafeAI/safety-gymnasium/discussions) first if unsure).
 
   - type: checkboxes
     id: steps
@@ -25,7 +25,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: What version of Safety Gymnasium are you using?
+      label: What version of Safety-Gymnasium are you using?
       description: Run command `python3 -c 'print(__import__("safety_gymnasium").__version__)'` in your shell and paste the output here.
       placeholder: E.g., 0.1.0
     validations:
@@ -56,7 +56,7 @@ body:
       label: Problem description
       description: >-
         Provide a short description, state the expected behavior and what actually happens. Include
-        relevant information like what version of Safety Gymnasium you are using, what system you are on,
+        relevant information like what version of Safety-Gymnasium you are using, what system you are on,
         and any useful commands / output.
     validations:
       required: true
