@@ -208,7 +208,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             cost.update(obstacle.cal_cost())
 
         # Sum all costs into single total cost
-        cost['cost'] = sum(v for k, v in cost.items() if k.startswith('cost_'))
+        cost['cost_sum'] = sum(v for k, v in cost.items() if k.startswith('cost_'))
         return cost
 
     def build_observation_space(self) -> gymnasium.spaces.Dict:

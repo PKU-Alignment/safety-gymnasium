@@ -27,6 +27,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'myst_parser',
+    'sphinx_copybutton',
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     'sphinx_design',

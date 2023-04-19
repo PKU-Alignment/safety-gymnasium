@@ -357,13 +357,14 @@ For the appetizer, the images are as follows:
 
 ### Environment Usage
 
-**Notes:** We support explicitly expressing the `cost` based on  [**Gymnasium APIs**](https://github.com/Farama-Foundation/Gymnasium).
+**Notes:** We support explicitly expressing the `cost` based on [**Gymnasium APIs**](https://github.com/Farama-Foundation/Gymnasium).
+The `step` method returns 6 items `(next_obervation, reward, cost, terminated, truncated, info)` with an extra `cost` field.
 
 ```python
 import safety_gymnasium
 
-env_name = 'SafetyPointGoal1-v0'
-env = safety_gymnasium.make(env_name)
+env_id = 'SafetyPointGoal1-v0'
+env = safety_gymnasium.make(env_id)
 
 obs, info = env.reset()
 while True:
@@ -372,6 +373,63 @@ while True:
     if terminated or truncated:
         break
     env.render()
+```
+
+We also provide two convenience wrappers for converting the Safety-Gymnasium environment to the standard Gymnasium API and vice versa.
+
+```python
+# Safety-Gymnasium API: step returns (next_obervation, reward, cost, terminated, truncated, info)
+# Gymnasium API:        step returns (next_obervation, reward, terminated, truncated, info) and cost is in the `info` dict associated with a str key `'cost'`
+
+safety_gymnasium_env = safety_gymnasium.make(env_id)
+gymnasium_env = safety_gymnasium.wrappers.SafetyGymnasium2Gymnasium(safety_gymnasium_env)
+
+safety_gymnasium_env = safety_gymnasium.wrappers.Gymnasium2SafetyGymnasium(gymnasium_env)
+```
+
+Users can apply Gymnasium wrappers easily with:
+
+```python
+import gymnasium
+import safety_gymnasium
+
+def make_safe_env(env_id):
+    safe_env = safety_gymnasium.make(env_id)
+    env = safety_gymnasium.wrappers.SafetyGymnasium2Gymnasium(safe_env)
+    env = gymnasium.wrappers.SomeWrapper1(env)
+    env = gymnasium.wrappers.SomeWrapper2(env, argname1=arg1, argname2=arg2)
+    ...
+    env = gymnasium.wrappers.SomeWrapperN(env)
+    safe_env = safety_gymnasium.wrappers.Gymnasium2SafetyGymnasium(env)
+    return safe_env
+```
+
+or
+
+```python
+import functools
+
+import gymnasium
+import safety_gymnasium
+
+def make_safe_env(env_id):
+    return safety_gymnasium.wrappers.with_gymnasium_wrappers(
+        safety_gymnasium.make(env_id),
+        gymnasium.wrappers.SomeWrapper1,
+        functools.partial(gymnasium.wrappers.SomeWrapper2, argname1=arg1, argname2=arg2),
+        ...,
+        gymnasium.wrappers.SomeWrapperN,
+    )
+```
+
+In addition, for all Safety-Gymnasium environments, we also provide corresponding Gymnasium environments with a suffix `Gymnasium` in the environment id. For example:
+
+```python
+import gymnasium
+import safety_gymnasium
+
+safety_gymnasium.make('SafetyPointGoal1-v0')    # step returns (next_obervation, reward, cost, terminated, truncated, info)
+gymnasium.make('SafetyPointGoal1Gymnasium-v0')  # step returns (next_obervation, reward, terminated, truncated, info)
 ```
 
 --------------------------------------------------------------------------------

@@ -14,6 +14,47 @@
 # ==============================================================================
 """Env wrappers."""
 
+from typing import Callable
+
+import gymnasium
+
 from safety_gymnasium.wrappers.autoreset import SafeAutoResetWrapper
 from safety_gymnasium.wrappers.env_checker import SafePassiveEnvChecker
+from safety_gymnasium.wrappers.gymnasium_conversion import (
+    Gymnasium2SafetyGymnasium,
+    SafetyGymnasium2Gymnasium,
+)
 from safety_gymnasium.wrappers.time_limit import SafeTimeLimit
+
+
+__all__ = [
+    'SafeAutoResetWrapper',
+    'SafePassiveEnvChecker',
+    'SafeTimeLimit',
+    'SafetyGymnasium2Gymnasium',
+    'Gymnasium2SafetyGymnasium',
+    'with_gymnasium_wrappers',
+]
+
+
+def with_gymnasium_wrappers(
+    env: gymnasium.Env,
+    *wrappers: Callable[[gymnasium.Env], gymnasium.Env],
+) -> gymnasium.Env:
+    """Wrap an environment with Gymnasium wrappers.
+
+    Example::
+
+        >>> env = safety_gymnasium.wrappers.with_gymnasium_wrappers(
+        ...     safety_gymnasium.make(env_id),
+        ...     gymnasium.wrappers.SomeWrapper1,
+        ...     functools.partial(gymnasium.wrappers.SomeWrapper2, argname1=arg1, argname2=arg2),
+        ...     ...,
+        ...     gymnasium.wrappers.SomeWrapperN,
+        ... )
+    """
+    for wrapper in (SafetyGymnasium2Gymnasium, *wrappers, Gymnasium2SafetyGymnasium):
+        if not callable(wrapper):  # wrapper class or a partial function
+            raise TypeError(f'Wrapper {wrapper} is not callable.')
+        env = wrapper(env)
+    return env
