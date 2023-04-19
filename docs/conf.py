@@ -27,6 +27,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'myst_parser',
+    'sphinx_copybutton',
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     'sphinx_design',
@@ -52,17 +53,17 @@ autodoc_preserve_defaults = True
 # a list of builtin themes.
 #
 html_theme = 'furo'
-html_title = 'Safety Gymnasium Documentation'
-html_baseurl = 'https://safety_gymnasium.com'
+html_title = 'Safety-Gymnasium Documentation'
+html_baseurl = 'https://www.safety-gymnasium.com'
 html_copy_source = False
 # html_favicon = '_static/images/favicon.png'
 html_context = {
     'conf_py_path': '/docs/',
     'display_github': False,
     'github_user': 'OmniSafeAI',
-    'github_repo': 'Safety Gymnasium',
+    'github_repo': 'safety-gymnasium',
     'github_version': 'main',
-    'slug': 'safety gymnasium',
+    'slug': 'safety-gymnasium',
 }
 
 html_static_path = ['_static']

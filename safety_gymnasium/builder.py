@@ -1,4 +1,4 @@
-# Copyright 2022 Safety Gymnasium Team. All Rights Reserved.
+# Copyright 2022-2023 OmniSafe AI Team. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -181,7 +181,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         self.task.agent.reset()
 
         cost = self._cost()
-        assert cost['cost'] == 0, f'World has starting cost! {cost}'
+        assert cost['cost_sum'] == 0, f'World has starting cost! {cost}'
         # Reset stateful parts of the environment
         self.first_reset = False  # Built our first world successfully
 
@@ -210,7 +210,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
             # Constraint violations
             info.update(self._cost())
 
-            cost = info['cost']
+            cost = info['cost_sum']
 
             self.task.specific_step()
 

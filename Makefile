@@ -1,6 +1,6 @@
 print-%  : ; @echo $* = $($*)
 PROJECT_NAME   = safety_gymnasium
-COPYRIGHT      = "Safety Gymnasium Team. All Rights Reserved."
+COPYRIGHT      = "OmniSafe AI Team. All Rights Reserved."
 PROJECT_PATH   = $(PROJECT_NAME)
 SHELL          = /bin/bash
 SOURCE_FOLDERS = $(PROJECT_PATH) examples tests docs
@@ -78,6 +78,9 @@ pytest-install:
 	$(call check_pip_install,pytest-cov)
 	$(call check_pip_install,pytest-xdist)
 
+test-install: pytest-install
+	$(PYTHON) -m pip install --requirement tests/requirements.txt
+
 go-install:
 	# requires go >= 1.16
 	command -v go || (sudo apt-get install -y golang && sudo ln -sf /usr/lib/go/bin/go /usr/bin/go)
@@ -87,10 +90,10 @@ addlicense-install: go-install
 
 # Tests
 
-pytest: pytest-install
-	cd tests && \
+pytest: test-install
+	cd tests && $(PYTHON) -c 'import $(PROJECT_NAME)' && \
 	$(PYTHON) -m pytest --verbose --color=yes --durations=0 \
-		--cov="$(PROJECT_NAME)" --cov-report=xml --cov-report=term-missing \
+		--cov="$(PROJECT_NAME)" --cov-config=.coveragerc --cov-report=xml --cov-report=term-missing \
 		$(PYTESTOPTS) .
 
 test: pytest
@@ -148,7 +151,7 @@ format: py-format-install ruff-install addlicense-install
 	$(PYTHON) -m isort --project $(PROJECT_NAME) $(PYTHON_FILES)
 	$(PYTHON) -m black $(PYTHON_FILES)
 	$(PYTHON) -m ruff check . --fix --exit-zero
-	addlicense -c $(COPYRIGHT) -ignore tests/coverage.xml -l apache -y 2022 $(SOURCE_FOLDERS)
+	addlicense -c $(COPYRIGHT) -ignore tests/coverage.xml -l apache -y 2022-$(shell date +"%Y") $(SOURCE_FOLDERS)
 
 clean-py:
 	find . -type f -name  '*.py[co]' -delete
