@@ -70,7 +70,8 @@ class PlacementsConf:
     """
 
     placements = None
-    extents = [-2, -2, 2, 2]
+    # FIXME: fix mutable default arguments  # pylint: disable=fixme
+    extents = [-2, -2, 2, 2]  # noqa: RUF008
     margin = 0.0
 
 
