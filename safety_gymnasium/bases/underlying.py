@@ -541,7 +541,6 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         if mode in {'rgb_array', 'depth_array'}:
             # Extract depth part of the read_pixels() tuple
             data = self._get_viewer(mode).render(render_mode=mode, camera_id=camera_id)
-            # original image is upside-down, so flip it
             self.viewer._markers[:] = []  # pylint: disable=protected-access
             self.viewer._overlays.clear()  # pylint: disable=protected-access
             return data

@@ -99,8 +99,8 @@ def __combine(tasks, agents, max_episode_steps):
             if MAKE_DEBUG_ENVIRONMENTS and robot_name in ['Point', 'Car', 'Racecar']:
                 # Keyboard inputs for debugging
                 debug_env_name = f'{PREFIX}{robot_name}{task_name}Debug-{VERSION}'
-                debug_config = copy.deepcopy(combined_config)
-                debug_config.update({'debug': True})
+                debug_config = {'debug': True}
+                debug_config.update(combined_config)
                 __register_helper(
                     env_id=debug_env_name,
                     entry_point='safety_gymnasium.builder:Builder',
