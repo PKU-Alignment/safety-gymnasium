@@ -19,42 +19,42 @@
   <size njmax="3000" nconmax="1000"/>
   <default>
     <joint limited="true" stiffness="0.01"/>
-    <geom condim="6" size="0.032" rgba="1 0 0 1" type="capsule" density="5"/>
+    <geom condim="6" size="0.032" rgba="0.8 0.6 0.4 1" type="capsule" density="5"/>
     <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear=".0125"/>
     <site size="0.036" type="sphere" rgba="1 0 0 0"/>
   </default>
   <worldbody>
     <geom name="floor" size="5 5 0.1" type="plane" condim="6"/>
-    <body name="robot" pos="0 0 0.22">
+    <body name="agent" pos="0 0 0.22">
       <camera name="vision" pos=".125 0 .2" xyaxes="0 -1 0 .4 0 1" fovy="100"/>
       <!-- <geom name="cam" pos=".15 0 .2" type="sphere" size="0.005"/> -->
-      <site name="robot" pos="0 0 0"/>
-      <geom name="robot" pos="0 0 0" size="0.075" fromto="0 0 0 .2 0 0" type="cylinder" density="0.5"/>
-      <freejoint name="robot"/>
+      <site name="agent" pos="0 0 0"/>
+      <geom name="agent" pos="0 0 0" size="0.075" fromto="0 0 0 .2 0 0" type="cylinder" density="0.5"/>
+      <freejoint name="agent"/>
 
       <body name="leg_1" pos="0 0 0">
-        <geom fromto=".1 0.0 0.0 0.2 0.1 0.0" name="aux_1"/>
+        <geom fromto=".1 0.0 0.0 0.2 0.1 0.0" name="aux_1" rgba="0.0039 0.1529 0.3961 1"/>
         <body name="aux_1" pos="0.2 0.1 0">
-          <joint axis="0 0 1" name="hip_1_z" pos="0.0 0.0 0.0" range="-10 30" type="hinge" springref="0"/>
-          <joint axis="0 1 0" name="hip_1_y" pos="0.0 0.0 0.0" range="-75 15" type="hinge" springref="-10"/>
-          <geom fromto="0.0 0.0 0.0 0.098 0.0566 -.05" name="hip_1"/>
+          <joint axis="0 0 1" name="hip_1_z" pos="0.0 0.0 0.0" range="-0.174533 0.523599" type="hinge" springref="0"/>
+          <joint axis="0 1 0" name="hip_1_y" pos="0.0 0.0 0.0" range="-1.308998 0.2618" type="hinge" springref="-0.174533"/>
+          <geom fromto="0.0 0.0 0.0 0.098 0.0566 -.05" name="hip_1" rgba="0.0039 0.1529 0.3961 1"/>
           <body pos="0.098 0.0566 -.05">
-            <joint axis="-.5 .866 0" name="ankle_1" pos="0.0 0.0 0.0" range="-75 0" type="hinge" springref="-20"/>
-            <geom fromto="0.0 0.0 0.0 -0.1176 -0.0679 -.1" name="ankle_1" rgba="0 0 1 1"/>
+            <joint axis="-.5 .866 0" name="ankle_1" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
+            <geom fromto="0.0 0.0 0.0 -0.1176 -0.0679 -.1" name="ankle_1"/>
             <site name="ankle_1a" pos="0 0 0"/>
             <site name="ankle_1b" pos="-0.1176 -0.0679 -.1"/>
           </body>
         </body>
       </body>
       <body name="leg_4" pos="0 0 0">
-        <geom fromto=".1 0.0 0.0 0.2 -0.1 0.0" name="aux_4"/>
+        <geom fromto=".1 0.0 0.0 0.2 -0.1 0.0" name="aux_4" rgba="0.0039 0.1529 0.3961 1"/>
         <body name="aux_4" pos="0.2 -0.1 0">
-          <joint axis="0 0 -1" name="hip_4_z" pos="0.0 0.0 0.0" range="-10 30" type="hinge" springref="0"/>
-          <joint axis="0 1 0" name="hip_4_y" pos="0.0 0.0 0.0" range="-75 15" type="hinge" springref="-10"/>
-          <geom fromto="0.0 0.0 0.0 0.098 -0.0566 -.05" name="hip_4"/>
+          <joint axis="0 0 -1" name="hip_4_z" pos="0.0 0.0 0.0" range="-0.174533 0.523599" type="hinge" springref="0"/>
+          <joint axis="0 1 0" name="hip_4_y" pos="0.0 0.0 0.0" range="-1.308998 0.2618" type="hinge" springref="-0.174533"/>
+          <geom fromto="0.0 0.0 0.0 0.098 -0.0566 -.05" name="hip_4" rgba="0.0039 0.1529 0.3961 1"/>
           <body pos="0.098 -0.0566 -.05">
-            <joint axis=".5 .866 0" name="ankle_4" pos="0.0 0.0 0.0" range="-75 0" type="hinge" springref="-20"/>
-            <geom fromto="0.0 0.0 0.0 -0.1176 0.0679 -.1" name="ankle_4" rgba="0 0 1 1"/>
+            <joint axis=".5 .866 0" name="ankle_4" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
+            <geom fromto="0.0 0.0 0.0 -0.1176 0.0679 -.1" name="ankle_4"/>
             <site name="ankle_4a" pos="0 0 0"/>
             <site name="ankle_4b" pos="-0.1176 0.0679 -.1"/>
           </body>
@@ -62,33 +62,33 @@
       </body>
 
       <body name="rear" pos="0 0 0">
-        <geom name="robot2" pos="0 0 0" size="0.075" fromto="-.2 0 0 0 0 0" type="cylinder" density="0.5"/>
-        <joint axis="1 0 0" name="waist_x" pos="0 0 0" range="-30 30" type="hinge" springref="0"/>
+        <geom name="agent2" pos="0 0 0" size="0.075" fromto="-.2 0 0 0 0 0" type="cylinder" density="0.5"/>
+        <joint axis="1 0 0" name="waist_x" pos="0 0 0" range="-0.523599 0.523599" type="hinge" springref="0"/>
         <body name="leg_2" pos="0 0 0">
-          <geom fromto="-.1 0.0 0.0 -0.2 0.1 0.0" name="aux_2"/>
+          <geom fromto="-.1 0.0 0.0 -0.2 0.1 0.0" name="aux_2" rgba="0.7412 0.0431 0.1843 1"/>
           <body name="aux_2" pos="-0.2 0.1 0">
-            <joint axis="0 0 1" name="hip_2_z" pos="0.0 0.0 0.0" range="-10 30" type="hinge" springref="0"/>
-            <joint axis="0 1 0" name="hip_2_y" pos="0.0 0.0 0.0" range="0 135" type="hinge" springref="0"/>
-            <geom fromto="0.0 0.0 0.0 0.098 0.0566 -.05" name="hip_2"/>
+            <joint axis="0 0 1" name="hip_2_z" pos="0.0 0.0 0.0" range="-0.174533 0.523599" type="hinge" springref="0"/>
+            <joint axis="0 1 0" name="hip_2_y" pos="0.0 0.0 0.0" range="0 2.356196" type="hinge" springref="0"/>
+            <geom fromto="0.0 0.0 0.0 0.098 0.0566 -.05" name="hip_2" rgba="0.7412 0.0431 0.1843 1"/>
             <body pos="0.098 0.0566 -.05">
               <!-- <joint axis="-.5 .866 0" name="ankle_2" pos="0.0 0.0 0.0" range="-80 -30" type="hinge"/> -->
-              <joint axis="-.5 .866 0" name="ankle_2" pos="0.0 0.0 0.0" range="-75 0" type="hinge" springref="-20"/>
-              <geom fromto="0.0 0.0 0.0 -0.1176 -0.0679 -.1" name="ankle_2" rgba="0 1 0 1"/>
+              <joint axis="-.5 .866 0" name="ankle_2" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
+              <geom fromto="0.0 0.0 0.0 -0.1176 -0.0679 -.1" name="ankle_2"/>
               <site name="ankle_2a" pos="0 0 0"/>
               <site name="ankle_2b" pos="-0.1176 -0.0679 -.1"/>
             </body>
           </body>
         </body>
         <body name="leg_3" pos="0 0 0">
-          <geom fromto="-.1 0.0 0.0 -0.2 -0.1 0.0" name="aux_3"/>
+          <geom fromto="-.1 0.0 0.0 -0.2 -0.1 0.0" name="aux_3" rgba="0.7412 0.0431 0.1843 1"/>
           <body name="aux_3" pos="-0.2 -0.1 0">
-            <joint axis="0 0 -1" name="hip_3_z" pos="0.0 0.0 0.0" range="-10 30" type="hinge" springref="0"/>
-            <joint axis="0 1 0" name="hip_3_y" pos="0.0 0.0 0.0" range="0 135" type="hinge" springref="0"/>
-            <geom fromto="0.0 0.0 0.0 0.098 -0.0566 -.05" name="hip_3"/>
+            <joint axis="0 0 -1" name="hip_3_z" pos="0.0 0.0 0.0" range="-0.174533 0.523599" type="hinge" springref="0"/>
+            <joint axis="0 1 0" name="hip_3_y" pos="0.0 0.0 0.0" range="0 2.356196" type="hinge" springref="0"/>
+            <geom fromto="0.0 0.0 0.0 0.098 -0.0566 -.05" name="hip_3" rgba="0.7412 0.0431 0.1843 1"/>
             <body pos="0.098 -0.0566 -.05">
               <!-- <joint axis=".5 .866 0" name="ankle_3" pos="0.0 0.0 0.0" range="-80 -30" type="hinge"/> -->
-              <joint axis=".5 .866 0" name="ankle_3" pos="0.0 0.0 0.0" range="-75 0" type="hinge" springref="-20"/>
-              <geom fromto="0.0 0.0 0.0 -0.1176 0.0679 -.1" name="ankle_3" rgba="0 1 0 1"/>
+              <joint axis=".5 .866 0" name="ankle_3" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
+              <geom fromto="0.0 0.0 0.0 -0.1176 0.0679 -.1" name="ankle_3"/>
               <site name="ankle_3a" pos="0 0 0"/>
               <site name="ankle_3b" pos="-0.1176 0.0679 -.1"/>
             </body>
@@ -166,15 +166,15 @@
     <actuatorfrc actuator="ankle_4"/> -->
 
     <!-- Used for observation -->
-    <accelerometer site="robot" name="accelerometer"/>
-    <velocimeter site="robot" name="velocimeter"/>
-    <gyro site="robot" name="gyro"/>
-    <magnetometer site="robot" name="magnetometer"/>
+    <accelerometer site="agent" name="accelerometer"/>
+    <velocimeter site="agent" name="velocimeter"/>
+    <gyro site="agent" name="gyro"/>
+    <magnetometer site="agent" name="magnetometer"/>
 
     <!-- Used for intrinsic constraints -->
-    <subtreecom body="robot" name="subtreecom"/>
-    <subtreelinvel body="robot" name="subtreelinvel"/>
-    <subtreeangmom body="robot" name="subtreeangmom"/>
+    <subtreecom body="agent" name="subtreecom"/>
+    <subtreelinvel body="agent" name="subtreelinvel"/>
+    <subtreeangmom body="agent" name="subtreeangmom"/>
   </sensor>
   <actuator>
     <motor name="hip_1_z" joint="hip_1_z"/>

@@ -16,6 +16,7 @@
 
 from safety_gymnasium.agents.ant import Ant
 from safety_gymnasium.agents.car import Car
+from safety_gymnasium.agents.doggo import Doggo
 from safety_gymnasium.agents.point import Point
 from safety_gymnasium.agents.racecar import Racecar
 
@@ -25,4 +26,5 @@ Registry = {
     'car': Car,
     'point': Point,
     'racecar': Racecar,
+    'doggo': Doggo,
 }
