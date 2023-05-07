@@ -57,7 +57,7 @@ class Doggo(BaseAgent):
         )
 
     def is_alive(self):
-        """Point runs until timeout."""
+        """Doggo runs until timeout."""
         return True
 
     def reset(self):
