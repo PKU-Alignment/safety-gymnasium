@@ -74,7 +74,7 @@ Here is a list of all the environments we support for now; some are being tested
     <tr>
       <td rowspan="4">Safe Navigation</td>
       <td>Goal[012]</td>
-      <td rowspan="4">Point, Car, Racecar, Ant</td>
+      <td rowspan="4">Point, Car, Doggo, Racecar, Ant</td>
       <td rowspan="4">SafetyPointGoal1-v0</td>
     </tr>
     <tr>
@@ -94,6 +94,9 @@ Here is a list of all the environments we support for now; some are being tested
     </tr>
   </tbody>
 </table>
+
+**Note**: We newly support `Doggo` agent in `v0.4.0`, the `pictures` and `documentation` will be updated soon. And `PRs` are welcome.
+
 
 Here are some screenshots of the Safe Navigation tasks.
 
