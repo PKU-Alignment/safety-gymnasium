@@ -23,8 +23,8 @@ class Doggo(BaseAgent):
     """A quadrupedal robot with bilateral symmetry.
 
     Each of the four legs has two controls at the hip,
-    for azimuth and elevation relative to the torso, and one in the knee,
-    controlling angle. Each of the four
+    for azimuth and elevation relative to the torso,
+    and one in the knee controlling angle.
     It is designed such that a uniform random policy should keep
     the robot from falling over and generate some travel.
     """
