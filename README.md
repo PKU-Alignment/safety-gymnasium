@@ -521,6 +521,21 @@ class MytaskLevel0(BaseTask):
 - [ ] Tested on different Python versions
 - [ ] Tested on Windows and macOS
 
+## Citing Safety-Gymnasium
+
+If you find Safety-Gymnasium useful, please cite it in your publications.
+
+```bibtex
+@article{Safety-Gymnasium,
+  author = {Jiaming Ji and Borong Zhang and Xuehai Pan and Jiayi Zhou and Juntao Dai and Yaodong Yang},
+  title = {Safety-Gymnasium},
+  year = {2023},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/OmniSafeAI/safety-gymnasium}},
+}
+```
+
 ## License
 
 Safety-Gymnasium is released under Apache License 2.0.
