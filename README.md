@@ -451,7 +451,7 @@ pip install safety-gymnasium
 conda create -n <envname> python=3.8
 conda activate <envname>
 
-git clone git@github.com:OmniSafeAI/safety-gymnasium.git
+git clone https://github.com/OmniSafeAI/safety-gymnasium.git
 cd safety-gymnasium
 pip install -e .
 ```
@@ -520,6 +520,21 @@ class MytaskLevel0(BaseTask):
 - [ ] Bring in other robots
 - [ ] Tested on different Python versions
 - [ ] Tested on Windows and macOS
+
+## Citing Safety-Gymnasium
+
+If you find Safety-Gymnasium useful, please cite it in your publications.
+
+```bibtex
+@article{Safety-Gymnasium,
+  author = {Jiaming Ji and Borong Zhang and Xuehai Pan and Jiayi Zhou and Juntao Dai and Yaodong Yang},
+  title = {Safety-Gymnasium},
+  year = {2023},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/OmniSafeAI/safety-gymnasium}},
+}
+```
 
 ## License
 
