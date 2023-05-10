@@ -32,7 +32,7 @@ __all__ = [
 ]
 
 VERSION = 'v0'
-ROBOT_NAMES = ('Point', 'Car', 'Racecar', 'Ant')
+ROBOT_NAMES = ('Point', 'Car', 'Doggo', 'Racecar', 'Ant')
 MAKE_VISION_ENVIRONMENTS = True
 MAKE_DEBUG_ENVIRONMENTS = True
 
