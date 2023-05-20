@@ -13,8 +13,8 @@ ROOT_DIR = pathlib.Path(__file__).absolute().parent.parent.parent
 sys.path.insert(0, str(ROOT_DIR / 'safety_gymnasium'))
 
 project = 'Safety-Gymnasium'
-copyright = '2023, OmniSafeAI'
-author = 'OmniSafeAI'
+copyright = '2023, PKU-Alignment'
+author = 'PKU-Alignment'
 release = '0.2.0'
 
 # -- General configuration ---------------------------------------------------
@@ -60,7 +60,7 @@ html_copy_source = False
 html_context = {
     'conf_py_path': '/docs/',
     'display_github': False,
-    'github_user': 'OmniSafeAI',
+    'github_user': 'PKU-Alignment',
     'github_repo': 'safety-gymnasium',
     'github_version': 'main',
     'slug': 'safety-gymnasium',

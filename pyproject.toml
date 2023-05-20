@@ -35,10 +35,10 @@ dependencies = [
 dynamic = ["version"]
 
 [project.urls]
-Homepage = "https://github.com/OmniSafeAI/safety-gymnasium"
-Repository = "https://github.com/OmniSafeAI/safety-gymnasium"
+Homepage = "https://github.com/PKU-Alignment/safety-gymnasium"
+Repository = "https://github.com/PKU-Alignment/safety-gymnasium"
 Documentation = "https://www.safety-gymnasium.com"
-"Bug Report" = "https://github.com/OmniSafeAI/safety-gymnasium/issues"
+"Bug Report" = "https://github.com/PKU-Alignment/safety-gymnasium/issues"
 
 [project.optional-dependencies]
 lint = [
