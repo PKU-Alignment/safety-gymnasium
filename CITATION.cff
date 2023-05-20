@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: Safety-Gymnasium
+message: 'If you use this software, please cite it as below.'
+type: software
+authors:
+  - given-names: Jiaming
+    family-names: Ji
+    email: jiamg.ji@gmail.com
+    affiliation: Peking University
+  - given-names: Borong
+    family-names: Zhang
+    email: borongzh@gmail.com
+    affiliation: Peking University
+  - given-names: Xuehai
+    family-names: Pan
+    email: xuehaipan@pku.edu.cn
+    affiliation: Peking University
+  - given-names: Jiayi
+    family-names: Zhou
+    email: gaiejj@outlook.com
+    affiliation: Peking University
+  - given-names: Juntao
+    family-names: Dai
+    email: jtd.acad@gmail.com
+    affiliation: Peking University
+  - given-names: Yaodong
+    family-names: Yang
+    affiliation: Peking University
+    email: yaodong.yang@pku.edu.cn
+version: 0.4.0
+date-released: "2023-05-10"
+license: Apache-2.0
+repository-code: "https://github.com/OmniSafeAI/safety-gymnasium"
