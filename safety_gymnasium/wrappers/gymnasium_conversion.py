@@ -1,4 +1,4 @@
-# Copyright 2022-2023 OmniSafe AI Team. All Rights Reserved.
+# Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,7 +50,8 @@ class Gymnasium2SafetyGymnasium(gymnasium.Wrapper):
 def make_gymnasium_environment(env_id, *args, **kwargs):
     """Make a Gymnasium environment."""
 
-    from safety_gymnasium.utils.registration import make  # pylint: disable=import-outside-toplevel
+    # pylint: disable-next=import-outside-toplevel,cyclic-import
+    from safety_gymnasium.utils.registration import make
 
     env_name, _, version = env_id.partition('-')
     if not env_name.endswith('Gymnasium'):

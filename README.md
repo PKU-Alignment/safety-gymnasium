@@ -532,7 +532,7 @@ If you find Safety-Gymnasium useful, please cite it in your publications.
   year = {2023},
   publisher = {GitHub},
   journal = {GitHub repository},
-  howpublished = {\url{https://github.com/OmniSafeAI/safety-gymnasium}},
+  howpublished = {\url{https://github.com/PKU-Alignment/safety-gymnasium}},
 }
 ```
 

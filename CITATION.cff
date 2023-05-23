@@ -30,4 +30,4 @@ authors:
 version: 0.4.0
 date-released: "2023-05-10"
 license: Apache-2.0
-repository-code: "https://github.com/OmniSafeAI/safety-gymnasium"
+repository-code: "https://github.com/PKU-Alignment/safety-gymnasium"

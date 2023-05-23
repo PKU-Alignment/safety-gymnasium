@@ -1,7 +1,7 @@
 print-%  : ; @echo $* = $($*)
-PROJECT_NAME   = safety_gymnasium
-COPYRIGHT      = "OmniSafe AI Team. All Rights Reserved."
-PROJECT_PATH   = $(PROJECT_NAME)
+PROJECT_NAME   = safety-gymnasium
+COPYRIGHT      = "OmniSafe Team. All Rights Reserved."
+PROJECT_PATH   = safety_gymnasium
 SHELL          = /bin/bash
 SOURCE_FOLDERS = $(PROJECT_PATH) examples tests docs
 PYTHON_FILES   = $(shell find $(SOURCE_FOLDERS) -type f -name "*.py" -o -name "*.pyi")
@@ -91,9 +91,9 @@ addlicense-install: go-install
 # Tests
 
 pytest: test-install
-	cd tests && $(PYTHON) -c 'import $(PROJECT_NAME)' && \
+	cd tests && $(PYTHON) -c 'import $(PROJECT_PATH)' && \
 	$(PYTHON) -m pytest --verbose --color=yes --durations=0 \
-		--cov="$(PROJECT_NAME)" --cov-config=.coveragerc --cov-report=xml --cov-report=term-missing \
+		--cov="$(PROJECT_PATH)" --cov-config=.coveragerc --cov-report=xml --cov-report=term-missing \
 		$(PYTESTOPTS) .
 
 test: pytest
@@ -107,7 +107,7 @@ flake8: flake8-install
 	$(PYTHON) -m flake8 --count --show-source --statistics
 
 py-format: py-format-install
-	$(PYTHON) -m isort --project $(PROJECT_NAME) --check $(PYTHON_FILES) && \
+	$(PYTHON) -m isort --project $(PROJECT_PATH) --check $(PYTHON_FILES) && \
 	$(PYTHON) -m black --check $(PYTHON_FILES)
 
 ruff: ruff-install
@@ -117,7 +117,7 @@ ruff-fix: ruff-install
 	$(PYTHON) -m ruff check . --fix --exit-non-zero-on-fix
 
 mypy: mypy-install
-	$(PYTHON) -m mypy $(PROJECT_PATH)
+	$(PYTHON) -m mypy $(PROJECT_PATH) --install-types --non-interactive
 
 pre-commit: pre-commit-install
 	$(PYTHON) -m pre_commit run --all-files
@@ -148,7 +148,7 @@ clean-docs:
 lint: ruff flake8 py-format pylint addlicense spelling
 
 format: py-format-install ruff-install addlicense-install
-	$(PYTHON) -m isort --project $(PROJECT_NAME) $(PYTHON_FILES)
+	$(PYTHON) -m isort --project $(PROJECT_PATH) $(PYTHON_FILES)
 	$(PYTHON) -m black $(PYTHON_FILES)
 	$(PYTHON) -m ruff check . --fix --exit-zero
 	addlicense -c $(COPYRIGHT) -ignore tests/coverage.xml -l apache -y 2022-$(shell date +"%Y") $(SOURCE_FOLDERS)
