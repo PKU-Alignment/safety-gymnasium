@@ -24,7 +24,14 @@ from safety_gymnasium.wrappers.gymnasium_conversion import (
     Gymnasium2SafetyGymnasium,
     SafetyGymnasium2Gymnasium,
 )
+from safety_gymnasium.wrappers.normalize import (
+    SafeNormalizeCost,
+    SafeNormalizeObservation,
+    SafeNormalizeReward,
+)
+from safety_gymnasium.wrappers.rescale_action import SafeRescaleAction
 from safety_gymnasium.wrappers.time_limit import SafeTimeLimit
+from safety_gymnasium.wrappers.unsqueeze import SafeUnsqueeze
 
 
 __all__ = [
@@ -34,6 +41,11 @@ __all__ = [
     'SafetyGymnasium2Gymnasium',
     'Gymnasium2SafetyGymnasium',
     'with_gymnasium_wrappers',
+    'SafeNormalizeObservation',
+    'SafeNormalizeCost',
+    'SafeNormalizeReward',
+    'SafeUnsqueeze',
+    'SafeRescaleAction',
 ]
 
 
