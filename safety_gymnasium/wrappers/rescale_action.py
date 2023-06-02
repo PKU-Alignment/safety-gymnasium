@@ -82,5 +82,4 @@ class SafeRescaleAction(gym.ActionWrapper, gym.utils.RecordConstructorArgs):
         action = low + (high - low) * (
             (action - self.min_action) / (self.max_action - self.min_action)
         )
-        action = np.clip(action, low, high)
         return action
