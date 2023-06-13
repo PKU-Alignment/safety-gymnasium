@@ -106,7 +106,7 @@ Here are some screenshots of the Safe Navigation tasks.
           <a class="reference external image-reference"><img
               alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/point_front.jpeg"
               src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/point_front.jpeg"
-              style="width: 230px;"></a>
+              style="width: 200px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="doc">Point</span></a></strong>
@@ -117,7 +117,7 @@ Here are some screenshots of the Safe Navigation tasks.
           <a class="reference external image-reference" href="agents/car.html"><img
               alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/car_front.jpeg"
               src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/car_front.jpeg"
-              style="width: 230px;"></a>
+              style="width: 200px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="doc">Car</span></a></strong>
@@ -128,7 +128,7 @@ Here are some screenshots of the Safe Navigation tasks.
           <a class="reference external image-reference" href="agents/racecar.html"><img
               alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/racecar_front.jpeg"
               src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/racecar_front.jpeg"
-              style="width: 230px;"></a>
+              style="width: 200px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="doc">Racecar</span></a></strong>
@@ -139,7 +139,7 @@ Here are some screenshots of the Safe Navigation tasks.
           <a class="reference external image-reference" href="agents/ant.html"><img
               alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/ant_front.jpeg"
               src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/ant_front.jpeg"
-              style="width: 230px;"></a>
+              style="width: 200px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="doc">Ant</span></a></strong>
