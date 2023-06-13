@@ -1,6 +1,6 @@
 # Safety-Gym Bug Report
 
-## Natural Lidar
+## The bug of Natural Lidar
 
 The original Natural Lidar in [Safe-Gym](https://github.com/openai/safety-gym) has a problem of not being able to detect low-lying objects, which may affect comprehensive environmental observations.
 
