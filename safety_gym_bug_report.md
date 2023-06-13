@@ -83,3 +83,14 @@ if self.observation_flatten:
     obs = gymnasium.spaces.utils.flatten(self.obs_info.obs_space_dict, obs)
     return obs
 ```
+
+## Missing cost information
+
+In `Safety Gym`, by default, there are only two possible outputs for the cost: `0` and `1`, representing whether a cost is incurred or not.
+
+```python
+# Optionally remove shaping from reward functions.
+if self.constrain_indicator:
+    for k in list(cost.keys()):
+        cost[k] = float(cost[k] > 0.0)  # Indicator function
+```
