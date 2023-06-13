@@ -137,8 +137,8 @@ Here are some screenshots of the Safe Navigation tasks.
       <td>
         <figure class="align-default">
           <a class="reference external image-reference" href="agents/ant.html"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium-zmsn/raw/HEAD/images/doggo_front.jpeg"
-              src="https://github.com/PKU-Alignment/safety-gymnasium-zmsn/raw/HEAD/images/doggo_front.jpeg"
+              alt="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/doggo_front.jpeg"
+              src="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/doggo_front.jpeg"
               style="width: 180px;"></a>
         </figure>
         <p class="centered">
