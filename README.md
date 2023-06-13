@@ -292,41 +292,6 @@ Here are some screenshots of the Safe Navigation tasks.
         </p>
       </td>
     </tr>
-    <tr class="row-odd">
-      <td>
-        <figure class="align-default">
-          <a class="reference internal image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              style="width: 230px;"></a>
-        </figure>
-        <p class="centered">
-          <strong>Coming soon…</strong>
-        </p>
-      </td>
-      <td>
-        <figure class="align-default">
-          <a class="reference internal image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              style="width: 230px;"></a>
-        </figure>
-        <p class="centered">
-          <strong>Coming soon…</strong>
-        </p>
-      </td>
-      <td>
-        <figure class="align-default">
-          <a class="reference internal image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              style="width: 230px;"></a>
-        </figure>
-        <p class="centered">
-          <strong>Coming soon…</strong>
-        </p>
-      </td>
-    </tr>
   </tbody>
 </table>
 
@@ -335,7 +300,6 @@ Here are some screenshots of the Safe Navigation tasks.
 Vision-based safety reinforcement learning lacks realistic scenarios.
 Although the original `Safety Gym` could minimally support visual input, the scenarios were too similar.
 To facilitate the validation of visual-based safety reinforcement learning algorithms, we have developed a set of realistic vision-based SafeRL tasks, which are currently being validated on the baseline.
-**In the later updates, we will release that part of the environment of `Safety-Gymnasium`.**
 
 For the appetizer, the images are as follows:
 
