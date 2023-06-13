@@ -52,3 +52,34 @@ The original Natural Lidar in [Safe-Gym](https://github.com/openai/safety-gym) h
     </tr>
   </tbody>
 </table>
+
+## The problem of observation space
+
+In Safety Gym, by default, the observation space is presented as a one-dimensional array, as shown in the following code:
+
+```python
+if self.observation_flatten:
+    self.obs_flat_size = sum([np.prod(i.shape) for i in self.obs_space_dict.values()])
+    self.observation_space = gym.spaces.Box(-np.inf, np.inf, (self.obs_flat_size,), dtype=np.float32)
+
+```
+
+While this representation does not lead to behavioral errors in the environment, it can be somewhat misleading for users. To address this issue, we have implemented the `Gymnasium`'s flatten mechanism in `Safety Gym` to handle the representation of the observation space. This mechanism reorganizes the observation space into a more intuitive and easily understandable format, enabling users to process and analyze the observation data more effectively.
+
+```python
+self.obs_info.obs_space_dict = gymnasium.spaces.Dict(obs_space_dict)
+
+if self.observation_flatten:
+    self.observation_space = gymnasium.spaces.utils.flatten_space(
+        self.obs_info.obs_space_dict
+    )
+else:
+    self.observation_space = self.obs_info.obs_space_dict
+assert self.obs_info.obs_space_dict.contains(
+    obs
+), f'Bad obs {obs} {self.obs_info.obs_space_dict}'
+
+if self.observation_flatten:
+    obs = gymnasium.spaces.utils.flatten(self.obs_info.obs_space_dict, obs)
+    return obs
+```
