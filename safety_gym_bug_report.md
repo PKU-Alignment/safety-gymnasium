@@ -14,7 +14,7 @@ The original Natural Lidar in [Safe-Gym](https://github.com/openai/safety-gym) h
               src="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_high_lying_0.jpg" style="width: 230px;">
         </figure>
         <p class="centered">
-          <strong><a class="reference internal"><span class="std std-ref">Goal0</span></a></strong>
+          <strong><a class="reference internal"><span class="std std-ref">can detect high_lying object</span></a></strong>
         </p>
       </td>
       <td>
@@ -24,7 +24,7 @@ The original Natural Lidar in [Safe-Gym](https://github.com/openai/safety-gym) h
               src="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_high_lying_1.jpg" style="width: 230px;"></a>
         </figure>
         <p class="centered">
-          <strong><a class="reference internal"><span class="std std-ref">Goal2</span></a></strong>
+          <strong><a class="reference internal"><span class="std std-ref">can detect high_lying object</span></a></strong>
         </p>
       </td>
     </tr>
@@ -36,7 +36,7 @@ The original Natural Lidar in [Safe-Gym](https://github.com/openai/safety-gym) h
               src="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_low_lying_0.jpg" style="width: 230px;"></a>
         </figure>
         <p class="centered">
-          <strong><a class="reference internal"><span class="std std-ref">Button0</span></a></strong>
+          <strong><a class="reference internal"><span class="std std-ref">cannot detect low_lying object</span></a></strong>
         </p>
       </td>
       <td>
@@ -46,7 +46,7 @@ The original Natural Lidar in [Safe-Gym](https://github.com/openai/safety-gym) h
               src="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_low_lying_1.jpg" style="width: 230px;"></a>
         </figure>
         <p class="centered">
-          <strong><a class="reference internal"><span class="std std-ref">Button2</span></a></strong>
+          <strong><a class="reference internal"><span class="std std-ref">cannot detect low_lying object</span></a></strong>
         </p>
       </td>
     </tr>
