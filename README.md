@@ -461,13 +461,6 @@ class MytaskLevel0(BaseTask):
         # depending on your task
 ```
 
-## Future Plans
-
-- [ ] Vision-based environments
-- [ ] Bring in other robots
-- [ ] Tested on different Python versions
-- [ ] Tested on Windows and macOS
-
 ## Citing Safety-Gymnasium
 
 If you find Safety-Gymnasium useful, please cite it in your publications.
