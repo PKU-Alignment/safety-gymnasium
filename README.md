@@ -23,11 +23,8 @@
   <a href="https://github.com/PKU-Alignment/safety-gymnasium#future-plans">Future Plan</a>
 </p>
 
-
-**This library is currently under heavy development - if you have suggestions on the API or use cases you'd like to be covered, please open a GitHub issue or reach out. We'd love to hear about how you're using the library.**
-
-Safety-Gymnasium is a highly scalable and customizable Safe Reinforcement Learning library.
-It aims to deliver a good view of benchmarking Safe Reinforcement Learning (Safe RL) algorithms and a standardized set of environments.
+Safety-Gymnasium is a highly scalable and customizable Safe Reinforcement Learning (SafeRL) library.
+It aims to deliver a good view of benchmarking SafeRL algorithms and a standardized set of environments.
 We provide a set of standard APIs which are compatible with information on constraints.
 Users can explore new insights via an elegant code framework and well-designed environments.
 
@@ -59,7 +56,7 @@ We introduce a unified safety-enhanced learning benchmark environment library ca
 Further, to facilitate the progress of community research, we redesigned [Safety Gym](https://github.com/openai/safety-gym) and removed the dependency on `mujoco-py`.
 We built it on top of [MuJoCo](https://github.com/deepmind/mujoco) and fixed some bugs, more specific bug reports can refer to [Safety Gym's BUG Report](https://github.com/PKU-Alignment/safety-gymnasium/blob/main/safety_gym_bug_report.md).
 
-Here is a list of all the environments we support for now; some are being tested in our baselines, and we will gradually release them in later updates.
+Here is a list of all the environments we support for now:
 
 <table border="1">
   <thead>
@@ -96,7 +93,6 @@ Here is a list of all the environments we support for now; some are being tested
 </table>
 
 **Note**: We newly support `Doggo` agent in `v0.4.0`, the corresponding `benchmarks`, `pictures`, and `documentation` will be updated soon. And `PRs` are welcome.
-
 
 Here are some screenshots of the Safe Navigation tasks.
 
@@ -138,8 +134,6 @@ Here are some screenshots of the Safe Navigation tasks.
           <strong><a class="reference internal"><span class="doc">Racecar</span></a></strong>
         </p>
       </td>
-    </tr>
-    <tr class="row-even">
       <td>
         <figure class="align-default">
           <a class="reference external image-reference" href="agents/ant.html"><img
@@ -149,28 +143,6 @@ Here are some screenshots of the Safe Navigation tasks.
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="doc">Ant</span></a></strong>
-        </p>
-      </td>
-      <td>
-        <figure class="align-default">
-          <a class="reference internal image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              style="width: 230px;"></a>
-        </figure>
-        <p class="centered">
-          <strong>Coming soon…</strong>
-        </p>
-      </td>
-      <td>
-        <figure class="align-default">
-          <a class="reference internal image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              style="width: 230px;"></a>
-        </figure>
-        <p class="centered">
-          <strong>Coming soon…</strong>
         </p>
       </td>
     </tr>
