@@ -55,7 +55,7 @@ The original Natural Lidar in [Safe-Gym](https://github.com/openai/safety-gym) h
 
 ## The problem of observation space
 
-In Safety Gym, by default, the observation space is presented as a one-dimensional array, as shown in the following code:
+In `Safety-Gym`, by default, the observation space is presented as a one-dimensional array, as shown in the following code:
 
 ```python
 if self.observation_flatten:
