@@ -226,3 +226,8 @@ __register_helper(
     entry_point='safety_gymnasium.tasks.safety_velocity.safety_humanoid_velocity_v1:SafetyHumanoidVelocityEnv',
     max_episode_steps=1000,
 )
+
+
+# Safety MA
+# ----------------------------------------
+import safety_gymnasium.tasks.masafe  # noqa: E402 # pylint: disable=wrong-import-position
