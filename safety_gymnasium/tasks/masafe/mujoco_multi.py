@@ -1,10 +1,37 @@
-import gymnasium
+# Copyright 2022 Safety Gymnasium Team. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ==============================================================================
+
+
+import gymnasium as gymnasium
 import numpy as np
 from gymnasium.spaces import Box
 
-from safety_gymnasium.tasks.masafe.multiagentenv import MultiAgentEnv
-from safety_gymnasium.tasks.masafe.obsk import build_obs, get_joints_at_kdist, get_parts_and_edges
 from safety_gymnasium.wrappers import SafeTimeLimit
+
+from .multiagentenv import MultiAgentEnv
+from .obsk import build_obs, get_joints_at_kdist, get_parts_and_edges
+
+
+velocity_constriant = {
+    'Ant-v4': 2.6222,
+    'HalfCheetah-v4': 3.2096,
+    'Hopper-v4': 0.7402,
+    'Humanoid-v4': 1.4149,
+    'Swimmer-v4': 0.2282,
+    'Walker2d-v4': 2.3415,
+}
 
 
 # using code from https://github.com/ikostrikov/pytorch-ddpg-naf
@@ -35,14 +62,13 @@ class MujocoMulti(MultiAgentEnv):
         'render_fps': 20,
     }
 
-    def __init__(self, batch_size=None, **kwargs) -> None:
+    def __init__(self, batch_size=None, **kwargs):
         super().__init__(batch_size, **kwargs)
         self.scenario = kwargs['env_args']['scenario']  # e.g. Ant-v4
         self.agent_conf = kwargs['env_args']['agent_conf']  # e.g. '2x3'
 
         self.agent_partitions, self.mujoco_edges, self.mujoco_globals = get_parts_and_edges(
-            self.scenario,
-            self.agent_conf,
+            self.scenario, self.agent_conf
         )
 
         self.n_agents = len(self.agent_partitions)
@@ -134,6 +160,7 @@ class MujocoMulti(MultiAgentEnv):
         self.env = self.timelimit_env.env
         self.timelimit_env.reset()
         self.obs_size = self.get_obs_size()
+        self.share_obs_size = self.get_state_size()
 
         # COMPATIBILITY
         self.n = self.n_agents
@@ -146,6 +173,9 @@ class MujocoMulti(MultiAgentEnv):
             for id in range(self.n_agents)
         )
 
+        self.share_observation_space = [
+            Box(low=-10, high=10, shape=(self.share_obs_size,)) for _ in range(self.n_agents)
+        ]
         acdims = [len(ap) for ap in self.agent_partitions]
         self.action_space = gymnasium.spaces.Tuple(
             [
@@ -156,6 +186,10 @@ class MujocoMulti(MultiAgentEnv):
                 for a in range(self.n_agents)
             ],
         )
+        try:
+            self.velocity_threshold = velocity_constriant[self.scenario]
+        except KeyError:
+            raise NotImplementedError
 
     def step(self, actions):
         # we need to map actions back into MuJoCo action space
@@ -180,6 +214,8 @@ class MujocoMulti(MultiAgentEnv):
             cost_n = 0.0
         else:
             raise NotImplementedError
+        done_n = terminated_n or truncated_n
+        cost_n = float(info_n['x_velocity'] > self.velocity_threshold)
         self.steps += 1
 
         info = {}
@@ -191,8 +227,11 @@ class MujocoMulti(MultiAgentEnv):
                 info['episode_limit'] = False  # the next state will be masked out
             else:
                 info['episode_limit'] = True  # the next state will not be masked out
-
-        return self.get_obs(), reward_n, cost_n, terminated_n, truncated_n, info
+        rewards = [[reward_n]] * self.n_agents
+        info['cost'] = [[cost_n]] * self.n_agents
+        dones = [done_n] * self.n_agents
+        infos = [info for _ in range(self.n_agents)]
+        return self.get_obs(), self.get_state(), rewards, dones, infos, self.get_avail_actions()
 
     def get_obs(self):
         """Returns all agent observat3ions in a list"""
@@ -223,14 +262,28 @@ class MujocoMulti(MultiAgentEnv):
 
     def get_state(self, team=None):
         # TODO: May want global states for different teams (so cannot see what the other team is communicating e.g.)
-        return self.env.unwrapped._get_obs()
+        state = self.env.unwrapped._get_obs()
+        share_obs = []
+        for a in range(self.n_agents):
+            agent_id_feats = np.zeros(self.n_agents, dtype=np.float32)
+            agent_id_feats[a] = 1.0
+            # share_obs.append(np.concatenate([state, self.get_obs_agent(a), agent_id_feats]))
+            state_i = np.concatenate([state, agent_id_feats])
+            state_i = (state_i - np.mean(state_i)) / np.std(state_i)
+            share_obs.append(state_i)
+        return share_obs
 
     def get_state_size(self):
         """Returns the shape of the state"""
-        return len(self.get_state())
+        return len(self.get_state()[0])
 
     def get_avail_actions(self):  # all actions are always available
-        return np.ones(shape=(self.n_agents, self.n_actions))
+        return np.ones(
+            shape=(
+                self.n_agents,
+                self.n_actions,
+            )
+        )
 
     def get_avail_agent_actions(self, agent_id):
         """Returns the available actions for agent_id"""
@@ -252,8 +305,7 @@ class MujocoMulti(MultiAgentEnv):
         """Returns initial observations and states"""
         self.steps = 0
         self.timelimit_env.reset()
-        info = {'state': self.get_state()}
-        return self.get_obs(), info
+        return self.get_obs(), self.get_state(), self.get_avail_actions()
 
     def render(self, **kwargs):
         self.env.render(**kwargs)
