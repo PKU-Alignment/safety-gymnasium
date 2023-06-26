@@ -17,11 +17,11 @@
 
 from typing import Union
 
-import gymnasium as gym
+import gymnasium
 import numpy as np
 
 
-class SafeRescaleAction(gym.ActionWrapper, gym.utils.RecordConstructorArgs):
+class SafeRescaleAction(gymnasium.ActionWrapper, gymnasium.utils.RecordConstructorArgs):
     """Affinely rescales the continuous action space of the environment to the range [min_action, max_action].
 
     The base environment :attr:`env` must have an action space of type :class:`spaces.Box`. If :attr:`min_action`
@@ -38,7 +38,7 @@ class SafeRescaleAction(gym.ActionWrapper, gym.utils.RecordConstructorArgs):
 
     def __init__(
         self,
-        env: gym.Env,
+        env: gymnasium.Env,
         min_action: Union[float, int, np.ndarray],
         max_action: Union[float, int, np.ndarray],
     ) -> None:
@@ -51,12 +51,12 @@ class SafeRescaleAction(gym.ActionWrapper, gym.utils.RecordConstructorArgs):
             max_action (float, int or np.ndarray): The max values for each action.
                 This may be a numpy array or a scalar.
         """
-        gym.utils.RecordConstructorArgs.__init__(
+        gymnasium.utils.RecordConstructorArgs.__init__(
             self,
             min_action=min_action,
             max_action=max_action,
         )
-        gym.ActionWrapper.__init__(self, env)
+        gymnasium.ActionWrapper.__init__(self, env)
 
         self.min_action = (
             np.zeros(env.action_space.shape, dtype=env.action_space.dtype) + min_action
