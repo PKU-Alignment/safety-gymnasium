@@ -19,8 +19,7 @@
 <a href="https://github.com/PKU-Alignment/safety-gymnasium#why-safety-gymnasium">Why Safety-Gymnasium?</a> |
   <a href="https://www.safety-gymnasium.com">Documentation</a> |
   <a href="https://github.com/PKU-Alignment/safety-gymnasium#installation">Install guide</a> |
-  <a href="https://github.com/PKU-Alignment/safety-gymnasium#customize-your-environments">Customization</a> |
-  <a href="https://github.com/PKU-Alignment/safety-gymnasium#future-plans">Future Plan</a>
+  <a href="https://github.com/PKU-Alignment/safety-gymnasium#customize-your-environments">Customization</a>
 </p>
 
 Safety-Gymnasium is a highly scalable and customizable Safe Reinforcement Learning (SafeRL) library.
