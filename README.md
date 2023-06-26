@@ -91,8 +91,6 @@ Here is a list of all the environments we support for now:
   </tbody>
 </table>
 
-**Note**: We newly support `Doggo` agent in `v0.4.0`, the corresponding `benchmarks`, `pictures`, and `documentation` will be updated soon. And `PRs` are welcome.
-
 Here are some screenshots of the Safe Navigation tasks.
 
 #### Agents
