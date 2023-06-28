@@ -274,7 +274,8 @@ class World:  # pylint: disable=too-many-instance-attributes
                     track_camera['b']['camera'],
                 ]
             else:
-                worldbody['body'][0]['camera'] = [worldbody['body'][0]['camera']] + [
+                worldbody['body'][0]['camera'] = [
+                    worldbody['body'][0]['camera'],
                     track_camera['b']['camera'],
                 ]
         else:
