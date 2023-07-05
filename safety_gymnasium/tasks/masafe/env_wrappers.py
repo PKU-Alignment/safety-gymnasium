@@ -23,7 +23,7 @@ from gymnasium.vector.vector_env import VectorEnv
 from safety_gymnasium.vector.utils.tile_images import tile_images
 
 
-class CloudpickleWrapper(object):
+class CloudpickleWrapper:
     """
     Uses cloudpickle to serialize contents (otherwise multiprocessing tries to use pickle)
     """
@@ -173,7 +173,7 @@ def worker(remote, parent_remote, env_fn_wrapper):
             remote.send((ob, reward, info['cost'], done, info))
         elif cmd == 'reset':
             ob = env.reset()
-            remote.send((ob))
+            remote.send(ob)
         elif cmd == 'render':
             if data == 'rgb_array':
                 fr = env.render(mode=data)
@@ -355,9 +355,9 @@ def shareworker(remote, parent_remote, env_fn_wrapper):
             remote.send((env.observation_space, env.share_observation_space, env.action_space))
         elif cmd == 'render_vulnerability':
             fr = env.render_vulnerability(data)
-            remote.send((fr))
+            remote.send(fr)
         elif cmd == 'get_num_agents':
-            remote.send((env.n_agents))
+            remote.send(env.n_agents)
         else:
             raise NotImplementedError
 
@@ -447,7 +447,7 @@ def choosesimpleworker(remote, parent_remote, env_fn_wrapper):
             remote.send((ob, reward, info['cost'], done, info))
         elif cmd == 'reset':
             ob = env.reset(data)
-            remote.send((ob))
+            remote.send(ob)
         elif cmd == 'reset_task':
             ob = env.reset_task()
             remote.send(ob)
@@ -639,7 +639,7 @@ def chooseguardworker(remote, parent_remote, env_fn_wrapper):
             remote.send((ob, reward, info['cost'], done, info))
         elif cmd == 'reset':
             ob = env.reset(data)
-            remote.send((ob))
+            remote.send(ob)
         elif cmd == 'reset_task':
             ob = env.reset_task()
             remote.send(ob)

@@ -50,6 +50,7 @@ repos:
         exclude: |
           (?x)(
             ^examples/
+            ^safety_gymnasium/tasks/multiagent_mujoco/|
           )
   - repo: https://github.com/pycqa/flake8
     rev: 6.0.0
@@ -64,6 +65,7 @@ repos:
         exclude: |
           (?x)(
             ^safety_gymnasium/tasks/masafe/|
+            ^safety_gymnasium/tasks/multiagent_mujoco/|
             ^examples/|
             ^tests/|
             ^docs/conf.py$
@@ -76,6 +78,7 @@ repos:
         exclude: |
           (?x)(
             ^docs/spelling_wordlist.txt$
+            ^safety_gymnasium/tasks/multiagent_mujoco/|
           )
   - repo: local
     hooks:
@@ -88,6 +91,7 @@ repos:
         exclude: |
           (?x)(
             ^safety_gymnasium/tasks/masafe/|
+            ^safety_gymnasium/tasks/multiagent_mujoco/|
             ^examples/|
             ^tests/|
             ^setup.py$|

@@ -20,6 +20,7 @@ from gymnasium import make as gymnasium_make
 from gymnasium import register as gymnasium_register
 
 from safety_gymnasium import vector, wrappers
+from safety_gymnasium.tasks.multiagent_mujoco import mamujoco_v0
 from safety_gymnasium.utils.registration import make, register
 from safety_gymnasium.version import __version__
 

@@ -305,6 +305,8 @@ class MujocoMulti(MultiAgentEnv):
         """Returns initial observations and states"""
         self.steps = 0
         self.timelimit_env.reset()
+        print(self.get_obs(), '\n\n\n', self.get_state(), '\n\n\n', self.get_avail_actions())
+        exit(0)
         return self.get_obs(), self.get_state(), self.get_avail_actions()
 
     def render(self, **kwargs):
