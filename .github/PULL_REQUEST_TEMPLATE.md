@@ -19,12 +19,6 @@ What types of changes does your code introduce? Put an `x` in all the boxes that
 - [ ] Breaking change (fix or feature that would cause existing functionality to change)
 - [ ] Documentation (update in the documentation)
 
-## Implemented Tasks
-
-- [ ] Subtask 1
-- [ ] Subtask 2
-- [ ] Subtask 3
-
 ## Checklist
 
 Go over all the following points, and put an `x` in all the boxes that apply.
