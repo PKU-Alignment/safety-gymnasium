@@ -11,17 +11,18 @@ Agents
             :width: 230px
             :target: agents/car.html
         .. centered:: :doc:`agents/car`
-      - .. figure:: ../_static/images/racecar_front.jpeg
+      - .. figure:: ../_static/images/doggo_front.jpeg
+            :width: 230px
+            :target: agents/doggo.html
+        .. centered:: :doc:`agents/doggo`
+    * - .. figure:: ../_static/images/racecar_front.jpeg
             :width: 230px
             :target: agents/racecar.html
         .. centered:: :doc:`agents/racecar`
-    * - .. figure:: ../_static/images/ant_front.jpeg
+      - .. figure:: ../_static/images/ant_front.jpeg
             :width: 230px
             :target: agents/ant.html
         .. centered:: :doc:`agents/ant`
-      - .. figure:: ../_static/images/coming_soon.png
-            :width: 230px
-        .. centered:: Coming soon...
       - .. figure:: ../_static/images/coming_soon.png
             :width: 230px
         .. centered:: Coming soon...
@@ -34,5 +35,6 @@ We have designed a set of unified agents for tasks, which are an important part 
 
     agents/point.rst
     agents/car.rst
+    agents/doggo.rst
     agents/racecar.rst
     agents/ant.rst

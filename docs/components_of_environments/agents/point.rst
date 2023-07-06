@@ -18,15 +18,15 @@ Point
 
 A simple robot constrained to a 2D plane has two actuators, one for rotation and the other for forward/backward movement. This decomposed control scheme makes it particularly easy to control the robot's navigation. It has a small square in front of it, which makes it easier to visually determine the robot's orientation and also helps Point push the box that appears in Push.
 
-+-----------------------------+--------------------------------+
-| Specific Action Space       | Box(-1.0, 1.0, (2,), float64)  |
-+=============================+================================+
-| Specific Observation Shape  | (12,)                          |
-+-----------------------------+--------------------------------+
-| Observation High            | inf                            |
-+-----------------------------+--------------------------------+
-| Observation Low             | -inf                           |
-+-----------------------------+--------------------------------+
++---------------------------------+--------------------------------+
+| **Specific Action Space**       | Box(-1.0, 1.0, (2,), float64)  |
++---------------------------------+--------------------------------+
+| **Specific Observation Shape**  | (12,)                          |
++---------------------------------+--------------------------------+
+| **Specific Observation High**   | inf                            |
++---------------------------------+--------------------------------+
+| **Specific Observation Low**    | -inf                           |
++---------------------------------+--------------------------------+
 
 
 Specific Action Space
