@@ -19,15 +19,11 @@
 <a href="https://github.com/PKU-Alignment/safety-gymnasium#why-safety-gymnasium">Why Safety-Gymnasium?</a> |
   <a href="https://www.safety-gymnasium.com">Documentation</a> |
   <a href="https://github.com/PKU-Alignment/safety-gymnasium#installation">Install guide</a> |
-  <a href="https://github.com/PKU-Alignment/safety-gymnasium#customize-your-environments">Customization</a> |
-  <a href="https://github.com/PKU-Alignment/safety-gymnasium#future-plans">Future Plan</a>
+  <a href="https://github.com/PKU-Alignment/safety-gymnasium#customize-your-environments">Customization</a>
 </p>
 
-
-**This library is currently under heavy development - if you have suggestions on the API or use cases you'd like to be covered, please open a GitHub issue or reach out. We'd love to hear about how you're using the library.**
-
-Safety-Gymnasium is a highly scalable and customizable Safe Reinforcement Learning library.
-It aims to deliver a good view of benchmarking Safe Reinforcement Learning (Safe RL) algorithms and a standardized set of environments.
+Safety-Gymnasium is a highly scalable and customizable Safe Reinforcement Learning (SafeRL) library.
+It aims to deliver a good view of benchmarking SafeRL algorithms and a standardized set of environments.
 We provide a set of standard APIs which are compatible with information on constraints.
 Users can explore new insights via an elegant code framework and well-designed environments.
 
@@ -39,13 +35,13 @@ Here we provide a table for comparison of **Safety-Gymnasium** and existing Safe
 
 |                                                                                   SafeRL<br/>Envs                                                                                   |            Engine             | Vectorized<br/> Environments | New Gym API<sup>**(3)**</sup> |    Vision Input     |
 | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: | :--------------------------: | :---------------------------: | :-----------------: |
-|            [Safety Gym](https://github.com/openai/safety-gym)<br/>![GitHub last commit](https://img.shields.io/github/last-commit/openai/safety-gym?label=last%20update)            | `mujoco-py`<sup>**(1)**</sup> |              ❌               |               ❌               | minimally supported |
+|            [Safety-Gym](https://github.com/openai/safety-gym)<br/>![GitHub last commit](https://img.shields.io/github/last-commit/openai/safety-gym?label=last%20update)            | `mujoco-py`<sup>**(1)**</sup> |              ❌               |               ❌               | minimally supported |
 | [safe-control-gym](https://github.com/utiasDSL/safe-control-gym)<br/>![GitHub last commit](https://img.shields.io/github/last-commit/utiasDSL/safe-control-gym?label=last%20update) |           PyBullet            |              ❌               |               ❌               |          ❌          |
 |                                                                       Velocity-Constraints<sup>**(2)**</sup>                                                                        |              N/A              |              ❌               |               ❌               |          ❌          | ❌ |
 |    [mujoco-circle](https://github.com/ymzhang01/mujoco-circle)<br/>![GitHub last commit](https://img.shields.io/github/last-commit/ymzhang01/mujoco-circle?label=last%20update)     |            PyTorch            |              ❌               |               ❌               |          ❌          | ❌ |
 |                                  Safety-Gymnasium<br/>![GitHub last commit](https://img.shields.io/github/last-commit/PKU-Alignment/safety-gymnasium)                                  |       **MuJoCo 2.3.0+**       |              ✅               |               ✅               |          ✅          |
 
-<sup>(1): Maintenance (expect bug fixes and minor updates); the last commit is 19 Nov 2021. Safety Gym depends on `mujoco-py` 2.0.2.7, which was updated on Oct 12, 2019.</sup><br/>
+<sup>(1): Maintenance (expect bug fixes and minor updates); the last commit is 19 Nov 2021. Safety-Gym depends on `mujoco-py` 2.0.2.7, which was updated on Oct 12, 2019.</sup><br/>
 <sup>(2): There is no official library for speed-related environments, and its associated cost constraints are constructed from info. But the task is widely used in the study of SafeRL, and we encapsulate it in Safety-Gymnasium.</sup><br/>
 <sup>(3): In the gym 0.26.0 release update, a new API of interaction was redefined.</sup>
 
@@ -56,10 +52,10 @@ Here we provide a table for comparison of **Safety-Gymnasium** and existing Safe
 We designed a variety of safety-enhanced learning tasks and integrated the contributions from the RL community: `safety-velocity`, `safety-run`, `safety-circle`, `safety-goal`, `safety-button`, etc.
 We introduce a unified safety-enhanced learning benchmark environment library called `Safety-Gymnasium.`
 
-Further, to facilitate the progress of community research, we redesigned [Safety Gym](https://github.com/openai/safety-gym) and removed the dependency on `mujoco-py`.
-We built it on top of [MuJoCo](https://github.com/deepmind/mujoco) and fixed some bugs, more specific bug reports can refer to [Safety Gym's BUG Report](https://github.com/PKU-Alignment/safety-gymnasium/blob/main/safety_gym_bug_report.md).
+Further, to facilitate the progress of community research, we redesigned [Safety-Gym](https://github.com/openai/safety-gym) and removed the dependency on `mujoco-py`.
+We built it on top of [MuJoCo](https://github.com/deepmind/mujoco) and fixed some bugs, more specific bug reports can refer to [Safety-Gym's BUG Report](https://github.com/PKU-Alignment/safety-gymnasium/blob/main/safety_gym_bug_report.md).
 
-Here is a list of all the environments we support for now; some are being tested in our baselines, and we will gradually release them in later updates.
+Here is a list of all the environments we support for now:
 
 <table border="1">
   <thead>
@@ -95,9 +91,6 @@ Here is a list of all the environments we support for now; some are being tested
   </tbody>
 </table>
 
-**Note**: We newly support `Doggo` agent in `v0.4.0`, the corresponding `benchmarks`, `pictures`, and `documentation` will be updated soon. And `PRs` are welcome.
-
-
 Here are some screenshots of the Safe Navigation tasks.
 
 #### Agents
@@ -110,7 +103,7 @@ Here are some screenshots of the Safe Navigation tasks.
           <a class="reference external image-reference"><img
               alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/point_front.jpeg"
               src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/point_front.jpeg"
-              style="width: 230px;"></a>
+              style="width: 130px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="doc">Point</span></a></strong>
@@ -121,7 +114,7 @@ Here are some screenshots of the Safe Navigation tasks.
           <a class="reference external image-reference" href="agents/car.html"><img
               alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/car_front.jpeg"
               src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/car_front.jpeg"
-              style="width: 230px;"></a>
+              style="width: 130px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="doc">Car</span></a></strong>
@@ -132,20 +125,18 @@ Here are some screenshots of the Safe Navigation tasks.
           <a class="reference external image-reference" href="agents/racecar.html"><img
               alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/racecar_front.jpeg"
               src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/racecar_front.jpeg"
-              style="width: 230px;"></a>
+              style="width: 130px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="doc">Racecar</span></a></strong>
         </p>
       </td>
-    </tr>
-    <tr class="row-even">
       <td>
         <figure class="align-default">
           <a class="reference external image-reference" href="agents/ant.html"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/ant_front.jpeg"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/ant_front.jpeg"
-              style="width: 230px;"></a>
+              alt="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/doggo_front.jpeg"
+              src="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/doggo_front.jpeg"
+              style="width: 130px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="doc">Ant</span></a></strong>
@@ -153,24 +144,13 @@ Here are some screenshots of the Safe Navigation tasks.
       </td>
       <td>
         <figure class="align-default">
-          <a class="reference internal image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              style="width: 230px;"></a>
+          <a class="reference external image-reference" href="agents/ant.html"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/ant_front.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/ant_front.jpeg"
+              style="width: 130px;"></a>
         </figure>
         <p class="centered">
-          <strong>Coming soon…</strong>
-        </p>
-      </td>
-      <td>
-        <figure class="align-default">
-          <a class="reference internal image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              style="width: 230px;"></a>
-        </figure>
-        <p class="centered">
-          <strong>Coming soon…</strong>
+          <strong><a class="reference internal"><span class="doc">Ant</span></a></strong>
         </p>
       </td>
     </tr>
@@ -309,50 +289,14 @@ Here are some screenshots of the Safe Navigation tasks.
         </p>
       </td>
     </tr>
-    <tr class="row-odd">
-      <td>
-        <figure class="align-default">
-          <a class="reference internal image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              style="width: 230px;"></a>
-        </figure>
-        <p class="centered">
-          <strong>Coming soon…</strong>
-        </p>
-      </td>
-      <td>
-        <figure class="align-default">
-          <a class="reference internal image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              style="width: 230px;"></a>
-        </figure>
-        <p class="centered">
-          <strong>Coming soon…</strong>
-        </p>
-      </td>
-      <td>
-        <figure class="align-default">
-          <a class="reference internal image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/coming_soon.png"
-              style="width: 230px;"></a>
-        </figure>
-        <p class="centered">
-          <strong>Coming soon…</strong>
-        </p>
-      </td>
-    </tr>
   </tbody>
 </table>
 
 ### Vision-base Safe RL
 
 Vision-based safety reinforcement learning lacks realistic scenarios.
-Although the original `Safety Gym` could minimally support visual input, the scenarios were too similar.
+Although the original `Safety-Gym` could minimally support visual input, the scenarios were too similar.
 To facilitate the validation of visual-based safety reinforcement learning algorithms, we have developed a set of realistic vision-based SafeRL tasks, which are currently being validated on the baseline.
-**In the later updates, we will release that part of the environment of `Safety-Gymnasium`.**
 
 For the appetizer, the images are as follows:
 
@@ -513,13 +457,6 @@ class MytaskLevel0(BaseTask):
     def goal_achieved(self):
         # depending on your task
 ```
-
-## Future Plans
-
-- [ ] Vision-based environments
-- [ ] Bring in other robots
-- [ ] Tested on different Python versions
-- [ ] Tested on Windows and macOS
 
 ## Citing Safety-Gymnasium
 

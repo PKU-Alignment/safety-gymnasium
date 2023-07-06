@@ -37,8 +37,8 @@ class SafetySyncVectorEnv(SyncVectorEnv):
     def __init__(
         self,
         env_fns: Iterator[Callable[[], Env]],
-        observation_space: Space = None,
-        action_space: Space = None,
+        observation_space: Space | None = None,
+        action_space: Space | None = None,
         copy: bool = True,
     ) -> None:
         """Initializes the vectorized safe environment."""
