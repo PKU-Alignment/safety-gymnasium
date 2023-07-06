@@ -55,7 +55,7 @@ class World:  # pylint: disable=too-many-instance-attributes
 
     # Default configuration (this should not be nested since it gets copied)
     # *NOTE:* Changes to this configuration should also be reflected in `Builder` configuration
-    DEFAULT: ClassVar[dict[str, Any]] = {
+    DEFAULT = {
         'agent_base': 'assets/xmls/car.xml',  # Which agent XML to use as the base
         'agent_xy': np.zeros(2),  # agent XY location
         'agent_rot': 0,  # agent rotation about Z axis
