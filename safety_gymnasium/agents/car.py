@@ -14,6 +14,8 @@
 # ==============================================================================
 """Car."""
 
+from typing import Optional
+
 import glfw
 import numpy as np
 
@@ -31,10 +33,10 @@ class Car(BaseAgent):
     def __init__(  # pylint: disable=too-many-arguments
         self,
         random_generator: RandomGenerator,
-        placements: list = None,
-        locations: list = None,
+        placements: Optional[list] = None,
+        locations: Optional[list] = None,
         keepout: float = 0.4,
-        rot: float = None,
+        rot: Optional[float] = None,
     ) -> None:
         super().__init__(
             self.__class__.__name__,

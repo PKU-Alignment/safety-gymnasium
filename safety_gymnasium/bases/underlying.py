@@ -19,6 +19,7 @@ from __future__ import annotations
 import abc
 from copy import deepcopy
 from dataclasses import dataclass
+from typing import ClassVar
 
 import gymnasium
 import mujoco
@@ -71,7 +72,7 @@ class PlacementsConf:
 
     placements = None
     # FIXME: fix mutable default arguments  # pylint: disable=fixme
-    extents = [-2, -2, 2, 2]  # noqa: RUF008
+    extents: ClassVar[list[float]] = [-2, -2, 2, 2]
     margin = 0.0
 
 
@@ -187,7 +188,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
     - :attr:`_obstacles` (list): All types of object in current environment.
     """
 
-    def __init__(self, config: dict = None) -> None:
+    def __init__(self, config: dict | None = None) -> None:
         """Initialize the engine.
 
         Args:
@@ -472,9 +473,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         width: int,
         height: int,
         mode: str,
-        camera_id: int = None,
-        camera_name: str = None,
-        cost: float = None,
+        camera_id: int | None = None,
+        camera_name: str | None = None,
+        cost: float | None = None,
     ) -> None:
         """Render the environment to somewhere.
 

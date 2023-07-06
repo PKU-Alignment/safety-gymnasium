@@ -79,7 +79,6 @@ class SafeRescaleAction(gymnasium.ActionWrapper, gymnasium.utils.RecordConstruct
         """
         low = self.env.action_space.low
         high = self.env.action_space.high
-        action = low + (high - low) * (
+        return low + (high - low) * (
             (action - self.min_action) / (self.max_action - self.min_action)
         )
-        return action
