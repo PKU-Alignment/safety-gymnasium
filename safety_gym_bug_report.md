@@ -63,7 +63,7 @@ if self.observation_flatten:
     self.observation_space = gym.spaces.Box(-np.inf, np.inf, (self.obs_flat_size,), dtype=np.float32)
 ```
 
-While this representation does not lead to behavioral errors in the environment, it can be somewhat misleading for users. To address this issue, we have implemented the `Gymnasium`'s flatten mechanism in `Safety Gym` to handle the representation of the observation space. This mechanism reorganizes the observation space into a more intuitive and easily understandable format, enabling users to process and analyze the observation data more effectively.
+While this representation does not lead to behavioral errors in the environment, it can be somewhat misleading for users. To address this issue, we have implemented the `Gymnasium`'s flatten mechanism in `Safety-Gym` to handle the representation of the observation space. This mechanism reorganizes the observation space into a more intuitive and easily understandable format, enabling users to process and analyze the observation data more effectively.
 
 ```python
 self.obs_info.obs_space_dict = gymnasium.spaces.Dict(obs_space_dict)
@@ -85,7 +85,7 @@ if self.observation_flatten:
 
 ## Missing Cost Information
 
-In `Safety Gym`, by default, there are only two possible outputs for the cost: `0` and `1`, representing whether a cost is incurred or not.
+In `Safety-Gym`, by default, there are only two possible outputs for the cost: `0` and `1`, representing whether a cost is incurred or not.
 
 ```python
 # Optionally remove shaping from reward functions.

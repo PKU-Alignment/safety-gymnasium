@@ -35,13 +35,13 @@ Here we provide a table for comparison of **Safety-Gymnasium** and existing Safe
 
 |                                                                                   SafeRL<br/>Envs                                                                                   |            Engine             | Vectorized<br/> Environments | New Gym API<sup>**(3)**</sup> |    Vision Input     |
 | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: | :--------------------------: | :---------------------------: | :-----------------: |
-|            [Safety Gym](https://github.com/openai/safety-gym)<br/>![GitHub last commit](https://img.shields.io/github/last-commit/openai/safety-gym?label=last%20update)            | `mujoco-py`<sup>**(1)**</sup> |              ❌               |               ❌               | minimally supported |
+|            [Safety-Gym](https://github.com/openai/safety-gym)<br/>![GitHub last commit](https://img.shields.io/github/last-commit/openai/safety-gym?label=last%20update)            | `mujoco-py`<sup>**(1)**</sup> |              ❌               |               ❌               | minimally supported |
 | [safe-control-gym](https://github.com/utiasDSL/safe-control-gym)<br/>![GitHub last commit](https://img.shields.io/github/last-commit/utiasDSL/safe-control-gym?label=last%20update) |           PyBullet            |              ❌               |               ❌               |          ❌          |
 |                                                                       Velocity-Constraints<sup>**(2)**</sup>                                                                        |              N/A              |              ❌               |               ❌               |          ❌          | ❌ |
 |    [mujoco-circle](https://github.com/ymzhang01/mujoco-circle)<br/>![GitHub last commit](https://img.shields.io/github/last-commit/ymzhang01/mujoco-circle?label=last%20update)     |            PyTorch            |              ❌               |               ❌               |          ❌          | ❌ |
 |                                  Safety-Gymnasium<br/>![GitHub last commit](https://img.shields.io/github/last-commit/PKU-Alignment/safety-gymnasium)                                  |       **MuJoCo 2.3.0+**       |              ✅               |               ✅               |          ✅          |
 
-<sup>(1): Maintenance (expect bug fixes and minor updates); the last commit is 19 Nov 2021. Safety Gym depends on `mujoco-py` 2.0.2.7, which was updated on Oct 12, 2019.</sup><br/>
+<sup>(1): Maintenance (expect bug fixes and minor updates); the last commit is 19 Nov 2021. Safety-Gym depends on `mujoco-py` 2.0.2.7, which was updated on Oct 12, 2019.</sup><br/>
 <sup>(2): There is no official library for speed-related environments, and its associated cost constraints are constructed from info. But the task is widely used in the study of SafeRL, and we encapsulate it in Safety-Gymnasium.</sup><br/>
 <sup>(3): In the gym 0.26.0 release update, a new API of interaction was redefined.</sup>
 
@@ -52,8 +52,8 @@ Here we provide a table for comparison of **Safety-Gymnasium** and existing Safe
 We designed a variety of safety-enhanced learning tasks and integrated the contributions from the RL community: `safety-velocity`, `safety-run`, `safety-circle`, `safety-goal`, `safety-button`, etc.
 We introduce a unified safety-enhanced learning benchmark environment library called `Safety-Gymnasium.`
 
-Further, to facilitate the progress of community research, we redesigned [Safety Gym](https://github.com/openai/safety-gym) and removed the dependency on `mujoco-py`.
-We built it on top of [MuJoCo](https://github.com/deepmind/mujoco) and fixed some bugs, more specific bug reports can refer to [Safety Gym's BUG Report](https://github.com/PKU-Alignment/safety-gymnasium/blob/main/safety_gym_bug_report.md).
+Further, to facilitate the progress of community research, we redesigned [Safety-Gym](https://github.com/openai/safety-gym) and removed the dependency on `mujoco-py`.
+We built it on top of [MuJoCo](https://github.com/deepmind/mujoco) and fixed some bugs, more specific bug reports can refer to [Safety-Gym's BUG Report](https://github.com/PKU-Alignment/safety-gymnasium/blob/main/safety_gym_bug_report.md).
 
 Here is a list of all the environments we support for now:
 
@@ -295,7 +295,7 @@ Here are some screenshots of the Safe Navigation tasks.
 ### Vision-base Safe RL
 
 Vision-based safety reinforcement learning lacks realistic scenarios.
-Although the original `Safety Gym` could minimally support visual input, the scenarios were too similar.
+Although the original `Safety-Gym` could minimally support visual input, the scenarios were too similar.
 To facilitate the validation of visual-based safety reinforcement learning algorithms, we have developed a set of realistic vision-based SafeRL tasks, which are currently being validated on the baseline.
 
 For the appetizer, the images are as follows:
