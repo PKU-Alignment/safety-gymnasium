@@ -26,21 +26,16 @@ class RaceLevel1(RaceLevel0):
 
         hazard_config = {
             'num': 7,
-            'size': self.palcement_cal_factor * 0.05,
+            'size': self.palcement_cal_factor * 0.075,
             'keepout': 0.0,
             'locations': [
                 (
                     self.palcement_cal_factor * (-0.45 + 0.2 * i),
-                    self.palcement_cal_factor * (0.3 - 0.05 * (-1) ** i),
+                    self.palcement_cal_factor * (0.3 - 0.09 * (-1) ** i),
                 )
                 for i in range(7)
             ],
             'is_meshed': True,
         }
         self._add_geoms(Hazards(**hazard_config))
-
-    @property
-    def hazards_pos(self):
-        """Helper to get the hazards positions from layout."""
-        # pylint: disable-next=no-member
-        return [self.data.body(f'hazard{i}').xpos.copy() for i in range(self.hazards.num)]
+        self.static_geoms_contact_cost = 1.0

@@ -116,7 +116,7 @@ meshes:
   bush:
     '@name': bush
     '@file': bush.obj
-    '@scale': 0.0025 0.0025 0.0025
+    '@scale': 0.0035 0.0035 0.0035
   flower_bush:
     '@name': flower_bush
     '@file': flower_bush.obj

@@ -42,15 +42,16 @@ class RaceLevel0(BaseTask):
         ]
         self.agent.keepout = 0
 
-        self.continue_goal = False
+        self.mechanism_conf.continue_goal = False
 
         goal_config = {
-            'reward_goal': 50.0,
+            'reward_goal': 10.0,
             'keepout': 0.305,
             'size': 0.3,
             'locations': [(self.palcement_cal_factor * 0.9, self.palcement_cal_factor * 0.3)],
             'is_meshed': True,
         }
+        self.reward_conf.reward_clip = 11
         self._add_geoms(Goal(**goal_config))
         self._is_load_static_geoms = True
 
@@ -70,26 +71,18 @@ class RaceLevel0(BaseTask):
         return reward
 
     def specific_reset(self):
-        self.last_dist_goal = self.dist_goal()
+        pass
 
     def specific_step(self):
         pass
 
-    def build_goal(self):
+    def update_world(self):
         """Build a new goal position, maybe with resampling due to hazards."""
         self.build_goal_position()
         self.last_dist_goal = self.dist_goal()
-
-    def update_world(self):
-        pass
 
     @property
     def goal_achieved(self):
         """Whether the goal of task is achieved."""
         # pylint: disable-next=no-member
         return self.dist_goal() <= self.goal.size
-
-    @property
-    def goal_pos(self):
-        """Helper to get goal position from layout."""
-        return [self.data.body('goal').xpos.copy()]
