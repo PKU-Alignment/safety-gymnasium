@@ -27,11 +27,13 @@ class RaceLevel1(RaceLevel0):
         hazard_config = {
             'num': 7,
             'size': self.palcement_cal_factor * 0.075,
-            'keepout': 0.0,
-            'locations': [
+            'keepout': 0.165,
+            'placements': [
                 (
-                    self.palcement_cal_factor * (-0.45 + 0.2 * i),
-                    self.palcement_cal_factor * (0.3 - 0.09 * (-1) ** i),
+                    self.palcement_cal_factor * (-0.45 + 0.2 * i) - 0.3,
+                    self.palcement_cal_factor * (0.3 - 0.09 * (-1) ** i) - 0.35,
+                    self.palcement_cal_factor * (-0.45 + 0.2 * i) + 0.3,
+                    self.palcement_cal_factor * (0.3 - 0.09 * (-1) ** i) + 0.35,
                 )
                 for i in range(7)
             ],
