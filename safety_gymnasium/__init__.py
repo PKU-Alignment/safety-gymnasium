@@ -160,7 +160,7 @@ __combine(race_tasks, robots, max_episode_steps=500)
 # Fading Environments
 # ----------------------------------------
 fading_tasks = {'Fading0': {}, 'Fading1': {}, 'Fading2': {}}
-__combine(fading_tasks, robots, max_episode_steps=500)
+__combine(fading_tasks, robots, max_episode_steps=1000)
 
 
 # ----------------------------------------
