@@ -147,7 +147,7 @@ __combine(run_tasks, robots, max_episode_steps=500)
 # Safety Vision
 # ----------------------------------------
 
-# Run Environments
+# Race Environments
 # ----------------------------------------
 race_tasks = {
     'Race0': {'floor_conf.type': 'village'},
@@ -155,6 +155,12 @@ race_tasks = {
     'Race2': {'floor_conf.type': 'village'},
 }
 __combine(race_tasks, robots, max_episode_steps=500)
+
+
+# Fading Environments
+# ----------------------------------------
+fading_tasks = {'Fading0': {}, 'Fading1': {}, 'Fading2': {}}
+__combine(fading_tasks, robots, max_episode_steps=500)
 
 
 # ----------------------------------------
