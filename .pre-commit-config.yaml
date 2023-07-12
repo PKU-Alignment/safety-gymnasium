@@ -18,6 +18,11 @@ repos:
       - id: check-toml
       - id: check-ast
       - id: check-added-large-files
+        exclude: |
+          (?x)(
+            ^safety_gymnasium/assets/meshes/|
+            ^safety_gymnasium/assets/textures/|
+          )
       - id: check-merge-conflict
       - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable

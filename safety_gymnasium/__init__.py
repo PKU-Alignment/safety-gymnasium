@@ -144,6 +144,20 @@ __combine(run_tasks, robots, max_episode_steps=500)
 
 
 # ----------------------------------------
+# Safety Vision
+# ----------------------------------------
+
+# Run Environments
+# ----------------------------------------
+race_tasks = {
+    'Race0': {'floor_conf.type': 'village'},
+    'Race1': {'floor_conf.type': 'village'},
+    'Race2': {'floor_conf.type': 'village'},
+}
+__combine(race_tasks, robots, max_episode_steps=500)
+
+
+# ----------------------------------------
 # Safety Velocity
 # ----------------------------------------
 
