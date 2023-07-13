@@ -30,10 +30,6 @@ repos:
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
-        exclude: |
-          (?x)(
-            ^safety_gymnasium/tasks/masafe/|
-          )
   - repo: https://github.com/PyCQA/isort
     rev: 5.12.0
     hooks:
@@ -50,7 +46,6 @@ repos:
         exclude: |
           (?x)(
             ^examples/
-            ^safety_gymnasium/tasks/multiagent_mujoco/|
           )
   - repo: https://github.com/pycqa/flake8
     rev: 6.0.0
@@ -64,8 +59,6 @@ repos:
           - flake8-simplify
         exclude: |
           (?x)(
-            ^safety_gymnasium/tasks/masafe/|
-            ^safety_gymnasium/tasks/multiagent_mujoco/|
             ^examples/|
             ^tests/|
             ^docs/conf.py$
@@ -78,7 +71,6 @@ repos:
         exclude: |
           (?x)(
             ^docs/spelling_wordlist.txt$
-            ^safety_gymnasium/tasks/multiagent_mujoco/|
           )
   - repo: local
     hooks:
@@ -90,8 +82,6 @@ repos:
         require_serial: true
         exclude: |
           (?x)(
-            ^safety_gymnasium/tasks/masafe/|
-            ^safety_gymnasium/tasks/multiagent_mujoco/|
             ^examples/|
             ^tests/|
             ^setup.py$|
