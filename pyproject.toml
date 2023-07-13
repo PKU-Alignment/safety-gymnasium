@@ -29,7 +29,7 @@ dependencies = [
     "gymnasium-robotics",
     "PettingZoo>=1.23.0",
     "pygame == 2.1.0",
-    "mujoco == 2.3.0",
+    "mujoco == 2.3.3",
     "xmltodict >= 0.13.0",
     "pyyaml >= 6.0",
     "imageio >= 2.27.0",
