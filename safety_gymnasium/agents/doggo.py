@@ -15,6 +15,8 @@
 """Doggo."""
 
 
+from typing import Optional
+
 from safety_gymnasium.bases.base_agent import BaseAgent
 from safety_gymnasium.utils.random_generator import RandomGenerator
 
@@ -32,10 +34,10 @@ class Doggo(BaseAgent):
     def __init__(  # pylint: disable=too-many-arguments
         self,
         random_generator: RandomGenerator,
-        placements: list = None,
-        locations: list = None,
+        placements: Optional[list] = None,
+        locations: Optional[list] = None,
         keepout: float = 0.4,
-        rot: float = None,
+        rot: Optional[float] = None,
     ) -> None:
         super().__init__(
             self.__class__.__name__,

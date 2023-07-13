@@ -48,7 +48,7 @@ class SafeMAEnv:
         global_categories: tuple[str, ...] | None = None,
         render_mode: str | None = None,
         **kwargs,
-    ):
+    ) -> None:
         assert scenario in TASK_VELCITY_THRESHOLD, f'Invalid agent: {scenario}'
         self.agent = scenario
         if agent_conf not in TASK_VELCITY_THRESHOLD[scenario]:

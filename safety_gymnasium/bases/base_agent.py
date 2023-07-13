@@ -158,10 +158,10 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
         self,
         name: str,
         random_generator: RandomGenerator,
-        placements: list = None,
-        locations: list = None,
+        placements: list | None = None,
+        locations: list | None = None,
         keepout: float = 0.4,
-        rot: float = None,
+        rot: float | None = None,
     ) -> None:
         """Initialize the agent.
 
