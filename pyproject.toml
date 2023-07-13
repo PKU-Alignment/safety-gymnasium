@@ -26,7 +26,7 @@ classifiers = [
 ]
 dependencies = [
     "gymnasium == 0.28.1",
-    "gymnasium-robotics == 1.2.2",
+    "gymnasium-robotics",
     "PettingZoo>=1.23.0",
     "pygame == 2.1.0",
     "mujoco == 2.3.0",
