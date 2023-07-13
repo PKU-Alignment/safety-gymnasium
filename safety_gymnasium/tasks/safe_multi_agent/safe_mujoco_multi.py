@@ -81,9 +81,9 @@ class SafeMAEnv:
             raise AttributeError(f"accessing private attribute '{name}' is prohibited")
         return getattr(self.env, name)
 
-    def reset(self):
+    def reset(self, *args, **kwargs):
         """Reset the environment."""
-        return self.env.reset()
+        return self.env.reset(*args, **kwargs)
 
     def step(self, action):
         """Step the environment."""
