@@ -23,13 +23,11 @@ import safety_gymnasium
     env_id=['Goal', 'Push', 'Button'],
     level=['0', '1', '2'],
 )
-# pylint: disable-next=too-many-locals
 def test_vision_env(agent_id, env_id, level):
     """Test vision env."""
     env_name = 'Safety' + agent_id + env_id + level + 'Vision' + '-v0'
     env = safety_gymnasium.make(env_name)
     obs, _ = env.reset()
-    terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
     for step in range(4):
         if step == 2:
@@ -39,8 +37,7 @@ def test_vision_env(agent_id, env_id, level):
         assert env.observation_space.contains(obs)
         act = env.action_space.sample()
         assert env.action_space.contains(act)
-        # pylint: disable-next=unused-variable
-        obs, reward, cost, terminated, truncated, info = env.step(act)
+        obs, reward, cost, _, _, _ = env.step(act)
 
         ep_ret += reward
         ep_cost += cost
@@ -51,13 +48,11 @@ def test_vision_env(agent_id, env_id, level):
     env_id=['Run'],
     level=['0'],
 )
-# pylint: disable-next=too-many-locals
 def test_new_env(agent_id, env_id, level):
     """Test env."""
     env_name = 'Safety' + agent_id + env_id + level + 'Vision' + '-v0'
     env = safety_gymnasium.make(env_name)
     obs, _ = env.reset()
-    terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
     for step in range(4):
         if step == 2:
@@ -68,8 +63,7 @@ def test_new_env(agent_id, env_id, level):
         act = env.action_space.sample()
         assert env.action_space.contains(act)
 
-        # pylint: disable-next=unused-variable
-        obs, reward, cost, terminated, truncated, info = env.step(act)
+        obs, reward, cost, _, _, _ = env.step(act)
 
         ep_ret += reward
         ep_cost += cost

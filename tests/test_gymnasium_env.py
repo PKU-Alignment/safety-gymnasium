@@ -30,7 +30,6 @@ def test_navigation_env(agent_id, env_id, level):
     env_name = 'Safety' + agent_id + env_id + level + 'Gymnasium' + '-v0'
     env = gymnasium.make(env_name)
     obs, _ = env.reset()
-    terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
     for step in range(4):
         if step == 2:
@@ -41,7 +40,7 @@ def test_navigation_env(agent_id, env_id, level):
         act = env.action_space.sample()
         assert env.action_space.contains(act)
 
-        obs, reward, terminated, truncated, info = env.step(act)
+        obs, reward, _, _, info = env.step(act)
         ep_ret += reward
         ep_cost += info['cost']
 
@@ -58,7 +57,6 @@ def test_convert_api(agent_id, env_id, level):
     env = gymnasium.wrappers.ClipAction(env)
     env = safety_gymnasium.wrappers.Gymnasium2SafetyGymnasium(env)
     obs, _ = env.reset()
-    terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
     for step in range(4):
         if step == 2:
@@ -69,7 +67,7 @@ def test_convert_api(agent_id, env_id, level):
         act = env.action_space.sample()
         assert env.action_space.contains(act)
 
-        obs, reward, cost, terminated, truncated, info = env.step(act)
+        obs, reward, cost, _, _, _ = env.step(act)
         ep_ret += reward
         ep_cost += cost
 
@@ -87,7 +85,6 @@ def test_with_wrappers(agent_id, env_id, level):
         gymnasium.wrappers.ClipAction,
     )
     obs, _ = env.reset()
-    terminated, truncated = False, False
     ep_ret, ep_cost = 0, 0
     for step in range(4):
         if step == 2:
@@ -98,6 +95,6 @@ def test_with_wrappers(agent_id, env_id, level):
         act = env.action_space.sample()
         assert env.action_space.contains(act)
 
-        obs, reward, cost, terminated, truncated, info = env.step(act)
+        obs, reward, cost, _, _, _ = env.step(act)
         ep_ret += reward
         ep_cost += cost
