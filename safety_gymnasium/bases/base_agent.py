@@ -299,7 +299,7 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
         """
         self.engine = engine
 
-    def apply_action(self, action: np.ndarray, noise: np.ndarray = None) -> None:
+    def apply_action(self, action: np.ndarray, noise: np.ndarray | None = None) -> None:
         """Apply an action to the agent.
 
         Just fill up the control array in the engine data.

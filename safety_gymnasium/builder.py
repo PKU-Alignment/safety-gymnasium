@@ -17,7 +17,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import ClassVar
+from typing import Any, ClassVar
 
 import gymnasium
 import numpy as np
@@ -81,7 +81,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
     - :attr:`done` (bool): Whether the episode is done.
     """
 
-    metadata: ClassVar[dict] = {
+    metadata: ClassVar[dict[str, Any]] = {
         'render_modes': [
             'human',
             'rgb_array',
