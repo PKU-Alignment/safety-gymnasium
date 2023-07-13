@@ -21,7 +21,7 @@ import safety_gymnasium
 
 def run_random(scenario, agent_conf):
     """Random run."""
-    env = safety_gymnasium.make_ma(scenario, agent_conf, render_mode='human')
+    env = safety_gymnasium.make_ma(scenario, agent_conf)
     obs, _ = env.reset()
     # Use below to specify seed.
     # obs, _ = env.reset(seed=0)
@@ -47,7 +47,7 @@ def run_random(scenario, agent_conf):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--scenario', default='Hopper')
-    parser.add_argument('--agent_conf', default='3x1')
+    parser.add_argument('--scenario', default='Ant')
+    parser.add_argument('--agent_conf', default='2x4')
     args = parser.parse_args()
     run_random(args.scenario, args.agent_conf)

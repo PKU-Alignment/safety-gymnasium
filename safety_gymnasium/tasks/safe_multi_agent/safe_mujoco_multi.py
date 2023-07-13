@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Safety-Gymnasium Environments for MultiAgent RL."""
+"""Safety-Gymnasium Environments for Multi-Agent RL."""
 
 from __future__ import annotations
 
@@ -55,9 +55,11 @@ class SafeMAEnv:
             vel_temp_conf = list(TASK_VELCITY_THRESHOLD[scenario].keys())[0]
             self._velocity_threshold = TASK_VELCITY_THRESHOLD[scenario][vel_temp_conf]
             warnings.warn(
-                (f'Unknown agent configuration: {agent_conf}'),
-                (f'using default velocity threshold {self._velocity_threshold}'),
-                (f'for agent {scenario} and configuration {vel_temp_conf}'),
+                f'\033[93mUnknown agent configuration: {agent_conf} \033[0m'
+                f'\033[93musing default velocity threshold {self._velocity_threshold} \033[0m'
+                f'\033[93mfor agent {scenario} and configuration {vel_temp_conf}.\033[0m',
+                UserWarning,
+                stacklevel=2,
             )
         else:
             self._velocity_threshold = TASK_VELCITY_THRESHOLD[scenario][agent_conf]
