@@ -19,16 +19,16 @@ import mujoco
 from safety_gymnasium.tasks.goal.goal_level0 import GoalLevel0
 
 
-class FadingLevel0(GoalLevel0):
+class FadingEasyLevel0(GoalLevel0):
     """An agent must navigate to a goal.
 
-    The Goal will gradually disappear over time.
+    The goal will gradually disappear over time.
     """
 
     def __init__(self, config) -> None:
         super().__init__(config=config)
 
-        self.fadding_steps = 100
+        self.fadding_steps = 150
         self.fadding_objects = [self.goal]  # pylint: disable=no-member
         self.objects_map_ids: dict
 
@@ -87,3 +87,12 @@ class FadingLevel0(GoalLevel0):
         self.model.geom_rgba[goal_id][-1] = self.goal.alpha
         self.last_dist_goal = self.dist_goal()
         # pylint: enable=no-member
+
+
+class FadingHardLevel0(FadingEasyLevel0):
+    """The goal will disappear more quickly."""
+
+    def __init__(self, config) -> None:
+        super().__init__(config=config)
+
+        self.fadding_steps = 75

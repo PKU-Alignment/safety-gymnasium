@@ -22,7 +22,7 @@ import numpy as np
 
 def get_task_class_name(task_id):
     """Help to translate task_id into task_class_name."""
-    class_name = re.findall('[A-Z][^A-Z]*', task_id.split('-')[0])[-1]
+    class_name = ''.join(re.findall('[A-Z][^A-Z]*', task_id.split('-')[0])[2:])
     return class_name[:-1] + 'Level' + class_name[-1]
 
 
