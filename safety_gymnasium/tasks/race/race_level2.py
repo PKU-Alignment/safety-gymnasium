@@ -24,8 +24,8 @@ class RaceLevel2(RaceLevel1):
         super().__init__(config=config)
 
         robot_placements_width = self.palcement_cal_factor * 0.05
-        robot_placements_lenth = self.palcement_cal_factor * 0.01
-        center_x, center_y = self.palcement_cal_factor * -0.7, self.palcement_cal_factor * -0.9
+        robot_placements_lenth = self.palcement_cal_factor * 0.05
+        center_x, center_y = self.palcement_cal_factor * -0.6, self.palcement_cal_factor * -0.9
         self.agent.placements = [
             (
                 center_x - robot_placements_width / 2,

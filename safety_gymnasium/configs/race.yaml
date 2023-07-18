@@ -67,7 +67,7 @@
     race_wall4:
       name: race_wall4
       size: [2.8, 2.1, 0.5]
-      pos: [0.35, -2.45, 0]
+      pos: [0.65, -2.45, 0]
       euler: [0, 0, 0]
       type: mesh
       mesh: cliff2
