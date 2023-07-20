@@ -21,6 +21,7 @@ scenario_agent_conf = {
     'Ant': ['2x4', '4x2'],
     'HalfCheetah': ['6x1', '2x3'],
     'Hopper': ['3x1'],
+    'Humanoid': ['9|8'],
     'Swimmer': ['2x1'],
     'Walker2d': ['2x3'],
 }
