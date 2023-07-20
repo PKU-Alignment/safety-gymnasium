@@ -19,7 +19,6 @@ from __future__ import annotations
 import abc
 from copy import deepcopy
 from dataclasses import dataclass
-from typing import ClassVar
 
 import gymnasium
 import mujoco
@@ -72,7 +71,7 @@ class PlacementsConf:
 
     placements = None
     # FIXME: fix mutable default arguments  # pylint: disable=fixme
-    extents: ClassVar[list[float]] = [-2, -2, 2, 2]
+    extents = (-2, -2, 2, 2)
     margin = 0.0
 
 
