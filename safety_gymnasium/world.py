@@ -248,7 +248,7 @@ class World:  # pylint: disable=too-many-instance-attributes
         worldbody['camera'] = cameras['b']['camera']
 
         # Build and add a tracking camera (logic needed to ensure orientation correct)
-        theta = self.agent_rot  # pylint: disable=no-member
+        theta = self.agent_rot + np.pi  # pylint: disable=no-member
         xyaxes = {
             'x1': np.cos(theta),
             'x2': -np.sin(theta),

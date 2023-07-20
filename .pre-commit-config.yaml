@@ -21,8 +21,11 @@ repos:
         exclude: |
           (?x)(
             ^safety_gymnasium/tasks/safe_issac_gym/assets/
+            ^safety_gymnasium/assets/meshes/|
+            ^safety_gymnasium/assets/textures/|
           )
       - id: check-merge-conflict
+        exclude: \.rst$
       - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable
       - id: detect-private-key

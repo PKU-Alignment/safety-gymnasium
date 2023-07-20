@@ -1,0 +1,118 @@
+# Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ==============================================================================
+
+- walls:
+    race_wall1_down:
+      name: race_wall1_down
+      size: [0.35, 3.5, 0.5]
+      pos: [-2.8, -2.1, 0]
+      euler: [1.57, 1.57, 0]
+      type: mesh
+      mesh: bamboo_wall
+      material: bamboo_wall
+      group: 2
+
+    race_wall1_up:
+      name: race_wall1_up
+      size: [0.35, 3.5, 0.5]
+      pos: [-2.8, 0.355, 0]
+      euler: [1.57, 1.57, 0]
+      type: mesh
+      mesh: bamboo_wall
+      material: bamboo_wall
+      group: 2
+
+    race_wall2_left:
+      name: race_wall2_left
+      size: [3.15, 1.05, 0.5]
+      pos: [-1.05, 1.75, 0]
+      euler: [1.57, 0, 0]
+      type: mesh
+      mesh: bamboo_wall
+      material: bamboo_wall
+      group: 2
+
+    race_wall22_right:
+      name: race_wall22_right
+      size: [3.15, 1.05, 0.5]
+      pos: [1.75, 1.75, 0]
+      euler: [1.57, 0, 0]
+      type: mesh
+      mesh: bamboo_wall
+      material: bamboo_wall
+      group: 2
+
+    race_wall3:
+      name: race_wall3
+      size: [2.8, 2.1, 0.5]
+      pos: [0.2, -0.175, 0]
+      euler: [0, 0, 1.57]
+      type: mesh
+      mesh: cliff1
+      material: cliff1
+      group: 2
+
+    race_wall4:
+      name: race_wall4
+      size: [2.8, 2.1, 0.5]
+      pos: [0.65, -2.45, 0]
+      euler: [0, 0, 0]
+      type: mesh
+      mesh: cliff2
+      material: cliff2
+      group: 2
+
+    race_wall5:
+      name: race_wall5
+      size: [2.8, 2.1, 0.5]
+      pos: [-1.75, -3.5, 0]
+      euler: [1.57, 3.14, 0]
+      type: mesh
+      mesh: wooden_door1
+      material: wooden_door1
+      group: 2
+
+    small_stone1:
+      name: small_stone1
+      size: [2.8, 2.1, 0.5]
+      pos: [-2.45, 2.1, 0]
+      euler: [0, 0, 1.57]
+      type: mesh
+      mesh: cliff3
+      material: cliff3
+      group: 2
+
+    small_stone2:
+      name: small_stone2
+      size: [2.8, 2.1, 0.5]
+      pos: [0.355, 2.1, 0]
+      euler: [1.57, 0, 0]
+      type: mesh
+      mesh: cliff3
+      material: cliff3
+      group: 2
+
+- {}
+
+- walls:
+    race_wall3:
+      name: race_wall3
+      size: [2.8, 2.1, 0.5]
+      pos: [0.7, -0.175, 0]
+      euler: [0, 0, 1.57]
+      type: mesh
+      mesh: cliff1
+      material: cliff1
+      group: 2

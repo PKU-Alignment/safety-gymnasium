@@ -20,6 +20,7 @@ from gymnasium import make as gymnasium_make
 from gymnasium import register as gymnasium_register
 
 from safety_gymnasium import vector, wrappers
+from safety_gymnasium.tasks.safe_multi_agent.safe_mujoco_multi import make_ma
 from safety_gymnasium.utils.registration import make, register
 from safety_gymnasium.version import __version__
 
@@ -141,6 +142,29 @@ __combine(circle_tasks, robots, max_episode_steps=500)
 # ----------------------------------------
 run_tasks = {'Run0': {}}
 __combine(run_tasks, robots, max_episode_steps=500)
+
+
+# ----------------------------------------
+# Safety Vision
+# ----------------------------------------
+
+# Race Environments
+# ----------------------------------------
+race_tasks = {
+    'Race0': {'floor_conf.type': 'village'},
+    'Race1': {'floor_conf.type': 'village'},
+    'Race2': {'floor_conf.type': 'village'},
+}
+__combine(race_tasks, robots, max_episode_steps=500)
+
+
+# Fading Environments
+# ----------------------------------------
+fading_tasks = {'FadingEasy0': {}, 'FadingEasy1': {}, 'FadingEasy2': {}}
+__combine(fading_tasks, robots, max_episode_steps=1000)
+
+fading_tasks = {'FadingHard0': {}, 'FadingHard1': {}, 'FadingHard2': {}}
+__combine(fading_tasks, robots, max_episode_steps=1000)
 
 
 # ----------------------------------------
