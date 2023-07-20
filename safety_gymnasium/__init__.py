@@ -173,21 +173,21 @@ __combine(fading_tasks, robots, max_episode_steps=1000)
 
 __register_helper(
     env_id='SafetyHalfCheetahVelocity-v0',
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_half_cheetah_velocity_v0:SafetyHalfCheetahVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_half_cheetah_velocity_v0:SafetyHalfCheetahVelocityEnv',
     max_episode_steps=1000,
     reward_threshold=4800.0,
 )
 
 __register_helper(
     env_id='SafetyHopperVelocity-v0',
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_hopper_velocity_v0:SafetyHopperVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_hopper_velocity_v0:SafetyHopperVelocityEnv',
     max_episode_steps=1000,
     reward_threshold=3800.0,
 )
 
 __register_helper(
     env_id='SafetySwimmerVelocity-v0',
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_swimmer_velocity_v0:SafetySwimmerVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_swimmer_velocity_v0:SafetySwimmerVelocityEnv',
     max_episode_steps=1000,
     reward_threshold=360.0,
 )
@@ -195,39 +195,39 @@ __register_helper(
 __register_helper(
     env_id='SafetyWalker2dVelocity-v0',
     max_episode_steps=1000,
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_walker2d_velocity_v0:SafetyWalker2dVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_walker2d_velocity_v0:SafetyWalker2dVelocityEnv',
 )
 
 __register_helper(
     env_id='SafetyAntVelocity-v0',
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_ant_velocity_v0:SafetyAntVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_ant_velocity_v0:SafetyAntVelocityEnv',
     max_episode_steps=1000,
     reward_threshold=6000.0,
 )
 
 __register_helper(
     env_id='SafetyHumanoidVelocity-v0',
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_humanoid_velocity_v0:SafetyHumanoidVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_humanoid_velocity_v0:SafetyHumanoidVelocityEnv',
     max_episode_steps=1000,
 )
 
 __register_helper(
     env_id='SafetyHalfCheetahVelocity-v1',
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_half_cheetah_velocity_v1:SafetyHalfCheetahVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_half_cheetah_velocity_v1:SafetyHalfCheetahVelocityEnv',
     max_episode_steps=1000,
     reward_threshold=4800.0,
 )
 
 __register_helper(
     env_id='SafetyHopperVelocity-v1',
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_hopper_velocity_v1:SafetyHopperVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_hopper_velocity_v1:SafetyHopperVelocityEnv',
     max_episode_steps=1000,
     reward_threshold=3800.0,
 )
 
 __register_helper(
     env_id='SafetySwimmerVelocity-v1',
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_swimmer_velocity_v1:SafetySwimmerVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_swimmer_velocity_v1:SafetySwimmerVelocityEnv',
     max_episode_steps=1000,
     reward_threshold=360.0,
 )
@@ -235,18 +235,18 @@ __register_helper(
 __register_helper(
     env_id='SafetyWalker2dVelocity-v1',
     max_episode_steps=1000,
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_walker2d_velocity_v1:SafetyWalker2dVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_walker2d_velocity_v1:SafetyWalker2dVelocityEnv',
 )
 
 __register_helper(
     env_id='SafetyAntVelocity-v1',
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_ant_velocity_v1:SafetyAntVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_ant_velocity_v1:SafetyAntVelocityEnv',
     max_episode_steps=1000,
     reward_threshold=6000.0,
 )
 
 __register_helper(
     env_id='SafetyHumanoidVelocity-v1',
-    entry_point='safety_gymnasium.tasks.safety_velocity.safety_humanoid_velocity_v1:SafetyHumanoidVelocityEnv',
+    entry_point='safety_gymnasium.tasks.safe_velocity.safety_humanoid_velocity_v1:SafetyHumanoidVelocityEnv',
     max_episode_steps=1000,
 )
