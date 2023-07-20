@@ -32,7 +32,7 @@ def test_safe_ma():
     for scenario, agent_confs in scenario_agent_conf.items():
         for agent_conf in agent_confs:
             env = safety_gymnasium.make_ma(scenario, agent_conf)
-            obs, _ = env.reset()  # pylint: disable=unused-variable
+            obs, _ = env.reset()
             # Use below to specify seed.
             # obs, _ = env.reset(seed=0)
             ep_ret, ep_cost = 0, 0
