@@ -40,7 +40,7 @@ class SafeMAEnv:
 
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        scenario: str,  # pylint: disable=redefined-builtin
+        scenario: str,
         agent_conf: str | None,
         agent_obsk: int | None = 1,
         agent_factorization: dict | None = None,
