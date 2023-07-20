@@ -191,7 +191,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         self.obs_info = ObservationInfo()
 
         self._is_load_static_geoms = False  # Whether to load static geoms in current task.
-        self.static_geom_names: dict
+        self.static_geoms_names: dict
         self.static_geoms_contact_cost: float = None
 
     def dist_goal(self) -> float:
@@ -214,7 +214,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             for contact in self.data.contact[: self.data.ncon]:
                 geom_ids = [contact.geom1, contact.geom2]
                 geom_names = sorted([self.model.geom(g).name for g in geom_ids])
-                if any(n in self.static_geom_names for n in geom_names) and any(
+                if any(n in self.static_geoms_names for n in geom_names) and any(
                     n in self.agent.body_info.geom_names for n in geom_names
                 ):
                     # pylint: disable-next=no-member
@@ -331,12 +331,12 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         with open(os.path.join(base_dir, f'configs/{config_name}.yaml'), encoding='utf-8') as file:
             meshes_config = yaml.load(file, Loader=yaml.FullLoader)  # noqa: S506
 
-        self.static_geom_names = set()
+        self.static_geoms_names = set()
         for idx in range(level + 1):
             for group in meshes_config[idx].values():
                 geoms_config.update(group)
                 for item in group.values():
-                    self.static_geom_names.add(item['name'])
+                    self.static_geoms_names.add(item['name'])
 
     def build_goal_position(self) -> None:
         """Build a new goal position, maybe with resampling due to hazards."""
