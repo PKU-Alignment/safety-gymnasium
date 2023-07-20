@@ -29,7 +29,7 @@ TASK_VELCITY_THRESHOLD = {
     'Ant': {'2x4': 2.522, '4x2': 2.418},
     'HalfCheetah': {'6x1': 2.932, '2x3': 3.227},
     'Hopper': {'3x1': 0.9613},
-    'Humanoid': {},
+    'Humanoid': {'9|8': 0.58},
     'Swimmer': {'2x1': 0.04891},
     'Walker2d': {'2x3': 1.641},
 }
