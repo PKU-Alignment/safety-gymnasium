@@ -12,25 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Race level 2."""
+"""Push level 1."""
 
-from safety_gymnasium.tasks.race.race_level1 import RaceLevel1
+from safety_gymnasium.assets.geoms import Hazards, Pillars
+from safety_gymnasium.tasks.safe_navigation.push.push_level0 import PushLevel0
 
 
-class RaceLevel2(RaceLevel1):
-    """A robot must navigate a far way to a goal, while avoiding hazards."""
+class PushLevel1(PushLevel0):
+    """An agent must push a box to a goal while avoiding hazards.
+
+    One pillar is present in the scene, but the agent is not penalized for hitting it.
+    """
 
     def __init__(self, config) -> None:
         super().__init__(config=config)
 
-        robot_placements_width = self.palcement_cal_factor * 0.05
-        robot_placements_lenth = self.palcement_cal_factor * 0.05
-        center_x, center_y = self.palcement_cal_factor * -0.6, self.palcement_cal_factor * -0.9
-        self.agent.placements = [
-            (
-                center_x - robot_placements_width / 2,
-                center_y - robot_placements_lenth / 2,
-                center_x + robot_placements_width / 2,
-                center_y + robot_placements_lenth / 2,
-            ),
-        ]
+        self.placements_conf.extents = [-1.5, -1.5, 1.5, 1.5]
+
+        self._add_geoms(Hazards(num=2, size=0.3), Pillars(num=1, is_constrained=False))

@@ -14,7 +14,7 @@
 # ==============================================================================
 """Ant environment with a safety constraint on velocity."""
 
-from safety_gymnasium.tasks.safety_velocity.safety_ant_velocity_v0 import (
+from safety_gymnasium.tasks.safe_velocity.safety_ant_velocity_v0 import (
     SafetyAntVelocityEnv as AntEnv,
 )
 

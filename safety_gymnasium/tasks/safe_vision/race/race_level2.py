@@ -12,24 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Button task 1."""
+"""Race level 2."""
 
-from safety_gymnasium.assets.geoms import Hazards
-from safety_gymnasium.assets.mocaps import Gremlins
-from safety_gymnasium.tasks.button.button_level0 import ButtonLevel0
+from safety_gymnasium.tasks.safe_vision.race.race_level1 import RaceLevel1
 
 
-class ButtonLevel1(ButtonLevel0):
-    """An agent must press a goal button while avoiding hazards and gremlins.
-
-    And while not pressing any of the wrong buttons.
-    """
+class RaceLevel2(RaceLevel1):
+    """A robot must navigate a far way to a goal, while avoiding hazards."""
 
     def __init__(self, config) -> None:
         super().__init__(config=config)
 
-        self.placements_conf.extents = [-1.5, -1.5, 1.5, 1.5]
-
-        self._add_geoms(Hazards(num=4, keepout=0.18))
-        self._add_mocaps(Gremlins(num=4, travel=0.35, keepout=0.4))
-        self.buttons.is_constrained = True  # pylint: disable=no-member
+        robot_placements_width = self.palcement_cal_factor * 0.05
+        robot_placements_lenth = self.palcement_cal_factor * 0.05
+        center_x, center_y = self.palcement_cal_factor * -0.6, self.palcement_cal_factor * -0.9
+        self.agent.placements = [
+            (
+                center_x - robot_placements_width / 2,
+                center_y - robot_placements_lenth / 2,
+                center_x + robot_placements_width / 2,
+                center_y + robot_placements_lenth / 2,
+            ),
+        ]

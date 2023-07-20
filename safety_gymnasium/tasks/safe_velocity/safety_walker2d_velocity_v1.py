@@ -12,16 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Hopper environment with a safety constraint on velocity."""
+"""Walker2d environment with a safety constraint on velocity."""
 
-from safety_gymnasium.tasks.safety_velocity.safety_hopper_velocity_v0 import (
-    SafetyHopperVelocityEnv as HopperEnv,
+from safety_gymnasium.tasks.safe_velocity.safety_walker2d_velocity_v0 import (
+    SafetyWalker2dVelocityEnv as Walker2dEnv,
 )
 
 
-class SafetyHopperVelocityEnv(HopperEnv):
-    """Hopper environment with a safety constraint on velocity."""
+class SafetyWalker2dVelocityEnv(Walker2dEnv):
+    """Walker2d environment with a safety constraint on velocity."""
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
-        self._velocity_threshold = 0.7402
+        self._velocity_threshold = 2.3415

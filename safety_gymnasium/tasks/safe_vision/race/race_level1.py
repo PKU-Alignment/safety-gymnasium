@@ -15,7 +15,7 @@
 """Race level 1."""
 
 from safety_gymnasium.assets.geoms import Hazards
-from safety_gymnasium.tasks.race.race_level0 import RaceLevel0
+from safety_gymnasium.tasks.safe_vision.race.race_level0 import RaceLevel0
 
 
 class RaceLevel1(RaceLevel0):

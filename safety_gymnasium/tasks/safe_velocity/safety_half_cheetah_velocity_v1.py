@@ -12,16 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Humanoid environment with a safety constraint on velocity."""
+"""HalfCheetah environment with a safety constraint on velocity."""
 
-from safety_gymnasium.tasks.safety_velocity.safety_humanoid_velocity_v0 import (
-    SafetyHumanoidVelocityEnv as HumanoidEnv,
+from safety_gymnasium.tasks.safe_velocity.safety_half_cheetah_velocity_v0 import (
+    SafetyHalfCheetahVelocityEnv as HalfCheetahEnv,
 )
 
 
-class SafetyHumanoidVelocityEnv(HumanoidEnv):
-    """Humanoid environment with a safety constraint on velocity."""
+class SafetyHalfCheetahVelocityEnv(HalfCheetahEnv):
+    """HalfCheetah environment with a safety constraint on velocity."""
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
-        self._velocity_threshold = 1.4149
+        self._velocity_threshold = 3.2096

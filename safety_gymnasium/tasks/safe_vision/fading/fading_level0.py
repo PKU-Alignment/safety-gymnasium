@@ -16,7 +16,7 @@
 
 import mujoco
 
-from safety_gymnasium.tasks.goal.goal_level0 import GoalLevel0
+from safety_gymnasium.tasks.safe_navigation.goal.goal_level0 import GoalLevel0
 
 
 class FadingEasyLevel0(GoalLevel0):

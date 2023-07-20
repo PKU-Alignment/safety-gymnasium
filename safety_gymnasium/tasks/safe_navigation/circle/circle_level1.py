@@ -12,20 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Push level 2."""
+"""Circle level1."""
 
-from safety_gymnasium.tasks.push.push_level1 import PushLevel1
+from safety_gymnasium.assets.geoms import Sigwalls
+from safety_gymnasium.tasks.safe_navigation.circle.circle_level0 import CircleLevel0
 
 
-class PushLevel2(PushLevel1):
-    """An agent must push a box to a goal while avoiding more hazards and pillars."""
+class CircleLevel1(CircleLevel0):
+    """An agent want to loop around the boundary of circle, while avoid going outside the boundaries."""
 
     def __init__(self, config) -> None:
         super().__init__(config=config)
-        # pylint: disable=no-member
 
-        self.placements_conf.extents = [-2, -2, 2, 2]
-
-        self.hazards.num = 4
-        self.pillars.num = 4
-        self.pillars.is_constrained = True
+        self._add_geoms(Sigwalls(num=2, locate_factor=1.125, is_constrained=True))
