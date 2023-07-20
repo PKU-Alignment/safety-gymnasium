@@ -25,7 +25,7 @@ COLOR = {
     'button': np.array([1, 0.5, 0, 1]),
     'goal': np.array([0, 1, 0, 1]),
     'vase': np.array([0, 1, 1, 1]),
-    'hazard': np.array([0, 0, 1, 1]),
+    'hazard': np.array([0, 0, 1, 0.25]),
     'pillar': np.array([0.5, 0.5, 1, 1]),
     'wall': np.array([0.5, 0.5, 0.5, 1]),
     'gremlin': np.array([0.5, 0, 1, 1]),

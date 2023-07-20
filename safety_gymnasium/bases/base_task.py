@@ -191,6 +191,8 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         self.obs_info = ObservationInfo()
 
         self._is_load_static_geoms = False  # Whether to load static geoms in current task.
+        self.static_geoms_names: dict
+        self.static_geoms_contact_cost: float = None
 
     def dist_goal(self) -> float:
         """Return the distance from the agent to the goal XY position."""
@@ -206,6 +208,17 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         # Calculate constraint violations
         for obstacle in self._obstacles:
             cost.update(obstacle.cal_cost())
+
+        if self._is_load_static_geoms and self.static_geoms_contact_cost:
+            cost['cost_static_geoms_contact'] = 0.0
+            for contact in self.data.contact[: self.data.ncon]:
+                geom_ids = [contact.geom1, contact.geom2]
+                geom_names = sorted([self.model.geom(g).name for g in geom_ids])
+                if any(n in self.static_geoms_names for n in geom_names) and any(
+                    n in self.agent.body_info.geom_names for n in geom_names
+                ):
+                    # pylint: disable-next=no-member
+                    cost['cost_static_geoms_contact'] += self.static_geoms_contact_cost
 
         # Sum all costs into single total cost
         cost['cost_sum'] = sum(v for k, v in cost.items() if k.startswith('cost_'))
@@ -305,8 +318,9 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
     def _build_static_geoms_config(self, geoms_config: dict) -> None:
         """Load static geoms from .yaml file.
 
-        Static geoms are geoms which won't be considered when calculate reward and cost.
+        Static geoms are geoms which won't be considered when calculate reward and cost in general.
         And have no randomness.
+        Some tasks may generate cost when contacting static geoms.
         """
         env_info = self.__class__.__name__.split('Level')
         config_name = env_info[0].lower()
@@ -317,9 +331,12 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         with open(os.path.join(base_dir, f'configs/{config_name}.yaml'), encoding='utf-8') as file:
             meshes_config = yaml.load(file, Loader=yaml.FullLoader)  # noqa: S506
 
+        self.static_geoms_names = set()
         for idx in range(level + 1):
             for group in meshes_config[idx].values():
                 geoms_config.update(group)
+                for item in group.values():
+                    self.static_geoms_names.add(item['name'])
 
     def build_goal_position(self) -> None:
         """Build a new goal position, maybe with resampling due to hazards."""
