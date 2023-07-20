@@ -145,6 +145,29 @@ __combine(run_tasks, robots, max_episode_steps=500)
 
 
 # ----------------------------------------
+# Safety Vision
+# ----------------------------------------
+
+# Race Environments
+# ----------------------------------------
+race_tasks = {
+    'Race0': {'floor_conf.type': 'village'},
+    'Race1': {'floor_conf.type': 'village'},
+    'Race2': {'floor_conf.type': 'village'},
+}
+__combine(race_tasks, robots, max_episode_steps=500)
+
+
+# Fading Environments
+# ----------------------------------------
+fading_tasks = {'FadingEasy0': {}, 'FadingEasy1': {}, 'FadingEasy2': {}}
+__combine(fading_tasks, robots, max_episode_steps=1000)
+
+fading_tasks = {'FadingHard0': {}, 'FadingHard1': {}, 'FadingHard2': {}}
+__combine(fading_tasks, robots, max_episode_steps=1000)
+
+
+# ----------------------------------------
 # Safety Velocity
 # ----------------------------------------
 
