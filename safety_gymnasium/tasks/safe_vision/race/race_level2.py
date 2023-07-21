@@ -25,7 +25,7 @@ class RaceLevel2(RaceLevel1):
 
         robot_placements_width = self.palcement_cal_factor * 0.05
         robot_placements_lenth = self.palcement_cal_factor * 0.05
-        center_x, center_y = self.palcement_cal_factor * -0.6, self.palcement_cal_factor * -0.9
+        center_x, center_y = self.palcement_cal_factor * -0.65, self.palcement_cal_factor * -0.8
         self.agent.placements = [
             (
                 center_x - robot_placements_width / 2,
