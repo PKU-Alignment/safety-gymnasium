@@ -41,30 +41,37 @@ class Hazards(Geom):  # pylint: disable=too-many-instance-attributes
     is_lidar_observed: bool = True
     is_constrained: bool = True
     is_meshed: bool = False
+    mesh_name: str = name[:-1]
 
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""
-        geom = {
+        body = {
             'name': self.name,
-            'size': [self.size, 1e-2],  # self.hazards_size / 2],
             'pos': np.r_[xy_pos, 2e-2],  # self.hazards_size / 2 + 1e-2],
             'rot': rot,
-            'type': 'cylinder',
-            'contype': 0,
-            'conaffinity': 0,
-            'group': self.group,
-            'rgba': self.color,
+            'geoms': [
+                {
+                    'name': self.name,
+                    'size': [self.size, 1e-2],  # self.hazards_size / 2],
+                    'type': 'cylinder',
+                    'contype': 0,
+                    'conaffinity': 0,
+                    'group': self.group,
+                    'rgba': self.color * np.array([1.0, 1.0, 1.0, self.alpha]),
+                },
+            ],
         }
         if self.is_meshed:
-            geom.update(
+            body['geoms'][0].update(
                 {
                     'type': 'mesh',
-                    'mesh': 'bush',
-                    'material': 'bush',
-                    'euler': [np.pi / 2, 0, 0],
+                    'mesh': self.mesh_name,
+                    'material': self.mesh_name,
+                    'euler': [0, 0, 0],
                 },
             )
-        return geom
+            body['geoms'][0]['rgba'] = np.array([1.0, 1.0, 1.0, 1.0])
+        return body
 
     def cal_cost(self):
         """Contacts Processing."""
@@ -84,4 +91,4 @@ class Hazards(Geom):  # pylint: disable=too-many-instance-attributes
     def pos(self):
         """Helper to get the hazards positions from layout."""
         # pylint: disable-next=no-member
-        return [self.engine.data.body(f'hazard{i}').xpos.copy() for i in range(self.num)]
+        return [self.engine.data.body(f'{self.name[:-1]}{i}').xpos.copy() for i in range(self.num)]

@@ -28,7 +28,7 @@ import xmltodict
 import yaml
 
 import safety_gymnasium
-from safety_gymnasium.utils.common_utils import convert, rot2quat
+from safety_gymnasium.utils.common_utils import build_xml_from_dict, convert, rot2quat
 from safety_gymnasium.utils.task_utils import get_body_xvelp
 
 
@@ -177,29 +177,38 @@ class World:  # pylint: disable=too-many-instance-attributes
         elif self.floor_type == 'village':  # pylint: disable=no-member
             texture.append(assets_config['textures']['village_floor'])
             material.append(assets_config['materials']['village_floor'])
+        elif self.floor_type == 'mud':  # pylint: disable=no-member
+            texture.append(assets_config['textures']['mud_floor'])
+            material.append(assets_config['materials']['mud_floor'])
+        elif self.floor_type == 'none':  # pylint: disable=no-member
+            self.floor_size = [5e-9, 5e-9, 0.1]  # pylint: disable=attribute-defined-outside-init
         else:
             raise NotImplementedError
 
         selected_textures = {}
         selected_materials = {}
         selected_meshes = {}
-        for config in self.geoms.values():  # pylint: disable=no-member
-            if config['type'] == 'mesh':
+        for config in (
+            # pylint: disable=no-member
+            list(self.geoms.values())
+            + list(self.free_geoms.values())
+            + list(self.mocaps.values())
+            # pylint: enable=no-member
+        ):
+            if 'type' not in config:
+                for geom in config['geoms']:
+                    if geom['type'] != 'mesh':
+                        continue
+                    mesh_name = geom['mesh']
+                    if mesh_name in assets_config['textures']:
+                        selected_textures[mesh_name] = assets_config['textures'][mesh_name]
+                        selected_materials[mesh_name] = assets_config['materials'][mesh_name]
+                    selected_meshes[mesh_name] = assets_config['meshes'][mesh_name]
+            elif config['type'] == 'mesh':
                 mesh_name = config['mesh']
-                selected_textures[mesh_name] = assets_config['textures'][mesh_name]
-                selected_materials[mesh_name] = assets_config['materials'][mesh_name]
-                selected_meshes[mesh_name] = assets_config['meshes'][mesh_name]
-        for config in self.free_geoms.values():  # pylint: disable=no-member
-            if config['type'] == 'mesh':
-                mesh_name = config['mesh']
-                selected_textures[mesh_name] = assets_config['textures'][mesh_name]
-                selected_materials[mesh_name] = assets_config['materials'][mesh_name]
-                selected_meshes[mesh_name] = assets_config['meshes'][mesh_name]
-        for config in self.mocaps.values():  # pylint: disable=no-member
-            if config['type'] == 'mesh':
-                mesh_name = config['mesh']
-                selected_textures[mesh_name] = assets_config['textures'][mesh_name]
-                selected_materials[mesh_name] = assets_config['materials'][mesh_name]
+                if mesh_name in assets_config['textures']:
+                    selected_textures[mesh_name] = assets_config['textures'][mesh_name]
+                    selected_materials[mesh_name] = assets_config['materials'][mesh_name]
                 selected_meshes[mesh_name] = assets_config['meshes'][mesh_name]
         texture += selected_textures.values()
         material += selected_materials.values()
@@ -236,6 +245,10 @@ class World:  # pylint: disable=too-many-instance-attributes
                     g.update({'@material': 'matplane'})
                 elif self.floor_type == 'village':  # pylint: disable=no-member
                     g.update({'@material': 'village_floor'})
+                elif self.floor_type == 'mud':  # pylint: disable=no-member
+                    g.update({'@material': 'mud_floor'})
+                elif self.floor_type == 'none':  # pylint: disable=no-member
+                    pass
                 else:
                     raise NotImplementedError
         # Add cameras to the XML dictionary
@@ -290,17 +303,16 @@ class World:  # pylint: disable=too-many-instance-attributes
         for name, object in self.free_geoms.items():  # pylint: disable=redefined-builtin, no-member
             assert object['name'] == name, f'Inconsistent {name} {object}'
             object = object.copy()  # don't modify original object
+            object['freejoint'] = object['name']
             if name == 'push_box':
-                object['quat'] = rot2quat(object['rot'])
-                dim = object['size'][0]
-                object['dim'] = dim
-                object['width'] = dim / 2
-                object['x'] = dim
-                object['y'] = dim
-                body = xmltodict.parse(
-                    # pylint: disable-next=consider-using-f-string
-                    """
-                    <body name="{name}" pos="{pos}" quat="{quat}">
+                object['quat'] = rot2quat(object.pop('rot'))
+                dim = object['geoms'][0]['size'][0]
+                object['geoms'][0]['dim'] = dim
+                object['geoms'][0]['width'] = dim / 2
+                object['geoms'][0]['x'] = dim
+                object['geoms'][0]['y'] = dim
+                # pylint: disable-next=consider-using-f-string
+                collision_xml = """
                         <freejoint name="{name}"/>
                         <geom name="{name}" type="{type}" size="{size}" density="{density}"
                             rgba="{rgba}" group="{group}"/>
@@ -312,39 +324,31 @@ class World:  # pylint: disable=too-many-instance-attributes
                             rgba="{rgba}" group="{group}" pos="{x} -{y} 0"/>
                         <geom name="col4" type="{type}" size="{width} {width} {dim}" density="{density}"
                             rgba="{rgba}" group="{group}" pos="-{x} -{y} 0"/>
-                    </body>
+                        """.format(
+                    **{k: convert(v) for k, v in object['geoms'][0].items()},
+                )
+                # pylint: disable-next=consider-using-f-string
+                visual_xml = """
+                    <geom name="{name}" type="mesh" mesh="{mesh}" material="{material}" pos="{pos}"
+                    rgba="1 1 1 1" group="{group}" contype="{contype}" conaffinity="{conaffinity}" density="{density}"
+                    euler="{euler}"/>
                 """.format(
-                        **{k: convert(v) for k, v in object.items()},
-                    ),
+                    **{k: convert(v) for k, v in object['geoms'][1].items()},
+                )
+                body = xmltodict.parse(
+                    # pylint: disable-next=consider-using-f-string
+                    f"""
+                    <body name="{object['name']}" pos="{convert(object['pos'])}" quat="{convert(object['quat'])}">
+                        {collision_xml}
+                        {visual_xml}
+                    </body>
+                """,
                 )
             else:
-                if object['type'] == 'mesh':
-                    body = xmltodict.parse(
-                        # pylint: disable-next=consider-using-f-string
-                        """
-                        <body name="{name}" pos="{pos}" euler="{euler}" >
-                            <freejoint name="{name}"/>
-                            <geom name="{name}" type="mesh" mesh="{mesh}" material="{material}" density="{density}"
-                                rgba="{rgba}" group="{group}" condim="6" />
-                        </body>
-                    """.format(
-                            **{k: convert(v) for k, v in object.items()},
-                        ),
-                    )
-                else:
-                    object['quat'] = rot2quat(object['rot'])
-                    body = xmltodict.parse(
-                        # pylint: disable-next=consider-using-f-string
-                        """
-                        <body name="{name}" pos="{pos}" quat="{quat}">
-                            <freejoint name="{name}"/>
-                            <geom name="{name}" type="{type}" size="{size}" density="{density}"
-                                rgba="{rgba}" group="{group}"/>
-                        </body>
-                    """.format(
-                            **{k: convert(v) for k, v in object.items()},
-                        ),
-                    )
+                if object['geoms'][0]['type'] == 'mesh':
+                    object['geoms'][0]['condim'] = 6
+                object['quat'] = rot2quat(object.pop('rot'))
+                body = build_xml_from_dict(object)
             # Append new body to world, making it a list optionally
             # Add the object to the world
             worldbody['body'].append(body['body'])
@@ -357,18 +361,12 @@ class World:  # pylint: disable=too-many-instance-attributes
             ), f'missing object for {name}'  # pylint: disable=no-member
             # Add the object to the world
             mocap = mocap.copy()  # don't modify original object
-            mocap['quat'] = rot2quat(mocap['rot'])
-            body = xmltodict.parse(
-                # pylint: disable-next=consider-using-f-string
-                """
-                <body name="{name}" mocap="true">
-                    <geom name="{name}" type="{type}" size="{size}" rgba="{rgba}"
-                        pos="{pos}" quat="{quat}" contype="0" conaffinity="0" group="{group}"/>
-                </body>
-            """.format(
-                    **{k: convert(v) for k, v in mocap.items()},
-                ),
-            )
+            mocap['quat'] = rot2quat(mocap.pop('rot'))
+            mocap['mocap'] = 'true'
+            mocap['geoms'][0]['contype'] = 0
+            mocap['geoms'][0]['conaffinity'] = 0
+            mocap['geoms'][0]['pos'] = mocap.pop('pos')
+            body = build_xml_from_dict(mocap)
             worldbody['body'].append(body['body'])
             # Add weld to equality list
             mocap['body1'] = name
@@ -386,34 +384,14 @@ class World:  # pylint: disable=too-many-instance-attributes
         for name, geom in self.geoms.items():  # pylint: disable=no-member
             assert geom['name'] == name, f'Inconsistent {name} {geom}'
             geom = geom.copy()  # don't modify original object
-            geom['contype'] = geom.get('contype', 1)
-            geom['conaffinity'] = geom.get('conaffinity', 1)
-            if geom['type'] == 'mesh':
-                body = xmltodict.parse(
-                    # pylint: disable-next=consider-using-f-string
-                    """
-                    <body name="{name}" pos="{pos}" euler="{euler}">
-                        <geom name="{name}" type="mesh" mesh="{mesh}" material="{material}"
-                        rgba="1 1 1 1" group="{group}" contype="{contype}"
-                        conaffinity="{conaffinity}"/>
-                    </body>
-                """.format(
-                        **{k: convert(v) for k, v in geom.items()},
-                    ),
-                )
-            else:
-                geom['quat'] = rot2quat(geom['rot'])
-                body = xmltodict.parse(
-                    # pylint: disable-next=consider-using-f-string
-                    """
-                    <body name="{name}" pos="{pos}" quat="{quat}">
-                        <geom name="{name}" type="{type}" size="{size}" rgba="{rgba}"
-                        group="{group}" contype="{contype}" conaffinity="{conaffinity}"/>
-                    </body>
-                """.format(
-                        **{k: convert(v) for k, v in geom.items()},
-                    ),
-                )
+            for item in geom['geoms']:
+                if 'contype' not in item:
+                    item['contype'] = item.get('contype', 1)
+                if 'conaffinity' not in item:
+                    item['conaffinity'] = item.get('conaffinity', 1)
+            if 'rot' in geom:
+                geom['quat'] = rot2quat(geom.pop('rot'))
+            body = build_xml_from_dict(geom)
             # Append new body to world, making it a list optionally
             # Add the object to the world
             worldbody['body'].append(body['body'])

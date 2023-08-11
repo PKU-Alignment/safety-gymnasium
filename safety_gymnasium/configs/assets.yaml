@@ -34,6 +34,10 @@ textures:
     '@name': village_floor
     '@file': village_floor.PNG
     '@type': 2d
+  mud_floor:
+    '@name': mud_floor
+    '@file': mud_floor.PNG
+    '@type': 2d
   bush:
     '@name': bush
     '@file': bush.PNG
@@ -62,6 +66,127 @@ textures:
     '@name': wooden_door1
     '@file': wooden_door1.PNG
     '@type': 2d
+  racing_track:
+    '@name': racing_track
+    '@file': racing_track.png
+    '@type': 2d
+  road_barrier:
+    '@name': road_barrier
+    '@file': road_barrier.PNG
+    '@type': 2d
+  static_box1:
+    '@name': static_box1
+    '@file': static_box1and2.PNG
+    '@type': 2d
+  static_box2:
+    '@name': static_box2
+    '@file': static_box1and2.PNG
+    '@type': 2d
+  static_box3:
+    '@name': static_box3
+    '@file': static_box3and4.PNG
+    '@type': 2d
+  static_box4:
+    '@name': static_box4
+    '@file': static_box3and4.PNG
+    '@type': 2d
+  static_box5:
+    '@name': static_box5
+    '@file': static_box5and6.PNG
+    '@type': 2d
+  static_box6:
+    '@name': static_box6
+    '@file': static_box5and6.PNG
+    '@type': 2d
+  static_box7:
+    '@name': static_box7
+    '@file': static_box7and8.PNG
+    '@type': 2d
+  static_box8:
+    '@name': static_box8
+    '@file': static_box7and8.PNG
+    '@type': 2d
+  static_box9:
+    '@name': static_box9
+    '@file': static_box9and10.PNG
+    '@type': 2d
+  static_box10:
+    '@name': static_box10
+    '@file': static_box9and10.PNG
+    '@type': 2d
+  static_box11:
+    '@name': static_box11
+    '@file': static_box11.PNG
+    '@type': 2d
+  static_box12:
+    '@name': static_box12
+    '@file': static_box12.PNG
+    '@type': 2d
+  static_box13:
+    '@name': static_box13
+    '@file': static_box13.PNG
+    '@type': 2d
+  static_box14:
+    '@name': static_box14
+    '@file': static_box14.PNG
+    '@type': 2d
+  static_box15:
+    '@name': static_box15
+    '@file': static_box15.PNG
+    '@type': 2d
+  static_box16:
+    '@name': static_box16
+    '@file': static_box16.PNG
+    '@type': 2d
+  static_light1:
+    '@name': static_light1
+    '@file': static_light1.PNG
+    '@type': 2d
+  static_machine1:
+    '@name': static_machine1
+    '@file': static_machine1.PNG
+    '@type': 2d
+  static_machine2:
+    '@name': static_machine2
+    '@file': static_machine2.PNG
+    '@type': 2d
+  static_machine3:
+    '@name': static_machine3
+    '@file': static_machine3.PNG
+    '@type': 2d
+  box:
+    '@name': box
+    '@file': box.PNG
+    '@type': 2d
+  button:
+    '@name': button
+    '@file': button.PNG
+    '@type': 2d
+  vase:
+    '@name': vase
+    '@file': vase.png
+    '@type': 2d
+  hazard:
+    '@name': hazard
+    '@file': hazard.png
+    '@type': 2d
+  goal:
+    '@name': goal
+    '@file': goal.png
+    '@type': 2d
+  gremlin:
+    '@name': gremlin
+    '@file': gremlin.png
+    '@type': 2d
+  pillar:
+    '@name': pillar
+    '@file': pillar.png
+    '@type': 2d
+  push_box:
+    '@name': push_box
+    '@file': push_box.PNG
+    '@type': 2d
+
 
 materials:
   matplane:
@@ -73,9 +198,12 @@ materials:
     '@texture': matplane
   village_floor:
     '@name': village_floor
-    '@reflectance': 0.1
     '@texrepeat': 25 25
     '@texture': village_floor
+  mud_floor:
+    '@name': mud_floor
+    '@texrepeat': 29 29
+    '@texture': mud_floor
   bush:
     '@name': bush
     '@texture': bush
@@ -111,6 +239,151 @@ materials:
     '@texture': wooden_door1
     '@specular': 1
     '@shininess': 1
+  racing_track:
+    '@name': racing_track
+    '@texture': racing_track
+    '@specular': 0.5
+    '@shininess': 0.225
+  road_barrier:
+    '@name': road_barrier
+    '@texture': road_barrier
+    '@specular': 1
+    '@shininess': 1
+  vase:
+    '@name': vase
+    '@texture': vase
+    '@specular': 1
+    '@shininess': 1
+  hazard:
+    '@name': hazard
+    '@texture': hazard
+    '@specular': 1
+    '@shininess': 1
+  goal:
+    '@name': goal
+    '@texture': goal
+    '@specular': 1
+    '@shininess': 1
+  gremlin:
+    '@name': gremlin
+    '@texture': gremlin
+    '@specular': 1
+    '@shininess': 1
+  pillar:
+    '@name': pillar
+    '@texture': pillar
+    '@specular': 1
+    '@shininess': 1
+  static_box1:
+    '@name': static_box1
+    '@texture': static_box1
+    '@specular': 1
+    '@shininess': 1
+  static_box2:
+    '@name': static_box2
+    '@texture': static_box2
+    '@specular': 1
+    '@shininess': 1
+  static_box3:
+    '@name': static_box3
+    '@texture': static_box3
+    '@specular': 1
+    '@shininess': 1
+  static_box4:
+    '@name': static_box4
+    '@texture': static_box4
+    '@specular': 1
+    '@shininess': 1
+  static_box5:
+    '@name': static_box5
+    '@texture': static_box5
+    '@specular': 1
+    '@shininess': 1
+  static_box6:
+    '@name': static_box6
+    '@texture': static_box6
+    '@specular': 1
+    '@shininess': 1
+  static_box7:
+    '@name': static_box7
+    '@texture': static_box7
+    '@specular': 1
+    '@shininess': 1
+  static_box8:
+    '@name': static_box8
+    '@texture': static_box8
+    '@specular': 1
+    '@shininess': 1
+  static_box9:
+    '@name': static_box9
+    '@texture': static_box9
+    '@specular': 1
+    '@shininess': 1
+  static_box10:
+    '@name': static_box10
+    '@texture': static_box10
+    '@specular': 1
+    '@shininess': 1
+  static_box11:
+    '@name': static_box11
+    '@texture': static_box11
+    '@specular': 1
+    '@shininess': 1
+  static_box12:
+    '@name': static_box12
+    '@texture': static_box12
+    '@specular': 1
+    '@shininess': 1
+  static_box13:
+    '@name': static_box13
+    '@texture': static_box13
+    '@specular': 1
+    '@shininess': 1
+  static_box14:
+    '@name': static_box14
+    '@texture': static_box14
+    '@specular': 1
+    '@shininess': 1
+  static_box15:
+    '@name': static_box15
+    '@texture': static_box15
+    '@specular': 1
+    '@shininess': 1
+  static_box16:
+    '@name': static_box16
+    '@texture': static_box16
+    '@specular': 1
+    '@shininess': 1
+  static_light1:
+    '@name': static_light1
+    '@texture': static_light1
+    '@specular': 1
+    '@shininess': 1
+  static_machine1:
+    '@name': static_machine1
+    '@texture': static_machine1
+    '@specular': 1
+    '@shininess': 1
+  static_machine2:
+    '@name': static_machine2
+    '@texture': static_machine2
+    '@specular': 1
+    '@shininess': 1
+  static_machine3:
+    '@name': static_machine3
+    '@texture': static_machine3
+    '@specular': 1
+    '@shininess': 1
+  push_box:
+    '@name': push_box
+    '@texture': push_box
+    '@specular': 1
+    '@shininess': 1
+  button:
+    '@name': button
+    '@texture': button
+    '@specular': 1
+    '@shininess': 1
 
 meshes:
   bush:
@@ -141,3 +414,2679 @@ meshes:
     '@name': wooden_door1
     '@file': wooden_door1.obj
     '@scale': 0.008 0.008 0.008
+  racing_track:
+    '@name': racing_track
+    '@file': racing_track.obj
+    '@scale': 0.2 0.2 0.2
+  wall_collision_0:
+      '@name': wall_collision_0
+      '@file': wall_collision_0.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_1:
+      '@name': wall_collision_1
+      '@file': wall_collision_1.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_2:
+      '@name': wall_collision_2
+      '@file': wall_collision_2.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_3:
+      '@name': wall_collision_3
+      '@file': wall_collision_3.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_4:
+      '@name': wall_collision_4
+      '@file': wall_collision_4.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_5:
+      '@name': wall_collision_5
+      '@file': wall_collision_5.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_6:
+      '@name': wall_collision_6
+      '@file': wall_collision_6.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_7:
+      '@name': wall_collision_7
+      '@file': wall_collision_7.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_8:
+      '@name': wall_collision_8
+      '@file': wall_collision_8.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_9:
+      '@name': wall_collision_9
+      '@file': wall_collision_9.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_10:
+      '@name': wall_collision_10
+      '@file': wall_collision_10.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_11:
+      '@name': wall_collision_11
+      '@file': wall_collision_11.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_12:
+      '@name': wall_collision_12
+      '@file': wall_collision_12.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_13:
+      '@name': wall_collision_13
+      '@file': wall_collision_13.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_14:
+      '@name': wall_collision_14
+      '@file': wall_collision_14.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_15:
+      '@name': wall_collision_15
+      '@file': wall_collision_15.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_16:
+      '@name': wall_collision_16
+      '@file': wall_collision_16.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_17:
+      '@name': wall_collision_17
+      '@file': wall_collision_17.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_18:
+      '@name': wall_collision_18
+      '@file': wall_collision_18.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_19:
+      '@name': wall_collision_19
+      '@file': wall_collision_19.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_20:
+      '@name': wall_collision_20
+      '@file': wall_collision_20.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_21:
+      '@name': wall_collision_21
+      '@file': wall_collision_21.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_22:
+      '@name': wall_collision_22
+      '@file': wall_collision_22.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_23:
+      '@name': wall_collision_23
+      '@file': wall_collision_23.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_24:
+      '@name': wall_collision_24
+      '@file': wall_collision_24.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_25:
+      '@name': wall_collision_25
+      '@file': wall_collision_25.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_26:
+      '@name': wall_collision_26
+      '@file': wall_collision_26.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_27:
+      '@name': wall_collision_27
+      '@file': wall_collision_27.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_28:
+      '@name': wall_collision_28
+      '@file': wall_collision_28.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_29:
+      '@name': wall_collision_29
+      '@file': wall_collision_29.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_30:
+      '@name': wall_collision_30
+      '@file': wall_collision_30.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_31:
+      '@name': wall_collision_31
+      '@file': wall_collision_31.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_32:
+      '@name': wall_collision_32
+      '@file': wall_collision_32.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_33:
+      '@name': wall_collision_33
+      '@file': wall_collision_33.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_34:
+      '@name': wall_collision_34
+      '@file': wall_collision_34.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_35:
+      '@name': wall_collision_35
+      '@file': wall_collision_35.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_36:
+      '@name': wall_collision_36
+      '@file': wall_collision_36.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_37:
+      '@name': wall_collision_37
+      '@file': wall_collision_37.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_38:
+      '@name': wall_collision_38
+      '@file': wall_collision_38.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_39:
+      '@name': wall_collision_39
+      '@file': wall_collision_39.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_40:
+      '@name': wall_collision_40
+      '@file': wall_collision_40.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_41:
+      '@name': wall_collision_41
+      '@file': wall_collision_41.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_42:
+      '@name': wall_collision_42
+      '@file': wall_collision_42.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_43:
+      '@name': wall_collision_43
+      '@file': wall_collision_43.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_44:
+      '@name': wall_collision_44
+      '@file': wall_collision_44.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_45:
+      '@name': wall_collision_45
+      '@file': wall_collision_45.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_46:
+      '@name': wall_collision_46
+      '@file': wall_collision_46.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_47:
+      '@name': wall_collision_47
+      '@file': wall_collision_47.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_48:
+      '@name': wall_collision_48
+      '@file': wall_collision_48.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_49:
+      '@name': wall_collision_49
+      '@file': wall_collision_49.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_50:
+      '@name': wall_collision_50
+      '@file': wall_collision_50.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_51:
+      '@name': wall_collision_51
+      '@file': wall_collision_51.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_52:
+      '@name': wall_collision_52
+      '@file': wall_collision_52.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_53:
+      '@name': wall_collision_53
+      '@file': wall_collision_53.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_54:
+      '@name': wall_collision_54
+      '@file': wall_collision_54.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_55:
+      '@name': wall_collision_55
+      '@file': wall_collision_55.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_56:
+      '@name': wall_collision_56
+      '@file': wall_collision_56.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_57:
+      '@name': wall_collision_57
+      '@file': wall_collision_57.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_58:
+      '@name': wall_collision_58
+      '@file': wall_collision_58.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_59:
+      '@name': wall_collision_59
+      '@file': wall_collision_59.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_60:
+      '@name': wall_collision_60
+      '@file': wall_collision_60.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_61:
+      '@name': wall_collision_61
+      '@file': wall_collision_61.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_62:
+      '@name': wall_collision_62
+      '@file': wall_collision_62.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_63:
+      '@name': wall_collision_63
+      '@file': wall_collision_63.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_64:
+      '@name': wall_collision_64
+      '@file': wall_collision_64.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_65:
+      '@name': wall_collision_65
+      '@file': wall_collision_65.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_66:
+      '@name': wall_collision_66
+      '@file': wall_collision_66.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_67:
+      '@name': wall_collision_67
+      '@file': wall_collision_67.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_68:
+      '@name': wall_collision_68
+      '@file': wall_collision_68.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_69:
+      '@name': wall_collision_69
+      '@file': wall_collision_69.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_70:
+      '@name': wall_collision_70
+      '@file': wall_collision_70.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_71:
+      '@name': wall_collision_71
+      '@file': wall_collision_71.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_72:
+      '@name': wall_collision_72
+      '@file': wall_collision_72.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_73:
+      '@name': wall_collision_73
+      '@file': wall_collision_73.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_74:
+      '@name': wall_collision_74
+      '@file': wall_collision_74.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_75:
+      '@name': wall_collision_75
+      '@file': wall_collision_75.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_76:
+      '@name': wall_collision_76
+      '@file': wall_collision_76.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_77:
+      '@name': wall_collision_77
+      '@file': wall_collision_77.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_78:
+      '@name': wall_collision_78
+      '@file': wall_collision_78.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_79:
+      '@name': wall_collision_79
+      '@file': wall_collision_79.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_80:
+      '@name': wall_collision_80
+      '@file': wall_collision_80.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_81:
+      '@name': wall_collision_81
+      '@file': wall_collision_81.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_82:
+      '@name': wall_collision_82
+      '@file': wall_collision_82.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_83:
+      '@name': wall_collision_83
+      '@file': wall_collision_83.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_84:
+      '@name': wall_collision_84
+      '@file': wall_collision_84.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_85:
+      '@name': wall_collision_85
+      '@file': wall_collision_85.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_86:
+      '@name': wall_collision_86
+      '@file': wall_collision_86.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_87:
+      '@name': wall_collision_87
+      '@file': wall_collision_87.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_88:
+      '@name': wall_collision_88
+      '@file': wall_collision_88.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_89:
+      '@name': wall_collision_89
+      '@file': wall_collision_89.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_90:
+      '@name': wall_collision_90
+      '@file': wall_collision_90.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_91:
+      '@name': wall_collision_91
+      '@file': wall_collision_91.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_92:
+      '@name': wall_collision_92
+      '@file': wall_collision_92.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_93:
+      '@name': wall_collision_93
+      '@file': wall_collision_93.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_94:
+      '@name': wall_collision_94
+      '@file': wall_collision_94.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_95:
+      '@name': wall_collision_95
+      '@file': wall_collision_95.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_96:
+      '@name': wall_collision_96
+      '@file': wall_collision_96.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_97:
+      '@name': wall_collision_97
+      '@file': wall_collision_97.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_98:
+      '@name': wall_collision_98
+      '@file': wall_collision_98.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_99:
+      '@name': wall_collision_99
+      '@file': wall_collision_99.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_100:
+      '@name': wall_collision_100
+      '@file': wall_collision_100.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_101:
+      '@name': wall_collision_101
+      '@file': wall_collision_101.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_102:
+      '@name': wall_collision_102
+      '@file': wall_collision_102.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_103:
+      '@name': wall_collision_103
+      '@file': wall_collision_103.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_104:
+      '@name': wall_collision_104
+      '@file': wall_collision_104.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_105:
+      '@name': wall_collision_105
+      '@file': wall_collision_105.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_106:
+      '@name': wall_collision_106
+      '@file': wall_collision_106.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_107:
+      '@name': wall_collision_107
+      '@file': wall_collision_107.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_108:
+      '@name': wall_collision_108
+      '@file': wall_collision_108.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_109:
+      '@name': wall_collision_109
+      '@file': wall_collision_109.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_110:
+      '@name': wall_collision_110
+      '@file': wall_collision_110.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_111:
+      '@name': wall_collision_111
+      '@file': wall_collision_111.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_112:
+      '@name': wall_collision_112
+      '@file': wall_collision_112.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_113:
+      '@name': wall_collision_113
+      '@file': wall_collision_113.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_114:
+      '@name': wall_collision_114
+      '@file': wall_collision_114.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_115:
+      '@name': wall_collision_115
+      '@file': wall_collision_115.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_116:
+      '@name': wall_collision_116
+      '@file': wall_collision_116.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_117:
+      '@name': wall_collision_117
+      '@file': wall_collision_117.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_118:
+      '@name': wall_collision_118
+      '@file': wall_collision_118.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_119:
+      '@name': wall_collision_119
+      '@file': wall_collision_119.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_120:
+      '@name': wall_collision_120
+      '@file': wall_collision_120.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_121:
+      '@name': wall_collision_121
+      '@file': wall_collision_121.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_122:
+      '@name': wall_collision_122
+      '@file': wall_collision_122.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_123:
+      '@name': wall_collision_123
+      '@file': wall_collision_123.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_124:
+      '@name': wall_collision_124
+      '@file': wall_collision_124.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_125:
+      '@name': wall_collision_125
+      '@file': wall_collision_125.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_126:
+      '@name': wall_collision_126
+      '@file': wall_collision_126.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_127:
+      '@name': wall_collision_127
+      '@file': wall_collision_127.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_128:
+      '@name': wall_collision_128
+      '@file': wall_collision_128.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_129:
+      '@name': wall_collision_129
+      '@file': wall_collision_129.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_130:
+      '@name': wall_collision_130
+      '@file': wall_collision_130.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_131:
+      '@name': wall_collision_131
+      '@file': wall_collision_131.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_132:
+      '@name': wall_collision_132
+      '@file': wall_collision_132.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_133:
+      '@name': wall_collision_133
+      '@file': wall_collision_133.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_134:
+      '@name': wall_collision_134
+      '@file': wall_collision_134.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_135:
+      '@name': wall_collision_135
+      '@file': wall_collision_135.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_136:
+      '@name': wall_collision_136
+      '@file': wall_collision_136.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_137:
+      '@name': wall_collision_137
+      '@file': wall_collision_137.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_138:
+      '@name': wall_collision_138
+      '@file': wall_collision_138.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_139:
+      '@name': wall_collision_139
+      '@file': wall_collision_139.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_140:
+      '@name': wall_collision_140
+      '@file': wall_collision_140.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_141:
+      '@name': wall_collision_141
+      '@file': wall_collision_141.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_142:
+      '@name': wall_collision_142
+      '@file': wall_collision_142.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_143:
+      '@name': wall_collision_143
+      '@file': wall_collision_143.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_144:
+      '@name': wall_collision_144
+      '@file': wall_collision_144.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_145:
+      '@name': wall_collision_145
+      '@file': wall_collision_145.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_146:
+      '@name': wall_collision_146
+      '@file': wall_collision_146.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_147:
+      '@name': wall_collision_147
+      '@file': wall_collision_147.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_148:
+      '@name': wall_collision_148
+      '@file': wall_collision_148.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_149:
+      '@name': wall_collision_149
+      '@file': wall_collision_149.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_150:
+      '@name': wall_collision_150
+      '@file': wall_collision_150.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_151:
+      '@name': wall_collision_151
+      '@file': wall_collision_151.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_152:
+      '@name': wall_collision_152
+      '@file': wall_collision_152.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_153:
+      '@name': wall_collision_153
+      '@file': wall_collision_153.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_154:
+      '@name': wall_collision_154
+      '@file': wall_collision_154.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_155:
+      '@name': wall_collision_155
+      '@file': wall_collision_155.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_156:
+      '@name': wall_collision_156
+      '@file': wall_collision_156.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_157:
+      '@name': wall_collision_157
+      '@file': wall_collision_157.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_158:
+      '@name': wall_collision_158
+      '@file': wall_collision_158.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_159:
+      '@name': wall_collision_159
+      '@file': wall_collision_159.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_160:
+      '@name': wall_collision_160
+      '@file': wall_collision_160.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_161:
+      '@name': wall_collision_161
+      '@file': wall_collision_161.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_162:
+      '@name': wall_collision_162
+      '@file': wall_collision_162.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_163:
+      '@name': wall_collision_163
+      '@file': wall_collision_163.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_164:
+      '@name': wall_collision_164
+      '@file': wall_collision_164.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_165:
+      '@name': wall_collision_165
+      '@file': wall_collision_165.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_166:
+      '@name': wall_collision_166
+      '@file': wall_collision_166.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_167:
+      '@name': wall_collision_167
+      '@file': wall_collision_167.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_168:
+      '@name': wall_collision_168
+      '@file': wall_collision_168.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_169:
+      '@name': wall_collision_169
+      '@file': wall_collision_169.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_170:
+      '@name': wall_collision_170
+      '@file': wall_collision_170.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_171:
+      '@name': wall_collision_171
+      '@file': wall_collision_171.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_172:
+      '@name': wall_collision_172
+      '@file': wall_collision_172.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_173:
+      '@name': wall_collision_173
+      '@file': wall_collision_173.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_174:
+      '@name': wall_collision_174
+      '@file': wall_collision_174.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_175:
+      '@name': wall_collision_175
+      '@file': wall_collision_175.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_176:
+      '@name': wall_collision_176
+      '@file': wall_collision_176.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_177:
+      '@name': wall_collision_177
+      '@file': wall_collision_177.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_178:
+      '@name': wall_collision_178
+      '@file': wall_collision_178.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_179:
+      '@name': wall_collision_179
+      '@file': wall_collision_179.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_180:
+      '@name': wall_collision_180
+      '@file': wall_collision_180.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_181:
+      '@name': wall_collision_181
+      '@file': wall_collision_181.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_182:
+      '@name': wall_collision_182
+      '@file': wall_collision_182.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_183:
+      '@name': wall_collision_183
+      '@file': wall_collision_183.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_184:
+      '@name': wall_collision_184
+      '@file': wall_collision_184.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_185:
+      '@name': wall_collision_185
+      '@file': wall_collision_185.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_186:
+      '@name': wall_collision_186
+      '@file': wall_collision_186.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_187:
+      '@name': wall_collision_187
+      '@file': wall_collision_187.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_188:
+      '@name': wall_collision_188
+      '@file': wall_collision_188.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_189:
+      '@name': wall_collision_189
+      '@file': wall_collision_189.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_190:
+      '@name': wall_collision_190
+      '@file': wall_collision_190.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_191:
+      '@name': wall_collision_191
+      '@file': wall_collision_191.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_192:
+      '@name': wall_collision_192
+      '@file': wall_collision_192.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_193:
+      '@name': wall_collision_193
+      '@file': wall_collision_193.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_194:
+      '@name': wall_collision_194
+      '@file': wall_collision_194.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_195:
+      '@name': wall_collision_195
+      '@file': wall_collision_195.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_196:
+      '@name': wall_collision_196
+      '@file': wall_collision_196.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_197:
+      '@name': wall_collision_197
+      '@file': wall_collision_197.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_198:
+      '@name': wall_collision_198
+      '@file': wall_collision_198.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_199:
+      '@name': wall_collision_199
+      '@file': wall_collision_199.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_200:
+      '@name': wall_collision_200
+      '@file': wall_collision_200.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_201:
+      '@name': wall_collision_201
+      '@file': wall_collision_201.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_202:
+      '@name': wall_collision_202
+      '@file': wall_collision_202.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_203:
+      '@name': wall_collision_203
+      '@file': wall_collision_203.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_204:
+      '@name': wall_collision_204
+      '@file': wall_collision_204.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_205:
+      '@name': wall_collision_205
+      '@file': wall_collision_205.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_206:
+      '@name': wall_collision_206
+      '@file': wall_collision_206.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_207:
+      '@name': wall_collision_207
+      '@file': wall_collision_207.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_208:
+      '@name': wall_collision_208
+      '@file': wall_collision_208.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_209:
+      '@name': wall_collision_209
+      '@file': wall_collision_209.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_210:
+      '@name': wall_collision_210
+      '@file': wall_collision_210.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_211:
+      '@name': wall_collision_211
+      '@file': wall_collision_211.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_212:
+      '@name': wall_collision_212
+      '@file': wall_collision_212.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_213:
+      '@name': wall_collision_213
+      '@file': wall_collision_213.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_214:
+      '@name': wall_collision_214
+      '@file': wall_collision_214.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_215:
+      '@name': wall_collision_215
+      '@file': wall_collision_215.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_216:
+      '@name': wall_collision_216
+      '@file': wall_collision_216.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_217:
+      '@name': wall_collision_217
+      '@file': wall_collision_217.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_218:
+      '@name': wall_collision_218
+      '@file': wall_collision_218.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_219:
+      '@name': wall_collision_219
+      '@file': wall_collision_219.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_220:
+      '@name': wall_collision_220
+      '@file': wall_collision_220.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_221:
+      '@name': wall_collision_221
+      '@file': wall_collision_221.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_222:
+      '@name': wall_collision_222
+      '@file': wall_collision_222.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_223:
+      '@name': wall_collision_223
+      '@file': wall_collision_223.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_224:
+      '@name': wall_collision_224
+      '@file': wall_collision_224.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_225:
+      '@name': wall_collision_225
+      '@file': wall_collision_225.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_226:
+      '@name': wall_collision_226
+      '@file': wall_collision_226.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_227:
+      '@name': wall_collision_227
+      '@file': wall_collision_227.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_228:
+      '@name': wall_collision_228
+      '@file': wall_collision_228.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_229:
+      '@name': wall_collision_229
+      '@file': wall_collision_229.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_230:
+      '@name': wall_collision_230
+      '@file': wall_collision_230.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_231:
+      '@name': wall_collision_231
+      '@file': wall_collision_231.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_232:
+      '@name': wall_collision_232
+      '@file': wall_collision_232.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_233:
+      '@name': wall_collision_233
+      '@file': wall_collision_233.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_234:
+      '@name': wall_collision_234
+      '@file': wall_collision_234.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_235:
+      '@name': wall_collision_235
+      '@file': wall_collision_235.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_236:
+      '@name': wall_collision_236
+      '@file': wall_collision_236.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_237:
+      '@name': wall_collision_237
+      '@file': wall_collision_237.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_238:
+      '@name': wall_collision_238
+      '@file': wall_collision_238.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_239:
+      '@name': wall_collision_239
+      '@file': wall_collision_239.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_240:
+      '@name': wall_collision_240
+      '@file': wall_collision_240.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_241:
+      '@name': wall_collision_241
+      '@file': wall_collision_241.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_242:
+      '@name': wall_collision_242
+      '@file': wall_collision_242.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_243:
+      '@name': wall_collision_243
+      '@file': wall_collision_243.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_244:
+      '@name': wall_collision_244
+      '@file': wall_collision_244.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_245:
+      '@name': wall_collision_245
+      '@file': wall_collision_245.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_246:
+      '@name': wall_collision_246
+      '@file': wall_collision_246.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_247:
+      '@name': wall_collision_247
+      '@file': wall_collision_247.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_248:
+      '@name': wall_collision_248
+      '@file': wall_collision_248.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_249:
+      '@name': wall_collision_249
+      '@file': wall_collision_249.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_250:
+      '@name': wall_collision_250
+      '@file': wall_collision_250.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_251:
+      '@name': wall_collision_251
+      '@file': wall_collision_251.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_252:
+      '@name': wall_collision_252
+      '@file': wall_collision_252.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_253:
+      '@name': wall_collision_253
+      '@file': wall_collision_253.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_254:
+      '@name': wall_collision_254
+      '@file': wall_collision_254.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_255:
+      '@name': wall_collision_255
+      '@file': wall_collision_255.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_256:
+      '@name': wall_collision_256
+      '@file': wall_collision_256.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_257:
+      '@name': wall_collision_257
+      '@file': wall_collision_257.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_258:
+      '@name': wall_collision_258
+      '@file': wall_collision_258.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_259:
+      '@name': wall_collision_259
+      '@file': wall_collision_259.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_260:
+      '@name': wall_collision_260
+      '@file': wall_collision_260.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_261:
+      '@name': wall_collision_261
+      '@file': wall_collision_261.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_262:
+      '@name': wall_collision_262
+      '@file': wall_collision_262.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_263:
+      '@name': wall_collision_263
+      '@file': wall_collision_263.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_264:
+      '@name': wall_collision_264
+      '@file': wall_collision_264.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_265:
+      '@name': wall_collision_265
+      '@file': wall_collision_265.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_266:
+      '@name': wall_collision_266
+      '@file': wall_collision_266.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_267:
+      '@name': wall_collision_267
+      '@file': wall_collision_267.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_268:
+      '@name': wall_collision_268
+      '@file': wall_collision_268.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_269:
+      '@name': wall_collision_269
+      '@file': wall_collision_269.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_270:
+      '@name': wall_collision_270
+      '@file': wall_collision_270.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_271:
+      '@name': wall_collision_271
+      '@file': wall_collision_271.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_272:
+      '@name': wall_collision_272
+      '@file': wall_collision_272.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_273:
+      '@name': wall_collision_273
+      '@file': wall_collision_273.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_274:
+      '@name': wall_collision_274
+      '@file': wall_collision_274.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_275:
+      '@name': wall_collision_275
+      '@file': wall_collision_275.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_276:
+      '@name': wall_collision_276
+      '@file': wall_collision_276.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_277:
+      '@name': wall_collision_277
+      '@file': wall_collision_277.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_278:
+      '@name': wall_collision_278
+      '@file': wall_collision_278.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_279:
+      '@name': wall_collision_279
+      '@file': wall_collision_279.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_280:
+      '@name': wall_collision_280
+      '@file': wall_collision_280.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_281:
+      '@name': wall_collision_281
+      '@file': wall_collision_281.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_282:
+      '@name': wall_collision_282
+      '@file': wall_collision_282.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_283:
+      '@name': wall_collision_283
+      '@file': wall_collision_283.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_284:
+      '@name': wall_collision_284
+      '@file': wall_collision_284.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_285:
+      '@name': wall_collision_285
+      '@file': wall_collision_285.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_286:
+      '@name': wall_collision_286
+      '@file': wall_collision_286.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_287:
+      '@name': wall_collision_287
+      '@file': wall_collision_287.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_288:
+      '@name': wall_collision_288
+      '@file': wall_collision_288.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_289:
+      '@name': wall_collision_289
+      '@file': wall_collision_289.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_290:
+      '@name': wall_collision_290
+      '@file': wall_collision_290.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_291:
+      '@name': wall_collision_291
+      '@file': wall_collision_291.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_292:
+      '@name': wall_collision_292
+      '@file': wall_collision_292.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_293:
+      '@name': wall_collision_293
+      '@file': wall_collision_293.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_294:
+      '@name': wall_collision_294
+      '@file': wall_collision_294.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_295:
+      '@name': wall_collision_295
+      '@file': wall_collision_295.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_296:
+      '@name': wall_collision_296
+      '@file': wall_collision_296.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_297:
+      '@name': wall_collision_297
+      '@file': wall_collision_297.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_298:
+      '@name': wall_collision_298
+      '@file': wall_collision_298.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_299:
+      '@name': wall_collision_299
+      '@file': wall_collision_299.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_300:
+      '@name': wall_collision_300
+      '@file': wall_collision_300.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_301:
+      '@name': wall_collision_301
+      '@file': wall_collision_301.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_302:
+      '@name': wall_collision_302
+      '@file': wall_collision_302.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_303:
+      '@name': wall_collision_303
+      '@file': wall_collision_303.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_304:
+      '@name': wall_collision_304
+      '@file': wall_collision_304.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_305:
+      '@name': wall_collision_305
+      '@file': wall_collision_305.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_306:
+      '@name': wall_collision_306
+      '@file': wall_collision_306.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_307:
+      '@name': wall_collision_307
+      '@file': wall_collision_307.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_308:
+      '@name': wall_collision_308
+      '@file': wall_collision_308.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_309:
+      '@name': wall_collision_309
+      '@file': wall_collision_309.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_310:
+      '@name': wall_collision_310
+      '@file': wall_collision_310.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_311:
+      '@name': wall_collision_311
+      '@file': wall_collision_311.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_312:
+      '@name': wall_collision_312
+      '@file': wall_collision_312.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_313:
+      '@name': wall_collision_313
+      '@file': wall_collision_313.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_314:
+      '@name': wall_collision_314
+      '@file': wall_collision_314.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_315:
+      '@name': wall_collision_315
+      '@file': wall_collision_315.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_316:
+      '@name': wall_collision_316
+      '@file': wall_collision_316.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_317:
+      '@name': wall_collision_317
+      '@file': wall_collision_317.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_318:
+      '@name': wall_collision_318
+      '@file': wall_collision_318.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_319:
+      '@name': wall_collision_319
+      '@file': wall_collision_319.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_320:
+      '@name': wall_collision_320
+      '@file': wall_collision_320.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_321:
+      '@name': wall_collision_321
+      '@file': wall_collision_321.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_322:
+      '@name': wall_collision_322
+      '@file': wall_collision_322.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_323:
+      '@name': wall_collision_323
+      '@file': wall_collision_323.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_324:
+      '@name': wall_collision_324
+      '@file': wall_collision_324.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_325:
+      '@name': wall_collision_325
+      '@file': wall_collision_325.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_326:
+      '@name': wall_collision_326
+      '@file': wall_collision_326.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_327:
+      '@name': wall_collision_327
+      '@file': wall_collision_327.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_328:
+      '@name': wall_collision_328
+      '@file': wall_collision_328.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_329:
+      '@name': wall_collision_329
+      '@file': wall_collision_329.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_330:
+      '@name': wall_collision_330
+      '@file': wall_collision_330.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_331:
+      '@name': wall_collision_331
+      '@file': wall_collision_331.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_332:
+      '@name': wall_collision_332
+      '@file': wall_collision_332.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_333:
+      '@name': wall_collision_333
+      '@file': wall_collision_333.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_334:
+      '@name': wall_collision_334
+      '@file': wall_collision_334.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_335:
+      '@name': wall_collision_335
+      '@file': wall_collision_335.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_336:
+      '@name': wall_collision_336
+      '@file': wall_collision_336.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_337:
+      '@name': wall_collision_337
+      '@file': wall_collision_337.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_338:
+      '@name': wall_collision_338
+      '@file': wall_collision_338.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_339:
+      '@name': wall_collision_339
+      '@file': wall_collision_339.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_340:
+      '@name': wall_collision_340
+      '@file': wall_collision_340.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_341:
+      '@name': wall_collision_341
+      '@file': wall_collision_341.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_342:
+      '@name': wall_collision_342
+      '@file': wall_collision_342.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_343:
+      '@name': wall_collision_343
+      '@file': wall_collision_343.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_344:
+      '@name': wall_collision_344
+      '@file': wall_collision_344.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_345:
+      '@name': wall_collision_345
+      '@file': wall_collision_345.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_346:
+      '@name': wall_collision_346
+      '@file': wall_collision_346.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_347:
+      '@name': wall_collision_347
+      '@file': wall_collision_347.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_348:
+      '@name': wall_collision_348
+      '@file': wall_collision_348.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_349:
+      '@name': wall_collision_349
+      '@file': wall_collision_349.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_350:
+      '@name': wall_collision_350
+      '@file': wall_collision_350.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_351:
+      '@name': wall_collision_351
+      '@file': wall_collision_351.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_352:
+      '@name': wall_collision_352
+      '@file': wall_collision_352.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_353:
+      '@name': wall_collision_353
+      '@file': wall_collision_353.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_354:
+      '@name': wall_collision_354
+      '@file': wall_collision_354.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_355:
+      '@name': wall_collision_355
+      '@file': wall_collision_355.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_356:
+      '@name': wall_collision_356
+      '@file': wall_collision_356.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_357:
+      '@name': wall_collision_357
+      '@file': wall_collision_357.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_358:
+      '@name': wall_collision_358
+      '@file': wall_collision_358.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_359:
+      '@name': wall_collision_359
+      '@file': wall_collision_359.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_360:
+      '@name': wall_collision_360
+      '@file': wall_collision_360.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_361:
+      '@name': wall_collision_361
+      '@file': wall_collision_361.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_362:
+      '@name': wall_collision_362
+      '@file': wall_collision_362.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_363:
+      '@name': wall_collision_363
+      '@file': wall_collision_363.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_364:
+      '@name': wall_collision_364
+      '@file': wall_collision_364.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_365:
+      '@name': wall_collision_365
+      '@file': wall_collision_365.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_366:
+      '@name': wall_collision_366
+      '@file': wall_collision_366.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_367:
+      '@name': wall_collision_367
+      '@file': wall_collision_367.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_368:
+      '@name': wall_collision_368
+      '@file': wall_collision_368.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_369:
+      '@name': wall_collision_369
+      '@file': wall_collision_369.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_370:
+      '@name': wall_collision_370
+      '@file': wall_collision_370.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_371:
+      '@name': wall_collision_371
+      '@file': wall_collision_371.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_372:
+      '@name': wall_collision_372
+      '@file': wall_collision_372.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_373:
+      '@name': wall_collision_373
+      '@file': wall_collision_373.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_374:
+      '@name': wall_collision_374
+      '@file': wall_collision_374.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_375:
+      '@name': wall_collision_375
+      '@file': wall_collision_375.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_376:
+      '@name': wall_collision_376
+      '@file': wall_collision_376.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_377:
+      '@name': wall_collision_377
+      '@file': wall_collision_377.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_378:
+      '@name': wall_collision_378
+      '@file': wall_collision_378.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_379:
+      '@name': wall_collision_379
+      '@file': wall_collision_379.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_380:
+      '@name': wall_collision_380
+      '@file': wall_collision_380.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_381:
+      '@name': wall_collision_381
+      '@file': wall_collision_381.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_382:
+      '@name': wall_collision_382
+      '@file': wall_collision_382.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_383:
+      '@name': wall_collision_383
+      '@file': wall_collision_383.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_384:
+      '@name': wall_collision_384
+      '@file': wall_collision_384.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_385:
+      '@name': wall_collision_385
+      '@file': wall_collision_385.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_386:
+      '@name': wall_collision_386
+      '@file': wall_collision_386.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_387:
+      '@name': wall_collision_387
+      '@file': wall_collision_387.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_388:
+      '@name': wall_collision_388
+      '@file': wall_collision_388.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_389:
+      '@name': wall_collision_389
+      '@file': wall_collision_389.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_390:
+      '@name': wall_collision_390
+      '@file': wall_collision_390.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_391:
+      '@name': wall_collision_391
+      '@file': wall_collision_391.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_392:
+      '@name': wall_collision_392
+      '@file': wall_collision_392.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_393:
+      '@name': wall_collision_393
+      '@file': wall_collision_393.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_394:
+      '@name': wall_collision_394
+      '@file': wall_collision_394.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_395:
+      '@name': wall_collision_395
+      '@file': wall_collision_395.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_396:
+      '@name': wall_collision_396
+      '@file': wall_collision_396.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_397:
+      '@name': wall_collision_397
+      '@file': wall_collision_397.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_398:
+      '@name': wall_collision_398
+      '@file': wall_collision_398.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_399:
+      '@name': wall_collision_399
+      '@file': wall_collision_399.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_400:
+      '@name': wall_collision_400
+      '@file': wall_collision_400.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_401:
+      '@name': wall_collision_401
+      '@file': wall_collision_401.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_402:
+      '@name': wall_collision_402
+      '@file': wall_collision_402.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_403:
+      '@name': wall_collision_403
+      '@file': wall_collision_403.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_404:
+      '@name': wall_collision_404
+      '@file': wall_collision_404.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_405:
+      '@name': wall_collision_405
+      '@file': wall_collision_405.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_406:
+      '@name': wall_collision_406
+      '@file': wall_collision_406.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_407:
+      '@name': wall_collision_407
+      '@file': wall_collision_407.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_408:
+      '@name': wall_collision_408
+      '@file': wall_collision_408.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_409:
+      '@name': wall_collision_409
+      '@file': wall_collision_409.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_410:
+      '@name': wall_collision_410
+      '@file': wall_collision_410.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_411:
+      '@name': wall_collision_411
+      '@file': wall_collision_411.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_412:
+      '@name': wall_collision_412
+      '@file': wall_collision_412.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_413:
+      '@name': wall_collision_413
+      '@file': wall_collision_413.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_414:
+      '@name': wall_collision_414
+      '@file': wall_collision_414.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_415:
+      '@name': wall_collision_415
+      '@file': wall_collision_415.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_416:
+      '@name': wall_collision_416
+      '@file': wall_collision_416.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_417:
+      '@name': wall_collision_417
+      '@file': wall_collision_417.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_418:
+      '@name': wall_collision_418
+      '@file': wall_collision_418.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_419:
+      '@name': wall_collision_419
+      '@file': wall_collision_419.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_420:
+      '@name': wall_collision_420
+      '@file': wall_collision_420.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_421:
+      '@name': wall_collision_421
+      '@file': wall_collision_421.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_422:
+      '@name': wall_collision_422
+      '@file': wall_collision_422.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_423:
+      '@name': wall_collision_423
+      '@file': wall_collision_423.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_424:
+      '@name': wall_collision_424
+      '@file': wall_collision_424.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_425:
+      '@name': wall_collision_425
+      '@file': wall_collision_425.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_426:
+      '@name': wall_collision_426
+      '@file': wall_collision_426.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_427:
+      '@name': wall_collision_427
+      '@file': wall_collision_427.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_428:
+      '@name': wall_collision_428
+      '@file': wall_collision_428.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_429:
+      '@name': wall_collision_429
+      '@file': wall_collision_429.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_430:
+      '@name': wall_collision_430
+      '@file': wall_collision_430.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_431:
+      '@name': wall_collision_431
+      '@file': wall_collision_431.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_432:
+      '@name': wall_collision_432
+      '@file': wall_collision_432.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_433:
+      '@name': wall_collision_433
+      '@file': wall_collision_433.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_434:
+      '@name': wall_collision_434
+      '@file': wall_collision_434.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_435:
+      '@name': wall_collision_435
+      '@file': wall_collision_435.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_436:
+      '@name': wall_collision_436
+      '@file': wall_collision_436.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_437:
+      '@name': wall_collision_437
+      '@file': wall_collision_437.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_438:
+      '@name': wall_collision_438
+      '@file': wall_collision_438.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_439:
+      '@name': wall_collision_439
+      '@file': wall_collision_439.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_440:
+      '@name': wall_collision_440
+      '@file': wall_collision_440.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_441:
+      '@name': wall_collision_441
+      '@file': wall_collision_441.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_442:
+      '@name': wall_collision_442
+      '@file': wall_collision_442.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_443:
+      '@name': wall_collision_443
+      '@file': wall_collision_443.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_444:
+      '@name': wall_collision_444
+      '@file': wall_collision_444.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_445:
+      '@name': wall_collision_445
+      '@file': wall_collision_445.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_446:
+      '@name': wall_collision_446
+      '@file': wall_collision_446.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_447:
+      '@name': wall_collision_447
+      '@file': wall_collision_447.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_448:
+      '@name': wall_collision_448
+      '@file': wall_collision_448.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_449:
+      '@name': wall_collision_449
+      '@file': wall_collision_449.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_450:
+      '@name': wall_collision_450
+      '@file': wall_collision_450.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_451:
+      '@name': wall_collision_451
+      '@file': wall_collision_451.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_452:
+      '@name': wall_collision_452
+      '@file': wall_collision_452.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_453:
+      '@name': wall_collision_453
+      '@file': wall_collision_453.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_454:
+      '@name': wall_collision_454
+      '@file': wall_collision_454.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_455:
+      '@name': wall_collision_455
+      '@file': wall_collision_455.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_456:
+      '@name': wall_collision_456
+      '@file': wall_collision_456.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_457:
+      '@name': wall_collision_457
+      '@file': wall_collision_457.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_458:
+      '@name': wall_collision_458
+      '@file': wall_collision_458.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_459:
+      '@name': wall_collision_459
+      '@file': wall_collision_459.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_460:
+      '@name': wall_collision_460
+      '@file': wall_collision_460.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_461:
+      '@name': wall_collision_461
+      '@file': wall_collision_461.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_462:
+      '@name': wall_collision_462
+      '@file': wall_collision_462.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_463:
+      '@name': wall_collision_463
+      '@file': wall_collision_463.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_464:
+      '@name': wall_collision_464
+      '@file': wall_collision_464.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_465:
+      '@name': wall_collision_465
+      '@file': wall_collision_465.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_466:
+      '@name': wall_collision_466
+      '@file': wall_collision_466.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_467:
+      '@name': wall_collision_467
+      '@file': wall_collision_467.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_468:
+      '@name': wall_collision_468
+      '@file': wall_collision_468.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_469:
+      '@name': wall_collision_469
+      '@file': wall_collision_469.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_470:
+      '@name': wall_collision_470
+      '@file': wall_collision_470.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_471:
+      '@name': wall_collision_471
+      '@file': wall_collision_471.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_472:
+      '@name': wall_collision_472
+      '@file': wall_collision_472.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_473:
+      '@name': wall_collision_473
+      '@file': wall_collision_473.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_474:
+      '@name': wall_collision_474
+      '@file': wall_collision_474.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_475:
+      '@name': wall_collision_475
+      '@file': wall_collision_475.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_476:
+      '@name': wall_collision_476
+      '@file': wall_collision_476.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_477:
+      '@name': wall_collision_477
+      '@file': wall_collision_477.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_478:
+      '@name': wall_collision_478
+      '@file': wall_collision_478.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_479:
+      '@name': wall_collision_479
+      '@file': wall_collision_479.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_480:
+      '@name': wall_collision_480
+      '@file': wall_collision_480.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_481:
+      '@name': wall_collision_481
+      '@file': wall_collision_481.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_482:
+      '@name': wall_collision_482
+      '@file': wall_collision_482.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_483:
+      '@name': wall_collision_483
+      '@file': wall_collision_483.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_484:
+      '@name': wall_collision_484
+      '@file': wall_collision_484.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_485:
+      '@name': wall_collision_485
+      '@file': wall_collision_485.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_486:
+      '@name': wall_collision_486
+      '@file': wall_collision_486.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_487:
+      '@name': wall_collision_487
+      '@file': wall_collision_487.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_488:
+      '@name': wall_collision_488
+      '@file': wall_collision_488.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_489:
+      '@name': wall_collision_489
+      '@file': wall_collision_489.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_490:
+      '@name': wall_collision_490
+      '@file': wall_collision_490.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_491:
+      '@name': wall_collision_491
+      '@file': wall_collision_491.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_492:
+      '@name': wall_collision_492
+      '@file': wall_collision_492.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_493:
+      '@name': wall_collision_493
+      '@file': wall_collision_493.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_494:
+      '@name': wall_collision_494
+      '@file': wall_collision_494.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_495:
+      '@name': wall_collision_495
+      '@file': wall_collision_495.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_496:
+      '@name': wall_collision_496
+      '@file': wall_collision_496.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_497:
+      '@name': wall_collision_497
+      '@file': wall_collision_497.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_498:
+      '@name': wall_collision_498
+      '@file': wall_collision_498.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_499:
+      '@name': wall_collision_499
+      '@file': wall_collision_499.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_500:
+      '@name': wall_collision_500
+      '@file': wall_collision_500.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_501:
+      '@name': wall_collision_501
+      '@file': wall_collision_501.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_502:
+      '@name': wall_collision_502
+      '@file': wall_collision_502.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_503:
+      '@name': wall_collision_503
+      '@file': wall_collision_503.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_504:
+      '@name': wall_collision_504
+      '@file': wall_collision_504.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_505:
+      '@name': wall_collision_505
+      '@file': wall_collision_505.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_506:
+      '@name': wall_collision_506
+      '@file': wall_collision_506.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_507:
+      '@name': wall_collision_507
+      '@file': wall_collision_507.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_508:
+      '@name': wall_collision_508
+      '@file': wall_collision_508.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_509:
+      '@name': wall_collision_509
+      '@file': wall_collision_509.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_510:
+      '@name': wall_collision_510
+      '@file': wall_collision_510.obj
+      '@scale': 0.2 0.2 0.2
+
+  wall_collision_511:
+      '@name': wall_collision_511
+      '@file': wall_collision_511.obj
+      '@scale': 0.2 0.2 0.2
+
+  road_barrier:
+      '@name': road_barrier
+      '@file': road_barrier.obj
+      '@scale': 0.004 0.004 0.004
+  vase:
+    '@name': vase
+    '@file': vase.obj
+    '@scale': 0.0008 0.0008 0.0008
+  hazard:
+    '@name': hazard
+    '@file': hazard.obj
+    '@scale': 0.2 0.2 0.2
+  goal:
+    '@name': goal
+    '@file': goal.obj
+    '@scale': 0.1 0.1 0.1
+  gremlin:
+    '@name': gremlin
+    '@file': gremlin.obj
+    '@scale': 0.2 0.2 0.2
+  pillar:
+    '@name': pillar
+    '@file': pillar.obj
+    '@scale': 0.02 0.02 0.02
+  static_box1:
+    '@name': static_box1
+    '@file': static_box1.obj
+    '@scale': 0.005 0.005 0.005
+  static_box2:
+    '@name': static_box2
+    '@file': static_box2.obj
+    '@scale': 0.005 0.005 0.005
+  static_box3:
+    '@name': static_box3
+    '@file': static_box3.obj
+    '@scale': 0.005 0.005 0.005
+  static_box4:
+    '@name': static_box4
+    '@file': static_box4.obj
+    '@scale': 0.005 0.005 0.005
+  static_box5:
+    '@name': static_box5
+    '@file': static_box5.obj
+    '@scale': 0.005 0.005 0.005
+  static_box6:
+    '@name': static_box6
+    '@file': static_box6.obj
+    '@scale': 0.005 0.005 0.005
+  static_box7:
+    '@name': static_box7
+    '@file': static_box7.obj
+    '@scale': 0.005 0.005 0.005
+  static_box8:
+    '@name': static_box8
+    '@file': static_box8.obj
+    '@scale': 0.005 0.005 0.005
+  static_box9:
+    '@name': static_box9
+    '@file': static_box9.obj
+    '@scale': 0.005 0.005 0.005
+  static_box10:
+    '@name': static_box10
+    '@file': static_box10.obj
+    '@scale': 0.005 0.005 0.005
+  static_box11:
+    '@name': static_box11
+    '@file': static_box11.obj
+    '@scale': 0.005 0.005 0.005
+  static_box12:
+    '@name': static_box12
+    '@file': static_box12.obj
+    '@scale': 0.005 0.005 0.005
+  static_box13:
+    '@name': static_box13
+    '@file': static_box13.obj
+    '@scale': 0.005 0.005 0.005
+  static_box14:
+    '@name': static_box14
+    '@file': static_box14.obj
+    '@scale': 0.005 0.005 0.005
+  static_box15:
+    '@name': static_box15
+    '@file': static_box15.obj
+    '@scale': 0.005 0.005 0.005
+  static_box16:
+    '@name': static_box16
+    '@file': static_box16.obj
+    '@scale': 0.015 0.015 0.015
+  static_light1:
+    '@name': static_light1
+    '@file': static_light1.obj
+    '@scale': 0.005 0.005 0.005
+  static_machine1:
+    '@name': static_machine1
+    '@file': static_machine1.obj
+    '@scale': 0.01 0.01 0.01
+  static_machine2:
+    '@name': static_machine2
+    '@file': static_machine2.obj
+    '@scale': 0.01 0.01 0.01
+  static_machine3:
+    '@name': static_machine3
+    '@file': static_machine3.obj
+    '@scale': 0.01 0.01 0.01
+  push_box:
+    '@name': push_box
+    '@file': push_box.obj
+    '@scale': 0.008 0.008 0.008
+  button:
+    '@name': button
+    '@file': button.obj
+    '@scale': 0.002 0.002 0.002
