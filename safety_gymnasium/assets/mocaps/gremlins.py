@@ -44,7 +44,7 @@ class Gremlins(Mocap):  # pylint: disable=too-many-instance-attributes
     group: np.array = GROUP['gremlin']
     is_lidar_observed: bool = True
     is_constrained: bool = True
-    is_meshed: bool = True
+    is_meshed: bool = False
     mesh_name: str = name[:-1]
 
     def get_config(self, xy_pos, rot):
