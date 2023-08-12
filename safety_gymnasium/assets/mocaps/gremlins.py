@@ -40,7 +40,7 @@ class Gremlins(Mocap):  # pylint: disable=too-many-instance-attributes
     density: float = 0.001
 
     color: np.array = COLOR['gremlin']
-    alpha: float = 0.1
+    alpha: float = 1
     group: np.array = GROUP['gremlin']
     is_lidar_observed: bool = True
     is_constrained: bool = True
@@ -93,7 +93,7 @@ class Gremlins(Mocap):  # pylint: disable=too-many-instance-attributes
                     'size': np.ones(3) * self.size,
                     'type': 'box',
                     'group': self.group,
-                    'rgba': self.color * np.array([1, 1, 1, self.alpha]),
+                    'rgba': self.color * np.array([1, 1, 1, self.alpha * 0.1]),
                 },
             ],
         }
