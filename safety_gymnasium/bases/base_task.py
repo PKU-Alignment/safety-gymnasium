@@ -178,6 +178,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         """
         super().__init__(config=config)
 
+        self.task_name: str
         self.num_steps = 1000  # Maximum number of environment steps in an episode
 
         self.lidar_conf = LidarConf()
@@ -304,6 +305,9 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         else:
             world_config['agent_rot'] = float(self.agent.rot)
 
+        self.task_name = self.__class__.__name__.split('Level', maxsplit=1)[0]
+        world_config['task_name'] = self.task_name
+
         # process world config via different objects.
         world_config.update(
             {
@@ -327,9 +331,8 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         And have no randomness.
         Some tasks may generate cost when contacting static geoms.
         """
-        env_info = self.__class__.__name__.split('Level')
-        config_name = camel_to_snake(env_info[0])
-        level = int(env_info[1])
+        config_name = camel_to_snake(self.task_name)
+        level = int(self.__class__.__name__.split('Level')[1])
 
         # load all config of meshes in specific environment from .yaml file
         base_dir = os.path.dirname(safety_gymnasium.__file__)

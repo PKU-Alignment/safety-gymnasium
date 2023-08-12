@@ -14,6 +14,8 @@
 # ==============================================================================
 """Race level 1."""
 
+import numpy as np
+
 from safety_gymnasium.assets.geoms import Hazards
 from safety_gymnasium.tasks.safe_vision.race.race_level0 import RaceLevel0
 
@@ -38,6 +40,8 @@ class RaceLevel1(RaceLevel0):
                 for i in range(7)
             ],
             'is_meshed': True,
+            'mesh_name': 'bush',
+            'mesh_euler': [np.pi / 2, 0, 0],
         }
         self._add_geoms(Hazards(**hazard_config))
         self.static_geoms_contact_cost = 1.0

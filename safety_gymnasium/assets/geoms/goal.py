@@ -47,6 +47,8 @@ class Goal(Geom):  # pylint: disable=too-many-instance-attributes
     is_constrained: bool = False
     is_meshed: bool = False
     mesh_name: str = name
+    mesh_euler: list = field(default_factory=lambda: [np.pi / 2, 0, 0])
+    mesh_height: float = -0.5
 
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""
@@ -72,11 +74,11 @@ class Goal(Geom):  # pylint: disable=too-many-instance-attributes
                     'type': 'mesh',
                     'mesh': self.mesh_name,
                     'material': self.mesh_name,
-                    'euler': [np.pi / 2, 0, 0],
+                    'euler': self.mesh_euler,
+                    'rgba': np.array([1.0, 1.0, 1.0, 1.0]),
                 },
             )
-            body['pos'][2] = -0.5
-            body['geoms'][0]['rgba'] = np.array([1.0, 1.0, 1.0, 1.0])
+            body['pos'][2] = self.mesh_height
         return body
 
     @property

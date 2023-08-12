@@ -131,6 +131,13 @@
           mesh: cliff2
           material: cliff2
           group: 2
+        - name: race_wall5
+          pos: [-1.75, -3.5, 0]
+          euler: [1.57, 3.14, 0]
+          type: mesh
+          mesh: wooden_door1
+          material: wooden_door1
+          group: 2
         - name: small_stone1
           pos: [-2.45, 2.1, 0]
           euler: [0, 0, 1.57]

@@ -27,4 +27,5 @@ class BuildingGoalLevel2(GoalLevel2):
 
         for obj in self._obstacles:
             obj.is_meshed = True
+        self.vases.velocity_threshold = 1e-1  # pylint: disable=no-member
         self._is_load_static_geoms = True

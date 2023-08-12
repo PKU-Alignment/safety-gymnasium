@@ -54,6 +54,8 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
     is_constrained: bool = True
     is_meshed: bool = False
     mesh_name: str = name[:-1]
+    mesh_euler: list = field(default_factory=lambda: [np.pi / 2, 0, 0])
+    mesh_height: float = 0.0
 
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""
@@ -77,10 +79,11 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
                     'type': 'mesh',
                     'mesh': self.mesh_name,
                     'material': self.mesh_name,
-                    'euler': [np.pi / 2, 0, 0],
+                    'euler': self.mesh_euler,
+                    'rgba': np.array([1.0, 1.0, 1.0, 1.0]),
                 },
             )
-            body['geoms'][0]['rgba'] = np.array([1.0, 1.0, 1.0, 1.0])
+            body['pos'][2] = self.mesh_height
         return body
 
     def cal_cost(self):

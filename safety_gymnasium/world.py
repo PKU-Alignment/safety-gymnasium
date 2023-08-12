@@ -69,6 +69,7 @@ class World:  # pylint: disable=too-many-instance-attributes
         # Mocaps -- mocap objects which are used to control other objects
         'mocaps': {},
         'floor_type': 'mat',
+        'task_name': None,
     }
 
     def __init__(self, agent, obstacles, config=None) -> None:
@@ -110,6 +111,9 @@ class World:  # pylint: disable=too-many-instance-attributes
         with open(self.agent_base_path, encoding='utf-8') as f:  # pylint: disable=invalid-name
             self.agent_base_xml = f.read()
         self.xml = xmltodict.parse(self.agent_base_xml)  # Nested OrderedDict objects
+        if self.task_name in ['FormulaOne']:  # pylint: disable=no-member
+            self.xml['mujoco']['option']['@integrator'] = 'RK4'
+            self.xml['mujoco']['option']['@timestep'] = '0.004'
 
         if 'compiler' not in self.xml['mujoco']:
             compiler = xmltodict.parse(
@@ -181,7 +185,7 @@ class World:  # pylint: disable=too-many-instance-attributes
             texture.append(assets_config['textures']['mud_floor'])
             material.append(assets_config['materials']['mud_floor'])
         elif self.floor_type == 'none':  # pylint: disable=no-member
-            self.floor_size = [5e-9, 5e-9, 0.1]  # pylint: disable=attribute-defined-outside-init
+            self.floor_size = [1e-9, 1e-9, 0.1]  # pylint: disable=attribute-defined-outside-init
         else:
             raise NotImplementedError
 
@@ -402,7 +406,6 @@ class World:  # pylint: disable=too-many-instance-attributes
         # Instantiate simulator
         # print(xmltodict.unparse(self.xml, pretty=True))
         self.xml_string = xmltodict.unparse(self.xml)
-
         model = mujoco.MjModel.from_xml_string(self.xml_string)  # pylint: disable=no-member
         data = mujoco.MjData(model)  # pylint: disable=no-member
 
