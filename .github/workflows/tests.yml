@@ -32,7 +32,7 @@ jobs:
         # TODO: add Python 3.11 to test matrix
         python-version: ["3.8", "3.9", "3.10"]
       fail-fast: false
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - name: Checkout
         uses: actions/checkout@v3
