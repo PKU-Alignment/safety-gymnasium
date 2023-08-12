@@ -14,6 +14,15 @@
 # ==============================================================================
 """Tasks in Safety-Gymnasium."""
 
+from safety_gymnasium.tasks.safe_multi_agent.tasks.multi_goal.multi_goal_level0 import (
+    MultiGoalLevel0,
+)
+from safety_gymnasium.tasks.safe_multi_agent.tasks.multi_goal.multi_goal_level1 import (
+    MultiGoalLevel1,
+)
+from safety_gymnasium.tasks.safe_multi_agent.tasks.multi_goal.multi_goal_level2 import (
+    MultiGoalLevel2,
+)
 from safety_gymnasium.tasks.safe_navigation.button.button_level0 import ButtonLevel0
 from safety_gymnasium.tasks.safe_navigation.button.button_level1 import ButtonLevel1
 from safety_gymnasium.tasks.safe_navigation.button.button_level2 import ButtonLevel2
