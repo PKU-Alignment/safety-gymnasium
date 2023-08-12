@@ -327,14 +327,17 @@ class World:  # pylint: disable=too-many-instance-attributes
                         """.format(
                     **{k: convert(v) for k, v in object['geoms'][0].items()},
                 )
-                # pylint: disable-next=consider-using-f-string
-                visual_xml = """
-                    <geom name="{name}" type="mesh" mesh="{mesh}" material="{material}" pos="{pos}"
-                    rgba="1 1 1 1" group="{group}" contype="{contype}" conaffinity="{conaffinity}" density="{density}"
-                    euler="{euler}"/>
-                """.format(
-                    **{k: convert(v) for k, v in object['geoms'][1].items()},
-                )
+                if len(object['geoms']) == 2:
+                    # pylint: disable-next=consider-using-f-string
+                    visual_xml = """
+                        <geom name="{name}" type="mesh" mesh="{mesh}" material="{material}" pos="{pos}"
+                        rgba="1 1 1 1" group="{group}" contype="{contype}" conaffinity="{conaffinity}" density="{density}"
+                        euler="{euler}"/>
+                    """.format(
+                        **{k: convert(v) for k, v in object['geoms'][1].items()},
+                    )
+                else:
+                    visual_xml = """"""
                 body = xmltodict.parse(
                     # pylint: disable-next=consider-using-f-string
                     f"""
