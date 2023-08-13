@@ -14,7 +14,7 @@
 # ==============================================================================
 """FormulaOne level 2."""
 
-from safety_gymnasium.tasks.safe_vision.racing.formula_one_level1 import FormulaOneLevel1
+from safety_gymnasium.tasks.safe_vision.formula_one.formula_one_level1 import FormulaOneLevel1
 
 
 class FormulaOneLevel2(FormulaOneLevel1):

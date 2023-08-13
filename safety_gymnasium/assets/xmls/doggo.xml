@@ -17,7 +17,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
 <mujoco model="doggo">
   <option timestep="0.01"/>
   <size njmax="3000" nconmax="1000"/>
-  <statistic meansize="0.23"/>
+  <statistic meansize="0.23" extent="3.96"/>
   <default>
     <joint limited="true" stiffness="0.0001" armature="0.00005"/>
     <geom condim="6" size="0.016" type="capsule" density="5"/>
@@ -27,7 +27,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
   <worldbody>
     <geom name="floor" size="5 5 0.1" type="plane" condim="6"/>
     <body name="agent" pos="0 0 0.22">
-      <camera name="vision" pos=".0625 0 .55" euler="1.57 -1.57 0"/>
+      <camera name="vision" pos=".0625 0 .1" xyaxes="0 -0.5 0 .2 0 0.5" fovy="100"/>
       <!-- <geom name="cam" pos=".15 0 .2" type="sphere" size="0.005"/> -->
       <site name="agent" pos="0 0 0"/>
       <geom name="agent" pos="0 0 0" size="0.0375" fromto="0 0 0 .1 0 0" type="cylinder" density="2" rgba="0.8 0.6 0.4 1"/>

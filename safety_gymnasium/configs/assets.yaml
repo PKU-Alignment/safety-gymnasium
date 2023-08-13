@@ -3085,7 +3085,7 @@ meshes:
   push_box:
     '@name': push_box
     '@file': push_box.obj
-    '@scale': 0.008 0.008 0.008
+    '@scale': 0.005 0.005 0.005
   button:
     '@name': button
     '@file': button.obj

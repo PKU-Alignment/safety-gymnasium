@@ -32,7 +32,7 @@ class FormulaOneLevel0(BaseTask):
 
         self.floor_conf.size = [0.5, 0.5, 0.1]
 
-        points = [
+        staged_points = [
             (3, 9),
             (13, -1.7),
             (26, 0.05),
@@ -41,7 +41,11 @@ class FormulaOneLevel0(BaseTask):
             (19.0, -20.7),
             (-0.85, -0.4),
         ]
-        self.agent.locations = points
+
+        delta = 1e-9
+        self.agent.placements = [
+            (x - delta, y - delta, x + delta, y + delta) for x, y in staged_points
+        ]
         self.agent.keepout = 0.0
 
         self.mechanism_conf.continue_goal = True
@@ -50,9 +54,10 @@ class FormulaOneLevel0(BaseTask):
             'reward_goal': 10.0,
             'keepout': 0.305,
             'size': 0.3,
+            'is_meshed': True,
         }
         self.reward_conf.reward_clip = 11
-        self._add_geoms(StagedGoal(num_stage=7, staged_locations=points, **goal_config))
+        self._add_geoms(StagedGoal(num_stage=7, staged_locations=staged_points, **goal_config))
         self._is_load_static_geoms = True
 
         self.last_dist_goal = None

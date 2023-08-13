@@ -15,7 +15,7 @@
 """FormulaOne level 1."""
 
 from safety_gymnasium.assets.free_geoms import Vases
-from safety_gymnasium.tasks.safe_vision.racing.formula_one_level0 import FormulaOneLevel0
+from safety_gymnasium.tasks.safe_vision.formula_one.formula_one_level0 import FormulaOneLevel0
 
 
 class FormulaOneLevel1(FormulaOneLevel0):
