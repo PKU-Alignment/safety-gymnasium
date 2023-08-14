@@ -42,7 +42,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
     <geom name="floor" size="5 5 0.1" type="plane" condim="6"/>
     <body name="agent" pos="0 0 0.05">
         <joint type="free" name="agent" damping="0"/>
-        <camera name="vision" pos="0.20 0 0.05" euler="1.57 -1.57 0" fovy="90"/>
+        <camera name="vision" pos="0.10 0 0.1" euler="1.57 -1.57 0" fovy="90"/>
         <site name="agent" pos="0.02 0 0"/>
         <body name="pos_change" pos="-0.16 0 0">
             <body name="car_body">
