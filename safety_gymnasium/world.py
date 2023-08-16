@@ -14,10 +14,13 @@
 # ==============================================================================
 """World."""
 
+from __future__ import annotations
+
 import os
 from collections import OrderedDict
 from copy import deepcopy
 from dataclasses import dataclass
+from typing import Any, ClassVar
 
 import mujoco
 import numpy as np
@@ -54,7 +57,7 @@ class World:  # pylint: disable=too-many-instance-attributes
 
     # Default configuration (this should not be nested since it gets copied)
     # *NOTE:* Changes to this configuration should also be reflected in `Builder` configuration
-    DEFAULT = {
+    DEFAULT: ClassVar[dict[str, Any]] = {
         'agent_base': 'assets/xmls/car.xml',  # Which agent XML to use as the base
         'agent_xy': np.zeros(2),  # agent XY location
         'agent_rot': 0,  # agent rotation about Z axis
@@ -245,7 +248,7 @@ class World:  # pylint: disable=too-many-instance-attributes
         worldbody['camera'] = cameras['b']['camera']
 
         # Build and add a tracking camera (logic needed to ensure orientation correct)
-        theta = self.agent_rot  # pylint: disable=no-member
+        theta = self.agent_rot + np.pi  # pylint: disable=no-member
         xyaxes = {
             'x1': np.cos(theta),
             'x2': -np.sin(theta),

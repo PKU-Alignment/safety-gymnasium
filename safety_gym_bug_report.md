@@ -1,1 +1,110 @@
-# Coming soon update.
+# Safety-Gym Bug Report
+
+## The Bug of Natural Lidar
+
+The original Natural Lidar in [Safety-Gym](https://github.com/openai/safety-gym) has a problem of not being able to detect low-lying objects, which may affect comprehensive environmental observations.
+
+<table class="docutils align-default">
+  <tbody>
+    <tr class="row-odd">
+      <td>
+        <figure class="align-default">
+          <img
+              alt="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_high_lying_0.jpg"
+              src="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_high_lying_0.jpg" style="width: 230px;">
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">can detect high_lying object</span></a></strong>
+        </p>
+      </td>
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_high_lying_1.jpg"
+              src="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_high_lying_1.jpg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">can detect high_lying object</span></a></strong>
+        </p>
+      </td>
+    </tr>
+    <tr class="row-even">
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_low_lying_0.jpg"
+              src="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_low_lying_0.jpg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">cannot detect low_lying object</span></a></strong>
+        </p>
+      </td>
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference" href="./button#button2"><img
+              alt="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_low_lying_1.jpg"
+              src="https://github.com/zmsn-2077/safety-gymnasium-zmsn/raw/HEAD/images/bug_report/detect_low_lying_1.jpg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">cannot detect low_lying object</span></a></strong>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## The Problem of Observation Space
+
+In `Safety-Gym`, by default, the observation space is presented as a one-dimensional array, as shown in the following code:
+
+```python
+if self.observation_flatten:
+    self.obs_flat_size = sum([np.prod(i.shape) for i in self.obs_space_dict.values()])
+    self.observation_space = gym.spaces.Box(-np.inf, np.inf, (self.obs_flat_size,), dtype=np.float32)
+```
+
+While this representation does not lead to behavioral errors in the environment, it can be somewhat misleading for users. To address this issue, we have implemented the `Gymnasium`'s flatten mechanism in `Safety-Gym` to handle the representation of the observation space. This mechanism reorganizes the observation space into a more intuitive and easily understandable format, enabling users to process and analyze the observation data more effectively.
+
+```python
+self.obs_info.obs_space_dict = gymnasium.spaces.Dict(obs_space_dict)
+
+if self.observation_flatten:
+    self.observation_space = gymnasium.spaces.utils.flatten_space(
+        self.obs_info.obs_space_dict
+    )
+else:
+    self.observation_space = self.obs_info.obs_space_dict
+assert self.obs_info.obs_space_dict.contains(
+    obs
+), f'Bad obs {obs} {self.obs_info.obs_space_dict}'
+
+if self.observation_flatten:
+    obs = gymnasium.spaces.utils.flatten(self.obs_info.obs_space_dict, obs)
+    return obs
+```
+
+## Missing Cost Information
+
+In `Safety-Gym`, by default, there are only two possible outputs for the cost: `0` and `1`, representing whether a cost is incurred or not.
+
+```python
+# Optionally remove shaping from reward functions.
+if self.constrain_indicator:
+    for k in list(cost.keys()):
+        cost[k] = float(cost[k] > 0.0)  # Indicator function
+```
+
+We believe that this representation method loses some information. For example, when the robot collides with a vase and causes the vase to move at different velocities, there should be different cost values associated with it to indicate subtle differences in violating constraint behaviors. Additionally, these costs incurred by the actions are accumulated into the total cost. In typical cases, algorithms use the total cost to update the policy. If the total cost generated by different obstacles is limited to only two states (`0` and `1`), the learning potential for multiple constraints is lost when multiple costs are triggered simultaneously.
+
+## Neglected Dependency Maintenance
+The `numpy~=1.17.4` will cause the following problems:
+
+```bash
+ValueError: numpy.ndarray size changed, may indicate binary incompatibility. Expected 96 from C header, got 80 from PyObject
+```
+
+and
+
+```bash
+AttributeError: module 'numpy' has no attribute 'complex'.
+```

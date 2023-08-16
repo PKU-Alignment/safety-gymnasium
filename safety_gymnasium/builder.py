@@ -17,6 +17,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+from typing import Any, ClassVar
 
 import gymnasium
 import numpy as np
@@ -80,7 +81,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
     - :attr:`done` (bool): Whether the episode is done.
     """
 
-    metadata = {
+    metadata: ClassVar[dict[str, Any]] = {
         'render_modes': [
             'human',
             'rgb_array',
@@ -92,12 +93,12 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
     def __init__(  # pylint: disable=too-many-arguments
         self,
         task_id: str,
-        config: dict = None,
-        render_mode: str = None,
+        config: dict | None = None,
+        render_mode: str | None = None,
         width: int = 256,
         height: int = 256,
-        camera_id: int = None,
-        camera_name: str = None,
+        camera_id: int | None = None,
+        camera_name: str | None = None,
     ) -> None:
         """Initialize the builder.
 
@@ -151,7 +152,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         task.build_observation_space()
         return task
 
-    def set_seed(self, seed: int = None) -> None:
+    def set_seed(self, seed: int | None = None) -> None:
         """Set internal random state seeds."""
         self._seed = np.random.randint(2**32, dtype='int64') if seed is None else seed
         self.task.random_generator.set_random_seed(self._seed)
@@ -159,8 +160,8 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
     def reset(
         self,
         *,
-        seed: int = None,
-        options: dict = None,
+        seed: int | None = None,
+        options: dict | None = None,
     ) -> tuple[np.ndarray, dict]:  # pylint: disable=arguments-differ
         """Reset the environment and return observations."""
         info = {}

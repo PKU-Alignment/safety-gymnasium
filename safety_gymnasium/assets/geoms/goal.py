@@ -69,6 +69,7 @@ class Goal(Geom):  # pylint: disable=too-many-instance-attributes
                     'euler': [np.pi / 2, 0, 0],
                 },
             )
+            geom['pos'][2] = 0.0
         return geom
 
     @property
