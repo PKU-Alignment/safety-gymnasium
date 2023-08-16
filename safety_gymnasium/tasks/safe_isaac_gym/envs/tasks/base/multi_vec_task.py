@@ -314,12 +314,12 @@ class FreightFrankaMultiVecTask:
         self.act_space = tuple(
             [
                 spaces.Box(
-                    low=np.ones((2,)) * self.clip_actions_low[:2].cpu().numpy(),
-                    high=np.ones((2,)) * self.clip_actions_high[:2].cpu().numpy(),
+                    low=np.ones((3,)) * self.clip_actions_low[:3].cpu().numpy(),
+                    high=np.ones((3,)) * self.clip_actions_high[:3].cpu().numpy(),
                 ),
                 spaces.Box(
-                    low=np.ones((8,)) * self.clip_actions_low[2:10].cpu().numpy(),
-                    high=np.ones((8,)) * self.clip_actions_high[2:10].cpu().numpy(),
+                    low=np.ones((9,)) * self.clip_actions_low[3:12].cpu().numpy(),
+                    high=np.ones((9,)) * self.clip_actions_high[3:12].cpu().numpy(),
                 ),
             ]
         )
