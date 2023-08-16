@@ -104,14 +104,14 @@ pylint: pylint-install
 	$(PYTHON) -m pylint $(PROJECT_PATH)
 
 flake8: flake8-install
-	$(PYTHON) -m flake8 --count --show-source --statistics --exclude=safety_gymnasium/tasks/safe_issac_gym
+	$(PYTHON) -m flake8 --count --show-source --statistics --exclude=safety_gymnasium/tasks/safe_isaac_gym
 
 py-format: py-format-install
 	$(PYTHON) -m isort --project $(PROJECT_PATH) --check $(PYTHON_FILES) && \
 	$(PYTHON) -m black --check $(PYTHON_FILES)
 
 ruff: ruff-install
-	$(PYTHON) -m ruff check --exclude=safety_gymnasium/tasks/safe_issac_gym/ .
+	$(PYTHON) -m ruff check --exclude=safety_gymnasium/tasks/safe_isaac_gym/ .
 
 ruff-fix: ruff-install
 	$(PYTHON) -m ruff check . --fix --exit-non-zero-on-fix
