@@ -47,7 +47,7 @@ class MultiGoalLevel0(BaseTask):
     def calculate_reward(self):
         """Determine reward depending on the agent and tasks."""
         # pylint: disable=no-member
-        reward = {'agent_0': 0.0, 'agent_1': '0.0'}
+        reward = {'agent_0': 0.0, 'agent_1': 0.0}
 
         dist_goal_red = self.dist_goal_red()
         reward['agent_0'] += (
