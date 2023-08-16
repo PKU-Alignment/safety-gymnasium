@@ -10,11 +10,10 @@ from tabnanny import process_tokens
 from tracemalloc import start
 
 import numpy as np
-import torch
 from gymnasium import spaces
 from isaacgym import gymtorch
 from isaacgym.torch_utils import to_torch
-
+import torch
 
 # VecEnv Wrapper for ShadowHand
 class ShadowHandMultiVecTask:
@@ -377,10 +376,9 @@ class FreightFrankaMultiVecTaskPython(FreightFrankaMultiVecTask):
 
         actions_tensor = torch.clamp(actions, self.clip_actions_low, self.clip_actions_high)
 
-        self.task.step(actions_tensor)
+        obs_buf, rew_buf, cost_buf, reset_buf, _ = self.task.step(actions_tensor)
 
         sub_agent_obs = []
-        obs_buf = self.task.obs_buf
         # self.process_sub_agent_obs(self.agent_dof_index, self.agent_finger_index, obs_buf)
         num_freight_obs = self.num_freight_obs // 2
         num_franka_obs = self.num_franka_obs // 2
@@ -404,10 +402,10 @@ class FreightFrankaMultiVecTaskPython(FreightFrankaMultiVecTask):
                 dim=1,
             )
         )
-        state_buf = self.task.obs_buf
-        rewards = self.task.rew_buf.unsqueeze(-1).to(self.rl_device)
-        costs = self.task.compute_cost().unsqueeze(-1).to(self.rl_device)
-        dones = self.task.reset_buf.to(self.rl_device)
+        state_buf = obs_buf
+        rewards = rew_buf.unsqueeze(-1).to(self.rl_device)
+        costs = cost_buf.unsqueeze(-1).to(self.rl_device)
+        dones = reset_buf.to(self.rl_device)
 
         agent_state = []
         sub_agent_reward = []

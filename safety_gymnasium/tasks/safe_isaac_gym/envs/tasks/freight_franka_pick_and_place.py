@@ -51,7 +51,7 @@ class FreightFrankaPickAndPlace(BaseTask):
         self.env_num_train = cfg['env']['numEnvs']
 
         self.env_num = self.env_num_train
-        self.asset_root = cfg['env']['asset']['assetRoot']
+        self.asset_root = os.path.dirname(os.path.abspath(__file__)).replace('envs/tasks', 'envs/assets')
         self.num_train = cfg['env']['asset']['AssetNumTrain']
 
         self.tot_num = self.num_train
@@ -531,7 +531,7 @@ class FreightFrankaPickAndPlace(BaseTask):
         within_x = (self.cost_x_range[0] <= freight_x) & (freight_x <= self.cost_x_range[1])
         within_y = (self.cost_y_range[0] <= freight_y) & (freight_y <= self.cost_y_range[1])
 
-        self.cost_buf = within_x & within_y
+        self.cost_buf = (within_x & within_y).type(torch.float32)
 
         time_out = self.progress_buf >= self.max_episode_length
         self.reset_buf = self.reset_buf | time_out

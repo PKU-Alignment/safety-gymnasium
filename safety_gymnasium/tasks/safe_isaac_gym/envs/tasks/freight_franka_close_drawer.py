@@ -52,7 +52,7 @@ class FreightFrankaCloseDrawer(BaseTask):
 
         self.env_num_train = cfg['env']['numEnvs']
         self.env_num = self.env_num_train
-        self.asset_root = cfg['env']['asset']['assetRoot']
+        self.asset_root = os.path.dirname(os.path.abspath(__file__)).replace('envs/tasks', 'envs/assets')
         self.cabinet_num_train = cfg['env']['asset']['cabinetAssetNumTrain']
         self.cabinet_num = self.cabinet_num_train
         cabinet_train_list_len = len(cfg['env']['asset']['trainAssets'])
@@ -628,7 +628,9 @@ class FreightFrankaCloseDrawer(BaseTask):
         within_y = (self.cost_y_range[0] <= freight_y) & (freight_y <= self.cost_y_range[1])
 
         # 两个范围都满足时返回True
-        self.cost_buf = within_x & within_y
+        self.cost_buf = (within_x & within_y).type(torch.float32)
+
+        # set the type 
 
         time_out = self.progress_buf >= self.max_episode_length
         self.reset_buf = self.reset_buf | time_out
