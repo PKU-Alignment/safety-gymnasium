@@ -13,6 +13,10 @@ repos:
       - id: check-symlinks
       - id: destroyed-symlinks
       - id: trailing-whitespace
+        exclude: |
+          (?x)(
+            ^safety_gymnasium/tasks/safe_issac_gym/assets/|
+          )
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-toml
@@ -27,9 +31,17 @@ repos:
       - id: check-merge-conflict
         exclude: \.rst$
       - id: check-executables-have-shebangs
+        exclude: |
+          (?x)(
+            ^safety_gymnasium/tasks/safe_issac_gym/assets/|
+          )
       - id: check-shebang-scripts-are-executable
       - id: detect-private-key
       - id: debug-statements
+        exclude: |
+          (?x)(
+            ^safety_gymnasium/tasks/safe_issac_gym/envs/tasks/freight_franka_pick_and_place.py|
+          )
       - id: double-quote-string-fixer
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: v0.0.275
@@ -81,7 +93,7 @@ repos:
         additional_dependencies: [".[toml]"]
         exclude: |
           (?x)(
-            ^safety_gymnasium/tasks/safe_issac_gym/assets/urdf/xarm_description/urdf/camera.gazebo.xacro$|
+            ^safety_gymnasium/tasks/safe_issac_gym/|
             ^docs/spelling_wordlist.txt$
           )
   - repo: local
