@@ -48,7 +48,7 @@ class Goal(Geom):  # pylint: disable=too-many-instance-attributes
     is_meshed: bool = False
     mesh_name: str = name
     mesh_euler: list = field(default_factory=lambda: [np.pi / 2, 0, 0])
-    mesh_height: float = -0.5
+    mesh_height: float = -0.7
 
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""

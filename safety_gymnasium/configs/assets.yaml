@@ -2993,7 +2993,7 @@ meshes:
   goal:
     '@name': goal
     '@file': goal.obj
-    '@scale': 0.1 0.1 0.1
+    '@scale': 0.15 0.15 0.15
   gremlin:
     '@name': gremlin
     '@file': gremlin.obj
