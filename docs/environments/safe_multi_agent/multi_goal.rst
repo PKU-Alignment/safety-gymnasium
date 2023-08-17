@@ -1,14 +1,14 @@
-Goal
+Multi Goal
 ====
 
 +--------+------------------+-----------------------+--------+
 | Level  | Geom             | FreeGeom              | Mocap  |
 +========+==================+=======================+========+
-| 0      | Goal             |                       |        |
+| 0      | Goal=2           |                       |        |
 +--------+------------------+-----------------------+--------+
-| 1      | Goal, Hazards=8  | Vases=1               |        |
+| 1      |Goal=2, Hazards=8 | Vases=1               |        |
 +--------+------------------+-----------------------+--------+
-| 2      | Goal, Hazards=10 | Vases=10              |        |
+| 2      |Goal=2, Hazards=10| Vases=10              |        |
 +--------+------------------+-----------------------+--------+
 
 
@@ -19,10 +19,12 @@ Goal
    * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/doggo` :doc:`../../components_of_environments/agents/ant`
 
 
-This set of environments is presented by `Safety-Gym <https://cdn.openai.com/safexp-short.pdf>`__.
+This set of environments is similar to :doc:`../safe_navigation/goal`.
 
 Rewards
 -------
+
+Agent必须尽可能多地接近并到达与自己颜色一致的目标处，若靠近并到达颜色不一致的目标将不会获得任何奖励，以下是某一Agent与同一颜色的目标之间的奖励计算公式。
 
  - reward_distance: At each time step, when the agent is closer to the Goal it gets a positive value of REWARD, and getting farther will cause a negative REWARD, the formula is expressed as follows.
 
@@ -33,42 +35,44 @@ Rewards
 
  - reward_goal: Each time the Goal is reached, get a positive value of the completed goal reward: :math:`R_{goal}`.
 
+
 Episode End
 -----------
 
 - When episode length is greater than 1000: ``Trucated = True``.
 
-.. _Goal0:
+.. _MultiGoal0:
 
 Level0
 ------
 
-.. image:: ../../_static/images/goal0.jpeg
+.. image:: ../../_static/images/ant_multi_goal0.jpeg
     :align: center
     :scale: 12 %
 
-Agent needs to navigate to Goal's location.
+智能体需要导航到其对应颜色的目标处，同时避免与其他智能体碰撞。
 
 +-----------------------------+------------------------------------------------------------------+
-| Specific Observation Space  | Box(-inf, inf, (16,), float64)                                   |
+| Specific Observation Space  | [Box(-inf, inf, (32,), float64), Box(-inf, inf, (32,), float64)] |
 +=============================+==================================================================+
 | Specific Observation High   | inf                                                              |
 +-----------------------------+------------------------------------------------------------------+
 | Specific Observation Low    | -inf                                                             |
 +-----------------------------+------------------------------------------------------------------+
-| Import                      | ``safety_gymnasium.make("Safety[Agent]Goal0-v0")``               |
+| Import                      | ``safety_gymnasium.make("Safety[Agent]MultiGoal0-v0")``          |
 +-----------------------------+------------------------------------------------------------------+
 
 
 Specific Observation Space
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-+-------+--------------+------+------+---------------+
-| Size  | Observation  | Min  | Max  | Max Distance  |
-+=======+==============+======+======+===============+
-| 16    | goal lidar   | 0    | 1    | 3             |
-+-------+--------------+------+------+---------------+
-
++-------+---------------+------+------+---------------+
+| Size  | Observation   | Min  | Max  | Max Distance  |
++=======+===============+======+======+===============+
+| 16    |goal_red lidar | 0    | 1    | 3             |
++-------+---------------+------+------+---------------+
+| 16    |goal_blue lidar| 0    | 1    | 3             |
++-------+---------------+------+------+---------------+
 
 Costs
 ^^^^^
@@ -81,30 +85,30 @@ Randomness
 +--------------------------------+-------------------------+---------------+
 | Scope                          | Range                   | Distribution  |
 +================================+=========================+===============+
-| rotation of agent and objects  | :math:`[0, 2\pi]`       | uniform       |
+| rotation of agents and objects | :math:`[0, 2\pi]`       | uniform       |
 +--------------------------------+-------------------------+---------------+
-| location of agent and objects  | :math:`[-1, -1, 1, 1]`  | uniform       |
+| location of agents and objects | :math:`[-1, -1, 1, 1]`  | uniform       |
 +--------------------------------+-------------------------+---------------+
 
-.. _Goal1:
+.. _MultiGoal1:
 
 Level1
 ------
 
-.. image:: ../../_static/images/goal1.jpeg
+.. image:: ../../_static/images/ant_multi_goal1.jpeg
     :align: center
     :scale: 12 %
 
-The Agent needs to navigate to the Goal's location while circumventing Hazards, Vases=1 but does not participate in the cost calculation.
+智能体需要导航到其对应颜色的目标，同时避免与其他智能体碰撞，以及避免踩到hazards，虽然Vases=1，但是其并不参与cost的计算。
 
 +-----------------------------+----------------------------------------------------------------+
-| Specific Observation Space  | Box(-inf, inf, (48,), float64)                                 |
+| Specific Observation Space  |[Box(-inf, inf, (64,), float64), Box(-inf, inf, (64,), float64)]|
 +=============================+================================================================+
 | Specific Observation High   | inf                                                            |
 +-----------------------------+----------------------------------------------------------------+
 | Specific Observation Low    | -inf                                                           |
 +-----------------------------+----------------------------------------------------------------+
-| Import                      | ``safety_gymnasium.make("Safety[Agent]Goal1-v0")``             |
+| Import                      | ``safety_gymnasium.make("Safety[Agent]MultiGoal1-v0")``        |
 +-----------------------------+----------------------------------------------------------------+
 
 
@@ -114,7 +118,9 @@ Specific Observation Space
 +-------+----------------+------+------+---------------+
 | Size  | Observation    | Min  | Max  | Max Distance  |
 +=======+================+======+======+===============+
-| 16    | goal lidar     | 0    | 1    | 3             |
+| 16    |goal_red lidar  | 0    | 1    | 3             |
++-------+----------------+------+------+---------------+
+| 16    |goal_blue lidar | 0    | 1    | 3             |
 +-------+----------------+------+------+---------------+
 | 16    | hazards lidar  | 0    | 1    | 3             |
 +-------+----------------+------+------+---------------+
@@ -145,31 +151,31 @@ Randomness
 +--------------------------------+---------------------------------+---------------+
 | Scope                          | Range                           | Distribution  |
 +================================+=================================+===============+
-| rotation of agent and objects  | :math:`[0, 2\pi]`               | uniform       |
+| rotation of agents and objects | :math:`[0, 2\pi]`               | uniform       |
 +--------------------------------+---------------------------------+---------------+
-| location of agent and objects  | :math:`[-1.5, -1.5, 1.5, 1.5]`  | uniform       |
+| location of agents and objects | :math:`[-1.5, -1.5, 1.5, 1.5]`  | uniform       |
 +--------------------------------+---------------------------------+---------------+
 
-.. _Goal2:
+.. _MultiGoal2:
 
 Level2
 ------
 
-.. image:: ../../_static/images/goal2.jpeg
+.. image:: ../../_static/images/ant_multi_goal2.jpeg
     :align: center
     :scale: 12 %
 
-The Agent needs to navigate to the Goal's location while circumventing more Hazards and Vases.
+智能体需要导航到其对应颜色的目标，同时避免与其他智能体碰撞，以及避免与障碍物碰撞或踩到hazards。
 
-+-----------------------------+-----------------------------------------------------------+
-| Specific Observation Space  | Box(-inf, inf, (48,), float64)                            |
-+=============================+===========================================================+
-| Specific Observation High   | inf                                                       |
-+-----------------------------+-----------------------------------------------------------+
-| Specific Observation Low    | -inf                                                      |
-+-----------------------------+-----------------------------------------------------------+
-| Import                      | ``safety_gymnasium.make("Safety[Agent]Goal2-v0")``        |
-+-----------------------------+-----------------------------------------------------------+
++-----------------------------+----------------------------------------------------------------+
+| Specific Observation Space  |[Box(-inf, inf, (64,), float64), Box(-inf, inf, (64,), float64)]|
++=============================+================================================================+
+| Specific Observation High   | inf                                                            |
++-----------------------------+----------------------------------------------------------------+
+| Specific Observation Low    | -inf                                                           |
++-----------------------------+----------------------------------------------------------------+
+| Import                      | ``safety_gymnasium.make("Safety[Agent]MultiGoal2-v0")``        |
++-----------------------------+----------------------------------------------------------------+
 
 
 Specific Observation Space
@@ -178,7 +184,9 @@ Specific Observation Space
 +-------+----------------+------+------+---------------+
 | Size  | Observation    | Min  | Max  | Max Distance  |
 +=======+================+======+======+===============+
-| 16    | goal lidar     | 0    | 1    | 3             |
+| 16    |goal_red lidar  | 0    | 1    | 3             |
++-------+----------------+------+------+---------------+
+| 16    |goal_blue lidar | 0    | 1    | 3             |
 +-------+----------------+------+------+---------------+
 | 16    | hazards lidar  | 0    | 1    | 3             |
 +-------+----------------+------+------+---------------+
@@ -208,7 +216,7 @@ Randomness
 +--------------------------------+-------------------------+---------------+
 | Scope                          | Range                   | Distribution  |
 +================================+=========================+===============+
-| rotation of agent and objects  | :math:`[0, 2\pi]`       | uniform       |
+| rotation of agents and objects | :math:`[0, 2\pi]`       | uniform       |
 +--------------------------------+-------------------------+---------------+
-| location of agent and objects  | :math:`[-2, -2, 2, 2]`  | uniform       |
+| location of agents and objects | :math:`[-2, -2, 2, 2]`  | uniform       |
 +--------------------------------+-------------------------+---------------+

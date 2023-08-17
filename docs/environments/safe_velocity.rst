@@ -1,7 +1,11 @@
 Safe Velocity
 ================
 
-Safe Velocity Environments are based on some extraodinary works of Gymnasium. For general information, Please read `Gymnasium's docs <https://gymnasium.farama.org/environments/mujoco/>`__.
+Safe velocity tasks 基于 `Gymnasium's MuJoCo <https://gymnasium.farama.org/environments/mujoco/>`__ 系列智能体引入了速度约束，对于agent特定的信息，请查阅Gymnasium的文档.
+
++-----------------------------+------------------------------------------------------------------+
+| **Import**                  | ``safety_gymnasium.make("Safety[Agent]Velocity-v1")``            |
++-----------------------------+------------------------------------------------------------------+
 
 .. list-table::
 
@@ -53,7 +57,18 @@ We can formulate it as follow:
 
 .. math:: cost=bool(V_{current} > V_{threshold})
 
-The velocity threshold is set to **50%** of the agent's maximum velocity achieved after the convergence of the **Proximal Policy Optimization (PPO)** algorithm trained via **1e6 steps**.
+我们进行了大量实验。The velocity threshold is set to **50%** of the agent's maximum velocity achieved after the convergence of the **Proximal Policy Optimization (PPO)** algorithm trained via **1e6 steps**.
+
+.. Note::
+    对于Swimmer，我们只使用了其在X轴上的速度来设定约束，这是因为它的运动依赖于它的摆动，这将在Y轴上产生速度。
+    其余智能体是使用其在X-Y轴上所有可能的速度的矢量和来设定约束的，一个粗略的表达如下：
+
+    .. code-block:: python
+
+        if 'y_velocity' not in agent_infomation:
+            agent_velocity = np.abs(agent_infomation['x_velocity'])
+        else:
+            agent_velocity = np.sqrt(agent_infomation['x_velocity'] ** 2 + agent_infomation['y_velocity'] ** 2)
 
 +------------------------------+--------------------+
 | Environment                  | Velocity Threshold |

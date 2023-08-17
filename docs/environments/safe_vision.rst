@@ -25,12 +25,24 @@ Safe Vision
             :width: 230px
         .. centered:: Coming soon...
 
-Navigation tasks are an important class of tasks that apply RL to reality, requiring an agent to continuously change its position and interact with objects in the environment in order to accomplish a specified goal, which is usually associated with a specific position or movement pattern. In Safe RL, the focus is on the behavioral paradigm of whether an intelligent body, as a free-moving individual, can accomplish tasks in the environment without dangerous collisions or contact.
+Safe vision tasks旨在通过一系列具备更真实视觉信息的任务，在更复杂的任务设定上促进机器人安全性的研究，此类环境中的物体
+不仅仅是在视觉信息上更复杂，同时也在环境的碰撞细微程度上更具挑战性。
 
-We have refactored and optimized the widely used but unmaintained and lacking supports environment library `Safety-Gym <https://github.com/openai/safety-gym>`__ in the library, and we have also carefully designed new environments and agents to take into account changing requirements, increasing computational power and advances in algorithms, which will be gradually Released in the coming period.
+.. Note::
 
+    在safe vision的任务当中，也尽可能支持了vectorized的观测信息，以便于社区在更复杂的环境当中探索新的见解。
+
+    对于所有采用视觉输入的情形，需要在任务名称后面加上 **Vision** 后缀，例如 `SafetyAntGoal0Vision-v0` 。
+
+    而即使是safe vision的任务，在不加该后缀的情况下也是vectorized观测的。因此可以认为，Safety-Gymnasium当中的所有任务都是同时支持视觉和vectorized观测的，不同的类别划分只是为了强调每一类任务的特点。
 
 .. toctree::
     :hidden:
 
+    safe_vision/building_button.rst
+    safe_vision/building_goal.rst
+    safe_vision/building_push.rst
+    safe_vision/fading_easy.rst
+    safe_vision/fading_hard.rst
     safe_vision/race.rst
+    safe_vision/formula_one.rst
