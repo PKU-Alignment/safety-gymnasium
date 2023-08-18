@@ -12,8 +12,8 @@ import numpy as np
 import torch
 from isaacgym import gymapi, gymtorch
 from matplotlib.pyplot import axis
-from safepo.envs.safe_dexteroushands.tasks.hand_base.base_task import BaseTask
-from safepo.envs.safe_dexteroushands.utils.torch_jit_utils import *
+from safety_gymnasium.tasks.safe_isaac_gym.envs.tasks.hand_base.base_task import BaseTask
+from safety_gymnasium.tasks.safe_isaac_gym.utils.torch_jit_utils import *
 
 
 class ShadowHandOver_Safe_finger(BaseTask):

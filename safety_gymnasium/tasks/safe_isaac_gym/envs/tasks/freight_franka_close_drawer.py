@@ -7,7 +7,7 @@ import numpy as np
 import yaml
 from isaacgym import gymapi, gymtorch, gymutil
 from isaacgym.torch_utils import *
-from safepo.envs.safe_dexteroushands.tasks.hand_base.base_task import BaseTask
+from safety_gymnasium.tasks.safe_isaac_gym.envs.tasks.hand_base.base_task import BaseTask
 from tqdm import tqdm
 
 
@@ -440,9 +440,9 @@ class FreightFrankaCloseDrawer(BaseTask):
         hazard_asset_options = gymapi.AssetOptions()
         hazard_asset_options.fix_base_link = True
         hazard_asset_options.disable_gravity = False
-        self.hazard_asset = self.gym.create_box(self.sim, 0.5, 0.6, 0.01, hazard_asset_options)
+        self.hazard_asset = self.gym.create_box(self.sim, 0.5, 1.0, 0.01, hazard_asset_options)
         self.hazard_pose = gymapi.Transform()
-        self.hazard_pose.p = gymapi.Vec3(0.05, -0.3, 0.005)  # franka:0, 0.0, 0
+        self.hazard_pose.p = gymapi.Vec3(0.05, 0.0, 0.005)  # franka:0, 0.0, 0
         self.hazard_pose.r = gymapi.Quat(0.0, 0.0, 1.0, 0.0)
 
     def _load_obj(self, env_ptr, env_id):
@@ -618,7 +618,7 @@ class FreightFrankaCloseDrawer(BaseTask):
         self.rew_buf = 1.0 * dist_reward + 0.5 * rot_reward - 1 * open_reward
 
         self.cost_x_range = torch.tensor([-0.2, 0.3])
-        self.cost_y_range = torch.tensor([-0.3, 0.3])
+        self.cost_y_range = torch.tensor([-0.5, 0.5])
 
         freight_x = freight_pos[:, 0]
         freight_y = freight_pos[:, 1]
@@ -652,11 +652,11 @@ class FreightFrankaCloseDrawer(BaseTask):
         )  # calculating middle of two fingers
         self.hand_rot = hand_rot
 
-        dim = 49
+        dim = 57
 
         state = torch.zeros((self.num_envs, dim), device=self.device)
 
-        joints = self.franka_num_dofs - 2
+        joints = self.franka_num_dofs
         # joint dof value
         state[:, :joints].copy_(
             (
@@ -685,12 +685,9 @@ class FreightFrankaCloseDrawer(BaseTask):
         # actions
         state[:, joints * 2 + 15 : joints * 3 + 15].copy_(self.actions[:, :joints])
 
-        if self.use_stage:
-            state[:, 42].copy_(self.stage)
 
-        if suggested_gt != None:
-            state[:, 43:46].copy_(self.franka_root_tensor[:, 0:3] - suggested_gt)
-            state[:, 46:49].copy_(suggested_gt - self.hand_tip_pos)
+        state[:,joints * 3 + 15:joints * 3 + 15 + 3].copy_(self.franka_root_tensor[:, 0:3] - self.cabinet_handle_pos_tensor)
+        state[:,joints * 3 + 15 + 3:joints * 3 + 15 + 3 + 3].copy_(self.cabinet_handle_pos_tensor - self.hand_tip_pos)
 
         return state
 

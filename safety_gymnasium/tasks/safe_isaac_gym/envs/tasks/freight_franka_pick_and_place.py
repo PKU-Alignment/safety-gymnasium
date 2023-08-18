@@ -5,7 +5,7 @@ import numpy as np
 import yaml
 from isaacgym import gymapi, gymtorch
 from isaacgym.torch_utils import *
-from safepo.envs.safe_dexteroushands.tasks.hand_base.base_task import BaseTask
+from safety_gymnasium.tasks.safe_isaac_gym.envs.tasks.hand_base.base_task import BaseTask
 from tqdm import tqdm
 
 
@@ -322,12 +322,12 @@ class FreightFrankaPickAndPlace(BaseTask):
             object_asset_options.vhacd_enabled = True
             object_asset_options.vhacd_params = gymapi.VhacdParams()
             object_asset_options.vhacd_params.resolution = 1000
-            obj_asset = self.gym.create_box(self.sim, 0.1, 0.1, 0.1, object_asset_options)
+            obj_asset = self.gym.create_box(self.sim, 0.05, 0.05, 0.05, object_asset_options)
             self.obj_asset_list.append(obj_asset)
             rig_dict = self.gym.get_asset_rigid_body_dict(obj_asset)
             self.obj_rig_name = list(rig_dict.keys())[0]
             obj_start_pose = gymapi.Transform()
-            obj_start_pose.p = gymapi.Vec3(0.0, 0.65, 0.3)
+            obj_start_pose.p = gymapi.Vec3(0.0, 0.65, 0.25)
             obj_start_pose.r = (
                 gymapi.Quat(0, 0, 0, 1)
                 * gymapi.Quat(np.sin(np.pi / 2), 0, 0, np.sin(np.pi / 2))
@@ -494,24 +494,24 @@ class FreightFrankaPickAndPlace(BaseTask):
         freight_pos = self.rigid_body_tensor[:, self.freight_rigid_body_index][:, 0:3]
 
         self.dist_reward = -d
-        self.z_reward = ((obj_pos[:, 2] - 0.0) * 5).to(torch.float32)
+        self.z_reward = ((obj_pos[:, 2] - 0.2) * 2).to(torch.float32)
         self.z_reward = torch.where(
             (self.z_reward) < 0.5,
             self.z_reward,
             (torch.ones_like(self.z_reward, device=self.device) * 0.5).to(torch.float32),
         )
-        pick = obj_pos[:, 2] > 0.1
+        pick = obj_pos[:, 2] > 0.26
         self.pick_reward = pick * 2
         self.target_reward = (
             torch.where(
                 pick,
-                1 - target_d,
+                1.3 - target_d,
                 (torch.zeros_like(target_d, device=self.device)).to(torch.float32),
             ).to(self.device)
             * 3
         )
         success = torch.where(
-            pick, target_d < 0.4, (torch.zeros_like(target_d, device=self.device)).to(torch.bool)
+            pick, target_d < 0.1, (torch.zeros_like(target_d, device=self.device)).to(torch.bool)
         ).to(self.device)
         self.success_reward = success * 2
         self.rew_buf = (
@@ -536,7 +536,7 @@ class FreightFrankaPickAndPlace(BaseTask):
         time_out = self.progress_buf >= self.max_episode_length
         self.reset_buf = self.reset_buf | time_out
         self.reset_buf = torch.where(
-            obj_pos[:, 2] < -1, torch.ones_like(self.reset_buf, device=self.device), self.reset_buf
+            obj_pos[:, 2] < 0.1, torch.ones_like(self.reset_buf, device=self.device), self.reset_buf
         )
 
         self.success_buf = self.success_buf | success
@@ -563,25 +563,25 @@ class FreightFrankaPickAndPlace(BaseTask):
         self.hand_tip_pos = self.hand_rigid_body_tensor[..., 0:3] + hand_down_dir * 0.130
         self.hand_rot = hand_rot
 
-        dim = 59
+        dim = 62
 
         state = torch.zeros((self.num_envs, dim), device=self.device)
 
-        joints = 10
+        joints = self.franka_num_dofs
         # joint dof value
         state[:, :joints].copy_(
             (
                 2
-                * (self.franka_dof_tensor[:, :10, 0] - self.franka_dof_lower_limits_tensor[:10])
+                * (self.franka_dof_tensor[:, :joints, 0] - self.franka_dof_lower_limits_tensor[:joints])
                 / (
-                    self.franka_dof_upper_limits_tensor[:10]
-                    - self.franka_dof_lower_limits_tensor[:10]
+                    self.franka_dof_upper_limits_tensor[:joints]
+                    - self.franka_dof_lower_limits_tensor[:joints]
                 )
             )
             - 1
         )
         # joint dof velocity
-        state[:, joints : joints * 2].copy_(self.franka_dof_tensor[:, :10, 1])
+        state[:, joints : joints * 2].copy_(self.franka_dof_tensor[:, :joints, 1])
         # object dof
         state[:, joints * 2 : joints * 2 + 13].copy_(self.object_root_tensor)
         # hand
@@ -591,7 +591,7 @@ class FreightFrankaPickAndPlace(BaseTask):
             )
         )
         # actions
-        state[:, joints * 2 + 29 : joints * 3 + 29].copy_(self.actions[:, :joints])
+        state[:, joints * 2 + 26 : joints * 3 + 26].copy_(self.actions[:, :joints])
 
         # if "useTaskId" in self.cfg["task"] :
         #     raise NotImplementedError("my test: not implemented!")

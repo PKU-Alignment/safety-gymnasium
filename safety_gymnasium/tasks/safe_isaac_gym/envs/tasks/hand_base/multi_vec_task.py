@@ -14,7 +14,7 @@ import torch
 from gymnasium import spaces
 from isaacgym import gymtorch
 from isaacgym.torch_utils import to_torch
-from safepo.envs.safe_dexteroushands.tasks.hand_base.base_task import BaseTask
+from safety_gymnasium.tasks.safe_isaac_gym.envs.tasks.hand_base.base_task import BaseTask
 
 
 # VecEnv Wrapper for RL training

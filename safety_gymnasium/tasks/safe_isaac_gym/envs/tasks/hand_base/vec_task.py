@@ -162,6 +162,7 @@ class VecTaskPython(VecTask):
         return torch.clamp(self.task.states_buf, -self.clip_obs, self.clip_obs).to(self.rl_device)
 
     def step(self, actions):
+        actions = torch.as_tensor(actions, dtype=torch.float32, device=self.rl_device)
         actions_tensor = torch.clamp(actions, -self.clip_actions, self.clip_actions)
 
         self.task.step(actions_tensor)
