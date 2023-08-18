@@ -386,8 +386,8 @@ class FreightFrankaMultiVecTaskPython(FreightFrankaMultiVecTask):
             torch.cat(
                 [
                     obs_buf[:, :num_freight_obs],
-                    obs_buf[:, 10 : 10 + num_freight_obs],
-                    obs_buf[:, 20:],
+                    obs_buf[:, 12 : 12 + num_freight_obs],
+                    obs_buf[:, 24:],
                 ],
                 dim=1,
             )
@@ -396,8 +396,8 @@ class FreightFrankaMultiVecTaskPython(FreightFrankaMultiVecTask):
             torch.cat(
                 [
                     obs_buf[:, num_freight_obs : num_freight_obs + num_franka_obs],
-                    obs_buf[:, 10 + num_freight_obs : 10 + num_freight_obs + num_franka_obs],
-                    obs_buf[:, 20:],
+                    obs_buf[:, 12 + num_freight_obs : 12 + num_freight_obs + num_franka_obs],
+                    obs_buf[:, 24:],
                 ],
                 dim=1,
             )
@@ -452,8 +452,8 @@ class FreightFrankaMultiVecTaskPython(FreightFrankaMultiVecTask):
             torch.cat(
                 [
                     obs_buf[:, :num_freight_obs],
-                    obs_buf[:, 10 : 10 + num_freight_obs],
-                    obs_buf[:, 20:],
+                    obs_buf[:, 12 : 12 + num_freight_obs],
+                    obs_buf[:, 24:],
                 ],
                 dim=1,
             )
@@ -462,8 +462,8 @@ class FreightFrankaMultiVecTaskPython(FreightFrankaMultiVecTask):
             torch.cat(
                 [
                     obs_buf[:, num_freight_obs : num_freight_obs + num_franka_obs],
-                    obs_buf[:, 10 + num_freight_obs : 10 + num_freight_obs + num_franka_obs],
-                    obs_buf[:, 20:],
+                    obs_buf[:, 12 + num_freight_obs : 12 + num_freight_obs + num_franka_obs],
+                    obs_buf[:, 24:],
                 ],
                 dim=1,
             )

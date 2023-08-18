@@ -207,8 +207,8 @@ class FreightFrankaCloseDrawer(BaseTask):
         # flags for switching between training and evaluation mode
         self.train_mode = True
 
-        self.num_freight_obs = 2 * 2
-        self.num_franka_obs = 8 * 2
+        self.num_freight_obs = 3 * 2
+        self.num_franka_obs = 9 * 2
 
     def create_sim(self):
         self.dt = self.sim_params.dt

@@ -170,8 +170,8 @@ class FreightFrankaPickAndPlace(BaseTask):
         # jacobian entries corresponding to franka hand
         self.j_eef = self.jacobian_tensor[:, 7, :, :7].to(self.device)
 
-        self.num_freight_obs = 2 * 2
-        self.num_franka_obs = 8 * 2
+        self.num_freight_obs = 3 * 2
+        self.num_franka_obs = 9 * 2
 
     def create_sim(self):
         self.dt = self.sim_params.dt
