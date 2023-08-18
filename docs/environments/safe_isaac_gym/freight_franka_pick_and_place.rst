@@ -19,15 +19,15 @@ Observations
 +-----------------+-------------------------------------------------------------------------------------------------------------+
 | Index           | Description                                                                                                 |
 +=================+=============================================================================================================+
-| 0 - 9           | Joint DOF values                                                                                            |
+| 0 - 11          | Joint DOF values                                                                                            |
 +-----------------+-------------------------------------------------------------------------------------------------------------+
-| 10 - 19         | Joint DOF velocities                                                                                        |
+| 12 - 23         | Joint DOF velocities                                                                                        |
 +-----------------+-------------------------------------------------------------------------------------------------------------+
-| 20 - 32         | Object DOF                                                                                                  |
+| 24 - 36         | Object DOF                                                                                                  |
 +-----------------+-------------------------------------------------------------------------------------------------------------+
-| 33 - 45         | Relative pose between the Franka robot's root and the hand rigid body tensor                                |
+| 37 - 49         | Relative pose between the Franka robot's root and the hand rigid body tensor                                |
 +-----------------+-------------------------------------------------------------------------------------------------------------+
-| 46 - 55         | Actions taken by the robot in the joint space                                                               |
+| 50 - 61         | Actions taken by the robot in the joint space                                                               |
 +-----------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -104,7 +104,7 @@ Distance between the target position and the object:
 
 .. math::
 
-    r_z = \min(5z_o, 0.5)
+    r_z = \min(2(z_o-0.2), 0.5)
 
 **Picking Reward**
 
@@ -121,7 +121,7 @@ Distance between the target position and the object:
 .. math::
     r_{\text{target}} =
     \begin{cases}
-    3(1 - d_t) & \text{if object is picked} \\
+    3(1.3 - d_t) & \text{if object is picked} \\
     0 & \text{otherwise}
     \end{cases}
 
@@ -131,7 +131,7 @@ Distance between the target position and the object:
 .. math::
     r_{\text{success}} =
     \begin{cases}
-    2 & \text{if } z_o > 0.26 \text{ and } d_{t} < 0.3 \\
+    2 & \text{if object is picked} \text{ and } d_{t} < 0.1 \\
     0 & \text{otherwise}
     \end{cases}
 
@@ -159,7 +159,7 @@ Freight positioning cost is based on whether it lies within a defined rectangula
 +================================+==================================+
 | X-axis                         | :math:`[-0.2, 0.3]`              |
 +--------------------------------+----------------------------------+
-| Y-axis                         | :math:`[-0.3, 0.3]`              |
+| Y-axis                         | :math:`[-0.6, 0.0]`              |
 +--------------------------------+----------------------------------+
 
 The cost, :math:`c`, is:

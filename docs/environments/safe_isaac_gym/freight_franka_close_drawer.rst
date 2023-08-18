@@ -19,23 +19,20 @@ Observations
 +-----------------+---------------------------------------------------------------------------------------------------+
 | Index           | Description                                                                                       |
 +=================+===================================================================================================+
-| 0 - 9           | Joint DOF values                                                                                  |
+| 0 - 11          | Joint DOF values                                                                                  |
 +-----------------+---------------------------------------------------------------------------------------------------+
-| 10 - 19         | Joint DOF velocities                                                                              |
+| 12 - 23         | Joint DOF velocities                                                                              |
 +-----------------+---------------------------------------------------------------------------------------------------+
-| 20 - 21         | Cabinet DOF                                                                                       |
+| 24 - 25         | Cabinet drawer DOF                                                                                |
 +-----------------+---------------------------------------------------------------------------------------------------+
-| 22 - 34         | Relative pose between the Franka robot's root and the hand rigid body tensor                      |
+| 26 - 38         | Relative pose between the Franka robot's root and the hand rigid body tensor                      |
 +-----------------+---------------------------------------------------------------------------------------------------+
-| 35 - 44         | Actions taken by the robot in the joint space                                                     |
+| 39 - 50         | Actions taken by the robot in the joint space                                                     |
 +-----------------+---------------------------------------------------------------------------------------------------+
-| 42              | Stage (if use_stage is True, but this seems to overlap with the actions segment)                  |
+| 51 - 53         | Difference between the xyz pos of agent's root tensor and the handle position                     |
 +-----------------+---------------------------------------------------------------------------------------------------+
-
-.. | 43 - 45         | Difference between the Franka root tensor and the suggested ground truth position                 |
-.. +-----------------+---------------------------------------------------------------------------------------------------+
-.. | 46 - 48         | Difference between the suggested ground truth position and the hand tip position                  |
-.. +-----------------+---------------------------------------------------------------------------------------------------+
+| 54 - 56         | Difference between the handle position and the hand tip position                                  |
++-----------------+---------------------------------------------------------------------------------------------------+
 
 
 Actions
@@ -81,7 +78,15 @@ Rewards
 +------------------------------------------+-----------------------------------+
 | Drawer position                          | :math:`p_{drawer}`                |
 +------------------------------------------+-----------------------------------+
-| Drawer open value                        | :math:`d_c`                       |
+| Direction of the hand grip               | :math:`\vec{d_{grip}}`            |
++------------------------------------------+-----------------------------------+
+| Direction of hand separation             | :math:`\vec{d_{sep}}`             |
++------------------------------------------+-----------------------------------+
+| Z-axis direction of the handle           | :math:`\vec{d_{handle\_z}}`       |
++------------------------------------------+-----------------------------------+
+| X-axis direction of the handle           | :math:`\vec{d_{handle\_x}}`       |
++------------------------------------------+-----------------------------------+
+| Drawer open dof value                    | :math:`d_c`                       |
 +------------------------------------------+-----------------------------------+
 
 Distance between the hand tip and the drawer is denoted as:
@@ -99,12 +104,24 @@ Distance between the hand tip and the drawer is denoted as:
      \end{array}
    \right.
 
-**Total Reward**
 
-The final reward is a combination of the above values:
+Orientation match values are:
 
 .. math::
-   r = 1.0 \cdot d_{reward} - 1.0 \cdot d_c
+   \omega_{1} = \vec{d_{grip}} \cdot \vec{d_{handle\_z}}
+
+   \omega_{2} = -\vec{d_{sep}} \cdot \vec{d_{handle\_x}}
+
+**Reward for matching the orientation**
+
+.. math::
+   r_{rot} = 0.5 \left( \text{sign}(\omega_{1}) \cdot \omega_{1}^2 + \text{sign}(\omega_{2}) \cdot \omega_{2}^2 \right)
+
+
+**Total Reward**
+
+.. math::
+   r = 1.0 \cdot d_{reward} + 0.5 \cdot r_{rot} - 10 \cdot d_c
 
 Costs
 ----------------
