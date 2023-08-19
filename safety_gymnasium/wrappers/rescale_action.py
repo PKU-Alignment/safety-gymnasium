@@ -39,8 +39,8 @@ class SafeRescaleAction(gymnasium.ActionWrapper, gymnasium.utils.RecordConstruct
     def __init__(
         self,
         env: gymnasium.Env,
-        min_action: Union[float, int, np.ndarray],
-        max_action: Union[float, int, np.ndarray],
+        min_action: Union[float, np.ndarray],
+        max_action: Union[float, np.ndarray],
     ) -> None:
         """Initializes the :class:`RescaleAction` wrapper.
 
