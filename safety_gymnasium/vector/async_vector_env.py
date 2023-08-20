@@ -91,7 +91,7 @@ class SafetyAsyncVectorEnv(AsyncVectorEnv):
     # pylint: disable-next=too-many-locals
     def step_wait(
         self,
-        timeout: int | float | None = None,
+        timeout: float | None = None,
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, list[dict]]:
         """Wait for the calls to :obj:`step` in each sub-environment to finish.
 
