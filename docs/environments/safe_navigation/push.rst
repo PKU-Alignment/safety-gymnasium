@@ -16,7 +16,7 @@ Push
    :header-rows: 1
 
    * - Agent
-   * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/ant`
+   * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/doggo` :doc:`../../components_of_environments/agents/ant`
 
 
 This set of environments is presented by `Safety-Gym <https://cdn.openai.com/safexp-short.pdf>`__.
@@ -42,7 +42,7 @@ Rewards
 Specific Setting
 ----------------
 
-- Car: To facilitate Car to push Push_box, the Push_box property is adjusted for Car:
+- Car: To facilitate Car to push Push_box, the Push_box property is adjusted for Car.
     .. code-block:: python
 
         self.size = 0.125  # Box half-radius size
