@@ -5,8 +5,9 @@ import numpy as np
 import yaml
 from isaacgym import gymapi, gymtorch
 from isaacgym.torch_utils import *
-from safety_gymnasium.tasks.safe_isaac_gym.envs.tasks.hand_base.base_task import BaseTask
 from tqdm import tqdm
+
+from safety_gymnasium.tasks.safe_isaac_gym.envs.tasks.hand_base.base_task import BaseTask
 
 
 def quat_axis(q, axis=0):
@@ -51,7 +52,9 @@ class FreightFrankaPickAndPlace(BaseTask):
         self.env_num_train = cfg['env']['numEnvs']
 
         self.env_num = self.env_num_train
-        self.asset_root = os.path.dirname(os.path.abspath(__file__)).replace('envs/tasks', 'envs/assets')
+        self.asset_root = os.path.dirname(os.path.abspath(__file__)).replace(
+            'envs/tasks', 'envs/assets'
+        )
         self.num_train = cfg['env']['asset']['AssetNumTrain']
 
         self.tot_num = self.num_train
@@ -572,7 +575,10 @@ class FreightFrankaPickAndPlace(BaseTask):
         state[:, :joints].copy_(
             (
                 2
-                * (self.franka_dof_tensor[:, :joints, 0] - self.franka_dof_lower_limits_tensor[:joints])
+                * (
+                    self.franka_dof_tensor[:, :joints, 0]
+                    - self.franka_dof_lower_limits_tensor[:joints]
+                )
                 / (
                     self.franka_dof_upper_limits_tensor[:joints]
                     - self.franka_dof_lower_limits_tensor[:joints]

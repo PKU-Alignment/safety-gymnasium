@@ -10,10 +10,11 @@ from tabnanny import process_tokens
 from tracemalloc import start
 
 import numpy as np
+import torch
 from gymnasium import spaces
 from isaacgym import gymtorch
 from isaacgym.torch_utils import to_torch
-import torch
+
 
 # VecEnv Wrapper for ShadowHand
 class ShadowHandMultiVecTask:

@@ -77,7 +77,7 @@ class VecTaskPython(VecTask):
         actions = torch.as_tensor(actions, dtype=torch.float32, device=self.rl_device)
         actions_tensor = torch.clamp(actions, -self.clip_actions, self.clip_actions)
 
-        obs_buf, rew_buf, cost_buf, reset_buf, _  = self.task.step(actions_tensor)
+        obs_buf, rew_buf, cost_buf, reset_buf, _ = self.task.step(actions_tensor)
 
         return (
             torch.clamp(obs_buf, -self.clip_obs, self.clip_obs).to(self.rl_device),
@@ -99,7 +99,6 @@ class VecTaskPython(VecTask):
         )
 
         # step the simulator
-        obs_buf, rew_buf, cost_buf, reset_buf, _  = self.task.step(actions)
+        obs_buf, rew_buf, cost_buf, reset_buf, _ = self.task.step(actions)
 
         return torch.clamp(obs_buf, -self.clip_obs, self.clip_obs).to(self.rl_device)
-

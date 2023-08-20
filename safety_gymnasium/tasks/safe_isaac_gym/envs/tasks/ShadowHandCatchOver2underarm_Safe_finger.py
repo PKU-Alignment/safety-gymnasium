@@ -9,11 +9,13 @@ import os
 import random
 
 import numpy as np
+import torch
 from isaacgym import gymapi, gymtorch
 from matplotlib.pyplot import axis
+
 from safety_gymnasium.tasks.safe_isaac_gym.envs.tasks.hand_base.base_task import BaseTask
 from safety_gymnasium.tasks.safe_isaac_gym.utils.torch_jit_utils import *
-import torch
+
 
 class ShadowHandCatchOver2Underarm_Safe_finger(BaseTask):
     def __init__(
