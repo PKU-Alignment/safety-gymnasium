@@ -16,7 +16,7 @@ Goal
    :header-rows: 1
 
    * - Agent
-   * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/ant`
+   * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/doggo` :doc:`../../components_of_environments/agents/ant`
 
 
 This set of environments is presented by `Safety-Gym <https://cdn.openai.com/safexp-short.pdf>`__.
