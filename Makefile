@@ -65,13 +65,14 @@ pre-commit-install:
 docs-install:
 	$(call check_pip_install_extra,pydocstyle,pydocstyle[toml])
 	$(call check_pip_install,doc8)
-	$(call check_pip_install_extra,sphinx,"sphinx<7.1.0")
+	$(call check_pip_install,sphinx)
 	$(call check_pip_install,sphinx-autoapi)
 	$(call check_pip_install,sphinx-autobuild)
 	$(call check_pip_install,sphinx-copybutton)
 	$(call check_pip_install,sphinx-autodoc-typehints)
 	$(call check_pip_install,sphinx-design)
 	$(call check_pip_install_extra,sphinxcontrib-spelling,sphinxcontrib-spelling pyenchant)
+	$(PYTHON) -m pip install --requirement docs/requirements.txt
 
 pytest-install:
 	$(call check_pip_install,pytest)
