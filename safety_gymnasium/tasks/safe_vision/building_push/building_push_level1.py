@@ -31,3 +31,4 @@ class BuildingPushLevel1(PushLevel1):
         for obj in self._obstacles:
             obj.is_meshed = True
         self._is_load_static_geoms = True
+        self.static_geoms_contact_cost = 1.0
