@@ -31,8 +31,8 @@ repos:
       - id: detect-private-key
       - id: debug-statements
       - id: double-quote-string-fixer
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.275
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.285
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
@@ -45,11 +45,11 @@ repos:
     hooks:
       - id: isort
   - repo: https://github.com/psf/black
-    rev: 23.3.0
+    rev: 23.7.0
     hooks:
       - id: black-jupyter
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.7.0
+    rev: v3.10.1
     hooks:
       - id: pyupgrade
         args: [--py38-plus] # sync with requires-python
@@ -58,7 +58,7 @@ repos:
             ^examples/
           )
   - repo: https://github.com/pycqa/flake8
-    rev: 6.0.0
+    rev: 6.1.0
     hooks:
       - id: flake8
         additional_dependencies:

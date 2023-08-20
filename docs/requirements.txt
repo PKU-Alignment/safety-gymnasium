@@ -1,9 +1,12 @@
 furo
-sphinx
+sphinx < 7.1.0
 myst-parser
 sphinx-autobuild
 sphinx-copybutton
+sphinx-autodoc-typehints
 sphinx-design
+sphinxcontrib-spelling
+pyenchant
 moviepy
 pygame
-sphinx_github_changelog
+sphinx-github-changelog
