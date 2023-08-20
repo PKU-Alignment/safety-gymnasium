@@ -48,6 +48,10 @@ Safety-Gymnasium is a standard API for safe reinforcement learning, and a divers
    :caption: ENVIRONMENTS
 
    environments/safe_navigation
+   environments/safe_velocity
+   environments/safe_vision
+   environments/safe_multi_agent
+   environments/safe_isaac_gym
 
 
 .. toctree::

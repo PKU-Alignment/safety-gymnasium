@@ -24,7 +24,8 @@ repos:
       - id: check-added-large-files
         exclude: |
           (?x)(
-            ^safety_gymnasium/tasks/safe_isaac_gym/assets/|
+            ^docs/_static/images/
+            ^safety_gymnasium/tasks/safe_issac_gym/assets/|
             ^safety_gymnasium/assets/meshes/|
             ^safety_gymnasium/assets/textures/|
           )
@@ -43,8 +44,8 @@ repos:
             ^safety_gymnasium/tasks/safe_isaac_gym/envs/tasks/freight_franka_pick_and_place.py|
           )
       - id: double-quote-string-fixer
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.275
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.285
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
@@ -57,11 +58,11 @@ repos:
     hooks:
       - id: isort
   - repo: https://github.com/psf/black
-    rev: 23.3.0
+    rev: 23.7.0
     hooks:
       - id: black-jupyter
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.7.0
+    rev: v3.10.1
     hooks:
       - id: pyupgrade
         args: [--py38-plus] # sync with requires-python
@@ -70,7 +71,7 @@ repos:
             ^examples/
           )
   - repo: https://github.com/pycqa/flake8
-    rev: 6.0.0
+    rev: 6.1.0
     hooks:
       - id: flake8
         additional_dependencies:

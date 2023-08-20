@@ -46,7 +46,7 @@ class SensorConf:
         sensors_angle_components (bool): Observe sin/cos theta instead of theta.
     """
 
-    sensors: tuple = ('accelerometer', 'velocimeter', 'gyro', 'magnetometer')
+    sensors: tuple[str, ...] = ('accelerometer', 'velocimeter', 'gyro', 'magnetometer')
     sensors_hinge_joints: bool = True
     sensors_ball_joints: bool = True
     sensors_angle_components: bool = True
