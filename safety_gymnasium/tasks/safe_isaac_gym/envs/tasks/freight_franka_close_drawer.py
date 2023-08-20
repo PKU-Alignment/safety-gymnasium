@@ -7,8 +7,9 @@ import numpy as np
 import yaml
 from isaacgym import gymapi, gymtorch, gymutil
 from isaacgym.torch_utils import *
-from safety_gymnasium.tasks.safe_isaac_gym.envs.tasks.hand_base.base_task import BaseTask
 from tqdm import tqdm
+
+from safety_gymnasium.tasks.safe_isaac_gym.envs.tasks.hand_base.base_task import BaseTask
 
 
 def quat_axis(q, axis=0):
@@ -52,7 +53,9 @@ class FreightFrankaCloseDrawer(BaseTask):
 
         self.env_num_train = cfg['env']['numEnvs']
         self.env_num = self.env_num_train
-        self.asset_root = os.path.dirname(os.path.abspath(__file__)).replace('envs/tasks', 'envs/assets')
+        self.asset_root = os.path.dirname(os.path.abspath(__file__)).replace(
+            'envs/tasks', 'envs/assets'
+        )
         self.cabinet_num_train = cfg['env']['asset']['cabinetAssetNumTrain']
         self.cabinet_num = self.cabinet_num_train
         cabinet_train_list_len = len(cfg['env']['asset']['trainAssets'])
@@ -623,14 +626,12 @@ class FreightFrankaCloseDrawer(BaseTask):
         freight_x = freight_pos[:, 0]
         freight_y = freight_pos[:, 1]
 
-        # 检查每个坐标是否在对应的范围内
         within_x = (self.cost_x_range[0] <= freight_x) & (freight_x <= self.cost_x_range[1])
         within_y = (self.cost_y_range[0] <= freight_y) & (freight_y <= self.cost_y_range[1])
 
-        # 两个范围都满足时返回True
         self.cost_buf = (within_x & within_y).type(torch.float32)
 
-        # set the type 
+        # set the type
 
         time_out = self.progress_buf >= self.max_episode_length
         self.reset_buf = self.reset_buf | time_out
@@ -685,9 +686,12 @@ class FreightFrankaCloseDrawer(BaseTask):
         # actions
         state[:, joints * 2 + 15 : joints * 3 + 15].copy_(self.actions[:, :joints])
 
-
-        state[:,joints * 3 + 15:joints * 3 + 15 + 3].copy_(self.franka_root_tensor[:, 0:3] - self.cabinet_handle_pos_tensor)
-        state[:,joints * 3 + 15 + 3:joints * 3 + 15 + 3 + 3].copy_(self.cabinet_handle_pos_tensor - self.hand_tip_pos)
+        state[:, joints * 3 + 15 : joints * 3 + 15 + 3].copy_(
+            self.franka_root_tensor[:, 0:3] - self.cabinet_handle_pos_tensor
+        )
+        state[:, joints * 3 + 15 + 3 : joints * 3 + 15 + 3 + 3].copy_(
+            self.cabinet_handle_pos_tensor - self.hand_tip_pos
+        )
 
         return state
 
