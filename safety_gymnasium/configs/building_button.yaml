@@ -1,0 +1,229 @@
+# Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ==============================================================================
+
+- boxes:
+    box1:
+      name: box1
+      pos: [-3.8, -2.1, 0.3]
+      geoms:
+        - name: box1
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box1
+          material: static_box1
+          euler: [0, 0, 0.314159]
+          group: 2
+    box2:
+      name: box2
+      pos: [3.8, 2.1, 0.0]
+      geoms:
+        - name: box2
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box2
+          material: static_box2
+          euler: [1.57, 0, 0]
+          group: 2
+    box3:
+      name: box3
+      pos: [1.8, 4.3, 0.0]
+      geoms:
+        - name: box3
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box3
+          material: static_box3
+          euler: [1.57, 0, 0]
+          group: 2
+    box4:
+      name: box4
+      pos: [1.2, 4.3, 0.0]
+      geoms:
+        - name: box4
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box4
+          material: static_box4
+          euler: [1.57, 0, 0]
+          group: 2
+    box5:
+      name: box5
+      pos: [-2.2, -4.3, 0.0]
+      geoms:
+        - name: box5
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box5
+          material: static_box5
+          euler: [1.57, 0, 0]
+          group: 2
+    box6:
+      name: box6
+      pos: [-1.5, -4.3, 0.0]
+      geoms:
+        - name: box6
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box6
+          material: static_box6
+          euler: [1.57, 0, 0]
+          group: 2
+    box7:
+      name: box7
+      pos: [3.7, -3.7, 0.0]
+      geoms:
+        - name: box7
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box7
+          material: static_box7
+          euler: [1.57, 0, 0]
+          group: 2
+    box8:
+      name: box8
+      pos: [4.0, -3.3, 0.0]
+      geoms:
+        - name: box8
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box8
+          material: static_box8
+          euler: [1.57, 0, 0]
+          group: 2
+    box9:
+      name: box9
+      pos: [0, -3.9, 0.2]
+      geoms:
+        - name: box9
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box9
+          material: static_box9
+          euler: [0, 0, 0]
+          group: 2
+    box11:
+      name: box11
+      pos: [-1, -8, 1.2]
+      geoms:
+        - name: box11
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box11
+          material: static_box11
+          euler: [-1.57, 0, 0]
+          group: 2
+    box12:
+      name: box12
+      pos: [2, -5, 0.7]
+      geoms:
+        - name: box12
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box12
+          material: static_box12
+          euler: [-1.57, 0, 0]
+          group: 2
+    box13:
+      name: box13
+      pos: [-8, -1, 0.0]
+      geoms:
+        - name: box13
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box13
+          material: static_box13
+          euler: [1.57, 0, 0]
+          group: 2
+    box14:
+      name: box14
+      pos: [3.9, -2.5, 0.0]
+      geoms:
+        - name: box14
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box14
+          material: static_box14
+          euler: [1.57, 0, 0]
+          group: 2
+    box15:
+      name: box15
+      pos: [3.9, -2.2, 0.0]
+      geoms:
+        - name: box15
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box15
+          material: static_box15
+          euler: [1.57, 0, 0]
+          group: 2
+    box16:
+      name: box16
+      pos: [1.1, -4.6, 0.0]
+      geoms:
+        - name: box16
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_box16
+          material: static_box16
+          euler: [-1.37, 0, 0.3]
+          group: 2
+    light1:
+      name: light1
+      pos: [3.6, 0, 0.0]
+      geoms:
+        - name: light1
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_light1
+          material: static_light1
+          euler: [1.57, 0, 0]
+          group: 2
+    machine1:
+      name: machine1
+      pos: [1, 4.9, 0.0]
+      geoms:
+        - name: machine1
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_machine1
+          material: static_machine1
+          euler: [1.57, 0, 0]
+          group: 2
+    machine2:
+      name: machine2
+      pos: [2.5, 3.6, -0.1]
+      geoms:
+        - name: machine2
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_machine2
+          material: static_machine2
+          euler: [1.57, 0, 0]
+          group: 2
+    machine3:
+      name: machine3
+      pos: [3.7, 1.6, 0.0]
+      geoms:
+        - name: machine3
+          type: mesh
+          rgba: [1, 1, 1, 1]
+          mesh: static_machine3
+          material: static_machine3
+          euler: [1.57, 0, 0]
+          group: 2
+
+- {}
+
+- {}

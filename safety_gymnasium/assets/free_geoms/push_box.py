@@ -39,23 +39,47 @@ class PushBox(FreeGeom):  # pylint: disable=too-many-instance-attributes
     reward_box_goal: float = 1.0  # Reward for moving the box towards the goal
 
     color: np.array = COLOR['push_box']
+    alpha: float = 0.25
     group: np.array = GROUP['push_box']
     is_lidar_observed: bool = True
     is_comp_observed: bool = False
     is_constrained: bool = False
+    is_meshed: bool = False
+    mesh_name: str = name
 
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""
-        return {
-            'name': 'push_box',
-            'type': 'box',
-            'size': np.ones(3) * self.size,
+        body = {
+            'name': self.name,
             'pos': np.r_[xy_pos, self.size],
             'rot': rot,
-            'density': self.density,
-            'group': self.group,
-            'rgba': self.color,
+            'geoms': [
+                {
+                    'name': self.name,
+                    'type': 'box',
+                    'size': np.ones(3) * self.size,
+                    'density': self.density,
+                    'group': self.group,
+                    'rgba': self.color * np.array([1, 1, 1, self.alpha]),
+                },
+            ],
         }
+        if self.is_meshed:
+            body['geoms'].append(
+                {
+                    'name': 'push_box_visual',
+                    'pos': [0, 0, -0.2],
+                    'contype': 0,
+                    'conaffinity': 0,
+                    'density': 0,
+                    'group': self.group,
+                    'type': 'mesh',
+                    'mesh': self.mesh_name,
+                    'material': self.mesh_name,
+                    'euler': [np.pi / 2, 0, 0],
+                },
+            )
+        return body
 
     def _specific_agent_config(self):
         """Modify the push_box property according to specific agent."""
@@ -67,4 +91,4 @@ class PushBox(FreeGeom):  # pylint: disable=too-many-instance-attributes
     @property
     def pos(self):
         """Helper to get the box position."""
-        return self.engine.data.body('push_box').xpos.copy()
+        return self.engine.data.body(self.name).xpos.copy()

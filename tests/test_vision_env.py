@@ -20,7 +20,18 @@ import safety_gymnasium
 
 @helpers.parametrize(
     agent_id=['Point', 'Car', 'Racecar', 'Ant'],
-    env_id=['Goal', 'Push', 'Button', 'Race', 'FadingEasy', 'FadingHard'],
+    env_id=[
+        'Goal',
+        'Push',
+        'Button',
+        'Race',
+        'FadingEasy',
+        'FadingHard',
+        'BuildingGoal',
+        'BuildingPush',
+        'BuildingButton',
+        'FormulaOne',
+    ],
     level=['0', '1', '2'],
 )
 def test_vision_env(agent_id, env_id, level):

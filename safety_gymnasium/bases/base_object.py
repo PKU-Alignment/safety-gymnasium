@@ -116,6 +116,7 @@ class BaseObject(abc.ABC):
                 name = f'{self.name[:-1]}{i}'
                 config[self.type][name] = self.get_config(xy_pos=layout[name], rot=rots[i])
                 config[self.type][name].update({'name': name})
+                config[self.type][name]['geoms'][0].update({'name': name})
         else:
             assert len(rots) == 1, 'The number of rotations should be 1.'
             config[self.type][self.name] = self.get_config(xy_pos=layout[self.name], rot=rots[0])
@@ -205,8 +206,10 @@ class Mocap(BaseObject):
                 configs = self.get_config(xy_pos=layout[layout_name], rot=rots[i])
                 config['free_geoms'][obj_name] = configs['obj']
                 config['free_geoms'][obj_name].update({'name': obj_name})
+                config['free_geoms'][obj_name]['geoms'][0].update({'name': obj_name})
                 config['mocaps'][mocap_name] = configs['mocap']
                 config['mocaps'][mocap_name].update({'name': mocap_name})
+                config['mocaps'][mocap_name]['geoms'][0].update({'name': mocap_name})
         else:
             assert len(rots) == 1, 'The number of rotations should be 1.'
             mocap_name = f'{self.name[:-1]}mocap'
@@ -215,8 +218,10 @@ class Mocap(BaseObject):
             configs = self.get_config(xy_pos=layout[layout_name], rot=rots[0])
             config['free_geoms'][obj_name] = configs['obj']
             config['free_geoms'][obj_name].update({'name': obj_name})
+            config['free_geoms'][obj_name]['geoms'][0].update({'name': obj_name})
             config['mocaps'][mocap_name] = configs['mocap']
             config['mocaps'][mocap_name].update({'name': mocap_name})
+            config['mocaps'][mocap_name]['geoms'][0].update({'name': mocap_name})
 
     def set_mocap_pos(self, name: str, value: np.ndarray) -> None:
         """Set the position of a mocap object.

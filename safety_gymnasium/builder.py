@@ -177,8 +177,8 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         self.steps = 0  # Count of steps taken in this episode
 
         self.task.reset()
-        self.task.update_world()  # refresh specific settings
         self.task.specific_reset()
+        self.task.update_world()  # refresh specific settings
         self.task.agent.reset()
 
         cost = self._cost()

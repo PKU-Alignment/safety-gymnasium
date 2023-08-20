@@ -366,7 +366,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                 continue
             self.world_info.layout[k] = self.data.body(k).xpos[:2].copy()
 
-    def _set_goal(self, pos: np.ndarray) -> None:
+    def _set_goal(self, pos: np.ndarray, name='goal') -> None:
         """Set position of goal object in Mujoco instance.
 
         Note:
@@ -375,9 +375,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             of task instance.
         """
         if pos.shape == (2,):
-            self.model.body('goal').pos[:2] = pos[:2]
+            self.model.body(name).pos[:2] = pos[:2]
         elif pos.shape == (3,):
-            self.model.body('goal').pos[:3] = pos[:3]
+            self.model.body(name).pos[:3] = pos[:3]
         else:
             raise NotImplementedError
 
