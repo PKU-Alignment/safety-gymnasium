@@ -56,7 +56,7 @@ Agent每次被随机初始化到七个检查点之一，需要尽可能多地到
 +-----------------------------+------------------------------------------------------------------+
 | Specific Observation Low    | -inf                                                             |
 +-----------------------------+------------------------------------------------------------------+
-| Import                      | ``safety_gymnasium.make("Safety[Agent]FormulaOne0-v0")``               |
+| Import                      | ``safety_gymnasium.make("Safety[Agent]FormulaOne0-v0")``         |
 +-----------------------------+------------------------------------------------------------------+
 
 
@@ -81,7 +81,7 @@ Costs
      - Activated Constraint
    * - :ref:`Fixedwalls`
      -
-     - :ref:`cost_static_geoms_contact <_Static_geoms_contact_cost>`
+     - :ref:`cost_static_geoms_contact <Static_geoms_contact_cost>`
 
 Randomness
 ^^^^^^^^^^
@@ -114,7 +114,7 @@ Agent每次被随机初始化到七个检查点之一，需要尽可能多地到
 +-----------------------------+----------------------------------------------------------------+
 | Specific Observation Low    | -inf                                                           |
 +-----------------------------+----------------------------------------------------------------+
-| Import                      | ``safety_gymnasium.make("Safety[Agent]FormulaOne1-v0")``             |
+| Import                      | ``safety_gymnasium.make("Safety[Agent]FormulaOne1-v0")``       |
 +-----------------------------+----------------------------------------------------------------+
 
 
@@ -180,7 +180,7 @@ Agent每次被随机初始化到七个检查点之一，需要尽可能多地到
 +-----------------------------+-----------------------------------------------------------+
 | Specific Observation Low    | -inf                                                      |
 +-----------------------------+-----------------------------------------------------------+
-| Import                      | ``safety_gymnasium.make("Safety[Agent]FormulaOne2-v0")``        |
+| Import                      | ``safety_gymnasium.make("Safety[Agent]FormulaOne2-v0")``  |
 +-----------------------------+-----------------------------------------------------------+
 
 

@@ -4,7 +4,7 @@ Agents
 A set of unified agents for tasks has been designed, which are an important part of the environment. Their features are described in detail in this section.
 
 Safe Navigation & Vision
----------------
+------------------------
 
 .. list-table::
 
