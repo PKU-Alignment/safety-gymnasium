@@ -40,9 +40,12 @@ class Gremlins(Mocap):  # pylint: disable=too-many-instance-attributes
     density: float = 0.001
 
     color: np.array = COLOR['gremlin']
+    alpha: float = 1
     group: np.array = GROUP['gremlin']
     is_lidar_observed: bool = True
     is_constrained: bool = True
+    is_meshed: bool = False
+    mesh_name: str = name[:-1]
 
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object"""
@@ -50,28 +53,62 @@ class Gremlins(Mocap):  # pylint: disable=too-many-instance-attributes
 
     def get_obj(self, xy_pos, rot):
         """To facilitate get objects config for this object"""
-        return {
+        body = {
             'name': self.name,
-            'size': np.ones(3) * self.size,
-            'type': 'box',
-            'density': self.density,
             'pos': np.r_[xy_pos, self.size],
             'rot': rot,
-            'group': self.group,
-            'rgba': self.color,
+            'geoms': [
+                {
+                    'name': self.name,
+                    'size': np.ones(3) * self.size,
+                    'type': 'box',
+                    'density': self.density,
+                    'group': self.group,
+                    'rgba': self.color * np.array([1, 1, 1, self.alpha]),
+                },
+            ],
         }
+        if self.is_meshed:
+            body['geoms'][0].update(
+                {
+                    'type': 'mesh',
+                    'mesh': self.mesh_name,
+                    'material': self.mesh_name,
+                    'rgba': np.array([1, 1, 1, 1]),
+                    'euler': [np.pi / 2, 0, 0],
+                },
+            )
+            body['pos'][2] = 0.0
+        return body
 
     def get_mocap(self, xy_pos, rot):
         """To facilitate get mocaps config for this object"""
-        return {
+        body = {
             'name': self.name,
-            'size': np.ones(3) * self.size,
-            'type': 'box',
             'pos': np.r_[xy_pos, self.size],
             'rot': rot,
-            'group': self.group,
-            'rgba': np.array([1, 1, 1, 0.1]) * self.color,
+            'geoms': [
+                {
+                    'name': self.name,
+                    'size': np.ones(3) * self.size,
+                    'type': 'box',
+                    'group': self.group,
+                    'rgba': self.color * np.array([1, 1, 1, self.alpha * 0.1]),
+                },
+            ],
         }
+        if self.is_meshed:
+            body['geoms'][0].update(
+                {
+                    'type': 'mesh',
+                    'mesh': self.mesh_name,
+                    'material': self.mesh_name,
+                    'rgba': np.array([1, 1, 1, 0]),
+                    'euler': [np.pi / 2, 0, 0],
+                },
+            )
+            body['pos'][2] = 0.0
+        return body
 
     def cal_cost(self):
         """Contacts processing."""

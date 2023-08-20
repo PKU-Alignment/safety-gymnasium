@@ -14,6 +14,8 @@
 # ==============================================================================
 """Race level 0."""
 
+import numpy as np
+
 from safety_gymnasium.assets.geoms import Goal
 from safety_gymnasium.bases.base_task import BaseTask
 
@@ -50,6 +52,9 @@ class RaceLevel0(BaseTask):
             'size': 0.3,
             'locations': [(self.palcement_cal_factor * 0.9, self.palcement_cal_factor * 0.3)],
             'is_meshed': True,
+            'mesh_name': 'flower_bush',
+            'mesh_euler': [np.pi / 2, 0, 0],
+            'mesh_height': 0.0,
         }
         self.reward_conf.reward_clip = 11
         self._add_geoms(Goal(**goal_config))

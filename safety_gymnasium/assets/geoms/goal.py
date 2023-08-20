@@ -32,7 +32,6 @@ class Goal(Geom):  # pylint: disable=too-many-instance-attributes
     placements: list = None  # Placements where goal may appear (defaults to full extents)
     locations: list = field(default_factory=list)  # Fixed locations to override placements
     keepout: float = 0.4  # Keepout radius when placing goals
-    alpha: float = 0.25
 
     reward_goal: float = 1.0  # Sparse reward for being inside the goal area
     # Reward is distance towards goal plus a constant for being within range of goal
@@ -40,39 +39,49 @@ class Goal(Geom):  # pylint: disable=too-many-instance-attributes
     # if reward_distance is 0, then the reward function is sparse
     reward_distance: float = 1.0  # Dense reward multiplied by the distance moved to the goal
 
-    color: np.array = COLOR['goal']
-    group: np.array = GROUP['goal']
+    color: np.ndarray = COLOR['goal']
+    alpha: float = 0.25
+    group: np.ndarray = GROUP['goal']
     is_lidar_observed: bool = True
     is_comp_observed: bool = False
     is_constrained: bool = False
     is_meshed: bool = False
+    mesh_name: str = name
+    mesh_euler: list = field(default_factory=lambda: [np.pi / 2, 0, 0])
+    mesh_height: float = -0.7
 
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""
-        geom = {
-            'name': 'goal',
-            'size': [self.size, self.size / 2],
+        body = {
+            'name': self.name,
             'pos': np.r_[xy_pos, self.size / 2 + 1e-2],
             'rot': rot,
-            'type': 'cylinder',
-            'contype': 0,
-            'conaffinity': 0,
-            'group': self.group,
-            'rgba': self.color * [1, 1, 1, self.alpha],  # transparent
+            'geoms': [
+                {
+                    'name': self.name,
+                    'size': [self.size, self.size / 2],
+                    'type': 'cylinder',
+                    'contype': 0,
+                    'conaffinity': 0,
+                    'group': self.group,
+                    'rgba': self.color * np.array([1, 1, 1, self.alpha]),
+                },
+            ],
         }
         if self.is_meshed:
-            geom.update(
+            body['geoms'][0].update(
                 {
                     'type': 'mesh',
-                    'mesh': 'flower_bush',
-                    'material': 'flower_bush',
-                    'euler': [np.pi / 2, 0, 0],
+                    'mesh': self.mesh_name,
+                    'material': self.mesh_name,
+                    'euler': self.mesh_euler,
+                    'rgba': np.array([1.0, 1.0, 1.0, 1.0]),
                 },
             )
-            geom['pos'][2] = 0.0
-        return geom
+            body['pos'][2] = self.mesh_height
+        return body
 
     @property
     def pos(self):
         """Helper to get goal position from layout."""
-        return self.engine.data.body('goal').xpos.copy()
+        return self.engine.data.body(self.name).xpos.copy()

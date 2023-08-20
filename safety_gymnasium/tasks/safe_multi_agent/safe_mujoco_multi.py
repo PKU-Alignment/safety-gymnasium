@@ -52,7 +52,7 @@ class SafeMAEnv:
         assert scenario in TASK_VELCITY_THRESHOLD, f'Invalid agent: {scenario}'
         self.agent = scenario
         if agent_conf not in TASK_VELCITY_THRESHOLD[scenario]:
-            vel_temp_conf = next(iter(TASK_VELCITY_THRESHOLD[scenario].keys()))
+            vel_temp_conf = next(iter(TASK_VELCITY_THRESHOLD[scenario]))
             self._velocity_threshold = TASK_VELCITY_THRESHOLD[scenario][vel_temp_conf]
             warnings.warn(
                 f'\033[93mUnknown agent configuration: {agent_conf} \033[0m'

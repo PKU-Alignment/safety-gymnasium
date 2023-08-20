@@ -1,5 +1,5 @@
-Safe Navigation
-===============
+Safe Vision
+===========
 
 .. list-table::
 
