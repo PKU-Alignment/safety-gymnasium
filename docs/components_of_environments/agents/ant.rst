@@ -1,6 +1,8 @@
 Ant
 ===
 
+.. _Ant:
+
 .. list-table::
 
     * - .. figure:: ../../_static/images/ant_front.jpeg

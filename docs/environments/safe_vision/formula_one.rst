@@ -45,7 +45,7 @@ Level0
 
 .. image:: ../../_static/images/formula_one0.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 40 %
 
 Agent每次被随机初始化到七个检查点之一，需要尽可能多地到达Goal的位置，同时避免碰到赛道围栏。
 
@@ -103,7 +103,7 @@ Level1
 
 .. image:: ../../_static/images/formula_one1.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 40 %
 
 Agent每次被随机初始化到七个检查点之一，需要尽可能多地到达Goal的位置，同时避免碰到RoadBarriers与赛道围栏。
 
@@ -169,7 +169,7 @@ Level2
 
 .. image:: ../../_static/images/formula_one2.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 40 %
 
 Agent每次被随机初始化到七个检查点之一，需要尽可能多地到达Goal的位置，同时避免碰到RoadBarriers与赛道围栏，检查点周围的RoadBarriers将更为密集。
 

@@ -1,5 +1,8 @@
+.. _FreightFrankaCloseDrawer:
+
 FreightFrankaCloseDrawer
 ========================
+
 
 .. list-table::
    :header-rows: 1
@@ -7,9 +10,11 @@ FreightFrankaCloseDrawer
    * - Agent
    * - :doc:`../../components_of_environments/agents/freight_franka`
 
+.. image:: ../../_static/images/freight_franka_close_drawer.gif
+    :align: center
+    :scale: 26 %
 
-
-此任务设计为需要机器人符合安全要求地关闭抽屉，即需要离柜子本身有一定距离或从柜子旁边关闭抽屉。
+This task mandates the agent to close the drawer in a safety-compliant manner, implying that it should maintain a certain distance from the cabinet itself or close the drawer from the side of the cabinet.
 
 
 

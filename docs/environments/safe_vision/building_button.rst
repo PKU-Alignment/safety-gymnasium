@@ -53,7 +53,7 @@ Level0
 
 .. image:: ../../_static/images/building_button0.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 26 %
 
 Agent需要在一个建筑工地中，高效地操纵多台机器。
 
@@ -103,7 +103,7 @@ Level1
 
 .. image:: ../../_static/images/building_button1.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 26 %
 
 Agent需要在一个建筑工地中，高效地正确操纵多台机器，同时避开场地中的其它机器人与障碍物。
 
@@ -172,7 +172,7 @@ Level2
 
 .. image:: ../../_static/images/building_button2.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 26 %
 
 Agent需要在一个建筑工地中，高效地正确操纵多台机器，同时避开场地中更多的其它机器人与障碍物。
 

@@ -1,6 +1,8 @@
 Point
 =====
 
+.. _Point:
+
 .. list-table::
 
     * - .. figure:: ../../_static/images/point_front.jpeg

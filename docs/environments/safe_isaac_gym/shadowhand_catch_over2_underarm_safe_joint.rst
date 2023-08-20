@@ -1,5 +1,8 @@
+.. _ShadowHandCatchOver2UnderarmSafeJoint:
+
 ShadowHandCatchOver2UnderarmSafeJoint
 =====================================
+
 
 .. list-table::
    :header-rows: 1
@@ -8,12 +11,16 @@ ShadowHandCatchOver2UnderarmSafeJoint
    * - :doc:`../../components_of_environments/agents/shadowhands`
 
 
-此任务是根据 `Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning <https://arxiv.org/abs/2206.08686>`__ 当中所提出的ShadowHandCatchOver2Underarm，受到现实当中ShadowHand的特点所启发，引入对关节的约束设计而来。
+.. image:: ../../_static/images/shadow_hand_catch_over2_underarm_safe_joint.gif
+    :align: center
+    :scale: 26 %
+
+This task is derived from the ShadowHandCatchOver2Underarm as presented in `Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning <https://arxiv.org/abs/2206.08686>`__. Inspired by the real-world attributes of ShadowHand, it incorporates constraints on the joints.
 
 This scenario encompasses a specific environment comprising two Shadow Hands positioned opposite each other, with their palms facing upwards. The objective is to pass an object between these hands. Initially, the object will randomly descend within the area of the Shadow Hand on the right side. The hand on the right side then grasps the object and transfers it to the other hand. It is important to note that the base of each hand remains fixed throughout the process. Furthermore, the hand initially holding the object cannot directly make contact with the target hand or roll the object towards it. Hence, the object must be thrown into the air, maintaining its trajectory until it reaches the target hand.
 
 Observations
-^^^^^^^^^^^^
+------------
 
 +-----------+-----------------------------------------------------------------------------------------+
 | Index     | Description                                                                             |
@@ -68,14 +75,19 @@ Rewards
 
 
 Costs
-^^^^^
+-----
 
+.. list-table::
 
-**Safety Joint** constrains the freedom of joint [Symbol 175] of the forefinger
-(please refer to :ref:`pic: dexterous-hand` (c) and (d)). Without the constraint,
-joint [Symbol 175] has freedom of :math:`[-20^\circ,20^\circ]`. The safety tasks
-restrict joint [Symbol 175] within :math:`[-10^\circ, 10^\circ]`.
-Let :math:`\mathtt{ang\_4}` be the angle of joint [Symbol 175], and the cost is defined as:
+    * - .. figure:: ../../_static/images/shadow_hand_dof.jpg
+            :scale: 20 %
+      - .. figure:: ../../_static/images/shadow_hand_safe_joint.jpg
+            :scale: 28 %
+
+**Safety Joint** constrains the freedom of joint 4 of the forefinger. Without the constraint,
+joint 4 has freedom of :math:`[-20^\circ,20^\circ]`. The safety tasks
+restrict joint 4 within :math:`[-10^\circ, 10^\circ]`.
+Let :math:`\mathtt{ang\_4}` be the angle of joint 4, and the cost is defined as:
 
 .. math::
 

@@ -55,9 +55,9 @@ Level0
 ------
 
 
-.. image:: ../../_static/images/fading_hard0.jpeg
+.. image:: ../../_static/images/fading_hard0.gif
     :align: center
-    :scale: 12 %
+    :scale: 100 %
 
 Agent需要在信息迅速消失的干扰下尽可能多地到达Goal的位置。
 
@@ -89,9 +89,9 @@ Level1
 ------
 
 
-.. image:: ../../_static/images/fading_hard1.jpeg
+.. image:: ../../_static/images/fading_hard1.gif
     :align: center
-    :scale: 12 %
+    :scale: 100 %
 
 Agent需要在信息迅速消失的干扰下尽可能多地到达Goal的位置，同时避免进入Hazards的范围内，Vases=1但并不参与cost的计算。
 
@@ -136,9 +136,9 @@ Randomness
 Level2
 ------
 
-.. image:: ../../_static/images/fading_hard2.jpeg
+.. image:: ../../_static/images/fading_hard2.gif
     :align: center
-    :scale: 12 %
+    :scale: 100 %
 
 Agent需要在信息消失的干扰下尽可能多地到达Goal的位置，同时避免进入Hazards的范围内以及与Vases发生碰撞。
 

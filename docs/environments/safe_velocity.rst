@@ -1,7 +1,11 @@
 Safe Velocity
 ================
 
-Safe velocity tasks 基于 `Gymnasium's MuJoCo <https://gymnasium.farama.org/environments/mujoco/>`__ 系列智能体引入了速度约束，对于agent特定的信息，请查阅Gymnasium的文档.
+.. _SingleVelocity:
+
+The Safe velocity tasks introduce velocity constraints for agents based on the `Gymnasium's MuJoCo-v4 <https://gymnasium.farama.org/environments/mujoco/>`__ series. For specific information regarding the agents, please refer to the Gymnasium documentation.
+
+Velocity tasks are also an important class of tasks that apply RL to reality, requiring an agent to move as quickly as possible while adhering to **velocity constraint**. These tasks have significant implications in various domains, including robotics, autonomous vehicles, and industrial automation.
 
 +-----------------------------+------------------------------------------------------------------+
 | **Import**                  | ``safety_gymnasium.make("Safety[Agent]Velocity-v1")``            |
@@ -46,8 +50,6 @@ Safe velocity tasks 基于 `Gymnasium's MuJoCo <https://gymnasium.farama.org/env
             :width: 300px
         .. centered:: SwimmerVelocity SAFE
 
-Velocity tasks are also an important class of tasks that apply RL to reality, requiring an agent to move as quickly as possible while adhering to **velocity constraint**. These tasks have significant implications in various domains, including robotics, autonomous vehicles, and industrial automation.
-
 Costs
 -----
 
@@ -57,11 +59,12 @@ We can formulate it as follow:
 
 .. math:: cost=bool(V_{current} > V_{threshold})
 
-我们进行了大量实验。The velocity threshold is set to **50%** of the agent's maximum velocity achieved after the convergence of the **Proximal Policy Optimization (PPO)** algorithm trained via **1e6 steps**.
+After conducting extensive experiments. The velocity threshold is set to **50%** of the agent's maximum velocity achieved after the convergence of the **Proximal Policy Optimization (PPO)** algorithm trained via **1e6 steps**.
 
 .. Note::
-    对于Swimmer，我们只使用了其在X轴上的速度来设定约束，这是因为它的运动依赖于它的摆动，这将在Y轴上产生速度。
-    其余智能体是使用其在X-Y轴上所有可能的速度的矢量和来设定约束的，一个粗略的表达如下：
+    For the **Swimmer**, we only set constraints based on its velocity in the X-axis, as its movement relies on its oscillation, which generates velocity in the Y-axis.
+
+    For the remaining agents, constraints were set based on the vector sum of all possible velocities in the X-Y plane. A **concise representation** is as follows:
 
     .. code-block:: python
 

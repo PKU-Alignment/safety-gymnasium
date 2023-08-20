@@ -67,7 +67,7 @@ Level0
 
 .. image:: ../../_static/images/building_push0.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 26 %
 
 Agent需要在一个建筑工地中，移动箱子到指定位置。
 
@@ -117,7 +117,7 @@ Level1
 
 .. image:: ../../_static/images/building_push1.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 26 %
 
 Agent需要在一个建筑工地中，移动箱子到指定位置，同时避开场地中禁止进入的区域。
 
@@ -182,7 +182,7 @@ Level2
 
 .. image:: ../../_static/images/building_push2.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 26 %
 
 Agent需要在一个建筑工地中，移动箱子到指定位置，同时避开场地中更多的危险燃料桶和禁止进入的区域。
 

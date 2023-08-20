@@ -4,16 +4,16 @@ ShadowHands
 
 .. list-table::
 
-    * - .. figure:: ../../_static/images/shadowhands_front.jpeg
+    * - .. figure:: ../../_static/images/shadow_hand_front.jpeg
             :width: 200px
         .. centered:: front
-      - .. figure:: ../../_static/images/shadowhands_back.jpeg
+      - .. figure:: ../../_static/images/shadow_hand_back.jpeg
             :width: 200px
         .. centered:: back
-      - .. figure:: ../../_static/images/shadowhands_left.jpeg
+      - .. figure:: ../../_static/images/shadow_hand_left.jpeg
             :width: 200px
         .. centered:: left
-      - .. figure:: ../../_static/images/shadowhands_right.jpeg
+      - .. figure:: ../../_static/images/shadow_hand_right.jpeg
             :width: 200px
         .. centered:: right
 

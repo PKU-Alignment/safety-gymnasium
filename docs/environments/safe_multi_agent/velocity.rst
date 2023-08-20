@@ -1,8 +1,9 @@
 Multi-Agent Velocity
 ====================
 
-基于 :doc:`../safe_velocity/` 当中所提到的见解，速度安全约束也被拓展到了多智能体设定下相同的机器人上。并且遵循与
-Multi-Agent Mujoco相一致的接口，关于其特定接口的定义与使用可参考 `Multi-Agent Mujoco's Documentation <https://robotics.farama.org/envs/MaMuJoCo/>`__。
+.. _MAVelocity:
+
+Drawing insights from :doc:`../safe_velocity/`, velocity safety constraints have also been extended to the same robots under multi-agent settings. These adhere to the interface consistent with Multi-Agent Mujoco. For specific definitions and usage of this interface, please consult the Multi-Agent Mujoco's `Documentation <https://robotics.farama.org/envs/MaMuJoCo/>`__.
 
 
 +-----------------------------+------------------------------------------------------------------+
@@ -26,7 +27,7 @@ Multi-Agent Mujoco相一致的接口，关于其特定接口的定义与使用�
 | **Import**                  | ``safety_gymnasium.make_ma([scenario], [agent_conf])``           |
 +-----------------------------+------------------------------------------------------------------+
 
-针对不同的agent以及不同的subagent划分方式，分别进行实验来设定具体的阈值。
+Distinct threshold values were established through experimentation for different agents as well as various subagent partitioning methods.
 
 +------------------------------+--------------------+
 | Environment                  | Velocity Threshold |

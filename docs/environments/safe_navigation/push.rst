@@ -42,7 +42,7 @@ Rewards
 Specific Setting
 ----------------
 
-- Car: To facilitate Car to push Push_box, the Push_box property is adjusted for Car:
+- Car: To facilitate Car to push Push_box, the Push_box property is adjusted for Car.
     .. code-block:: python
 
         self.size = 0.125  # Box half-radius size

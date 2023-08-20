@@ -49,7 +49,7 @@ Level0
 
 .. image:: ../../_static/images/building_goal0.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 26 %
 
 Agent需要在一个建筑工地中，正确地停泊在指定位置。
 
@@ -97,7 +97,7 @@ Level1
 
 .. image:: ../../_static/images/building_goal1.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 26 %
 
 Agent需要在一个建筑工地中，正确地停泊在指定位置，同时保证不进入危险区域。
 
@@ -165,7 +165,7 @@ Level2
 
 .. image:: ../../_static/images/building_goal2.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 26 %
 
 Agent需要在一个建筑工地中，正确地停泊在指定位置，避开场地中的排风机，同时保证不进入危险区域。
 

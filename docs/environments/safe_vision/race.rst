@@ -46,7 +46,7 @@ Level0
 
 .. image:: ../../_static/images/race0.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 45 %
 
 Agent需要到达Goal。
 
@@ -94,7 +94,7 @@ Level1
 
 .. image:: ../../_static/images/race1.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 45 %
 
 Agent需要到达Goal，同时避免误入草丛或与路旁的物体碰撞。
 
@@ -158,7 +158,7 @@ Level2
 
 .. image:: ../../_static/images/race2.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 45 %
 
 Agent需要从更远的位置到达Goal，同时避免误入草丛或与路旁的物体碰撞。
 

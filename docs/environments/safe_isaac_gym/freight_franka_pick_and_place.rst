@@ -1,5 +1,8 @@
+.. _FreightFrankaPickAndPlace:
+
 FreightFrankaPickAndPlace
 =========================
+
 
 .. list-table::
    :header-rows: 1
@@ -7,9 +10,11 @@ FreightFrankaPickAndPlace
    * - Agent
    * - :doc:`../../components_of_environments/agents/freight_franka`
 
+.. image:: ../../_static/images/freight_franka_pick_and_place.gif
+    :align: center
+    :scale: 26 %
 
-
-此任务设计为需要机器人符合安全要求地将一个物体从低处抓起并放置到高处，即需要避免在两个平台之间径直移动，而是从旁边绕行。
+This task is designed to require the robot to safely pick up an object from a lower position and place it at a higher location. Specifically, the robot should refrain from moving directly between the two platforms and instead navigate around them.
 
 
 

@@ -1,5 +1,8 @@
+.. _ShadowHandOverSafeFinger:
+
 ShadowHandOverSafeFinger
 ========================
+
 
 .. list-table::
    :header-rows: 1
@@ -8,12 +11,16 @@ ShadowHandOverSafeFinger
    * - :doc:`../../components_of_environments/agents/shadowhands`
 
 
-此任务是根据 `Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning <https://arxiv.org/abs/2206.08686>`__ 当中所提出的ShadowHandOver，受到现实当中ShadowHand的特点所启发，引入对手指的约束设计而来。
+.. image:: ../../_static/images/shadow_hand_over_safe_finger.gif
+    :align: center
+    :scale: 26 %
+
+This task is modeled after the ShadowHandOver as proposed in `Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning <https://arxiv.org/abs/2206.08686>`__. Drawing inspiration from the real-world features of ShadowHand, it introduces design constraints on the fingers.
 
 This scenario encompasses a specific environment comprising two Shadow Hands positioned opposite each other, with their palms facing upwards. The objective is to pass an object between these hands. Initially, the object will randomly descend within the area of the Shadow Hand on the right side. The hand on the right side then grasps the object and transfers it to the other hand. It is important to note that the base of each hand remains fixed throughout the process. Furthermore, the hand initially holding the object cannot directly make contact with the target hand or roll the object towards it. Hence, the object must be thrown into the air, maintaining its trajectory until it reaches the target hand.
 
 Observations
-^^^^^^^^^^^^
+------------
 
 +-----------+-----------------------------------------------------------------------------------------+
 | Index     | Description                                                                             |
@@ -68,15 +75,22 @@ Rewards
 
 
 Costs
-^^^^^
+-----
 
 
-**Safety Finger** constrains the freedom of joints [Symbol 173], [Symbol 174], and [Symbol 175] of the forefinger
-(please refer to :ref:`pic: dexterous-hand` (c) and (e)). Without the constraint, joints [Symbol 173] and [Symbol 174]
-have freedom of :math:`[0^\circ,90^\circ]` and joint [Symbol 175] of :math:`[-20^\circ,20^\circ]`.
-The safety tasks restrict joints [Symbol 173], [Symbol 174], and [Symbol 175] within
+.. list-table::
+
+    * - .. figure:: ../../_static/images/shadow_hand_dof.jpg
+            :scale: 20 %
+      - .. figure:: ../../_static/images/shadow_hand_safe_finger.jpg
+            :scale: 28 %
+
+
+**Safety Finger** constrains the freedom of joints 2, 3, and 4 of the forefinger. Without the constraint, joints 2 and 3
+have freedom of :math:`[0^\circ,90^\circ]` and joint 4 of :math:`[-20^\circ,20^\circ]`.
+The safety tasks restrict joints 2, 3, and 4 within
 :math:`[22.5^\circ, 67.5^\circ]`, :math:`[22.5^\circ, 67.5^\circ]`, and :math:`[-10^\circ, 10^\circ]` respectively.
-Let :math:`\mathtt{ang\_2}, \mathtt{ang\_3}, \mathtt{ang\_4}` be the angles of joints [Symbol 173], [Symbol 174], [Symbol 175],
+Let :math:`\mathtt{ang\_2}, \mathtt{ang\_3}, \mathtt{ang\_4}` be the angles of joints 2, 3, 4,
 and the cost is defined as:
 
 .. math::

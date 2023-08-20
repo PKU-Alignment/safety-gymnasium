@@ -1,5 +1,5 @@
-Multi Goal
-====
+MultiGoal
+=========
 
 +--------+------------------+-----------------------+--------+
 | Level  | Geom             | FreeGeom              | Mocap  |
@@ -24,7 +24,7 @@ This set of environments is similar to :doc:`../safe_navigation/goal`.
 Rewards
 -------
 
-Agent必须尽可能多地接近并到达与自己颜色一致的目标处，若靠近并到达颜色不一致的目标将不会获得任何奖励，以下是某一Agent与同一颜色的目标之间的奖励计算公式。
+Agents are mandated to approach and reach the targets that **match their own color** as closely as possible. Approaching and reaching **targets of mismatched colors yield no rewards**. Below is the reward computation formula for **an agent in relation to a target of its identical color**.
 
  - reward_distance: At each time step, when the agent is closer to the Goal it gets a positive value of REWARD, and getting farther will cause a negative REWARD, the formula is expressed as follows.
 
@@ -50,7 +50,7 @@ Level0
     :align: center
     :scale: 12 %
 
-智能体需要导航到其对应颜色的目标处，同时避免与其他智能体碰撞。
+Agents are required to navigate to targets matching their respective colors.
 
 +-----------------------------+------------------------------------------------------------------+
 | Specific Observation Space  | [Box(-inf, inf, (32,), float64), Box(-inf, inf, (32,), float64)] |
@@ -99,7 +99,7 @@ Level1
     :align: center
     :scale: 12 %
 
-智能体需要导航到其对应颜色的目标，同时避免与其他智能体碰撞，以及避免踩到hazards，虽然Vases=1，但是其并不参与cost的计算。
+Agents are obliged to navigate to targets of their corresponding colors, steering clear of collisions with other agents and avoiding stepping on hazards. Although Vases=1, it does not contribute to the cost computation.
 
 +-----------------------------+----------------------------------------------------------------+
 | Specific Observation Space  |[Box(-inf, inf, (64,), float64), Box(-inf, inf, (64,), float64)]|
@@ -165,7 +165,7 @@ Level2
     :align: center
     :scale: 12 %
 
-智能体需要导航到其对应颜色的目标，同时避免与其他智能体碰撞，以及避免与障碍物碰撞或踩到hazards。
+Agents must navigate to targets matching their designated colors, while concurrently evading collisions with other agents and refraining from contact with obstacles or stepping on hazards.
 
 +-----------------------------+----------------------------------------------------------------+
 | Specific Observation Space  |[Box(-inf, inf, (64,), float64), Box(-inf, inf, (64,), float64)]|

@@ -1,7 +1,9 @@
 Agents
 ======
 
-Safe Navigation
+A set of unified agents for tasks has been designed, which are an important part of the environment. Their features are described in detail in this section.
+
+Safe Navigation & Vision
 ---------------
 
 .. list-table::
@@ -68,36 +70,58 @@ Safe Multi-Agent
     * - .. figure:: ../_static/images/multi_point.jpeg
             :width: 230px
             :target: agents/point.html
-        .. centered:: `Multi-Point <https://gymnasium.farama.org/environments/mujoco/ant/>`_
+        .. centered:: :ref:`Multi-Point <Point>`
       - .. figure:: ../_static/images/multi_ant.jpeg
             :width: 230px
             :target: agents/ant.html
-        .. centered:: `Multi-Ant <https://gymnasium.farama.org/environments/mujoco/half-cheetah/>`_
-    * - .. figure:: ../_static/images/freight_franka.jpeg
+        .. centered:: :ref:`Multi-Ant <Ant>`
+    * - .. figure:: ../_static/images/freight_franka_front.jpeg
             :width: 230px
-            :target: x
-        .. centered:: `ShadowHands <>`_
-      - .. figure:: ../_static/images/shadow_hand.jpeg
+            :target: agents/freight_franka.html
+        .. centered:: :doc:`agents/freight_franka`
+      - .. figure:: ../_static/images/shadow_hand_front.jpeg
             :width: 230px
-            :target: x
-        .. centered:: `FreightFranka <>`_
+            :target: agents/shadowhands.html
+        .. centered:: :doc:`agents/shadowhands`
+    * - .. figure:: ../_static/images/ant_vel.jpeg
+            :width: 230px
+            :target: https://robotics.farama.org/envs/MaMuJoCo/ma_ant/
+        .. centered:: `MA-Ant <https://robotics.farama.org/envs/MaMuJoCo/ma_ant/>`_
+      - .. figure:: ../_static/images/half_cheetah_vel.jpeg
+            :width: 230px
+            :target: https://robotics.farama.org/envs/MaMuJoCo/ma_half_cheetah/
+        .. centered:: `MA-HalfCheetah <https://robotics.farama.org/envs/MaMuJoCo/ma_half_cheetah/>`_
+    * - .. figure:: ../_static/images/hopper_vel.jpeg
+            :width: 230px
+            :target: https://robotics.farama.org/envs/MaMuJoCo/ma_hopper/
+        .. centered:: `MA-Hopper <https://robotics.farama.org/envs/MaMuJoCo/ma_hopper/>`_
+      - .. figure:: ../_static/images/humanoid_vel.jpeg
+            :width: 230px
+            :target: https://robotics.farama.org/envs/MaMuJoCo/ma_humanoid/
+        .. centered:: `MA-Humanoid <https://robotics.farama.org/envs/MaMuJoCo/ma_humanoid/>`_
+    * - .. figure:: ../_static/images/swimmer_vel.jpeg
+            :width: 230px
+            :target: https://robotics.farama.org/envs/MaMuJoCo/ma_swimmer/
+        .. centered:: `MA-Swimmer <https://robotics.farama.org/envs/MaMuJoCo/ma_swimmer/>`_
+      - .. figure:: ../_static/images/walker2d_vel.jpeg
+            :width: 230px
+            :target: https://robotics.farama.org/envs/MaMuJoCo/ma_walker2d/
+        .. centered:: `MA-Walker2d <https://robotics.farama.org/envs/MaMuJoCo/ma_walker2d/>`_
+
 
 Safe Isaac Gym
 --------------
 
 .. list-table::
 
-    * - .. figure:: ../_static/images/freight_franka.jpeg
+    * - .. figure:: ../_static/images/freight_franka_front.jpeg
             :width: 230px
-            :target: x
-        .. centered:: `ShadowHands <>`_
-      - .. figure:: ../_static/images/shadow_hand.jpeg
+            :target: agents/freight_franka.html
+        .. centered:: :doc:`agents/freight_franka`
+      - .. figure:: ../_static/images/shadow_hand_front.jpeg
             :width: 230px
-            :target: x
-        .. centered:: `FreightFranka <>`_
-
-
-A set of unified agents for tasks has been designed, which are an important part of the environment. Their features are described in detail in this section.
+            :target: agents/shadowhands.html
+        .. centered:: :doc:`agents/shadowhands`
 
 
 .. toctree::
@@ -108,5 +132,5 @@ A set of unified agents for tasks has been designed, which are an important part
     agents/doggo.rst
     agents/racecar.rst
     agents/ant.rst
-    agents/shadowhands.rst
     agents/freight_franka.rst
+    agents/shadowhands.rst

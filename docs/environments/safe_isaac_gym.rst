@@ -1,23 +1,40 @@
 Safe Isaac Gym
 ==============
 
-.. list-table::
-
-    * - .. figure:: ../_static/images/shadowhands.jpeg
-            :width: 230px
-            :target: safe_navigation/goal.html#goal0
-        .. centered:: :ref:`Goal0 <Goal0>`
-      - .. figure:: ../_static/images/freight_franka.jpeg
-            :width: 230px
-            :target: safe_navigation/goal.html#goal1
-        .. centered:: :ref:`Goal1 <Goal1>`
-
-
-The robust parallel computation capabilities of Isaac Gym enable the integration of safety constraints into more intricate scenarios and tasks. "Safe Isaac Gym" represents an endeavor in this direction, introducing constraints based on real-world requirements and designing the heterogeneous multi-agent system, "FreightFranka".
+Safe Isaac Gym introduces constraints based on real-world requirements and designing the heterogeneous multi-agent system, FreightFranka.
 
 .. Note::
 
-    safe isaac gym所支持的智能体，均有单智能体与多智能体两种设定可选。
+    By harnessing the rapid parallel capabilities of Isaac Gym, we are able to explore more realistic and challenging environments, unveiling and examining the potentialities of SafeRL. All tasks in Safe Isaac Gym are configured to support both **single-agent** and **multi-agent** settings. The single-agent and multi-agent algorithms from `SafePO <https://github.com/PKU-Alignment/Safe-Policy-Optimization>`__ can be seamlessly implemented in these respective environments.
+
+
+.. list-table::
+
+    * - .. figure:: ../_static/images/freight_franka_close_drawer.gif
+            :width: 350px
+            :target: ../environments/safe_isaac_gym/freight_franka_close_drawer.html
+        .. centered:: :ref:`FreightFrankaCloseDrawer <FreightFrankaCloseDrawer>`
+      - .. figure:: ../_static/images/freight_franka_pick_and_place.gif
+            :width: 350px
+            :target: ../environments/safe_isaac_gym/freight_franka_pick_and_place.html
+        .. centered:: :ref:`FreightFrankaPickAndPlace <FreightFrankaPickAndPlace>`
+    * - .. figure:: ../_static/images/shadow_hand_over_safe_finger.gif
+            :width: 350px
+            :target: ../environments/safe_isaac_gym/shadowhand_over_safe_finger.html
+        .. centered:: :ref:`ShadowHandOverSafeFinger <ShadowHandOverSafeFinger>`
+      - .. figure:: ../_static/images/shadow_hand_catch_over2_underarm_safe_finger.gif
+            :width: 350px
+            :target: ../environments/safe_isaac_gym/shadowhand_catch_over2_underarm_safe_finger.html
+        .. centered:: :ref:`ShadowHandCatchOver2UnderarmSafeFinger <ShadowHandCatchOver2UnderarmSafeFinger>`
+    * - .. figure:: ../_static/images/shadow_hand_over_safe_joint.gif
+            :width: 350px
+            :target: ../environments/safe_isaac_gym/shadowhand_over_safe_joint.html
+        .. centered:: :ref:`ShadowHandOverSafeJoint <ShadowHandOverSafeJoint>`
+      - .. figure:: ../_static/images/shadow_hand_catch_over2_underarm_safe_joint.gif
+            :width: 350px
+            :target: ../environments/safe_isaac_gym/shadowhand_catch_over2_underarm_safe_joint.html
+        .. centered:: :ref:`ShadowHandCatchOver2UnderarmSafeJoint <ShadowHandCatchOver2UnderarmSafeJoint>`
+
 
 .. toctree::
     :hidden:

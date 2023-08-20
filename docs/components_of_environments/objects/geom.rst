@@ -189,7 +189,7 @@ Fixedwalls
 
 .. image:: ../../_static/images/fixedwalls.jpeg
     :align: center
-    :scale: 12 %
+    :scale: 22 %
 
 ===================== ===============
 Can be constrained    No collision
@@ -197,11 +197,11 @@ Can be constrained    No collision
    ✅                  ❌
 ===================== ===============
 
-In certain scenarios, especially when modeling complex visual tasks, irregular fixed walls are utilized. These walls are designed to simulate real-world fixed obstacles as accurately as possible. Both the shape and position of these walls remain constant within a given task.
+In **certain scenarios**, especially when modeling complex visual tasks, irregular fixed walls are utilized. These walls are designed to simulate real-world fixed obstacles as accurately as possible. Both the shape and position of these walls remain constant within a given task.
 
 Constraints
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _Static_geoms_contact_cost:
 
-- cost_static_geoms_contact: This parameter incurs a cost of ``1`` when the agent comes into contact with `FixedWalls`.
+- cost_static_geoms_contact: This parameter incurs a cost of ``1`` when the agent comes into contact with ``FixedWalls``.
