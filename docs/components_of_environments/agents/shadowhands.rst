@@ -18,7 +18,7 @@ ShadowHands
         .. centered:: right
 
 
-Shadow Dexterous Hand, designed by `Shadow Robot <https://www.shadowrobot.com/dexterous-hand-series/>`__,  allowing researchers to manipulate tools and objects with greater precision and control. The Shadow Dexterous Hand has 24 joints. It has 20 degrees of freedom, greater than that of a human hand. It has been designed to have a range of movement equivalent to that of a typical human being. The four fingers of the hand contain two one-axis joints connecting the distal phalanx, middle phalanx and proximal phalanx and one universal joint connecting the finger to the metacarpal. The little finger has an extra one-axis joint on the metacarpal to provide the Hand with a palm curl movement. The thumb contains one one-axis joint connecting the distal phalanx to the proximal phalanx, one universal joint connecting the thumb to the metacarpal and one one-axis joint on the bottom of the metacarpal to provide a palm curl movement. The wrist contains two joints, providing flex/extend and adduct/abduct.
+Shadow Dexterous Hand, designed by `Shadow Robot <https://www.shadowrobot.com/dexterous-hand-series/>`__,  allowing researchers to manipulate tools and objects with greater precision and control. The Shadow Dexterous Hand has 24 joints. It has 20 degrees of freedom, greater than that of a human hand. It has been designed to have a range of movement equivalent to that of a typical human being. The four fingers of the hand contain two one-axis joints connecting the distal phalanx, middle phalanx and proximal phalanx and one universal joint connecting the finger to the metacarpal. The little finger has an extra one-axis joint on the metacarpal to provide the Hand with a palm curl movement. The thumb contains one one-axis joint connecting the distal phalanx to the proximal phalanx, one universal joint connecting the thumb to the metacarpal and one one-axis joint on the bottom of the metacarpal to provide a palm curl movement.
 
 
 
@@ -26,7 +26,7 @@ Shadow Dexterous Hand, designed by `Shadow Robot <https://www.shadowrobot.com/de
 Specific Actions
 ----------------
 
-The information in this section pertains to the task. For detailes, please refer to the specific task documentation.
+The information in this section pertains to the task. For details, please refer to the specific task documentation.
 
 
 Specific Observations

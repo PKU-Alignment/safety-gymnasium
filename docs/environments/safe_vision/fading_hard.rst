@@ -61,7 +61,7 @@ Level0
     :align: center
     :scale: 100 %
 
-Amidst the perturbation of rapidly disappearing information, the agent seeks to maximize its reaches to the 'Goal' location.
+Confronted by the swift disappearance of information, the agent seeks to maximize its reaches to the 'Goal' location.
 
 
 Fading Objects
@@ -95,7 +95,7 @@ Level1
     :align: center
     :scale: 100 %
 
-Amidst the disturbance of swiftly vanishing information, the agent endeavors to frequently attain the 'Goal' location, while vigilantly avoiding 'Hazards'. Notably, while 'Vases' carry a value of 1, they do not factor into the cost computation.
+Confronted with the rapid disappearance of information, the agent endeavors to frequently attain the 'Goal' location, while vigilantly avoiding 'Hazards'. Notably, although 'Vases' hold a value of 1, they do not contribute to the cost computation.
 
 
 Fading Objects
