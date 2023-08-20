@@ -1,4 +1,4 @@
-furo
+furo == 2023.7.26
 sphinx < 7.1.0
 myst-parser
 sphinx-autobuild
