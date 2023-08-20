@@ -126,7 +126,21 @@ pre-commit: pre-commit-install
 # Documentation
 
 addlicense: addlicense-install
-	addlicense -c $(COPYRIGHT) -ignore tests/coverage.xml -l apache -y 2022-$(shell date +"%Y") -check $(SOURCE_FOLDERS)
+	addlicense -c $(COPYRIGHT) \
+	-ignore tests/coverage.xml \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/assets/dataset/one_drawer_cabinet/40147_link_1/door.yaml \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/assets/dataset/one_drawer_cabinet/40147_link_1/handle.yaml \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/assets/dataset/one_drawer_cabinet/40147_link_1/tree_hier_after_merging.html \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/assets/dataset/one_drawer_cabinet/40147_link_1/tree_hier.html \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/assets/urdf/shadow_hand_description/meshes/convert_dae2obj.py \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/utils/util.py \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/utils/Logger.py \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/utils/process_sarl.py \
+	-ignore docs/_build/spelling/_sphinx_design_static/design-tabs.js \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/tasks/freight_franka_close_drawer.py \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/tasks/freight_franka_pick_and_place.py \
+	-ignore docs/_build/spelling/_sphinx_design_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css \
+	-l apache -y 2022-$(shell date +"%Y") $(SOURCE_FOLDERS)
 
 docstyle: docs-install
 	make -C docs clean
@@ -152,7 +166,21 @@ format: py-format-install ruff-install addlicense-install
 	$(PYTHON) -m isort --project $(PROJECT_PATH) $(PYTHON_FILES)
 	$(PYTHON) -m black $(PYTHON_FILES)
 	$(PYTHON) -m ruff check . --fix --exit-zero
-	addlicense -c $(COPYRIGHT) -ignore tests/coverage.xml -l apache -y 2022-$(shell date +"%Y") $(SOURCE_FOLDERS)
+	addlicense -c $(COPYRIGHT) \
+	-ignore tests/coverage.xml \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/assets/dataset/one_drawer_cabinet/40147_link_1/door.yaml \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/assets/dataset/one_drawer_cabinet/40147_link_1/handle.yaml \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/assets/dataset/one_drawer_cabinet/40147_link_1/tree_hier_after_merging.html \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/assets/dataset/one_drawer_cabinet/40147_link_1/tree_hier.html \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/assets/urdf/shadow_hand_description/meshes/convert_dae2obj.py \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/utils/util.py \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/utils/Logger.py \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/utils/process_sarl.py \
+	-ignore docs/_build/spelling/_sphinx_design_static/design-tabs.js \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/tasks/freight_franka_close_drawer.py \
+	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/tasks/freight_franka_pick_and_place.py \
+	-ignore docs/_build/spelling/_sphinx_design_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css \
+	-l apache -y 2022-$(shell date +"%Y") $(SOURCE_FOLDERS)
 
 clean-py:
 	find . -type f -name  '*.py[co]' -delete
