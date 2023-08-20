@@ -26,7 +26,7 @@ Shadow Dexterous Hand, designed by `Shadow Robot <https://www.shadowrobot.com/de
 Specific Actions
 ----------------
 
-与任务相关，请查阅具体任务。
+The information in this section pertains to the task. For detailes, please refer to the specific task documentation.
 
 
 Specific Observations

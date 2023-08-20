@@ -17,7 +17,7 @@ FormulaOne
    * - Agent
    * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/doggo` :doc:`../../components_of_environments/agents/ant`
 
-这个系列的任务针对F1赛车比赛的场景，提供了相当丰富的视觉信息和庞大的地图，对算法的能力提出了更高的考验。
+This series of tasks, set against the backdrop of Formula 1 racing events, offers abundant visual data and expansive maps, presenting a heightened challenge to the capabilities of algorithms.
 
 
 Rewards
@@ -47,7 +47,7 @@ Level0
     :align: center
     :scale: 40 %
 
-Agent每次被随机初始化到七个检查点之一，需要尽可能多地到达Goal的位置，同时避免碰到赛道围栏。
+For each episode, the agent is randomly initialized at one of the seven checkpoints and endeavors to maximize its reaches to the 'Goal' location.
 
 +-----------------------------+------------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (16,), float64)                                   |
@@ -105,7 +105,7 @@ Level1
     :align: center
     :scale: 40 %
 
-Agent每次被随机初始化到七个检查点之一，需要尽可能多地到达Goal的位置，同时避免碰到RoadBarriers与赛道围栏。
+On each episode, the agent is randomly positioned at one of seven checkpoints and seeks to optimize its approaches to the 'Goal' location, all while circumventing 'RoadBarriers' and racetrack fences.
 
 +-----------------------------+----------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                                 |
@@ -171,7 +171,7 @@ Level2
     :align: center
     :scale: 40 %
 
-Agent每次被随机初始化到七个检查点之一，需要尽可能多地到达Goal的位置，同时避免碰到RoadBarriers与赛道围栏，检查点周围的RoadBarriers将更为密集。
+During each episode, the agent is randomly stationed at one of seven checkpoints. It strives to maximize its approaches to the 'Goal' location, while vigilantly avoiding collisions with 'RoadBarriers' and racetrack fences. Notably, the 'RoadBarriers' surrounding the checkpoints are denser.
 
 +-----------------------------+-----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                            |

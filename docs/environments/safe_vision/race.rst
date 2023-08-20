@@ -17,7 +17,7 @@ Race
    * - Agent
    * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/doggo` :doc:`../../components_of_environments/agents/ant`
 
-Race tasks在视觉信息上相比于经典的Navigation更为复杂，智能体需要根据视觉信息到达指定位置，同时保证安全。并且在Race2上，智能体并不能直接通过奖励信号得到完成任务的路径，而是要结合视觉信息学习到如何正确地通往目标。
+Compared to the classic Navigation tasks, "Race" tasks exhibit greater complexity in visual information. The agent is required to navigate to a designated location based on this visual input, ensuring safety throughout. Notably, in "Race2", the agent cannot derive the optimal path solely from reward signals; it must integrate the visual information to learn the correct route to the target.
 
 
 Rewards
@@ -36,7 +36,7 @@ Episode End
 -----------
 
 - When episode length is greater than 500: ``Trucated = True``.
-- 当agent到达Goal: ``goal_achieved = True``.
+- Upon the agent's arrival at the 'Goal': ``goal_achieved = True``.
 
 .. _Race0:
 
@@ -48,7 +48,7 @@ Level0
     :align: center
     :scale: 45 %
 
-Agent需要到达Goal。
+The agent's objective is to reach the 'Goal'.
 
 +-----------------------------+------------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (16,), float64)                                   |
@@ -96,7 +96,7 @@ Level1
     :align: center
     :scale: 45 %
 
-Agent需要到达Goal，同时避免误入草丛或与路旁的物体碰撞。
+The agent aims to reach the 'Goal' while ensuring it avoids straying into the grass and prevents collisions with roadside objects.
 
 +-----------------------------+----------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                                 |
@@ -160,7 +160,7 @@ Level2
     :align: center
     :scale: 45 %
 
-Agent需要从更远的位置到达Goal，同时避免误入草丛或与路旁的物体碰撞。
+From a distant starting point, the agent is tasked with reaching the 'Goal', ensuring it sidesteps the grass and refrains from colliding with objects along the path.
 
 +-----------------------------+-----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                            |

@@ -17,11 +17,11 @@ BuildingButton
    * - Agent
    * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/doggo` :doc:`../../components_of_environments/agents/ant`
 
-Building tasks 是我们基于 **Goal**， **Button** 和 **Push** 的高度抽象，以建筑工地为背景，建模出来的一个机器人任务系列。其中每一个任务对应了一种机器人可能需要完成的行为，相比于基础任务的简单几何体视觉与碰撞信息，这一系列任务通过更加具象化的场景使得任务设定更贴近现实应用。
 
-Agent需要在一个建筑工地中，高效地操纵多台机器，同时避开场地中的其它机器人与障碍物。
+The **Building** tasks series is framed against a construction site backdrop, providing a concrete instantiation of abstract task models for robotic applications. Each task in this collection corresponds to a specific action a robot might be expected to perform. Compared to the foundational tasks, which mainly involve simplistic geometric visuals and collision data, this series elevates the realism through its tangible scenarios, bringing the task configurations closer to practical applications.
 
-本任务基于Button，一些物体的建模形式发生了变化：
+Within this series, the agent is tasked to efficiently operate multiple machines within a construction site while adeptly avoiding other robots and obstacles present in the vicinity.
+
 
 
 Rewards
@@ -55,7 +55,7 @@ Level0
     :align: center
     :scale: 26 %
 
-Agent需要在一个建筑工地中，高效地操纵多台机器。
+The agent is tasked to proficiently operate several machines within a construction site setting.
 
 +-----------------------------+-------------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                                    |
@@ -105,7 +105,7 @@ Level1
     :align: center
     :scale: 26 %
 
-Agent需要在一个建筑工地中，高效地正确操纵多台机器，同时避开场地中的其它机器人与障碍物。
+The agent is required to adeptly and accurately operate multiple machines within a construction site, while concurrently evading other robots and obstacles present in the area.
 
 +-----------------------------+--------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                               |
@@ -174,7 +174,7 @@ Level2
     :align: center
     :scale: 26 %
 
-Agent需要在一个建筑工地中，高效地正确操纵多台机器，同时避开场地中更多的其它机器人与障碍物。
+The agent is tasked to proficiently and accurately operate several machines within a construction site, while simultaneously navigating around a heightened number of other robots and obstacles in the area.
 
 +-----------------------------+------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                             |

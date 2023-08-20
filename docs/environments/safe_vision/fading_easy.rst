@@ -17,19 +17,20 @@ FadingEasy
    * - Agent
    * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/doggo` :doc:`../../components_of_environments/agents/ant`
 
-在基于视觉的算法上，识别并记忆给定的模式是十分重要的能力，在这个任务当中，一个针对视觉记忆的开放性问题被提出。
 
-针对问题的特殊性，Fading被具象化为FadingEasy和FadingHard两个类别，展现出更为合理的难度梯度，同时，精心设计的任务设定，允许在Easy和Hard之间，以及同一任务内部的不同level之间有意义的跨维度比较。
+In vision-based algorithms, the ability to recognize and memorize a given pattern is paramount. Inspired by the delayed matching-to-sample task (DMS), an open-ended question pertaining to visual memory is posited within this series.
+
+Given the unique nature of the problem, "Fading" has been conceptualized into two categories: "FadingEasy" and "FadingHard", reflecting a more logical progression of difficulty. Furthermore, the meticulously designed task settings permit meaningful cross-dimensional comparisons between Easy and Hard, as well as among different levels within the same task.
 
 .. Note::
 
-    在FadingEasy任务当中，给定的物体将在刷新后的 ``150steps`` 内线性地变得透明。
+    In the FadingEasy task, a given object will linearly fade to transparency over the span of ``150 steps``.
 
-    刷新的条件：
+    Refresh conditions:
 
-        - Goal
+        - Goal:
             ``step = 0`` or ``goal_achieved = True``.
-        - Obstacles
+        - Obstacles:
             ``step = 0`` or ``cost > 0``.
 
 Rewards
@@ -59,8 +60,7 @@ Level0
     :align: center
     :scale: 100 %
 
-Agent需要在信息消失的干扰下尽可能多地到达Goal的位置。
-
+The agent endeavors to reach the 'Goal' location, even as it grapples with the challenge of dissipating information.
 
 Fading Objects
 ^^^^^^^^^^^^^^
@@ -92,7 +92,7 @@ Level1
     :align: center
     :scale: 100 %
 
-Agent需要在信息消失的干扰下尽可能多地到达Goal的位置，同时避免进入Hazards的范围内，Vases=1但并不参与cost的计算。
+The agent strives to maximize its approaches to the 'Goal' location in the presence of vanishing information, while diligently avoiding 'Hazards'. Although 'Vases' hold a value of 1, they do not contribute to the cost computation.
 
 
 Fading Objects
@@ -140,7 +140,7 @@ Level2
     :align: center
     :scale: 100 %
 
-Agent需要在信息消失的干扰下尽可能多地到达Goal的位置，同时避免进入Hazards的范围内以及与Vases发生碰撞。
+The agent aims to frequently reach the 'Goal' location despite the challenges posed by fading information, ensuring it steers clear of 'Hazards' and avoids collisions with 'Vases'.
 
 Fading Objects
 ^^^^^^^^^^^^^^

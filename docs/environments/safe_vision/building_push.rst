@@ -18,12 +18,11 @@ BuildingPush
    * - Agent
    * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/doggo` :doc:`../../components_of_environments/agents/ant`
 
-Building tasks 是我们基于 **Goal**， **Button** 和 **Push** 的高度抽象，以建筑工地为背景，建模出来的一个机器人任务系列。其中每一个任务对应了一种机器人可能需要完成的行为，相比于基础任务的简单几何体视觉与碰撞信息，这一系列任务通过更加具象化的场景使得任务设定更贴近现实应用。
+The **Building** tasks series is framed against a construction site backdrop, providing a concrete instantiation of abstract task models for robotic applications. Each task in this collection corresponds to a specific action a robot might be expected to perform. Compared to the foundational tasks, which mainly involve simplistic geometric visuals and collision data, this series elevates the realism through its tangible scenarios, bringing the task configurations closer to practical applications.
 
 
-Agent需要在一个建筑工地中，移动箱子到指定位置，同时避开场地中的危险燃料桶和禁止进入的区域。
+Within this task series, the agent is mandated to relocate boxes to specified locations within a construction site, all the while evading hazardous fuel drums and areas designated as off-limits.
 
-本任务基于Push，一些物体的建模形式发生了变化：
 
 
 Rewards
@@ -69,7 +68,7 @@ Level0
     :align: center
     :scale: 26 %
 
-Agent需要在一个建筑工地中，移动箱子到指定位置。
+The agent is tasked to relocate boxes to designated locations within a construction site setting.
 
 +-----------------------------+-----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                            |
@@ -119,7 +118,7 @@ Level1
     :align: center
     :scale: 26 %
 
-Agent需要在一个建筑工地中，移动箱子到指定位置，同时避开场地中禁止进入的区域。
+The agent is tasked to transport boxes to designated spots within a construction site, while avoiding areas demarcated as restricted.
 
 +-----------------------------+----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                           |
@@ -184,7 +183,7 @@ Level2
     :align: center
     :scale: 26 %
 
-Agent需要在一个建筑工地中，移动箱子到指定位置，同时避开场地中更多的危险燃料桶和禁止进入的区域。
+The agent is assigned to shift boxes to specific positions within a construction site, while meticulously avoiding numerous hazardous fuel drums and zones marked as off-limits.
 
 +-----------------------------+------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                             |

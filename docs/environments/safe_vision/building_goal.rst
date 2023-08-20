@@ -18,11 +18,10 @@ BuildingGoal
    * - Agent
    * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/doggo` :doc:`../../components_of_environments/agents/ant`
 
-Building tasks 是基于 **Goal**， **Button** 和 **Push** 的高度抽象，以建筑工地为背景，建模出来的一个机器人任务系列。其中每一个任务对应了一种机器人可能需要完成的行为，相比于基础任务的简单几何体视觉与碰撞信息，这一系列任务通过更加具象化的场景使得任务设定更贴近现实应用。
+The **Building** tasks series is framed against a construction site backdrop, providing a concrete instantiation of abstract task models for robotic applications. Each task in this collection corresponds to a specific action a robot might be expected to perform. Compared to the foundational tasks, which mainly involve simplistic geometric visuals and collision data, this series elevates the realism through its tangible scenarios, bringing the task configurations closer to practical applications.
 
-Agent需要在一个建筑工地中，正确地停泊在指定位置，避开场地中的排风机，同时保证不进入危险区域。
+Within this series, the agent is assigned to accurately dock at designated locations within a construction site, circumnavigate exhaust fans, and ensure it steers clear of hazardous zones.
 
-本任务基于Goal，一些物体的建模形式发生了变化：
 
 Rewards
 -------
@@ -51,7 +50,7 @@ Level0
     :align: center
     :scale: 26 %
 
-Agent需要在一个建筑工地中，正确地停泊在指定位置。
+The agent is tasked to accurately dock at designated positions within a construction site setting.
 
 +-----------------------------+------------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (16,), float64)                                   |
@@ -99,7 +98,7 @@ Level1
     :align: center
     :scale: 26 %
 
-Agent需要在一个建筑工地中，正确地停泊在指定位置，同时保证不进入危险区域。
+The agent is required to accurately dock at specific locations within a construction site, while ensuring to avoid entry into hazardous areas.
 
 +-----------------------------+----------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (48,), float64)                                 |
@@ -167,7 +166,7 @@ Level2
     :align: center
     :scale: 26 %
 
-Agent需要在一个建筑工地中，正确地停泊在指定位置，避开场地中的排风机，同时保证不进入危险区域。
+The agent is tasked to precisely dock at designated locations within a construction site, circumvent the site's exhaust fans, and ensure it does not enter any hazardous zones.
 
 +-----------------------------+-----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (48,), float64)                            |
