@@ -18,15 +18,15 @@ Racecar
 
 A robot closer to realistic car dynamics, moving in three dimensions, it has one velocity servo and one position servo, one to adjust the rear wheel speed to the target speed and the other to adjust the front wheel steering angle to the target angle. Racecar references the widely known MIT Racecar project's dynamics model. For it to accomplish the specified goal, it must coordinate the relationship between the steering angle of the tires and the speed, just like a human driving a car.
 
-+-----------------------------+-------------------------------------------------------------------+
-| Specific Action Space       | Box([-20.          -0.785], [20.          0.785], (2,), float64)  |
-+=============================+===================================================================+
-| Specific Observation Shape  | (12,)                                                             |
-+-----------------------------+-------------------------------------------------------------------+
-| Observation High            | inf                                                               |
-+-----------------------------+-------------------------------------------------------------------+
-| Observation Low             | -inf                                                              |
-+-----------------------------+-------------------------------------------------------------------+
++---------------------------------+-------------------------------------------------------------------+
+| **Specific Action Space**       | Box([-20.          -0.785], [20.          0.785], (2,), float64)  |
++---------------------------------+-------------------------------------------------------------------+
+| **Specific Observation Shape**  | (12,)                                                             |
++---------------------------------+-------------------------------------------------------------------+
+| **Specific Observation High**   | inf                                                               |
++---------------------------------+-------------------------------------------------------------------+
+| **Specific Observation Low**    | -inf                                                              |
++---------------------------------+-------------------------------------------------------------------+
 
 
 Specific Action Space

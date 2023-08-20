@@ -16,7 +16,7 @@ Circle
    :header-rows: 1
 
    * - Agent
-   * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/ant`
+   * - :doc:`../../components_of_environments/agents/point` :doc:`../../components_of_environments/agents/car` :doc:`../../components_of_environments/agents/racecar` :doc:`../../components_of_environments/agents/doggo` :doc:`../../components_of_environments/agents/ant`
 
 
 This set of environments is based on the idea of Humanoid-Circle in `Constrained Policy Optimization <https://arxiv.org/abs/1705.10528>`__.

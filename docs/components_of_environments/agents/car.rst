@@ -18,15 +18,15 @@ Car
 
 A slightly more complex robot, moving in three dimensions, has two independently driven parallel wheels and one free-rolling rear wheel. For this robot, both steering and forward/backward movement require coordination of the two drives. It is similar in design to a simple robot used for educational purposes.
 
-+-----------------------------+--------------------------------+
-| Specific Action Space       | Box(-1.0, 1.0, (2,), float64)  |
-+=============================+================================+
-| Specific Observation Shape  | (24,)                          |
-+-----------------------------+--------------------------------+
-| Observation High            | inf                            |
-+-----------------------------+--------------------------------+
-| Observation Low             | -inf                           |
-+-----------------------------+--------------------------------+
++---------------------------------+--------------------------------+
+| **Specific Action Space**       | Box(-1.0, 1.0, (2,), float64)  |
++---------------------------------+--------------------------------+
+| **Specific Observation Shape**  | (24,)                          |
++---------------------------------+--------------------------------+
+| **Specific Observation High**   | inf                            |
++---------------------------------+--------------------------------+
+| **Specific Observation Low**    | -inf                           |
++---------------------------------+--------------------------------+
 
 
 Specific Action Space
