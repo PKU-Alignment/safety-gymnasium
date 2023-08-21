@@ -34,3 +34,4 @@ class MultiGoalLevel1(MultiGoalLevel0):
 
         self._add_geoms(Hazards(num=8, keepout=0.18))
         self._add_free_geoms(Vases(num=1, is_constrained=False))
+        self.contact_other_cost = 1.0

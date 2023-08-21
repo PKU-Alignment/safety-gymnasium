@@ -31,3 +31,4 @@ class MultiGoalLevel2(MultiGoalLevel1):
         self.hazards.num = 10
         self.vases.num = 10
         self.vases.is_constrained = True
+        self.contact_other_cost = 1.0
