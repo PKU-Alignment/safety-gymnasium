@@ -37,22 +37,41 @@ class Pillars(Geom):  # pylint: disable=too-many-instance-attributes
     cost: float = 1.0  # Cost (per step) for being in contact with a pillar
 
     color: np.array = COLOR['pillar']
+    alpha: float = 1.0
     group: np.array = GROUP['pillar']
     is_lidar_observed: bool = True
     is_constrained: bool = True
+    is_meshed: bool = False
+    mesh_name: str = name[:-1]
 
     # pylint: disable-next=too-many-arguments
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""
-        return {
+        body = {
             'name': self.name,
-            'size': [self.size, self.height],
             'pos': np.r_[xy_pos, self.height],
             'rot': rot,
-            'type': 'cylinder',
-            'group': self.group,
-            'rgba': self.color,
+            'geoms': [
+                {
+                    'name': self.name,
+                    'size': [self.size, self.height],
+                    'type': 'cylinder',
+                    'group': self.group,
+                    'rgba': self.color * np.array([1.0, 1.0, 1.0, self.alpha]),
+                },
+            ],
         }
+        if self.is_meshed:
+            body['geoms'][0].update(
+                {
+                    'type': 'mesh',
+                    'mesh': self.mesh_name,
+                    'material': self.mesh_name,
+                    'euler': [np.pi / 2, 0, 0],
+                },
+            )
+            body['pos'][2] = 0.5
+        return body
 
     def cal_cost(self):
         """Contacts processing."""
@@ -75,4 +94,4 @@ class Pillars(Geom):  # pylint: disable=too-many-instance-attributes
     def pos(self):
         """Helper to get list of pillar positions."""
         # pylint: disable-next=no-member
-        return [self.engine.data.body(f'pillar{i}').xpos.copy() for i in range(self.num)]
+        return [self.engine.data.body(f'{self.name[:-1]}{i}').xpos.copy() for i in range(self.num)]

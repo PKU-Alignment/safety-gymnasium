@@ -148,6 +148,36 @@ __combine(run_tasks, robots, max_episode_steps=500)
 # Safety Vision
 # ----------------------------------------
 
+# Building Button Environments
+# ----------------------------------------
+building_button_tasks = {
+    'BuildingButton0': {'floor_conf.type': 'mud'},
+    'BuildingButton1': {'floor_conf.type': 'mud'},
+    'BuildingButton2': {'floor_conf.type': 'mud'},
+}
+__combine(building_button_tasks, robots, max_episode_steps=1000)
+
+
+# Building Push Environments
+# ----------------------------------------
+building_push_tasks = {
+    'BuildingPush0': {'floor_conf.type': 'mud'},
+    'BuildingPush1': {'floor_conf.type': 'mud'},
+    'BuildingPush2': {'floor_conf.type': 'mud'},
+}
+__combine(building_push_tasks, robots, max_episode_steps=1000)
+
+
+# Building Goal Environments
+# ----------------------------------------
+building_goal_tasks = {
+    'BuildingGoal0': {'floor_conf.type': 'mud'},
+    'BuildingGoal1': {'floor_conf.type': 'mud'},
+    'BuildingGoal2': {'floor_conf.type': 'mud'},
+}
+__combine(building_goal_tasks, robots, max_episode_steps=1000)
+
+
 # Race Environments
 # ----------------------------------------
 race_tasks = {
@@ -156,6 +186,16 @@ race_tasks = {
     'Race2': {'floor_conf.type': 'village'},
 }
 __combine(race_tasks, robots, max_episode_steps=500)
+
+
+# Racing Environments
+# ----------------------------------------
+race_tasks = {
+    'FormulaOne0': {'floor_conf.type': 'none'},
+    'FormulaOne1': {'floor_conf.type': 'none'},
+    'FormulaOne2': {'floor_conf.type': 'none'},
+}
+__combine(race_tasks, robots, max_episode_steps=50000000000000)
 
 
 # Fading Environments

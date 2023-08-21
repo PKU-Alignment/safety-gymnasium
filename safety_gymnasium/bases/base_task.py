@@ -28,7 +28,7 @@ import yaml
 
 import safety_gymnasium
 from safety_gymnasium.bases.underlying import Underlying
-from safety_gymnasium.utils.common_utils import ResamplingError
+from safety_gymnasium.utils.common_utils import ResamplingError, camel_to_snake
 from safety_gymnasium.utils.task_utils import theta2vec
 
 
@@ -178,6 +178,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         """
         super().__init__(config=config)
 
+        self.task_name: str
         self.num_steps = 1000  # Maximum number of environment steps in an episode
 
         self.lidar_conf = LidarConf()
@@ -198,6 +199,11 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         """Return the distance from the agent to the goal XY position."""
         assert hasattr(self, 'goal'), 'Please make sure you have added goal into env.'
         return self.agent.dist_xy(self.goal.pos)  # pylint: disable=no-member
+
+    def dist_staged_goal(self) -> float:
+        """Return the distance from the agent to the goal XY position."""
+        assert hasattr(self, 'staged_goal'), 'Please make sure you have added goal into env.'
+        return self.agent.dist_xy(self.staged_goal.pos)  # pylint: disable=no-member
 
     def calculate_cost(self) -> dict:
         """Determine costs depending on the agent and obstacles."""
@@ -299,6 +305,9 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         else:
             world_config['agent_rot'] = float(self.agent.rot)
 
+        self.task_name = self.__class__.__name__.split('Level', maxsplit=1)[0]
+        world_config['task_name'] = self.task_name
+
         # process world config via different objects.
         world_config.update(
             {
@@ -322,9 +331,8 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         And have no randomness.
         Some tasks may generate cost when contacting static geoms.
         """
-        env_info = self.__class__.__name__.split('Level')
-        config_name = env_info[0].lower()
-        level = int(env_info[1])
+        config_name = camel_to_snake(self.task_name)
+        level = int(self.__class__.__name__.split('Level')[1])
 
         # load all config of meshes in specific environment from .yaml file
         base_dir = os.path.dirname(safety_gymnasium.__file__)
@@ -336,7 +344,11 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             for group in meshes_config[idx].values():
                 geoms_config.update(group)
                 for item in group.values():
-                    self.static_geoms_names.add(item['name'])
+                    if 'geoms' in item:
+                        for geom in item['geoms']:
+                            self.static_geoms_names.add(geom['name'])
+                    else:
+                        self.static_geoms_names.add(item['name'])
 
     def build_goal_position(self) -> None:
         """Build a new goal position, maybe with resampling due to hazards."""
@@ -353,6 +365,21 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             'goal'
         ]
         self._set_goal(self.world_info.layout['goal'])
+        mujoco.mj_forward(self.model, self.data)  # pylint: disable=no-member
+
+    def build_staged_goal_position(self) -> None:
+        """Build a new goal position, maybe with resampling due to hazards."""
+        # Resample until goal is compatible with layout
+        if 'staged_goal' in self.world_info.layout:
+            del self.world_info.layout['staged_goal']
+        self.world_info.layout['staged_goal'] = np.array(
+            self.staged_goal.get_next_goal_xy(),  # pylint: disable=no-member
+        )
+        # Move goal geom to new layout position
+        self.world_info.world_config_dict['geoms']['staged_goal']['pos'][
+            :2
+        ] = self.world_info.layout['staged_goal']
+        self._set_goal(self.world_info.layout['staged_goal'], 'staged_goal')
         mujoco.mj_forward(self.model, self.data)  # pylint: disable=no-member
 
     def _placements_dict_from_object(self, object_name: dict) -> dict:

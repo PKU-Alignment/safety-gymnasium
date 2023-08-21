@@ -1,0 +1,3112 @@
+# Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ==============================================================================
+
+- backgrounds:
+    racing_track:
+      name: racing_track
+      pos: [15, -15, 1.62]
+      geoms:
+        - name: racing_track
+          type: mesh
+          mesh: racing_track
+          material: racing_track
+          contype: 0
+          conaffinity: 0
+          euler: [1.57, 0, 0]
+    wall:
+      name: wall
+      pos: [15, -15, 1.62]
+      geoms:
+        - name: wall_collision_0
+          type: mesh
+          mesh: wall_collision_0
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_1
+          type: mesh
+          mesh: wall_collision_1
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_2
+          type: mesh
+          mesh: wall_collision_2
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_3
+          type: mesh
+          mesh: wall_collision_3
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_4
+          type: mesh
+          mesh: wall_collision_4
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_5
+          type: mesh
+          mesh: wall_collision_5
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_6
+          type: mesh
+          mesh: wall_collision_6
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_7
+          type: mesh
+          mesh: wall_collision_7
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_8
+          type: mesh
+          mesh: wall_collision_8
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_9
+          type: mesh
+          mesh: wall_collision_9
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_10
+          type: mesh
+          mesh: wall_collision_10
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_11
+          type: mesh
+          mesh: wall_collision_11
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_12
+          type: mesh
+          mesh: wall_collision_12
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_13
+          type: mesh
+          mesh: wall_collision_13
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_14
+          type: mesh
+          mesh: wall_collision_14
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_15
+          type: mesh
+          mesh: wall_collision_15
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_16
+          type: mesh
+          mesh: wall_collision_16
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_17
+          type: mesh
+          mesh: wall_collision_17
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_18
+          type: mesh
+          mesh: wall_collision_18
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_19
+          type: mesh
+          mesh: wall_collision_19
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_20
+          type: mesh
+          mesh: wall_collision_20
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_21
+          type: mesh
+          mesh: wall_collision_21
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_22
+          type: mesh
+          mesh: wall_collision_22
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_23
+          type: mesh
+          mesh: wall_collision_23
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_24
+          type: mesh
+          mesh: wall_collision_24
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_25
+          type: mesh
+          mesh: wall_collision_25
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_26
+          type: mesh
+          mesh: wall_collision_26
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_27
+          type: mesh
+          mesh: wall_collision_27
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_28
+          type: mesh
+          mesh: wall_collision_28
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_29
+          type: mesh
+          mesh: wall_collision_29
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_30
+          type: mesh
+          mesh: wall_collision_30
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_31
+          type: mesh
+          mesh: wall_collision_31
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_32
+          type: mesh
+          mesh: wall_collision_32
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_33
+          type: mesh
+          mesh: wall_collision_33
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_34
+          type: mesh
+          mesh: wall_collision_34
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_35
+          type: mesh
+          mesh: wall_collision_35
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_36
+          type: mesh
+          mesh: wall_collision_36
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_37
+          type: mesh
+          mesh: wall_collision_37
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_38
+          type: mesh
+          mesh: wall_collision_38
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_39
+          type: mesh
+          mesh: wall_collision_39
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_40
+          type: mesh
+          mesh: wall_collision_40
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_41
+          type: mesh
+          mesh: wall_collision_41
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_42
+          type: mesh
+          mesh: wall_collision_42
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_43
+          type: mesh
+          mesh: wall_collision_43
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_44
+          type: mesh
+          mesh: wall_collision_44
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_45
+          type: mesh
+          mesh: wall_collision_45
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_46
+          type: mesh
+          mesh: wall_collision_46
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_47
+          type: mesh
+          mesh: wall_collision_47
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_48
+          type: mesh
+          mesh: wall_collision_48
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_49
+          type: mesh
+          mesh: wall_collision_49
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_50
+          type: mesh
+          mesh: wall_collision_50
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_51
+          type: mesh
+          mesh: wall_collision_51
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_52
+          type: mesh
+          mesh: wall_collision_52
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_53
+          type: mesh
+          mesh: wall_collision_53
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_54
+          type: mesh
+          mesh: wall_collision_54
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_55
+          type: mesh
+          mesh: wall_collision_55
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_56
+          type: mesh
+          mesh: wall_collision_56
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_57
+          type: mesh
+          mesh: wall_collision_57
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_58
+          type: mesh
+          mesh: wall_collision_58
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_59
+          type: mesh
+          mesh: wall_collision_59
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_60
+          type: mesh
+          mesh: wall_collision_60
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_61
+          type: mesh
+          mesh: wall_collision_61
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_62
+          type: mesh
+          mesh: wall_collision_62
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_63
+          type: mesh
+          mesh: wall_collision_63
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_64
+          type: mesh
+          mesh: wall_collision_64
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_65
+          type: mesh
+          mesh: wall_collision_65
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_66
+          type: mesh
+          mesh: wall_collision_66
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_67
+          type: mesh
+          mesh: wall_collision_67
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_68
+          type: mesh
+          mesh: wall_collision_68
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_69
+          type: mesh
+          mesh: wall_collision_69
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_70
+          type: mesh
+          mesh: wall_collision_70
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_71
+          type: mesh
+          mesh: wall_collision_71
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_72
+          type: mesh
+          mesh: wall_collision_72
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_73
+          type: mesh
+          mesh: wall_collision_73
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_74
+          type: mesh
+          mesh: wall_collision_74
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_75
+          type: mesh
+          mesh: wall_collision_75
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_76
+          type: mesh
+          mesh: wall_collision_76
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_77
+          type: mesh
+          mesh: wall_collision_77
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_78
+          type: mesh
+          mesh: wall_collision_78
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_79
+          type: mesh
+          mesh: wall_collision_79
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_80
+          type: mesh
+          mesh: wall_collision_80
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_81
+          type: mesh
+          mesh: wall_collision_81
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_82
+          type: mesh
+          mesh: wall_collision_82
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_83
+          type: mesh
+          mesh: wall_collision_83
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_84
+          type: mesh
+          mesh: wall_collision_84
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_85
+          type: mesh
+          mesh: wall_collision_85
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_86
+          type: mesh
+          mesh: wall_collision_86
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_87
+          type: mesh
+          mesh: wall_collision_87
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_88
+          type: mesh
+          mesh: wall_collision_88
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_89
+          type: mesh
+          mesh: wall_collision_89
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_90
+          type: mesh
+          mesh: wall_collision_90
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_91
+          type: mesh
+          mesh: wall_collision_91
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_92
+          type: mesh
+          mesh: wall_collision_92
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_93
+          type: mesh
+          mesh: wall_collision_93
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_94
+          type: mesh
+          mesh: wall_collision_94
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_95
+          type: mesh
+          mesh: wall_collision_95
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_96
+          type: mesh
+          mesh: wall_collision_96
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_97
+          type: mesh
+          mesh: wall_collision_97
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_98
+          type: mesh
+          mesh: wall_collision_98
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_99
+          type: mesh
+          mesh: wall_collision_99
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_100
+          type: mesh
+          mesh: wall_collision_100
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_101
+          type: mesh
+          mesh: wall_collision_101
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_102
+          type: mesh
+          mesh: wall_collision_102
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_103
+          type: mesh
+          mesh: wall_collision_103
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_104
+          type: mesh
+          mesh: wall_collision_104
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_105
+          type: mesh
+          mesh: wall_collision_105
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_106
+          type: mesh
+          mesh: wall_collision_106
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_107
+          type: mesh
+          mesh: wall_collision_107
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_108
+          type: mesh
+          mesh: wall_collision_108
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_109
+          type: mesh
+          mesh: wall_collision_109
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_110
+          type: mesh
+          mesh: wall_collision_110
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_111
+          type: mesh
+          mesh: wall_collision_111
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_112
+          type: mesh
+          mesh: wall_collision_112
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_113
+          type: mesh
+          mesh: wall_collision_113
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_114
+          type: mesh
+          mesh: wall_collision_114
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_115
+          type: mesh
+          mesh: wall_collision_115
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_116
+          type: mesh
+          mesh: wall_collision_116
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_117
+          type: mesh
+          mesh: wall_collision_117
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_118
+          type: mesh
+          mesh: wall_collision_118
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_119
+          type: mesh
+          mesh: wall_collision_119
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_120
+          type: mesh
+          mesh: wall_collision_120
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_121
+          type: mesh
+          mesh: wall_collision_121
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_122
+          type: mesh
+          mesh: wall_collision_122
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_123
+          type: mesh
+          mesh: wall_collision_123
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_124
+          type: mesh
+          mesh: wall_collision_124
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_125
+          type: mesh
+          mesh: wall_collision_125
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_126
+          type: mesh
+          mesh: wall_collision_126
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_127
+          type: mesh
+          mesh: wall_collision_127
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_128
+          type: mesh
+          mesh: wall_collision_128
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_129
+          type: mesh
+          mesh: wall_collision_129
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_130
+          type: mesh
+          mesh: wall_collision_130
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_131
+          type: mesh
+          mesh: wall_collision_131
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_132
+          type: mesh
+          mesh: wall_collision_132
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_133
+          type: mesh
+          mesh: wall_collision_133
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_134
+          type: mesh
+          mesh: wall_collision_134
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_135
+          type: mesh
+          mesh: wall_collision_135
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_136
+          type: mesh
+          mesh: wall_collision_136
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_137
+          type: mesh
+          mesh: wall_collision_137
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_138
+          type: mesh
+          mesh: wall_collision_138
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_139
+          type: mesh
+          mesh: wall_collision_139
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_140
+          type: mesh
+          mesh: wall_collision_140
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_141
+          type: mesh
+          mesh: wall_collision_141
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_142
+          type: mesh
+          mesh: wall_collision_142
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_143
+          type: mesh
+          mesh: wall_collision_143
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_144
+          type: mesh
+          mesh: wall_collision_144
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_145
+          type: mesh
+          mesh: wall_collision_145
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_146
+          type: mesh
+          mesh: wall_collision_146
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_147
+          type: mesh
+          mesh: wall_collision_147
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_148
+          type: mesh
+          mesh: wall_collision_148
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_149
+          type: mesh
+          mesh: wall_collision_149
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_150
+          type: mesh
+          mesh: wall_collision_150
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_151
+          type: mesh
+          mesh: wall_collision_151
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_152
+          type: mesh
+          mesh: wall_collision_152
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_153
+          type: mesh
+          mesh: wall_collision_153
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_154
+          type: mesh
+          mesh: wall_collision_154
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_155
+          type: mesh
+          mesh: wall_collision_155
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_156
+          type: mesh
+          mesh: wall_collision_156
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_157
+          type: mesh
+          mesh: wall_collision_157
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_158
+          type: mesh
+          mesh: wall_collision_158
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_159
+          type: mesh
+          mesh: wall_collision_159
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_160
+          type: mesh
+          mesh: wall_collision_160
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_161
+          type: mesh
+          mesh: wall_collision_161
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_162
+          type: mesh
+          mesh: wall_collision_162
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_163
+          type: mesh
+          mesh: wall_collision_163
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_164
+          type: mesh
+          mesh: wall_collision_164
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_165
+          type: mesh
+          mesh: wall_collision_165
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_166
+          type: mesh
+          mesh: wall_collision_166
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_167
+          type: mesh
+          mesh: wall_collision_167
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_168
+          type: mesh
+          mesh: wall_collision_168
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_169
+          type: mesh
+          mesh: wall_collision_169
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_170
+          type: mesh
+          mesh: wall_collision_170
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_171
+          type: mesh
+          mesh: wall_collision_171
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_172
+          type: mesh
+          mesh: wall_collision_172
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_173
+          type: mesh
+          mesh: wall_collision_173
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_174
+          type: mesh
+          mesh: wall_collision_174
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_175
+          type: mesh
+          mesh: wall_collision_175
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_176
+          type: mesh
+          mesh: wall_collision_176
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_177
+          type: mesh
+          mesh: wall_collision_177
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_178
+          type: mesh
+          mesh: wall_collision_178
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_179
+          type: mesh
+          mesh: wall_collision_179
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_180
+          type: mesh
+          mesh: wall_collision_180
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_181
+          type: mesh
+          mesh: wall_collision_181
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_182
+          type: mesh
+          mesh: wall_collision_182
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_183
+          type: mesh
+          mesh: wall_collision_183
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_184
+          type: mesh
+          mesh: wall_collision_184
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_185
+          type: mesh
+          mesh: wall_collision_185
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_186
+          type: mesh
+          mesh: wall_collision_186
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_187
+          type: mesh
+          mesh: wall_collision_187
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_188
+          type: mesh
+          mesh: wall_collision_188
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_189
+          type: mesh
+          mesh: wall_collision_189
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_190
+          type: mesh
+          mesh: wall_collision_190
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_191
+          type: mesh
+          mesh: wall_collision_191
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_192
+          type: mesh
+          mesh: wall_collision_192
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_193
+          type: mesh
+          mesh: wall_collision_193
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_194
+          type: mesh
+          mesh: wall_collision_194
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_195
+          type: mesh
+          mesh: wall_collision_195
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_196
+          type: mesh
+          mesh: wall_collision_196
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_197
+          type: mesh
+          mesh: wall_collision_197
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_198
+          type: mesh
+          mesh: wall_collision_198
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_199
+          type: mesh
+          mesh: wall_collision_199
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_200
+          type: mesh
+          mesh: wall_collision_200
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_201
+          type: mesh
+          mesh: wall_collision_201
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_202
+          type: mesh
+          mesh: wall_collision_202
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_203
+          type: mesh
+          mesh: wall_collision_203
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_204
+          type: mesh
+          mesh: wall_collision_204
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_205
+          type: mesh
+          mesh: wall_collision_205
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_206
+          type: mesh
+          mesh: wall_collision_206
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_207
+          type: mesh
+          mesh: wall_collision_207
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_208
+          type: mesh
+          mesh: wall_collision_208
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_209
+          type: mesh
+          mesh: wall_collision_209
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_210
+          type: mesh
+          mesh: wall_collision_210
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_211
+          type: mesh
+          mesh: wall_collision_211
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_212
+          type: mesh
+          mesh: wall_collision_212
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_213
+          type: mesh
+          mesh: wall_collision_213
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_214
+          type: mesh
+          mesh: wall_collision_214
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_216
+          type: mesh
+          mesh: wall_collision_216
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_217
+          type: mesh
+          mesh: wall_collision_217
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_218
+          type: mesh
+          mesh: wall_collision_218
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_219
+          type: mesh
+          mesh: wall_collision_219
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_220
+          type: mesh
+          mesh: wall_collision_220
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_221
+          type: mesh
+          mesh: wall_collision_221
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_222
+          type: mesh
+          mesh: wall_collision_222
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_223
+          type: mesh
+          mesh: wall_collision_223
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_224
+          type: mesh
+          mesh: wall_collision_224
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_225
+          type: mesh
+          mesh: wall_collision_225
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_226
+          type: mesh
+          mesh: wall_collision_226
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_227
+          type: mesh
+          mesh: wall_collision_227
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_228
+          type: mesh
+          mesh: wall_collision_228
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_229
+          type: mesh
+          mesh: wall_collision_229
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_230
+          type: mesh
+          mesh: wall_collision_230
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_231
+          type: mesh
+          mesh: wall_collision_231
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_232
+          type: mesh
+          mesh: wall_collision_232
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_233
+          type: mesh
+          mesh: wall_collision_233
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_234
+          type: mesh
+          mesh: wall_collision_234
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_235
+          type: mesh
+          mesh: wall_collision_235
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_236
+          type: mesh
+          mesh: wall_collision_236
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_237
+          type: mesh
+          mesh: wall_collision_237
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_238
+          type: mesh
+          mesh: wall_collision_238
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_239
+          type: mesh
+          mesh: wall_collision_239
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_240
+          type: mesh
+          mesh: wall_collision_240
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_241
+          type: mesh
+          mesh: wall_collision_241
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_242
+          type: mesh
+          mesh: wall_collision_242
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_243
+          type: mesh
+          mesh: wall_collision_243
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_244
+          type: mesh
+          mesh: wall_collision_244
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_245
+          type: mesh
+          mesh: wall_collision_245
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_246
+          type: mesh
+          mesh: wall_collision_246
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_247
+          type: mesh
+          mesh: wall_collision_247
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_248
+          type: mesh
+          mesh: wall_collision_248
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_249
+          type: mesh
+          mesh: wall_collision_249
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_250
+          type: mesh
+          mesh: wall_collision_250
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_251
+          type: mesh
+          mesh: wall_collision_251
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_252
+          type: mesh
+          mesh: wall_collision_252
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_253
+          type: mesh
+          mesh: wall_collision_253
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_254
+          type: mesh
+          mesh: wall_collision_254
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_255
+          type: mesh
+          mesh: wall_collision_255
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_256
+          type: mesh
+          mesh: wall_collision_256
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_257
+          type: mesh
+          mesh: wall_collision_257
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_258
+          type: mesh
+          mesh: wall_collision_258
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_259
+          type: mesh
+          mesh: wall_collision_259
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_260
+          type: mesh
+          mesh: wall_collision_260
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_261
+          type: mesh
+          mesh: wall_collision_261
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_262
+          type: mesh
+          mesh: wall_collision_262
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_263
+          type: mesh
+          mesh: wall_collision_263
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_264
+          type: mesh
+          mesh: wall_collision_264
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_265
+          type: mesh
+          mesh: wall_collision_265
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_266
+          type: mesh
+          mesh: wall_collision_266
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_267
+          type: mesh
+          mesh: wall_collision_267
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_268
+          type: mesh
+          mesh: wall_collision_268
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_269
+          type: mesh
+          mesh: wall_collision_269
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_270
+          type: mesh
+          mesh: wall_collision_270
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_271
+          type: mesh
+          mesh: wall_collision_271
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_272
+          type: mesh
+          mesh: wall_collision_272
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_275
+          type: mesh
+          mesh: wall_collision_275
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_276
+          type: mesh
+          mesh: wall_collision_276
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_277
+          type: mesh
+          mesh: wall_collision_277
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_278
+          type: mesh
+          mesh: wall_collision_278
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_279
+          type: mesh
+          mesh: wall_collision_279
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_280
+          type: mesh
+          mesh: wall_collision_280
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_281
+          type: mesh
+          mesh: wall_collision_281
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_282
+          type: mesh
+          mesh: wall_collision_282
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_283
+          type: mesh
+          mesh: wall_collision_283
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_284
+          type: mesh
+          mesh: wall_collision_284
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_285
+          type: mesh
+          mesh: wall_collision_285
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_286
+          type: mesh
+          mesh: wall_collision_286
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_287
+          type: mesh
+          mesh: wall_collision_287
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_288
+          type: mesh
+          mesh: wall_collision_288
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_289
+          type: mesh
+          mesh: wall_collision_289
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_290
+          type: mesh
+          mesh: wall_collision_290
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_291
+          type: mesh
+          mesh: wall_collision_291
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_292
+          type: mesh
+          mesh: wall_collision_292
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_293
+          type: mesh
+          mesh: wall_collision_293
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_294
+          type: mesh
+          mesh: wall_collision_294
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_295
+          type: mesh
+          mesh: wall_collision_295
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_296
+          type: mesh
+          mesh: wall_collision_296
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_297
+          type: mesh
+          mesh: wall_collision_297
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_298
+          type: mesh
+          mesh: wall_collision_298
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_299
+          type: mesh
+          mesh: wall_collision_299
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_301
+          type: mesh
+          mesh: wall_collision_301
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_302
+          type: mesh
+          mesh: wall_collision_302
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_303
+          type: mesh
+          mesh: wall_collision_303
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_304
+          type: mesh
+          mesh: wall_collision_304
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_305
+          type: mesh
+          mesh: wall_collision_305
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_306
+          type: mesh
+          mesh: wall_collision_306
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_307
+          type: mesh
+          mesh: wall_collision_307
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_308
+          type: mesh
+          mesh: wall_collision_308
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_309
+          type: mesh
+          mesh: wall_collision_309
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_310
+          type: mesh
+          mesh: wall_collision_310
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_311
+          type: mesh
+          mesh: wall_collision_311
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_312
+          type: mesh
+          mesh: wall_collision_312
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_313
+          type: mesh
+          mesh: wall_collision_313
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_314
+          type: mesh
+          mesh: wall_collision_314
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_315
+          type: mesh
+          mesh: wall_collision_315
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_316
+          type: mesh
+          mesh: wall_collision_316
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_317
+          type: mesh
+          mesh: wall_collision_317
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_318
+          type: mesh
+          mesh: wall_collision_318
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_319
+          type: mesh
+          mesh: wall_collision_319
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_320
+          type: mesh
+          mesh: wall_collision_320
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_321
+          type: mesh
+          mesh: wall_collision_321
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_322
+          type: mesh
+          mesh: wall_collision_322
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_323
+          type: mesh
+          mesh: wall_collision_323
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_324
+          type: mesh
+          mesh: wall_collision_324
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_325
+          type: mesh
+          mesh: wall_collision_325
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_326
+          type: mesh
+          mesh: wall_collision_326
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_327
+          type: mesh
+          mesh: wall_collision_327
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_328
+          type: mesh
+          mesh: wall_collision_328
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_329
+          type: mesh
+          mesh: wall_collision_329
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_330
+          type: mesh
+          mesh: wall_collision_330
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_331
+          type: mesh
+          mesh: wall_collision_331
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_332
+          type: mesh
+          mesh: wall_collision_332
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_333
+          type: mesh
+          mesh: wall_collision_333
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_334
+          type: mesh
+          mesh: wall_collision_334
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_335
+          type: mesh
+          mesh: wall_collision_335
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_336
+          type: mesh
+          mesh: wall_collision_336
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_337
+          type: mesh
+          mesh: wall_collision_337
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_338
+          type: mesh
+          mesh: wall_collision_338
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_339
+          type: mesh
+          mesh: wall_collision_339
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_340
+          type: mesh
+          mesh: wall_collision_340
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_341
+          type: mesh
+          mesh: wall_collision_341
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_342
+          type: mesh
+          mesh: wall_collision_342
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_343
+          type: mesh
+          mesh: wall_collision_343
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_344
+          type: mesh
+          mesh: wall_collision_344
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_345
+          type: mesh
+          mesh: wall_collision_345
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_346
+          type: mesh
+          mesh: wall_collision_346
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_347
+          type: mesh
+          mesh: wall_collision_347
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_348
+          type: mesh
+          mesh: wall_collision_348
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_349
+          type: mesh
+          mesh: wall_collision_349
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_350
+          type: mesh
+          mesh: wall_collision_350
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_351
+          type: mesh
+          mesh: wall_collision_351
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_352
+          type: mesh
+          mesh: wall_collision_352
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_353
+          type: mesh
+          mesh: wall_collision_353
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_354
+          type: mesh
+          mesh: wall_collision_354
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_355
+          type: mesh
+          mesh: wall_collision_355
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_356
+          type: mesh
+          mesh: wall_collision_356
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_357
+          type: mesh
+          mesh: wall_collision_357
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_358
+          type: mesh
+          mesh: wall_collision_358
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_359
+          type: mesh
+          mesh: wall_collision_359
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_360
+          type: mesh
+          mesh: wall_collision_360
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_361
+          type: mesh
+          mesh: wall_collision_361
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_362
+          type: mesh
+          mesh: wall_collision_362
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_363
+          type: mesh
+          mesh: wall_collision_363
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_364
+          type: mesh
+          mesh: wall_collision_364
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_365
+          type: mesh
+          mesh: wall_collision_365
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_366
+          type: mesh
+          mesh: wall_collision_366
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_367
+          type: mesh
+          mesh: wall_collision_367
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_368
+          type: mesh
+          mesh: wall_collision_368
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_369
+          type: mesh
+          mesh: wall_collision_369
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_370
+          type: mesh
+          mesh: wall_collision_370
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_371
+          type: mesh
+          mesh: wall_collision_371
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_372
+          type: mesh
+          mesh: wall_collision_372
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_373
+          type: mesh
+          mesh: wall_collision_373
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_374
+          type: mesh
+          mesh: wall_collision_374
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_375
+          type: mesh
+          mesh: wall_collision_375
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_376
+          type: mesh
+          mesh: wall_collision_376
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_377
+          type: mesh
+          mesh: wall_collision_377
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_378
+          type: mesh
+          mesh: wall_collision_378
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_379
+          type: mesh
+          mesh: wall_collision_379
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_380
+          type: mesh
+          mesh: wall_collision_380
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_381
+          type: mesh
+          mesh: wall_collision_381
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_382
+          type: mesh
+          mesh: wall_collision_382
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_383
+          type: mesh
+          mesh: wall_collision_383
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_384
+          type: mesh
+          mesh: wall_collision_384
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_385
+          type: mesh
+          mesh: wall_collision_385
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_386
+          type: mesh
+          mesh: wall_collision_386
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_387
+          type: mesh
+          mesh: wall_collision_387
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_388
+          type: mesh
+          mesh: wall_collision_388
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_389
+          type: mesh
+          mesh: wall_collision_389
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_390
+          type: mesh
+          mesh: wall_collision_390
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_391
+          type: mesh
+          mesh: wall_collision_391
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_392
+          type: mesh
+          mesh: wall_collision_392
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_393
+          type: mesh
+          mesh: wall_collision_393
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_394
+          type: mesh
+          mesh: wall_collision_394
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_395
+          type: mesh
+          mesh: wall_collision_395
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_396
+          type: mesh
+          mesh: wall_collision_396
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_397
+          type: mesh
+          mesh: wall_collision_397
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_398
+          type: mesh
+          mesh: wall_collision_398
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_399
+          type: mesh
+          mesh: wall_collision_399
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_400
+          type: mesh
+          mesh: wall_collision_400
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_401
+          type: mesh
+          mesh: wall_collision_401
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_402
+          type: mesh
+          mesh: wall_collision_402
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_403
+          type: mesh
+          mesh: wall_collision_403
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_404
+          type: mesh
+          mesh: wall_collision_404
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_405
+          type: mesh
+          mesh: wall_collision_405
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_406
+          type: mesh
+          mesh: wall_collision_406
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_407
+          type: mesh
+          mesh: wall_collision_407
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_408
+          type: mesh
+          mesh: wall_collision_408
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_409
+          type: mesh
+          mesh: wall_collision_409
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_410
+          type: mesh
+          mesh: wall_collision_410
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_411
+          type: mesh
+          mesh: wall_collision_411
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_412
+          type: mesh
+          mesh: wall_collision_412
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_413
+          type: mesh
+          mesh: wall_collision_413
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_414
+          type: mesh
+          mesh: wall_collision_414
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_415
+          type: mesh
+          mesh: wall_collision_415
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_416
+          type: mesh
+          mesh: wall_collision_416
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_417
+          type: mesh
+          mesh: wall_collision_417
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_418
+          type: mesh
+          mesh: wall_collision_418
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_419
+          type: mesh
+          mesh: wall_collision_419
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_420
+          type: mesh
+          mesh: wall_collision_420
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_421
+          type: mesh
+          mesh: wall_collision_421
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_422
+          type: mesh
+          mesh: wall_collision_422
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_423
+          type: mesh
+          mesh: wall_collision_423
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_424
+          type: mesh
+          mesh: wall_collision_424
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_425
+          type: mesh
+          mesh: wall_collision_425
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_426
+          type: mesh
+          mesh: wall_collision_426
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_427
+          type: mesh
+          mesh: wall_collision_427
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_428
+          type: mesh
+          mesh: wall_collision_428
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_429
+          type: mesh
+          mesh: wall_collision_429
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_430
+          type: mesh
+          mesh: wall_collision_430
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_431
+          type: mesh
+          mesh: wall_collision_431
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_432
+          type: mesh
+          mesh: wall_collision_432
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_433
+          type: mesh
+          mesh: wall_collision_433
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_434
+          type: mesh
+          mesh: wall_collision_434
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_435
+          type: mesh
+          mesh: wall_collision_435
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_436
+          type: mesh
+          mesh: wall_collision_436
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_437
+          type: mesh
+          mesh: wall_collision_437
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_438
+          type: mesh
+          mesh: wall_collision_438
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_439
+          type: mesh
+          mesh: wall_collision_439
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_440
+          type: mesh
+          mesh: wall_collision_440
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_441
+          type: mesh
+          mesh: wall_collision_441
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_442
+          type: mesh
+          mesh: wall_collision_442
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_443
+          type: mesh
+          mesh: wall_collision_443
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_444
+          type: mesh
+          mesh: wall_collision_444
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_445
+          type: mesh
+          mesh: wall_collision_445
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_446
+          type: mesh
+          mesh: wall_collision_446
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_447
+          type: mesh
+          mesh: wall_collision_447
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_448
+          type: mesh
+          mesh: wall_collision_448
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_449
+          type: mesh
+          mesh: wall_collision_449
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_450
+          type: mesh
+          mesh: wall_collision_450
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_451
+          type: mesh
+          mesh: wall_collision_451
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_452
+          type: mesh
+          mesh: wall_collision_452
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_453
+          type: mesh
+          mesh: wall_collision_453
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_454
+          type: mesh
+          mesh: wall_collision_454
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_455
+          type: mesh
+          mesh: wall_collision_455
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_456
+          type: mesh
+          mesh: wall_collision_456
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_457
+          type: mesh
+          mesh: wall_collision_457
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_458
+          type: mesh
+          mesh: wall_collision_458
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_459
+          type: mesh
+          mesh: wall_collision_459
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_460
+          type: mesh
+          mesh: wall_collision_460
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_461
+          type: mesh
+          mesh: wall_collision_461
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_462
+          type: mesh
+          mesh: wall_collision_462
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_463
+          type: mesh
+          mesh: wall_collision_463
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_464
+          type: mesh
+          mesh: wall_collision_464
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_465
+          type: mesh
+          mesh: wall_collision_465
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_466
+          type: mesh
+          mesh: wall_collision_466
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_467
+          type: mesh
+          mesh: wall_collision_467
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_468
+          type: mesh
+          mesh: wall_collision_468
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_469
+          type: mesh
+          mesh: wall_collision_469
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_470
+          type: mesh
+          mesh: wall_collision_470
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_471
+          type: mesh
+          mesh: wall_collision_471
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_472
+          type: mesh
+          mesh: wall_collision_472
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_473
+          type: mesh
+          mesh: wall_collision_473
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_474
+          type: mesh
+          mesh: wall_collision_474
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_475
+          type: mesh
+          mesh: wall_collision_475
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_476
+          type: mesh
+          mesh: wall_collision_476
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_477
+          type: mesh
+          mesh: wall_collision_477
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_478
+          type: mesh
+          mesh: wall_collision_478
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_479
+          type: mesh
+          mesh: wall_collision_479
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_480
+          type: mesh
+          mesh: wall_collision_480
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_481
+          type: mesh
+          mesh: wall_collision_481
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_482
+          type: mesh
+          mesh: wall_collision_482
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_483
+          type: mesh
+          mesh: wall_collision_483
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_484
+          type: mesh
+          mesh: wall_collision_484
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_485
+          type: mesh
+          mesh: wall_collision_485
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_486
+          type: mesh
+          mesh: wall_collision_486
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_487
+          type: mesh
+          mesh: wall_collision_487
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_488
+          type: mesh
+          mesh: wall_collision_488
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_489
+          type: mesh
+          mesh: wall_collision_489
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_490
+          type: mesh
+          mesh: wall_collision_490
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_491
+          type: mesh
+          mesh: wall_collision_491
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_492
+          type: mesh
+          mesh: wall_collision_492
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_493
+          type: mesh
+          mesh: wall_collision_493
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_494
+          type: mesh
+          mesh: wall_collision_494
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_495
+          type: mesh
+          mesh: wall_collision_495
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_496
+          type: mesh
+          mesh: wall_collision_496
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_497
+          type: mesh
+          mesh: wall_collision_497
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_498
+          type: mesh
+          mesh: wall_collision_498
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_499
+          type: mesh
+          mesh: wall_collision_499
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_500
+          type: mesh
+          mesh: wall_collision_500
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_501
+          type: mesh
+          mesh: wall_collision_501
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_502
+          type: mesh
+          mesh: wall_collision_502
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_503
+          type: mesh
+          mesh: wall_collision_503
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_504
+          type: mesh
+          mesh: wall_collision_504
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_505
+          type: mesh
+          mesh: wall_collision_505
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_506
+          type: mesh
+          mesh: wall_collision_506
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_507
+          type: mesh
+          mesh: wall_collision_507
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_508
+          type: mesh
+          mesh: wall_collision_508
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_509
+          type: mesh
+          mesh: wall_collision_509
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_510
+          type: mesh
+          mesh: wall_collision_510
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_511
+          type: mesh
+          mesh: wall_collision_511
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [1.57, 0, 0]
+        - name: wall_collision_512
+          type: box
+          pos: [-16.25, 6.47, -1.4]
+          size: [0.3, 11.5, 0.4]
+          group: 2
+          rgba: [0, 0, 0, 0]
+          euler: [0, 0, -0.314159]
+    # track:
+    #   name: track
+    #   pos: [0, 0, 0]
+    #   geoms:
+        # - name: track1
+        #   pos: [-3.2, -9.5, 0]
+        #   type: box
+        #   size: [0.97, 22, 0.001]
+        #   euler: [0, 0, -0.3141592653589793]
+        # - name: track1
+        #   pos: [7.8, -12.5, 0]
+        #   type: box
+        #   size: [20, 26, 0.001]
+        #   # [-12.2, -32.5, 27.8, 7.5]
+        #   euler: [0, 0, 0]
+        # - name: track2
+        #   pos: [32, -5, 0]
+        #   # [26, -11, 38, 1]
+        #   type: box
+        #   size: [6, 6, 0.001]
+        #   euler: [0, 0, 0]
+
+
+- {}
+
+- {}
