@@ -1,0 +1,64 @@
+task:
+  useStage: False
+  useSlider: False
+  useGroundTruth: False
+  useTaskId: False
+
+env:
+  env_name: "freight_franka_pick_and_place"
+  numEnvs: 128
+  numObservations: 62
+  numActions: 12
+  envSpacing: 2.0
+  maxEpisodeLength: 512
+  actionSpeedScale: 20
+  enableDebugVis: False
+
+  contactBufferSize: 2048
+  contactMovingThreshold: 0.1
+
+  pointFeatureDim: 512
+  objPointDownsampleNum: 2048
+  handPointDownsampleNum: 64
+  pointNetLR: 0.0001
+  visualizePointcloud: False
+
+  enableCameraSensors: False
+  depth_bar: 10
+  map_dis_bar: 0.1
+  moving_pc_mode: False
+
+  driveMode: "pos"
+  clipObservations: 5.0
+  clipActions: 1.0
+
+  asset:
+    assetRoot: "../envs/assets"
+    AssetNumTrain: 1
+    AssetNumVal: 0
+    randomAsset: False
+    trainObjAssets:
+      0:
+        name: 0
+
+    trainTableAssets:
+      0:
+        name: tablebox
+
+sim:
+  substeps: 2
+  physx:
+    num_threads: 4
+    solver_type: 1  # 0: pgs, 1: tgs
+    num_position_iterations: 8
+    num_velocity_iterations: 0
+    contact_offset: 0.002
+    rest_offset: 0.0
+    bounce_threshold_velocity: 0.2
+    max_depenetration_velocity: 1000.0
+    default_buffer_size_multiplier: 5.0
+  flex:
+    num_outer_iterations: 5
+    num_inner_iterations: 20
+    warm_start: 0.8
+    relaxation: 0.75

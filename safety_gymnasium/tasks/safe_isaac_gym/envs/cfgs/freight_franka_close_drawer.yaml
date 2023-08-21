@@ -1,0 +1,83 @@
+# if given, will override the device setting in gym.
+
+task:
+  target: close
+  useHandle: False
+  useDrawer: True
+  useStage: False
+  useSlider: True
+
+env:
+  env_name: "freight_franka_close_drawer"
+  numEnvs: 1024
+  numObservations: 57
+  numActions: 12
+  envSpacing: 2.0
+  maxEpisodeLength: 192
+  actionSpeedScale: 20
+  enableDebugVis: False
+
+  contactBufferSize: 512
+  contactMovingThreshold: 0.1
+  contactPosThreshold: 0.01
+
+  pointFeatureDim: 512
+  cabinetPointDownsampleNum: 2048
+  cabinetPointOriginalNum: 8192
+  handPointDownsampleNum: 64
+  pointNetLR: 0.0001
+  visualizePointcloud: False
+
+  enableCameraSensors: False
+  depth_bar: 10
+  map_dis_bar: 0.1
+
+  reset:
+    cabinet:
+      resetPositionNoise: 0.0
+      resetRotationNoise: 0.0
+      resetDofPosRandomInterval: 0.0
+      resetDofVelRandomInterval: 0.0
+    franka:
+      resetPositionNoise: 0.0
+      resetRotationNoise: 0.0
+      resetDofPosRandomInterval: 0.0
+      resetDofVelRandomInterval: 0.0
+
+  driveMode: "pos"
+  clipObservations: 5.0
+  clipActions: 1.0
+
+  asset:
+    assetRoot: "../assets"
+    datasetPath: "dataset/one_drawer_cabinet"
+    cabinetAssetNumTrain: 1
+    cabinetAssetNumVal: 0
+    randomAsset: False
+
+    trainAssets:
+      40147_link_1:
+        boundingBox: dataset/one_drawer_cabinet/40147_link_1/bounding_box.json
+        door: dataset/one_drawer_cabinet/40147_link_1/door.yaml
+        handle: dataset/one_drawer_cabinet/40147_link_1/handle.yaml
+        name: 40147_link_1
+        path: dataset/one_drawer_cabinet/40147_link_1/mobility.urdf
+        pointCloud: dataset/one_drawer_cabinet/40147_link_1/point_sample/ply-10000.ply
+
+sim:
+  substeps: 2
+  physx:
+    num_threads: 4
+    solver_type: 1  # 0: pgs, 1: tgs
+    num_position_iterations: 8
+    num_velocity_iterations: 0
+    contact_offset: 0.002
+    rest_offset: 0.0
+    bounce_threshold_velocity: 0.2
+    max_depenetration_velocity: 1000.0
+    default_buffer_size_multiplier: 5.0
+  flex:
+    num_outer_iterations: 5
+    num_inner_iterations: 20
+    warm_start: 0.8
+    relaxation: 0.75
