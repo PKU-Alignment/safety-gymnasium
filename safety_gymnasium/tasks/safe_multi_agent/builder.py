@@ -230,6 +230,8 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
             # Constraint violations
             info.update(self._cost())
 
+            info['reward_sum'] = sum(rewards.values())
+
             costs = {'agent_0': info['agent_0']['cost_sum'], 'agent_1': info['agent_1']['cost_sum']}
 
             self.task.specific_step()
