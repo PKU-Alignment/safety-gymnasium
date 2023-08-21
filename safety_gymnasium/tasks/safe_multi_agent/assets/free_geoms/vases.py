@@ -18,10 +18,10 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from safety_gymnasium.assets.color import COLOR
-from safety_gymnasium.assets.group import GROUP
-from safety_gymnasium.bases.base_object import FreeGeom
-from safety_gymnasium.utils.task_utils import get_body_xvelp
+from safety_gymnasium.tasks.safe_multi_agent.assets.color import COLOR
+from safety_gymnasium.tasks.safe_multi_agent.assets.group import GROUP
+from safety_gymnasium.tasks.safe_multi_agent.bases.base_object import FreeGeom
+from safety_gymnasium.tasks.safe_multi_agent.utils.task_utils import get_body_xvelp
 
 
 @dataclass
