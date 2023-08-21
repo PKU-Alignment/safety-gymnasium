@@ -20,7 +20,7 @@ from gymnasium import make as gymnasium_make
 from gymnasium import register as gymnasium_register
 
 from safety_gymnasium import vector, wrappers
-from safety_gymnasium.tasks.safe_multi_agent.safe_mujoco_multi import make_ma
+from safety_gymnasium.tasks.safe_multi_agent.tasks.velocity.safe_mujoco_multi import make_ma
 from safety_gymnasium.utils.registration import make, register
 from safety_gymnasium.version import __version__
 
@@ -290,3 +290,60 @@ __register_helper(
     entry_point='safety_gymnasium.tasks.safe_velocity.safety_humanoid_velocity_v1:SafetyHumanoidVelocityEnv',
     max_episode_steps=1000,
 )
+
+
+def __combine_multi(tasks, agents, max_episode_steps):
+    """Combine tasks and agents together to register environment tasks."""
+    for task_name, task_config in tasks.items():
+        # Vector inputs
+        for robot_name in agents:
+            env_id = f'{PREFIX}{robot_name}{task_name}-{VERSION}'
+            combined_config = copy.deepcopy(task_config)
+            combined_config.update({'agent_name': robot_name})
+
+            __register_helper(
+                env_id=env_id,
+                entry_point='safety_gymnasium.tasks.safe_multi_agent.builder:Builder',
+                spec_kwargs={'config': combined_config, 'task_id': env_id},
+                max_episode_steps=max_episode_steps,
+                disable_env_checker=True,
+            )
+
+            if MAKE_VISION_ENVIRONMENTS:
+                # Vision inputs
+                vision_env_name = f'{PREFIX}{robot_name}{task_name}Vision-{VERSION}'
+                vision_config = {
+                    'observe_vision': True,
+                    'observation_flatten': False,
+                }
+                vision_config.update(combined_config)
+                __register_helper(
+                    env_id=vision_env_name,
+                    entry_point='safety_gymnasium.tasks.safe_multi_agent.builder:Builder',
+                    spec_kwargs={'config': vision_config, 'task_id': env_id},
+                    max_episode_steps=max_episode_steps,
+                    disable_env_checker=True,
+                )
+
+            if MAKE_DEBUG_ENVIRONMENTS and robot_name in ['Point', 'Car', 'Racecar']:
+                # Keyboard inputs for debugging
+                debug_env_name = f'{PREFIX}{robot_name}{task_name}Debug-{VERSION}'
+                debug_config = {'debug': True}
+                debug_config.update(combined_config)
+                __register_helper(
+                    env_id=debug_env_name,
+                    entry_point='safety_gymnasium.tasks.safe_multi_agent.builder:Builder',
+                    spec_kwargs={'config': debug_config, 'task_id': env_id},
+                    max_episode_steps=max_episode_steps,
+                    disable_env_checker=True,
+                )
+
+
+# ----------------------------------------
+# Safety Multi-Agent
+# ----------------------------------------
+
+# Multi Goal Environments
+# ----------------------------------------
+fading_tasks = {'MultiGoal0': {}, 'MultiGoal1': {}, 'MultiGoal2': {}}
+__combine_multi(fading_tasks, robots, max_episode_steps=1000)

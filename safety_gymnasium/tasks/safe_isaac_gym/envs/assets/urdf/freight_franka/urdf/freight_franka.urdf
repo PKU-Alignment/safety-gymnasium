@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <!--
 Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
 
@@ -13,7 +14,6 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<?xml version="1.0" ?>
 <robot name="freight_franka">
 
 <!-- <link name="freight_root0">

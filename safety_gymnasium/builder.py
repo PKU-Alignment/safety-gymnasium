@@ -246,7 +246,11 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
         if self.render_parameters.mode == 'human':
             self.render()
-        return self.task.obs(), reward, cost, self.terminated, self.truncated, info
+
+        terminateds = {'agent_0': self.terminated, 'agent_1': self.terminated}
+        truncateds = {'agent_0': self.truncated, 'agent_1': self.truncated}
+
+        return self.task.obs(), reward, cost, terminateds, truncateds, info
 
     def _reward(self) -> float:
         """Calculate the current rewards.
