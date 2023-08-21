@@ -60,7 +60,7 @@ Level0
     :align: center
     :scale: 100 %
 
-**FadingEasy0** requires the agent to reach the goal position. The **goal** will linearly disappear in **150** steps after every refresh.
+**The Level 0 of FadingEasy** requires the agent to reach the goal position. The **goal** will linearly disappear in **150** steps after every refresh.
 
 Fading Objects
 ^^^^^^^^^^^^^^
@@ -92,7 +92,7 @@ Level1
     :align: center
     :scale: 100 %
 
-**FadingEasy1** requires the agent to reach the goal position, ensuring it steers clear of hazardous areas. The **goal** will linearly disappear in **150** steps after every refresh.
+**The Level 1 of FadingEasy** requires the agent to reach the goal position, ensuring it steers clear of hazardous areas. The **goal** will linearly disappear in **150** steps after every refresh.
 
 
 Fading Objects
@@ -140,7 +140,7 @@ Level2
     :align: center
     :scale: 100 %
 
-**FadingEasy2** requires the agent to reach the goal position, ensuring it steers clear of hazardous areas and avoids collisions with vases. The **goal** and **hazardous areas** will linearly disappear in **150** steps after every refresh.
+**The Level 2 of FadingEasy** requires the agent to reach the goal position, ensuring it steers clear of hazardous areas and avoids collisions with vases. The **goal** and **hazardous areas** will linearly disappear in **150** steps after every refresh.
 
 Fading Objects
 ^^^^^^^^^^^^^^
