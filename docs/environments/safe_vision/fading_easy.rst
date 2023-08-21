@@ -140,7 +140,7 @@ Level2
     :align: center
     :scale: 100 %
 
-**FadingEasy2** requires the agent to reach the goal position, ensuring it steers clear of hazardous areas and avoids collisions with vases. The **goal** will linearly disappear in **150** steps after every refresh.
+**FadingEasy2** requires the agent to reach the goal position, ensuring it steers clear of hazardous areas and avoids collisions with vases. The **goal** and **hazardous areas** will linearly disappear in **150** steps after every refresh.
 
 Fading Objects
 ^^^^^^^^^^^^^^
