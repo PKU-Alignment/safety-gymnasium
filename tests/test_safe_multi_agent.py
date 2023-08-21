@@ -54,8 +54,6 @@ def test_safe_ma():
                 ep_ret += reward['agent_0']
                 ep_cost += cost['agent_0']
 
-                env.render()
-
 
 @helpers.parametrize(
     agent_id=['Point', 'Ant'],
