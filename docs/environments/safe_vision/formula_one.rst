@@ -47,7 +47,7 @@ Level0
     :align: center
     :scale: 40 %
 
-For each episode, the agent is randomly initialized at one of the seven checkpoints and endeavors to maximize its reaches to the 'Goal' location.
+**The Level 0 of FormulaOne** requires the agent to maximize its reach to the goal position. For each episode, the agent is randomly initialized at one of the seven checkpoints.
 
 +-----------------------------+------------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (16,), float64)                                   |
@@ -105,7 +105,7 @@ Level1
     :align: center
     :scale: 40 %
 
-On each episode, the agent is randomly positioned at one of seven checkpoints and seeks to optimize its approaches to the 'Goal' location, all while circumventing 'RoadBarriers' and racetrack fences.
+**The Level 1 of FormulaOne** requires the agent to maximize its reach to the goal position while circumventing barriers and racetrack fences. For each episode, the agent is randomly initialized at one of the seven checkpoints.
 
 +-----------------------------+----------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                                 |
@@ -171,7 +171,7 @@ Level2
     :align: center
     :scale: 40 %
 
-During each episode, the agent is randomly stationed at one of seven checkpoints. It strives to maximize its approaches to the 'Goal' location, while vigilantly avoiding collisions with 'RoadBarriers' and racetrack fences. Notably, the 'RoadBarriers' surrounding the checkpoints are denser.
+**The Level 2 of FormulaOne** requires the agent to maximize its reach to the goal position while circumventing barriers and racetrack fences. For each episode, the agent is randomly initialized at one of the seven checkpoints. Notably, the barriers surrounding the checkpoints are denser.
 
 +-----------------------------+-----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                            |

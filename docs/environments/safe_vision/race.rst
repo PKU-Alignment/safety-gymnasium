@@ -48,7 +48,7 @@ Level0
     :align: center
     :scale: 45 %
 
-The agent's objective is to reach the 'Goal'.
+**The Level 0 of Race** requires the agent to reach the goal position.
 
 +-----------------------------+------------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (16,), float64)                                   |
@@ -96,7 +96,7 @@ Level1
     :align: center
     :scale: 45 %
 
-The agent aims to reach the 'Goal' while ensuring it avoids straying into the grass and prevents collisions with roadside objects.
+**The Level 1 of Race** requires the agent to reach the goal position while ensuring it avoids straying into the grass and prevents collisions with roadside objects.
 
 +-----------------------------+----------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                                 |
@@ -160,7 +160,7 @@ Level2
     :align: center
     :scale: 45 %
 
-From a distant starting point, the agent is tasked with reaching the 'Goal', ensuring it sidesteps the grass and refrains from colliding with objects along the path.
+**The Level 2 of Race** requires the agent to reach the goal position from a distant starting point while ensuring it avoids straying into the grass and prevents collisions with roadside objects.
 
 +-----------------------------+-----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                            |

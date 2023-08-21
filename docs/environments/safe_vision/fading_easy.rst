@@ -60,7 +60,7 @@ Level0
     :align: center
     :scale: 100 %
 
-The agent endeavors to reach the 'Goal' location, even as it grapples with the challenge of dissipating information.
+**FadingEasy0** requires the agent to reach the goal position. The **goal** will linearly disappear in **150** steps after every refresh.
 
 Fading Objects
 ^^^^^^^^^^^^^^
@@ -92,7 +92,7 @@ Level1
     :align: center
     :scale: 100 %
 
-The agent strives to maximize its approaches to the 'Goal' location in the presence of vanishing information, while diligently avoiding 'Hazards'. Although 'Vases' hold a value of 1, they do not contribute to the cost computation.
+**FadingEasy1** requires the agent to reach the goal position, ensuring it steers clear of hazardous areas. The **goal** will linearly disappear in **150** steps after every refresh.
 
 
 Fading Objects
@@ -140,7 +140,7 @@ Level2
     :align: center
     :scale: 100 %
 
-The agent aims to frequently reach the 'Goal' location despite the challenges posed by fading information, ensuring it steers clear of 'Hazards' and avoids collisions with 'Vases'.
+**FadingEasy2** requires the agent to reach the goal position, ensuring it steers clear of hazardous areas and avoids collisions with vases. The **goal** will linearly disappear in **150** steps after every refresh.
 
 Fading Objects
 ^^^^^^^^^^^^^^
