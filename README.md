@@ -69,12 +69,12 @@ Here is a list of all the environments we support for now:
   <tbody>
     <tr>
       <td rowspan="4">Safe Navigation</td>
-      <td>Goal[012]</td>
+      <td>Button[012]</td>
       <td rowspan="4">Point, Car, Doggo, Racecar, Ant</td>
       <td rowspan="4">SafetyPointGoal1-v0</td>
     </tr>
     <tr>
-      <td>Button[012]</td>
+      <td>Goal[012]</td>
     </tr>
     <tr>
       <td>Push[012]</td>
@@ -83,15 +83,95 @@ Here is a list of all the environments we support for now:
       <td>Circle[012]</td>
     </tr>
     <tr>
-      <td>Velocity</td>
+      <td>Safe Velocity</td>
       <td>Velocity</td>
       <td>HalfCheetah, Hopper, Swimmer, Walker2d, Ant, Humanoid</td>
       <td>SafetyAntVelocity-v1</td>
     </tr>
+    <tr>
+      <td rowspan="7">Safe Vision</td>
+      <td>BuildingButton[012]</td>
+      <td rowspan="7">Point, Car, Doggo, Racecar, Ant</td>
+      <td rowspan="7">SafetyFormulaOne1-v0</td>
+    </tr>
+    <tr>
+      <td>BuildingGoal[012]</td>
+    </tr>
+    <tr>
+      <td>BuildingPush[012]</td>
+    </tr>
+    <tr>
+      <td>FadingEasy[012]</td>
+    </tr>
+    <tr>
+      <td>FadingHard[012]</td>
+    </tr>
+    <tr>
+      <td>Race[012]</td>
+    </tr>
+    <tr>
+      <td>FormulaOne[012]</td>
+    </tr>
+    <tr>
+      <td rowspan="8">Safe Multi-Agent</td>
+      <td>MultiGoal[012]</td>
+      <td>Multi-Point, Multi-Ant</td>
+      <td>SafetyAntMultiGoal1-v0</td>
+    </tr>
+    <tr>
+      <td>Multi-Agent Velocity</td>
+      <td>MA-HalfCheetah, MA-Hopper, MA-Swimmer, MA-Walker2d, MA-Ant, MA-Humanoid</td>
+      <td>Safety2x4AntVelocity-v0</td>
+    </tr>
+    <tr>
+      <td>FreightFrankaCloseDrawer(Multi-Agent)</td>
+      <td rowspan="2">FreightFranka</td>
+      <td rowspan="2">FreightFrankaCloseDrawer(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td>FreightFrankaPickAndPlace(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td>ShadowHandCatchOver2UnderarmSafeFinger(Multi-Agent)</td>
+      <td rowspan="4">ShadowHands</td>
+      <td rowspan="4">ShadowHandCatchOver2UnderarmSafeJoint(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td>ShadowHandCatchOver2UnderarmSafeJoint(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td>ShadowHandOverSafeFinger(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td>ShadowHandOverSafeJoint(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td rowspan="6">Safe Isaac Gym</td>
+      <td>FreightFrankaCloseDrawer</td>
+      <td rowspan="2">FreightFranka</td>
+      <td rowspan="2">FreightFrankaCloseDrawer</td>
+    </tr>
+    <tr>
+      <td>FreightFrankaPickAndPlace</td>
+    </tr>
+    <tr>
+      <td>ShadowHandCatchOver2UnderarmSafeFinger</td>
+      <td rowspan="4">ShadowHands</td>
+      <td rowspan="4">ShadowHandCatchOver2UnderarmSafeJoint</td>
+    </tr>
+    <tr>
+      <td>ShadowHandCatchOver2UnderarmSafeJoint</td>
+    </tr>
+    <tr>
+      <td>ShadowHandOverSafeFinger</td>
+    </tr>
+    <tr>
+      <td>ShadowHandOverSafeJoint</td>
+    </tr>
   </tbody>
 </table>
 
-Here are some screenshots of the Safe Navigation tasks.
+Here are some screenshots of the Safe **Navigation tasks**.
 
 #### Agents
 
