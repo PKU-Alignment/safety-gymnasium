@@ -55,7 +55,7 @@ Level0
     :align: center
     :scale: 26 %
 
-The agent is tasked to proficiently operate several machines within a construction site setting.
+**The Level 0 of BuildingButton** requires the agent to proficiently operate multiple machines within a construction site.
 
 +-----------------------------+-------------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                                    |
@@ -105,7 +105,7 @@ Level1
     :align: center
     :scale: 26 %
 
-The agent is required to adeptly and accurately operate multiple machines within a construction site, while concurrently evading other robots and obstacles present in the area.
+**The Level 1 of BuildingButton** requires the agent to proficiently and accurately operate multiple machines within a construction site, while concurrently evading other robots and obstacles present in the area.
 
 +-----------------------------+--------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                               |
@@ -174,7 +174,7 @@ Level2
     :align: center
     :scale: 26 %
 
-The agent is tasked to proficiently and accurately operate several machines within a construction site, while simultaneously navigating around a heightened number of other robots and obstacles in the area.
+**The Level 2 of BuildingButton** requires the agent to proficiently and accurately operate multiple machines within a construction site, while concurrently evading a heightened number of other robots and obstacles in the area.
 
 +-----------------------------+------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                             |

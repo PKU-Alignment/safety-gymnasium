@@ -18,20 +18,21 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
   <size njmax="3000" nconmax="1000"/>
   <compiler angle="radian" coordinate="local" inertiafromgeom="true"/>
   <option integrator="RK4" timestep="0.01"/>
+  <statistic meansize="0.23" extent="3.96"/>
   <custom>
     <numeric data="0.0 0.0 0.55 1.0 0.0 0.0 0.0 0.0 1.0 0.0 -1.0 0.0 -1.0 0.0 1.0" name="init_qpos"/>
   </custom>
   <default>
     <joint armature="1" damping="1" limited="true"/>
-    <geom condim="6" density="5.0" rgba="0.8 0.6 0.4 1"/>
+    <geom condim="6" density="5.0"/>
     <site size="0.032" type="sphere"/>
   </default>
   <worldbody>
     <geom name="floor" size="5 5 0.1" type="plane" condim="6" conaffinity="3"/>
     <body name="agent" pos="0 0 0.18">
       <site name="agent" rgba="1 0 0 .1" pos="0 0 -0.02"/>
-      <camera name="vision" pos="0 0.05 0.05" euler="1.57 0 0"/>
-      <geom name="torso_geom" pos="0 0 0" size="0.0625" type="sphere"/>
+      <camera name="vision" pos="0 0.05 0.05" euler="1.57 0 0" fovy="100"/>
+      <geom name="torso_geom" pos="0 0 0" size="0.0625" type="sphere" rgba="0.8 0.6 0.4 1"/>
       <joint armature="0" damping="0" limited="false" margin="0.01" name="root" pos="0 0 0" type="free"/>
       <body name="front_left_leg" pos="0 0 0">
         <geom fromto="0.0 0.0 0.0 0.05 0.05 0.0" name="aux_1_geom" size="0.02" type="capsule" rgba="0.0039 0.1529 0.3961 1"/>
@@ -40,7 +41,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
           <geom fromto="0.0 0.0 0.0 0.05 0.05 0.0" name="left_leg_geom" size="0.02" type="capsule" rgba="0.0039 0.1529 0.3961 1"/>
           <body pos="0.05 0.05 0" name="front_left_foot">
             <joint axis="-1 1 0" name="ankle_1" pos="0.0 0.0 0.0" range="0.52 1.74" type="hinge"/>
-            <geom fromto="0.0 0.0 0.0 0.1 0.1 0.0" name="left_ankle_geom" size="0.02" type="capsule" rgba=".8 .5 .3 1"/>
+            <geom fromto="0.0 0.0 0.0 0.1 0.1 0.0" name="left_ankle_geom" size="0.02" type="capsule" rgba=".8 .5 .3 1" density="50000.0"/>
           </body>
         </body>
       </body>
@@ -51,7 +52,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
           <geom fromto="0.0 0.0 0.0 -0.05 0.05 0.0" name="right_leg_geom" size="0.02" type="capsule" rgba="0.0039 0.1529 0.3961 1"/>
           <body pos="-0.05 0.05 0" name="front_right_foot">
             <joint axis="1 1 0" name="ankle_2" pos="0.0 0.0 0.0" range="-1.74 -0.52" type="hinge"/>
-            <geom fromto="0.0 0.0 0.0 -0.1 0.1 0.0" name="right_ankle_geom" size="0.02" type="capsule"/>
+            <geom fromto="0.0 0.0 0.0 -0.1 0.1 0.0" name="right_ankle_geom" size="0.02" type="capsule" density="50000.0"/>
           </body>
         </body>
       </body>
@@ -62,7 +63,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
           <geom fromto="0.0 0.0 0.0 -0.05 -0.05 0.0" name="back_leg_geom" size="0.02" type="capsule" rgba="0.7412 0.0431 0.1843 1"/>
           <body pos="-0.05 -0.05 0" name="left_back_foot">
             <joint axis="-1 1 0" name="ankle_3" pos="0.0 0.0 0.0" range="-1.74 -0.52" type="hinge"/>
-            <geom fromto="0.0 0.0 0.0 -0.1 -0.1 0.0" name="third_ankle_geom" size="0.02" type="capsule"/>
+            <geom fromto="0.0 0.0 0.0 -0.1 -0.1 0.0" name="third_ankle_geom" size="0.02" type="capsule" density="50000.0"/>
           </body>
         </body>
       </body>
@@ -73,7 +74,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
           <geom fromto="0.0 0.0 0.0 0.05 -0.05 0.0" name="rightback_leg_geom" size="0.02" type="capsule" rgba="0.7412 0.0431 0.1843 1"/>
           <body pos="0.05 -0.05 0" name="right_back_foot">
             <joint axis="1 1 0" name="ankle_4" pos="0.0 0.0 0.0" range="0.52 1.74" type="hinge"/>
-            <geom fromto="0.0 0.0 0.0 0.1 -0.1 0.0" name="fourth_ankle_geom" size="0.02" type="capsule" rgba=".8 .5 .3 1"/>
+            <geom fromto="0.0 0.0 0.0 0.1 -0.1 0.0" name="fourth_ankle_geom" size="0.02" type="capsule" rgba=".8 .5 .3 1" density="50000.0"/>
           </body>
         </body>
       </body>

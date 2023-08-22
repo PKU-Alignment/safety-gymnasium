@@ -17,9 +17,10 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
 <mujoco model="doggo">
   <option timestep="0.01"/>
   <size njmax="3000" nconmax="1000"/>
+  <statistic meansize="0.23" extent="3.96"/>
   <default>
     <joint limited="true" stiffness="0.0001" armature="0.00005"/>
-    <geom condim="6" size="0.016" rgba="0.8 0.6 0.4 1" type="capsule" density="5"/>
+    <geom condim="6" size="0.016" type="capsule" density="5"/>
     <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear=".00625"/>
     <site size="0.018" type="sphere" rgba="1 0 0 0"/>
   </default>
@@ -29,7 +30,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
       <camera name="vision" pos=".0625 0 .1" xyaxes="0 -0.5 0 .2 0 0.5" fovy="100"/>
       <!-- <geom name="cam" pos=".15 0 .2" type="sphere" size="0.005"/> -->
       <site name="agent" pos="0 0 0"/>
-      <geom name="agent" pos="0 0 0" size="0.0375" fromto="0 0 0 .1 0 0" type="cylinder" density="2"/>
+      <geom name="agent" pos="0 0 0" size="0.0375" fromto="0 0 0 .1 0 0" type="cylinder" density="2" rgba="0.8 0.6 0.4 1"/>
       <freejoint name="agent"/>
 
       <body name="leg_1" pos="0 0 0">
@@ -40,7 +41,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
           <geom fromto="0.0 0.0 0.0 0.049 0.0283 -0.025" name="hip_1" rgba="0.0039 0.1529 0.3961 1" density="20"/>
           <body pos="0.049 0.0283 -0.025">
             <joint axis="-.5 .866 0" name="ankle_1" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
-            <geom fromto="0.0 0.0 0.0 -0.0588 -0.0339 -0.05" name="ankle_1" density="20"/>
+            <geom fromto="0.0 0.0 0.0 -0.0588 -0.0339 -0.05" name="ankle_1" density="20" rgba="0.8 0.6 0.4 1"/>
             <site name="ankle_1a" pos="0 0 0"/>
             <site name="ankle_1b" pos="-0.0588 -0.0339 -0.05"/>
           </body>
@@ -54,7 +55,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
           <geom fromto="0.0 0.0 0.0 0.049 -0.0283 -0.025" name="hip_4" rgba="0.0039 0.1529 0.3961 1" density="20"/>
           <body pos="0.049 -0.0283 -0.025">
             <joint axis=".5 .866 0" name="ankle_4" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
-            <geom fromto="0.0 0.0 0.0 -0.0588 0.0339 -0.05" name="ankle_4" density="20"/>
+            <geom fromto="0.0 0.0 0.0 -0.0588 0.0339 -0.05" name="ankle_4" density="20" rgba="0.8 0.6 0.4 1"/>
             <site name="ankle_4a" pos="0 0 0"/>
             <site name="ankle_4b" pos="-0.0588 0.0339 -0.05"/>
           </body>
@@ -62,7 +63,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
       </body>
 
       <body name="rear" pos="0 0 0">
-        <geom name="agent2" pos="0 0 0" size="0.0375" fromto="-.1 0 0 0 0 0" type="cylinder" density="2"/>
+        <geom name="agent2" pos="0 0 0" size="0.0375" fromto="-.1 0 0 0 0 0" type="cylinder" density="2" rgba="0.8 0.6 0.4 1"/>
         <joint axis="1 0 0" name="waist_x" pos="0 0 0" range="-0.523599 0.523599" type="hinge" springref="0"/>
         <body name="leg_2" pos="0 0 0">
           <geom fromto="-.05 0.0 0.0 -0.1 0.05 0.0" name="aux_2" rgba="0.7412 0.0431 0.1843 1" density="20"/>
@@ -73,7 +74,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
             <body pos="0.049 0.0283 -0.025">
             <!-- <joint axis="-.5 .866 0" name="ankle_2" pos="0.0 0.0 0.0" range="-80 -30" type="hinge"/> -->
               <joint axis="-.5 .866 0" name="ankle_2" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
-              <geom fromto="0.0 0.0 0.0 -0.0588 -0.0339 -0.05" name="ankle_2" density="20"/>
+              <geom fromto="0.0 0.0 0.0 -0.0588 -0.0339 -0.05" name="ankle_2" density="20" rgba="0.8 0.6 0.4 1"/>
               <site name="ankle_2a" pos="0 0 0"/>
               <site name="ankle_2b" pos="-0.0588 -0.0339 -0.05"/>
             </body>
@@ -88,7 +89,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
             <body pos="0.049 -0.0283 -0.025">
             <!-- <joint axis=".5 .866 0" name="ankle_3" pos="0.0 0.0 0.0" range="-80 -30" type="hinge"/> -->
               <joint axis=".5 .866 0" name="ankle_3" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
-              <geom fromto="0.0 0.0 0.0 -0.0588 0.0339 -0.05" name="ankle_3" density="20"/>
+              <geom fromto="0.0 0.0 0.0 -0.0588 0.0339 -0.05" name="ankle_3" density="20" rgba="0.8 0.6 0.4 1"/>
               <site name="ankle_3a" pos="0 0 0"/>
               <site name="ankle_3b" pos="-0.0588 0.0339 -0.05"/>
             </body>

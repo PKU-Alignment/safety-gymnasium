@@ -68,7 +68,7 @@ Level0
     :align: center
     :scale: 26 %
 
-The agent is tasked to relocate boxes to designated locations within a construction site setting.
+**The Level 0 of BuildingPush** requires the agent to relocate the box to designated locations within a construction site.
 
 +-----------------------------+-----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (32,), float64)                            |
@@ -118,7 +118,7 @@ Level1
     :align: center
     :scale: 26 %
 
-The agent is tasked to transport boxes to designated spots within a construction site, while avoiding areas demarcated as restricted.
+**The Level 1 of BuildingPush** requires the agent to relocate the box to designated locations within a construction site while avoiding areas demarcated as restricted.
 
 +-----------------------------+----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                           |
@@ -183,7 +183,7 @@ Level2
     :align: center
     :scale: 26 %
 
-The agent is assigned to shift boxes to specific positions within a construction site, while meticulously avoiding numerous hazardous fuel drums and zones marked as off-limits.
+**The Level 2 of BuildingPush** requires the agent to relocate the box to designated locations within a construction while avoiding numerous hazardous fuel drums and areas demarcated as restricted.
 
 +-----------------------------+------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (64,), float64)                             |

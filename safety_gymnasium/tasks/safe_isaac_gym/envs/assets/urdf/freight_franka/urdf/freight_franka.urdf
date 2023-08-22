@@ -1,0 +1,526 @@
+<?xml version="1.0" ?>
+<!--
+Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<robot name="freight_franka">
+
+<!-- <link name="freight_root0">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <mass value="4.00000"/>
+    <inertia ixx="1e-4" ixy="0" ixz="0" iyy="1e-4" iyz="0" izz="1e-4"/>
+  </inertial>
+</link>
+<link name="freight_root1">
+  <inertial>
+    <mass value="0.05"/>
+    <inertia ixx="1e-4" ixy="0.0" ixz="0.0" iyy="1e-4" iyz="0.0" izz="1e-4"/>
+  </inertial>
+</link>
+<link name="freight_root2">
+  <inertial>
+    <mass value="0.05"/>
+    <inertia ixx="1e-4" ixy="0.0" ixz="0.0" iyy="1e-4" iyz="0.0" izz="1e-4"/>
+  </inertial>
+</link>
+<joint name="x_joint" type="prismatic">
+  <parent link="freight_root0"/>
+  <child link="freight_root1"/>
+  <axis xyz="1 0 0"/>
+  <limit effort="8.85" lower="-0.5" upper="0.5" velocity="2.6100"/>
+</joint>
+<joint name="y_joint" type="prismatic">
+  <parent link="freight_root1"/>
+  <child link="freight_root2"/>
+  <axis xyz="0 1 0"/>
+  <limit effort="8.85" lower="-0.5" upper="0.5" velocity="2.6100"/>
+</joint>
+<joint name="z_rotation_joint" type="revolute">
+  <parent link="freight_root2"/>
+  <child link="base_link"/>
+  <axis xyz="0 0 1"/>
+  <origin rpy="-0.00000 -0.00000 0" xyz="0 0 0"/>
+  <limit effort="8.85" lower="-3.14" upper="3.14" velocity="2.6100"/>
+</joint> -->
+
+<!-- <link name="root">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <mass value="4.00000"/>
+    <inertia ixx="1e-4" ixy="0" ixz="0" iyy="1e-4" iyz="0" izz="1e-4"/>
+  </inertial>
+</link> -->
+<link name="freight_root0">
+
+  </link>
+  <link name="freight_root1">
+
+  </link>
+  <link name="freight_root2">
+  </link>
+<!-- <joint name="root" type="fixed">
+  <parent link="root"/>
+  <child link="freight_root0"/>
+  <axis xyz="1 0 0"/>
+</joint> -->
+
+  <link name="base_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.0036 0.0 0.0014"/>
+      <mass value="1"/>
+      <inertia ixx="1.225" ixy="0.0099" ixz="0.0062" iyy="1.2853" iyz="-0.0034" izz="0.987"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/base_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.356 0.361 0.376 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/base_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="r_wheel_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="4.3542"/>
+      <inertia ixx="0.0045" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.0045"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/r_wheel_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.086 0.506 0.767 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/r_wheel_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="r_wheel_joint" type="fixed">
+    <origin rpy="-6.123E-17 0 0" xyz="0.0012914 -0.18738 0.055325"/>
+    <parent link="base_link"/>
+    <child link="r_wheel_link"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="8.85" velocity="34.8"/>
+  </joint>
+  <link name="l_wheel_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="4.3542"/>
+      <inertia ixx="0.0045" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.0045"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/l_wheel_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.086 0.506 0.767 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/l_wheel_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_wheel_joint" type="fixed">
+    <origin rpy="-6.123E-17 0 0" xyz="0.0012914 0.18738 0.055325"/>
+    <parent link="base_link"/>
+    <child link="l_wheel_link"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="8.85" velocity="34.8"/>
+  </joint>
+  <link name="estop_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.002434512737072 -0.00330608315239905 0.00665139196650039"/>
+      <mass value="0.00196130439134723"/>
+      <inertia ixx="3.02810026604417E-07" ixy="-1.5862023118056E-08" ixz="3.16561396557437E-08" iyy="2.93322917127605E-07" iyz="-4.28833522751273E-08" izz="2.28513272627183E-07"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/estop_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.8 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/estop_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="estop_joint" type="fixed">
+    <origin rpy="1.5708 0 0" xyz="-0.12465 0.23892 0.31127"/>
+    <parent link="base_link"/>
+    <child link="estop_link"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="laser_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.0306228970175641 0.0007091682908278 0.0551974119471302"/>
+      <mass value="0.00833634573995571"/>
+      <inertia ixx="1.01866461240801E-06" ixy="-5.88447626567756E-08" ixz="7.83857244757914E-08" iyy="5.10039589974707E-07" iyz="-7.12664289617235E-09" izz="1.28270671527309E-06"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/laser_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/laser_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="laser_joint" type="fixed">
+    <origin rpy="3.14159265359 0 0" xyz="0.235 0 0.2878"/>
+    <parent link="base_link"/>
+    <child link="laser_link"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="base_camera_link"/>
+  <joint name="base_camera_joint" type="fixed">
+    <origin rpy="0 -0.17453292519943 0" xyz="0.2645 0 0.198"/>
+    <parent link="base_link"/>
+    <child link="base_camera_link"/>
+  </joint>
+  <link name="base_camera_optical_frame"/>
+  <joint name="base_camera_optical_joint" type="fixed">
+    <origin rpy="1.5707963267966 0 1.5707963267966" xyz="0 0 0"/>
+    <parent link="base_camera_link"/>
+    <child link="base_camera_optical_frame"/>
+  </joint>
+  <link name="panda_link0">
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/visual/link0.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/collision/link0.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="panda_link1">
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/visual/link1.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/collision/link1.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="panda_joint1" type="revolute">
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973"/>
+    <origin rpy="0 0 0" xyz="0 0 0.333"/>
+    <parent link="panda_link0"/>
+    <child link="panda_link1"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="10.0"/>
+    <limit effort="87" lower="-2.8973" upper="2.8973" velocity="2.1750"/>
+  </joint>
+  <link name="panda_link2">
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/visual/link2.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/collision/link2.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="panda_joint2" type="revolute">
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-1.7628" soft_upper_limit="1.7628"/>
+    <origin rpy="-1.57079632679 0 0" xyz="0 0 0"/>
+    <parent link="panda_link1"/>
+    <child link="panda_link2"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="10.0"/>
+    <limit effort="87" lower="-1.7628" upper="1.7628" velocity="2.1750"/>
+  </joint>
+  <link name="panda_link3">
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/visual/link3.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/collision/link3.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="panda_joint3" type="revolute">
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973"/>
+    <origin rpy="1.57079632679 0 0" xyz="0 -0.316 0"/>
+    <parent link="panda_link2"/>
+    <child link="panda_link3"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="10.0"/>
+    <limit effort="87" lower="-2.8973" upper="2.8973" velocity="2.1750"/>
+  </joint>
+  <link name="panda_link4">
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/visual/link4.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/collision/link4.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="panda_joint4" type="revolute">
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-3.0718" soft_upper_limit="-0.0698"/>
+    <origin rpy="1.57079632679 0 0" xyz="0.0825 0 0"/>
+    <parent link="panda_link3"/>
+    <child link="panda_link4"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="10.0"/>
+    <limit effort="87" lower="-3.0718" upper="-0.0698" velocity="2.1750"/>
+  </joint>
+  <link name="panda_link5">
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/visual/link5.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/collision/link5.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="panda_joint5" type="revolute">
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973"/>
+    <origin rpy="-1.57079632679 0 0" xyz="-0.0825 0.384 0"/>
+    <parent link="panda_link4"/>
+    <child link="panda_link5"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="10.0"/>
+    <limit effort="12" lower="-2.8973" upper="2.8973" velocity="2.6100"/>
+  </joint>
+  <link name="panda_link6">
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/visual/link6.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/collision/link6.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="panda_joint6" type="revolute">
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-0.0175" soft_upper_limit="3.7525"/>
+    <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+    <parent link="panda_link5"/>
+    <child link="panda_link6"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="10.0"/>
+    <limit effort="12" lower="-0.0175" upper="3.7525" velocity="2.6100"/>
+  </joint>
+  <link name="panda_link7">
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/visual/link7.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/collision/link7.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="panda_joint7" type="revolute">
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973"/>
+    <origin rpy="1.57079632679 0 0" xyz="0.088 0 0"/>
+    <parent link="panda_link6"/>
+    <child link="panda_link7"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="10.0"/>
+    <limit effort="12" lower="-2.8973" upper="2.8973" velocity="2.6100"/>
+    <!-- note -->
+  </joint>
+  <!--
+    <link name="panda_link8"/>
+    <joint name="panda_joint8" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0.107"/>
+        <parent link="panda_link7"/>
+        <child link="panda_link8"/>
+        <axis xyz="0 0 0"/>
+    </joint>
+    -->
+  <joint name="panda_hand_joint" type="fixed">
+    <parent link="panda_link7"/>
+    <child link="panda_hand"/>
+    <origin rpy="0 0 -0.785398163397" xyz="0 0 0.107"/>
+  </joint>
+  <link name="panda_hand">
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/visual/hand.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/collision/hand.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="panda_leftfinger">
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/visual/finger.dae" scale="1 1 1.5"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/collision/finger.obj" scale="1 1 1.5"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="panda_rightfinger">
+    <visual>
+      <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/visual/finger.dae" scale="1 1 1.5"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/collision/finger.obj" scale="1 1 1.5"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="panda_finger_joint1" type="prismatic">
+    <parent link="panda_hand"/>
+    <child link="panda_leftfinger"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0584"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="100" lower="0.0" upper="0.04" velocity="1.0"/>
+  </joint>
+  <joint name="panda_finger_joint2" type="prismatic">
+    <parent link="panda_hand"/>
+    <child link="panda_rightfinger"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0584"/>
+    <axis xyz="0 -1 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="100" lower="0.0" upper="0.04" velocity="1.0"/>
+    <mimic joint="panda_finger_joint1"/>
+  </joint>
+
+  <!-- Connect the two robots together here -->
+  <joint name="base_link_connection" type="fixed">
+    <parent link="base_link"/>
+    <child link="panda_link0"/>
+    <origin rpy="0 0 3.14159" xyz="0 0 0.36"/>
+  </joint>
+
+  <!-- <link name="freight_root0">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="4.00000"/>
+      <inertia ixx="1e-4" ixy="0" ixz="0" iyy="1e-4" iyz="0" izz="1e-4"/>
+    </inertial>
+  </link>
+  <link name="freight_root1">
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="1e-4" ixy="0.0" ixz="0.0" iyy="1e-4" iyz="0.0" izz="1e-4"/>
+    </inertial>
+  </link>
+  <link name="freight_root2">
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="1e-4" ixy="0.0" ixz="0.0" iyy="1e-4" iyz="0.0" izz="1e-4"/>
+    </inertial>
+  </link>
+  <joint name="x_joint" type="prismatic">
+    <parent link="freight_root0"/>
+    <child link="freight_root1"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.5" upper="0.5"/>
+  </joint>
+  <joint name="y_joint" type="prismatic">
+    <parent link="freight_root1"/>
+    <child link="freight_root2"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.5" upper="0.5"/>
+  </joint>
+  <joint name="z_rotation_joint" type="revolute">
+    <parent link="freight_root2"/>
+    <child link="base_link"/>
+    <axis xyz="0 0 1"/>
+    <origin rpy="-0.00000 -0.00000 0" xyz="0 0 0"/>
+    <limit lower="-3.14" upper="3.14"/>
+  </joint> -->
+
+  <joint name="x_joint" type="prismatic">
+    <parent link="freight_root0"/>
+    <child link="freight_root1"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="10.0"/>
+    <limit lower="-1" upper="1" velocity="1.0"/>
+
+  </joint>
+  <joint name="y_joint" type="prismatic">
+    <parent link="freight_root1"/>
+    <child link="freight_root2"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="10.0"/>
+    <limit lower="-1" upper="1" velocity="0.3"/>
+  </joint>
+  <joint name="z_rotation_joint" type="revolute">
+    <parent link="freight_root2"/>
+    <child link="base_link"/>
+    <axis xyz="0 0 1"/>
+    <origin rpy="-0.00000 -0.00000 0" xyz="0 0 0"/>
+    <limit lower="-3.14" upper="3.14" velocity="1.0"/>
+  </joint>
+
+</robot>

@@ -1,0 +1,143 @@
+# Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ==============================================================================
+
+textures:
+  skybox:
+    '@type': skybox
+    '@fileright': star_hd.right.png
+    '@fileleft': star_hd.left.png
+    '@fileback': star_hd.back.png
+    '@filefront': star_hd.front.png
+    '@filedown': star_hd.bottom.png
+    '@fileup': star_hd.top.png
+  matplane:
+    '@name': matplane
+    '@builtin': checker
+    '@height': 100
+    '@width': 100
+    '@rgb1': '0.859 0.843 0.765'
+    '@rgb2': '0.949 0.914 0.855'
+    '@type': 2d
+  village_floor:
+    '@name': village_floor
+    '@file': village_floor.PNG
+    '@type': 2d
+  bush:
+    '@name': bush
+    '@file': bush.PNG
+    '@type': 2d
+  flower_bush:
+    '@name': flower_bush
+    '@file': flower_bush.PNG
+    '@type': 2d
+  bamboo_wall:
+    '@name': bamboo_wall
+    '@file': bamboo_wall.PNG
+    '@type': 2d
+  cliff1:
+    '@name': cliff1
+    '@file': cliff1.PNG
+    '@type': 2d
+  cliff2:
+    '@name': cliff2
+    '@file': cliff2.PNG
+    '@type': 2d
+  cliff3:
+    '@name': cliff3
+    '@file': cliff3.PNG
+    '@type': 2d
+  wooden_door1:
+    '@name': wooden_door1
+    '@file': wooden_door1.PNG
+    '@type': 2d
+
+materials:
+  matplane:
+    '@name': matplane
+    '@reflectance': 0.1
+    '@shininess': 0.1
+    '@specular': 0.1
+    '@texrepeat': 10 10
+    '@texture': matplane
+  village_floor:
+    '@name': village_floor
+    '@reflectance': 0.1
+    '@texrepeat': 25 25
+    '@texture': village_floor
+  bush:
+    '@name': bush
+    '@texture': bush
+    '@specular': 1
+    '@shininess': 1
+  flower_bush:
+    '@name': flower_bush
+    '@texture': flower_bush
+    '@specular': 1
+    '@shininess': 1
+  bamboo_wall:
+    '@name': bamboo_wall
+    '@texture': bamboo_wall
+    '@specular': 1
+    '@shininess': 1
+  cliff1:
+    '@name': cliff1
+    '@texture': cliff1
+    '@specular': 1
+    '@shininess': 1
+  cliff2:
+    '@name': cliff2
+    '@texture': cliff2
+    '@specular': 1
+    '@shininess': 1
+  cliff3:
+    '@name': cliff3
+    '@texture': cliff3
+    '@specular': 1
+    '@shininess': 1
+  wooden_door1:
+    '@name': wooden_door1
+    '@texture': wooden_door1
+    '@specular': 1
+    '@shininess': 1
+
+meshes:
+  bush:
+    '@name': bush
+    '@file': bush.obj
+    '@scale': 0.0035 0.0035 0.0035
+  flower_bush:
+    '@name': flower_bush
+    '@file': flower_bush.obj
+    '@scale': 0.0035 0.0035 0.0035
+  bamboo_wall:
+    '@name': bamboo_wall
+    '@file': bamboo_wall.obj
+    '@scale': 0.008 0.008 0.008
+  cliff1:
+    '@name': cliff1
+    '@file': cliff1.obj
+    '@scale': 0.0016 0.0032 0.0016
+  cliff2:
+    '@name': cliff2
+    '@file': cliff2.obj
+    '@scale': 0.0064 0.0064 0.0064
+  cliff3:
+    '@name': cliff3
+    '@file': cliff3.obj
+    '@scale': 0.0008 0.0008 0.0008
+  wooden_door1:
+    '@name': wooden_door1
+    '@file': wooden_door1.obj
+    '@scale': 0.008 0.008 0.008

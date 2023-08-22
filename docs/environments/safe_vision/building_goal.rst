@@ -50,7 +50,7 @@ Level0
     :align: center
     :scale: 26 %
 
-The agent is tasked to accurately dock at designated positions within a construction site setting.
+**The Level 0 of BuildingGoal** requires the agent to dock at designated positions within a construction site.
 
 +-----------------------------+------------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (16,), float64)                                   |
@@ -98,7 +98,7 @@ Level1
     :align: center
     :scale: 26 %
 
-The agent is required to accurately dock at specific locations within a construction site, while ensuring to avoid entry into hazardous areas.
+**The Level 1 of BuildingGoal** requires the agent to dock at designated positions within a construction site while ensuring to avoid entry into hazardous areas.
 
 +-----------------------------+----------------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (48,), float64)                                 |
@@ -166,7 +166,7 @@ Level2
     :align: center
     :scale: 26 %
 
-The agent is tasked to precisely dock at designated locations within a construction site, circumvent the site's exhaust fans, and ensure it does not enter any hazardous zones.
+**The Level 2 of BuildingGoal** requires the agent to dock at designated positions within a construction site, while ensuring to avoid entry into hazardous areas and circumventing the site’s exhaust fans.
 
 +-----------------------------+-----------------------------------------------------------+
 | Specific Observation Space  | Box(-inf, inf, (48,), float64)                            |

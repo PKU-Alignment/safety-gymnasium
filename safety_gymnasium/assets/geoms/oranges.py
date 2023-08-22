@@ -45,37 +45,44 @@ class Oranges(Geom):  # pylint: disable=too-many-instance-attributes
     reward_distance: float = 1.0  # Dense reward multiplied by the distance moved to the goal
 
     color: np.array = COLOR['orange']
+    alpha: float = 0.25
     group: np.array = GROUP['orange']
     is_lidar_observed: bool = True
     is_constrained: bool = False
     is_meshed: bool = False
+    mesh_name: str = name[:-1]
 
     def get_config(self, xy_pos, rot):
         """To facilitate get specific config for this object."""
-        geom = {
+        body = {
             'name': self.name,
-            'size': [self.size, self.size / 2],
             'pos': np.r_[xy_pos, self.size / 2 + 1e-2],
             'rot': rot,
-            'type': 'cylinder',
-            'contype': 0,
-            'conaffinity': 0,
-            'group': self.group,
-            'rgba': self.color * [1, 1, 1, 0.25],  # transparent
+            'geoms': [
+                {
+                    'name': self.name,
+                    'size': [self.size, self.size / 2],
+                    'type': 'cylinder',
+                    'contype': 0,
+                    'conaffinity': 0,
+                    'group': self.group,
+                    'rgba': self.color * np.array([1, 1, 1, self.alpha]),
+                },
+            ],
         }
         if self.is_meshed:
-            geom.update(
+            body['geoms'][0].update(
                 {
-                    'pos': np.r_[xy_pos, 0.3],
                     'type': 'mesh',
-                    'mesh': 'orange',
-                    'material': 'orange',
+                    'mesh': self.mesh_name,
+                    'material': self.mesh_name,
                     'euler': [np.pi / 2, 0, 0],
                 },
             )
-        return geom
+            body['pos'] = (np.r_[xy_pos, 0.3],)
+        return body
 
     @property
     def pos(self):
         """Helper to get goal position from layout"""
-        return [self.engine.data.body(f'orange{i}').xpos.copy() for i in range(self.num)]
+        return [self.engine.data.body(f'{self.name[:-1]}{i}').xpos.copy() for i in range(self.num)]
