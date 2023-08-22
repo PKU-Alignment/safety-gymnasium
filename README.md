@@ -171,7 +171,7 @@ Here is a list of all the environments we support for now:
   </tbody>
 </table>
 
-Here are some screenshots of the **Safe Navigation tasks**.
+Here are some screenshots of the **Safe Navigation** tasks.
 
 #### Agents
 
