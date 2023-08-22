@@ -59,7 +59,7 @@ We can formulate it as follow:
 
 .. math:: cost=bool(V_{current} > V_{threshold})
 
-After conducting extensive experiments. The velocity threshold is set to **50%** of the agent's maximum velocity achieved after the convergence of the **Proximal Policy Optimization (PPO)** algorithm trained via **1e6 steps**.
+After conducting extensive experiments. The velocity threshold is set to **50%** of the agent's maximum velocity achieved after the convergence of the **Proximal Policy Optimization (PPO)** algorithm trained via **1e7 steps**.
 
 .. Note::
     For the **Swimmer**, we only set constraints based on its velocity in the X-axis, as its movement relies on its oscillation, which generates velocity in the Y-axis.
@@ -97,15 +97,15 @@ v0:
 +------------------------------+--------------------+
 | Environment                  | Velocity Threshold |
 +==============================+====================+
-| SafetyHopperVelocity-v1      | 0.37315            |
+| SafetyHopperVelocity-v0      | 0.37315            |
 +------------------------------+--------------------+
-| SafetyAntVelocity-v1         | 2.5745             |
+| SafetyAntVelocity-v0         | 2.5745             |
 +------------------------------+--------------------+
-| SafetyHumanoidVelocity-v1    | 2.3475             |
+| SafetyHumanoidVelocity-v0    | 2.3475             |
 +------------------------------+--------------------+
-| SafetyWalker2dVelocity-v1    | 1.7075             |
+| SafetyWalker2dVelocity-v0    | 1.7075             |
 +------------------------------+--------------------+
-| SafetyHalfCheetahVelocity-v1 | 2.8795             |
+| SafetyHalfCheetahVelocity-v0 | 2.8795             |
 +------------------------------+--------------------+
-| SafetySwimmerVelocity-v1     | 0.04845            |
+| SafetySwimmerVelocity-v0     | 0.04845            |
 +------------------------------+--------------------+
