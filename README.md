@@ -372,11 +372,11 @@ Here are some screenshots of the **Safe Navigation** tasks.
   </tbody>
 </table>
 
-### Vision-base Safe RL
+### Vision-based Safe RL
 
-Vision-based Safe Reinforcement Learning lacks realistic scenarios.
+Vision-based SafeRL lacks realistic scenarios.
 Although the original `Safety-Gym` could minimally support visual input, the scenarios were too similar.
-To facilitate the validation of visual-based Safe Reinforcement Learning algorithms, we have developed a set of realistic vision-based SafeRL tasks, which are currently being validated on the baseline.
+To facilitate the validation of visual-based SafeRL algorithms, we have developed a set of realistic vision-based SafeRL tasks, which are currently being validated on the baseline.
 
 For the appetizer, the images are as follows:
 
