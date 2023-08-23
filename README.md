@@ -380,7 +380,74 @@ To facilitate the validation of visual-based safety reinforcement learning algor
 
 For the appetizer, the images are as follows:
 
-<img src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/vision_input.png" width="100%"/>
+<table class="docutils align-default">
+  <tbody>
+    <tr class="row-odd">
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">Race0</span></a></strong>
+        </p>
+      </td>
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">Race1</span></a></strong>
+        </p>
+      </td>
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">Race2</span></a></strong>
+        </p>
+      </td>
+    </tr>
+    <tr class="row-odd">
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">FormulaOne0</span></a></strong>
+        </p>
+      </td>
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">FormulaOne1</span></a></strong>
+        </p>
+      </td>
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">FormulaOne2</span></a></strong>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### Environment Usage
 
