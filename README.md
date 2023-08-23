@@ -19,7 +19,7 @@
 <a href="https://github.com/PKU-Alignment/safety-gymnasium#why-safety-gymnasium">Why Safety-Gymnasium?</a> |
   <a href="https://www.safety-gymnasium.com">Documentation</a> |
   <a href="https://github.com/PKU-Alignment/safety-gymnasium#installation">Install guide</a> |
-  <a href="https://github.com/PKU-Alignment/safety-gymnasium#customize-your-environments">Customization</a>
+  <a href="https://github.com/PKU-Alignment/safety-gymnasium#customize-your-environments">Customization</a> | <a href="https://sites.google.com/view/safety-gymnasium">Video</a>
 </p>
 
 Safety-Gymnasium is a highly scalable and customizable Safe Reinforcement Learning (SafeRL) library.
@@ -120,7 +120,7 @@ Here is a list of all the environments we support for now:
     </tr>
     <tr>
       <td>Multi-Agent Velocity</td>
-      <td>MA-HalfCheetah, MA-Hopper, MA-Swimmer, MA-Walker2d, MA-Ant, MA-Humanoid</td>
+      <td>6x1HalfCheetah, 2x3HalfCheetah, 3x1Hopper, 2x1Swimmer, 2x3Walker2d, 2x4Ant, 4x2Ant, 9|8Humanoid</td>
       <td>Safety2x4AntVelocity-v0</td>
     </tr>
     <tr>
@@ -564,7 +564,7 @@ apt-get install python3-opengl
 
 We construct a highly expandable framework of code so that you can easily comprehend it and design your environments to facilitate your research with no more than 100 lines of code on average.
 
-For details, please refer to our documentation.
+For details, please refer to our [documentation](https://www.safety-gymnasium.com/en/latest/components_of_environments/tasks/task_example.html).
 Here is a minimal example:
 
 ```python
