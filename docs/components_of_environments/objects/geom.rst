@@ -180,7 +180,7 @@ Constraints
 
 .. _Sigwalls_out_of_boundary_cost:
 
-- out_of_boundary_cost: When agent crosses the boundary from inside the circular domain outward, it generates cost: ``1``
+- out_of_boundary_cost: When the agent crosses the boundary from inside the circular domain outward, it generates cost: ``1``
 
 .. _Fixedwalls:
 
