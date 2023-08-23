@@ -396,8 +396,8 @@ For the appetizer, the images are as follows:
       <td>
         <figure class="align-default">
           <a class="reference external image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg" style="width: 230px;"></a>
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race1.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race1.jpeg" style="width: 230px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="std std-ref">Race1</span></a></strong>
@@ -406,8 +406,8 @@ For the appetizer, the images are as follows:
       <td>
         <figure class="align-default">
           <a class="reference external image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg" style="width: 230px;"></a>
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race2.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race2.jpeg" style="width: 230px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="std std-ref">Race2</span></a></strong>
@@ -428,8 +428,8 @@ For the appetizer, the images are as follows:
       <td>
         <figure class="align-default">
           <a class="reference external image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg" style="width: 230px;"></a>
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one1.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one1.jpeg" style="width: 230px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="std std-ref">FormulaOne1</span></a></strong>
@@ -438,8 +438,8 @@ For the appetizer, the images are as follows:
       <td>
         <figure class="align-default">
           <a class="reference external image-reference"><img
-              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg"
-              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg" style="width: 230px;"></a>
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one2.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one2.jpeg" style="width: 230px;"></a>
         </figure>
         <p class="centered">
           <strong><a class="reference internal"><span class="std std-ref">FormulaOne2</span></a></strong>
