@@ -253,7 +253,7 @@ Safe Isaac Gym
 
 .. Note::
 
-    By harnessing the rapid parallel capabilities of Isaac Gym, we are able to explore more realistic and challenging environments, unveiling and examining the potentialities of SafeRL. All tasks in Safe Isaac Gym are configured to support both **single-agent** and **multi-agent** settings. The single-agent and multi-agent algorithms from `SafePO <https://github.com/PKU-Alignment/Safe-Policy-Optimization>`__ can be seamlessly implemented in these respective environments.
+    By harnessing the rapid parallel capabilities of Isaac Gym, we can explore more realistic and challenging environments, unveiling and examining the potentialities of SafeRL. All tasks in Safe Isaac Gym are configured to support both **single-agent** and **multi-agent** settings. The single-agent and multi-agent algorithms from `SafePO <https://github.com/PKU-Alignment/Safe-Policy-Optimization>`__ can be seamlessly implemented in these respective environments.
 
 
 .. list-table::

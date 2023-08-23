@@ -93,8 +93,8 @@ class ShadowHandOver_Safe_joint(BaseTask):
 
         self.asset_files_dict = {
             'block': 'urdf/objects/cube_multicolor.urdf',
-            'egg': 'mjcf/open_ai_assets/hand/egg.xml',
-            'pen': 'mjcf/open_ai_assets/hand/pen.xml',
+            'egg': 'mjcf/shadow_hand_description/egg.xml',
+            'pen': 'mjcf/shadow_hand_description/pen.xml',
             'ycb/banana': 'urdf/ycb/011_banana/011_banana.urdf',
             'ycb/can': 'urdf/ycb/010_potted_meat_can/010_potted_meat_can.urdf',
             'ycb/mug': 'urdf/ycb/025_mug/025_mug.urdf',
@@ -254,15 +254,9 @@ class ShadowHandOver_Safe_joint(BaseTask):
         lower = gymapi.Vec3(-spacing, -spacing, 0.0)
         upper = gymapi.Vec3(spacing, spacing, spacing)
 
-        asset_root = '../../assets'
-        shadow_hand_asset_file = 'mjcf/open_ai_assets/hand/shadow_hand.xml'
-        shadow_hand_another_asset_file = 'mjcf/open_ai_assets/hand/shadow_hand1.xml'
-
-        if 'asset' in self.cfg['env']:
-            asset_root = self.cfg['env']['asset'].get('assetRoot', asset_root)
-            shadow_hand_asset_file = self.cfg['env']['asset'].get(
-                'assetFileName', shadow_hand_asset_file
-            )
+        asset_root = os.path.dirname(os.path.abspath(__file__)).replace('envs/tasks', 'envs/assets')
+        shadow_hand_asset_file = 'mjcf/shadow_hand_description/shadow_hand.xml'
+        shadow_hand_another_asset_file = 'mjcf/shadow_hand_description/shadow_hand1.xml'
 
         object_asset_file = self.asset_files_dict[self.object_type]
 

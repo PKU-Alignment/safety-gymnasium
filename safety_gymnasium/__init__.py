@@ -345,5 +345,5 @@ def __combine_multi(tasks, agents, max_episode_steps):
 
 # Multi Goal Environments
 # ----------------------------------------
-fading_tasks = {'MultiGoal0': {}, 'MultiGoal1': {}, 'MultiGoal2': {}}
-__combine_multi(fading_tasks, robots, max_episode_steps=1000)
+multi_goal_tasks = {'MultiGoal0': {}, 'MultiGoal1': {}, 'MultiGoal2': {}}
+__combine_multi(multi_goal_tasks, robots, max_episode_steps=1000)

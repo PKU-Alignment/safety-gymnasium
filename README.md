@@ -19,7 +19,7 @@
 <a href="https://github.com/PKU-Alignment/safety-gymnasium#why-safety-gymnasium">Why Safety-Gymnasium?</a> |
   <a href="https://www.safety-gymnasium.com">Documentation</a> |
   <a href="https://github.com/PKU-Alignment/safety-gymnasium#installation">Install guide</a> |
-  <a href="https://github.com/PKU-Alignment/safety-gymnasium#customize-your-environments">Customization</a>
+  <a href="https://github.com/PKU-Alignment/safety-gymnasium#customize-your-environments">Customization</a> | <a href="https://sites.google.com/view/safety-gymnasium">Video</a>
 </p>
 
 Safety-Gymnasium is a highly scalable and customizable Safe Reinforcement Learning (SafeRL) library.
@@ -69,12 +69,12 @@ Here is a list of all the environments we support for now:
   <tbody>
     <tr>
       <td rowspan="4">Safe Navigation</td>
-      <td>Goal[012]</td>
+      <td>Button[012]</td>
       <td rowspan="4">Point, Car, Doggo, Racecar, Ant</td>
       <td rowspan="4">SafetyPointGoal1-v0</td>
     </tr>
     <tr>
-      <td>Button[012]</td>
+      <td>Goal[012]</td>
     </tr>
     <tr>
       <td>Push[012]</td>
@@ -83,15 +83,95 @@ Here is a list of all the environments we support for now:
       <td>Circle[012]</td>
     </tr>
     <tr>
-      <td>Velocity</td>
+      <td>Safe Velocity</td>
       <td>Velocity</td>
       <td>HalfCheetah, Hopper, Swimmer, Walker2d, Ant, Humanoid</td>
       <td>SafetyAntVelocity-v1</td>
     </tr>
+    <tr>
+      <td rowspan="7">Safe Vision</td>
+      <td>BuildingButton[012]</td>
+      <td rowspan="7">Point, Car, Doggo, Racecar, Ant</td>
+      <td rowspan="7">SafetyFormulaOne1-v0</td>
+    </tr>
+    <tr>
+      <td>BuildingGoal[012]</td>
+    </tr>
+    <tr>
+      <td>BuildingPush[012]</td>
+    </tr>
+    <tr>
+      <td>FadingEasy[012]</td>
+    </tr>
+    <tr>
+      <td>FadingHard[012]</td>
+    </tr>
+    <tr>
+      <td>Race[012]</td>
+    </tr>
+    <tr>
+      <td>FormulaOne[012]</td>
+    </tr>
+    <tr>
+      <td rowspan="8">Safe Multi-Agent</td>
+      <td>MultiGoal[012]</td>
+      <td>Multi-Point, Multi-Ant</td>
+      <td>SafetyAntMultiGoal1-v0</td>
+    </tr>
+    <tr>
+      <td>Multi-Agent Velocity</td>
+      <td>6x1HalfCheetah, 2x3HalfCheetah, 3x1Hopper, 2x1Swimmer, 2x3Walker2d, 2x4Ant, 4x2Ant, 9|8Humanoid</td>
+      <td>Safety2x4AntVelocity-v0</td>
+    </tr>
+    <tr>
+      <td>FreightFrankaCloseDrawer(Multi-Agent)</td>
+      <td rowspan="2">FreightFranka</td>
+      <td rowspan="2">FreightFrankaCloseDrawer(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td>FreightFrankaPickAndPlace(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td>ShadowHandCatchOver2UnderarmSafeFinger(Multi-Agent)</td>
+      <td rowspan="4">ShadowHands</td>
+      <td rowspan="4">ShadowHandCatchOver2UnderarmSafeJoint(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td>ShadowHandCatchOver2UnderarmSafeJoint(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td>ShadowHandOverSafeFinger(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td>ShadowHandOverSafeJoint(Multi-Agent)</td>
+    </tr>
+    <tr>
+      <td rowspan="6">Safe Isaac Gym</td>
+      <td>FreightFrankaCloseDrawer</td>
+      <td rowspan="2">FreightFranka</td>
+      <td rowspan="2">FreightFrankaCloseDrawer</td>
+    </tr>
+    <tr>
+      <td>FreightFrankaPickAndPlace</td>
+    </tr>
+    <tr>
+      <td>ShadowHandCatchOver2UnderarmSafeFinger</td>
+      <td rowspan="4">ShadowHands</td>
+      <td rowspan="4">ShadowHandCatchOver2UnderarmSafeJoint</td>
+    </tr>
+    <tr>
+      <td>ShadowHandCatchOver2UnderarmSafeJoint</td>
+    </tr>
+    <tr>
+      <td>ShadowHandOverSafeFinger</td>
+    </tr>
+    <tr>
+      <td>ShadowHandOverSafeJoint</td>
+    </tr>
   </tbody>
 </table>
 
-Here are some screenshots of the Safe Navigation tasks.
+Here are some screenshots of the **Safe Navigation** tasks.
 
 #### Agents
 
@@ -292,15 +372,82 @@ Here are some screenshots of the Safe Navigation tasks.
   </tbody>
 </table>
 
-### Vision-base Safe RL
+### Vision-based Safe RL
 
-Vision-based safety reinforcement learning lacks realistic scenarios.
+Vision-based SafeRL lacks realistic scenarios.
 Although the original `Safety-Gym` could minimally support visual input, the scenarios were too similar.
-To facilitate the validation of visual-based safety reinforcement learning algorithms, we have developed a set of realistic vision-based SafeRL tasks, which are currently being validated on the baseline.
+To facilitate the validation of visual-based SafeRL algorithms, we have developed a set of realistic vision-based SafeRL tasks, which are currently being validated on the baseline.
 
 For the appetizer, the images are as follows:
 
-<img src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/images/vision_input.png" width="100%"/>
+<table class="docutils align-default">
+  <tbody>
+    <tr class="row-odd">
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race0.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">Race0</span></a></strong>
+        </p>
+      </td>
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race1.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race1.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">Race1</span></a></strong>
+        </p>
+      </td>
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race2.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/race2.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">Race2</span></a></strong>
+        </p>
+      </td>
+    </tr>
+    <tr class="row-odd">
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one0.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">FormulaOne0</span></a></strong>
+        </p>
+      </td>
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one1.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one1.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">FormulaOne1</span></a></strong>
+        </p>
+      </td>
+      <td>
+        <figure class="align-default">
+          <a class="reference external image-reference"><img
+              alt="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one2.jpeg"
+              src="https://github.com/PKU-Alignment/safety-gymnasium/raw/HEAD/docs/_static/images/formula_one2.jpeg" style="width: 230px;"></a>
+        </figure>
+        <p class="centered">
+          <strong><a class="reference internal"><span class="std std-ref">FormulaOne2</span></a></strong>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### Environment Usage
 
@@ -417,7 +564,7 @@ apt-get install python3-opengl
 
 We construct a highly expandable framework of code so that you can easily comprehend it and design your environments to facilitate your research with no more than 100 lines of code on average.
 
-For details, please refer to our documentation.
+For details, please refer to our [documentation](https://www.safety-gymnasium.com/en/latest/components_of_environments/tasks/task_example.html).
 Here is a minimal example:
 
 ```python

@@ -40,10 +40,10 @@ env:
 
   asset:
     assetRoot: "../envs/assets"
-    assetFileName: "mjcf/open_ai_assets/hand/shadow_hand.xml"
+    assetFileName: "mjcf/shadow_hand_description/shadow_hand.xml"
     assetFileNameBlock: "urdf/objects/cube_multicolor.urdf"
-    assetFileNameEgg: "mjcf/open_ai_assets/hand/egg.xml"
-    assetFileNamePen: "mjcf/open_ai_assets/hand/pen.xml"
+    assetFileNameEgg: "mjcf/shadow_hand_description/egg.xml"
+    assetFileNamePen: "mjcf/shadow_hand_description/pen.xml"
 
 task:
   randomize: False

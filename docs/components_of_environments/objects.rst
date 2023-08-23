@@ -130,7 +130,7 @@ Both lidars are designed to target a specific class of targets and will ignore o
     where :math:`\alpha` is the decay factor.
 
 .. hint::
-    In the lidar_conf data class of task, the lidar category can be switched by modifying the lidar_type, but Natural lidar will be significantly more difficult.
+    In the lidar_conf data class of the task, the lidar category can be switched by modifying the lidar_type, but Natural lidar will be significantly more difficult.
 
 Group mechanism
 ^^^^^^^^^^^^^^^
