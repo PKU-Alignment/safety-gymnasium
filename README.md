@@ -374,9 +374,9 @@ Here are some screenshots of the **Safe Navigation** tasks.
 
 ### Vision-base Safe RL
 
-Vision-based safety reinforcement learning lacks realistic scenarios.
+Vision-based Safe Reinforcement Learning lacks realistic scenarios.
 Although the original `Safety-Gym` could minimally support visual input, the scenarios were too similar.
-To facilitate the validation of visual-based safety reinforcement learning algorithms, we have developed a set of realistic vision-based SafeRL tasks, which are currently being validated on the baseline.
+To facilitate the validation of visual-based Safe Reinforcement Learning algorithms, we have developed a set of realistic vision-based SafeRL tasks, which are currently being validated on the baseline.
 
 For the appetizer, the images are as follows:
 
