@@ -52,7 +52,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
           <geom fromto="0.0 0.0 0.0 -0.05 0.05 0.0" name="right_leg_geom" size="0.02" type="capsule" rgba="0.0039 0.1529 0.3961 1"/>
           <body pos="-0.05 0.05 0" name="front_right_foot">
             <joint axis="1 1 0" name="ankle_2" pos="0.0 0.0 0.0" range="-1.74 -0.52" type="hinge"/>
-            <geom fromto="0.0 0.0 0.0 -0.1 0.1 0.0" name="right_ankle_geom" size="0.02" type="capsule" density="50000.0"/>
+            <geom fromto="0.0 0.0 0.0 -0.1 0.1 0.0" name="right_ankle_geom" size="0.02" type="capsule" density="50000.0" rgba="0.8 0.6 0.4 1"/>
           </body>
         </body>
       </body>
@@ -63,7 +63,7 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
           <geom fromto="0.0 0.0 0.0 -0.05 -0.05 0.0" name="back_leg_geom" size="0.02" type="capsule" rgba="0.7412 0.0431 0.1843 1"/>
           <body pos="-0.05 -0.05 0" name="left_back_foot">
             <joint axis="-1 1 0" name="ankle_3" pos="0.0 0.0 0.0" range="-1.74 -0.52" type="hinge"/>
-            <geom fromto="0.0 0.0 0.0 -0.1 -0.1 0.0" name="third_ankle_geom" size="0.02" type="capsule" density="50000.0"/>
+            <geom fromto="0.0 0.0 0.0 -0.1 -0.1 0.0" name="third_ankle_geom" size="0.02" type="capsule" density="50000.0" rgba="0.8 0.6 0.4 1"/>
           </body>
         </body>
       </body>
