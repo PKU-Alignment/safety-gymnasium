@@ -560,6 +560,14 @@ apt-get install python3-opengl
 
 --------------------------------------------------------------------------------
 
+## Debug with your keyboard
+
+For simple agents, we offer the capability to control the robot's movement via the keyboard, facilitating debugging. Simply append a **Debug** suffix to the task name, such as `SafetyCarGoal2Debug-v0`, and utilize the keys `I`, `K`, `J`, and `L` to guide the robot's movement.
+
+For more intricate agents, you can also craft custom control logic based on specific peripherals. To achieve this, implement the `debug` method from the `BaseAgent` for the designated agent.
+
+
+
 ## Customize your environments
 
 We construct a highly expandable framework of code so that you can easily comprehend it and design your environments to facilitate your research with no more than 100 lines of code on average.
