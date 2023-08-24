@@ -1,5 +1,8 @@
 recursive-include safety_gymnasium/assets/meshes *.stl *.STL *.obj
-recursive-include safety_gymnasium/assets/textures *.png *.jpg *.jpeg
+recursive-include safety_gymnasium/assets/textures *.png *.jpg *.jpeg *.PNG
 recursive-include safety_gymnasium/assets/xmls *.xml
 recursive-include safety_gymnasium/configs *.yaml
+recursive-include safety_gymnasium/tasks/safe_multi_agent/assets/meshes *.stl *.STL *.obj
+recursive-include safety_gymnasium/tasks/safe_multi_agent/assets/textures *.png *.jpg *.jpeg *.PNG
 recursive-include safety_gymnasium/tasks/safe_multi_agent/assets/xmls *.xml
+recursive-include safety_gymnasium/tasks/safe_multi_agent/configs *.yaml

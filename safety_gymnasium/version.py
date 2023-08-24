@@ -14,10 +14,10 @@
 # ==============================================================================
 """Safety-Gymnasium."""
 
-__version__ = '1.2.0'
+__version__ = '1.2.2'
 __license__ = 'Apache License, Version 2.0'
 __author__ = 'Safety-Gymnasium Contributors'
-__release__ = False
+__release__ = True
 
 if not __release__:
     import os
