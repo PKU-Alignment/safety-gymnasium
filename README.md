@@ -29,6 +29,20 @@ Users can explore new insights via an elegant code framework and well-designed e
 
 --------------------------------------------------------------------------------
 
+# Note for v1.1.0 and v1.2.0❗️❗️❗️
+
+We have updated the environments for both the Safe Vision series and the Safe Isaac Gym series. However, due to **package size constraints**, we have not yet uploaded versions **v1.1.0** and **v1.2.0** to PyPI. As a result, users are required to manually download and install. We currently recommend using GitHub's **Download zip** feature to obtain our package and access the latest environments. In the future, we plan to deploy resources separately to a cloud service to accommodate PyPI. Stay tuned for further updates.
+
+**Python 3.11 is not supported for now, due to the incompatibility of pygame.**
+```bash
+conda create -n example python=3.8
+conda activate example
+wget https://github.com/PKU-Alignment/safety-gymnasium/archive/refs/heads/main.zip
+unzip main.zip
+cd safety-gymnasium-main
+pip install -e .
+```
+
 ## Why Safety-Gymnasium?
 
 Here we provide a table for comparison of **Safety-Gymnasium** and existing SafeRL Environments libraries.
@@ -559,6 +573,14 @@ apt-get install python3-opengl
 ```
 
 --------------------------------------------------------------------------------
+
+## Debug with your keyboard
+
+For simple agents, we offer the capability to control the robot's movement via the keyboard, facilitating debugging. Simply append a **Debug** suffix to the task name, such as `SafetyCarGoal2Debug-v0`, and utilize the keys `I`, `K`, `J`, and `L` to guide the robot's movement.
+
+For more intricate agents, you can also craft custom control logic based on specific peripherals. To achieve this, implement the `debug` method from the `BaseAgent` for the designated agent.
+
+
 
 ## Customize your environments
 
