@@ -29,6 +29,15 @@ Users can explore new insights via an elegant code framework and well-designed e
 
 --------------------------------------------------------------------------------
 
+## Customization for number of agents
+
+We are testing the future of customization for the number of agents. For now, you can use `agent_num=3` style to create a multi-agent environment in specific tasks.
+
+```
+env = safety_gymnasium.make('SafetyPointCoverGoal2Debug-v0', render_mode='human', agent_num=3)
+obs, _ = env.reset()
+```
+
 # Note for v1.1.0 and v1.2.0❗️❗️❗️
 
 We have updated the environments for both the Safe Vision series and the Safe Isaac Gym series. However, due to **package size constraints**, we have not yet uploaded versions **v1.1.0** and **v1.2.0** to PyPI. As a result, users are required to manually download and install. We currently recommend using GitHub's **Download zip** feature to obtain our package and access the latest environments. In the future, we plan to deploy resources separately to a cloud service to accommodate PyPI. Stay tuned for further updates.
