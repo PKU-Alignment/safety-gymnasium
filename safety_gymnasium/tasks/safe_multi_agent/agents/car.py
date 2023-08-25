@@ -37,7 +37,10 @@ class Car(BaseAgent):
         locations: Optional[list] = None,
         keepout: float = 0.4,
         rot: Optional[float] = None,
+        num: int = 2,
     ) -> None:
+        self.actuator_index = np.array([i for i in range(2)])
+        self.delta = 2
         super().__init__(
             self.__class__.__name__,
             random_generator,
@@ -45,6 +48,7 @@ class Car(BaseAgent):
             locations,
             keepout,
             rot,
+            num,
         )
 
     def is_alive(self):
@@ -56,16 +60,16 @@ class Car(BaseAgent):
 
     def debug(self):
         """Apply action which inputted from keyboard."""
-        action = np.array([0, 0])
+        action = np.zeros(2 * self.num)
         for key in self.debug_info.keys:
             if key == glfw.KEY_I:
-                action += np.array([1, 1])
+                action[:2] += np.array([1, 1])
             elif key == glfw.KEY_K:
-                action += np.array([-1, -1])
+                action[:2] += np.array([-1, -1])
             elif key == glfw.KEY_J:
-                action = np.array([1, -1])
+                action[:2] = np.array([1, -1])
                 break
             elif key == glfw.KEY_L:
-                action = np.array([-1, 1])
+                action[:2] = np.array([-1, 1])
                 break
         self.apply_action(action)

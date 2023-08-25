@@ -1,0 +1,198 @@
+<!--
+Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<mujoco model="doggo">
+  <option timestep="0.01"/>
+  <size njmax="3000" nconmax="1000"/>
+  <statistic meansize="0.23" extent="3.96"/>
+  <default>
+    <joint limited="true" stiffness="0.0001" armature="0.00005"/>
+    <geom condim="6" size="0.016" type="capsule" density="5"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear=".00625"/>
+    <site size="0.018" type="sphere" rgba="1 0 0 0"/>
+  </default>
+  <worldbody>
+    <geom name="floor" size="5 5 0.1" type="plane" condim="6"/>
+    <body name="agent" pos="0 0 0.22">
+      <camera name="vision" pos=".0625 0 .1" xyaxes="0 -0.5 0 .2 0 0.5" fovy="100"/>
+      <!-- <geom name="cam" pos=".15 0 .2" type="sphere" size="0.005"/> -->
+      <site name="agent" pos="0 0 0"/>
+      <geom name="agent" pos="0 0 0" size="0.0375" fromto="0 0 0 .1 0 0" type="cylinder" density="2" rgba="0.8 0.6 0.4 1"/>
+      <freejoint name="agent"/>
+
+      <body name="leg_1" pos="0 0 0">
+        <geom fromto=".05 0.0 0.0 0.1 0.05 0.0" name="aux_1" rgba="0.0039 0.1529 0.3961 1" density="20"/>
+        <body name="aux_1" pos="0.1 0.05 0">
+          <joint axis="0 0 1" name="hip_1_z" pos="0.0 0.0 0.0" range="-0.174533 0.523599" type="hinge" springref="0"/>
+          <joint axis="0 1 0" name="hip_1_y" pos="0.0 0.0 0.0" range="-1.308998 0.2618" type="hinge" springref="-0.174533"/>
+          <geom fromto="0.0 0.0 0.0 0.049 0.0283 -0.025" name="hip_1" rgba="0.0039 0.1529 0.3961 1" density="20"/>
+          <body pos="0.049 0.0283 -0.025">
+            <joint axis="-.5 .866 0" name="ankle_1" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
+            <geom fromto="0.0 0.0 0.0 -0.0588 -0.0339 -0.05" name="ankle_1" density="20" rgba="0.8 0.6 0.4 1"/>
+            <site name="ankle_1a" pos="0 0 0"/>
+            <site name="ankle_1b" pos="-0.0588 -0.0339 -0.05"/>
+          </body>
+        </body>
+      </body>
+      <body name="leg_4" pos="0 0 0">
+        <geom fromto=".05 0.0 0.0 0.1 -0.05 0.0" name="aux_4" rgba="0.0039 0.1529 0.3961 1" density="20"/>
+        <body name="aux_4" pos="0.1 -0.05 0">
+          <joint axis="0 0 -1" name="hip_4_z" pos="0.0 0.0 0.0" range="-0.174533 0.523599" type="hinge" springref="0"/>
+          <joint axis="0 1 0" name="hip_4_y" pos="0.0 0.0 0.0" range="-1.308998 0.2618" type="hinge" springref="-0.174533"/>
+          <geom fromto="0.0 0.0 0.0 0.049 -0.0283 -0.025" name="hip_4" rgba="0.0039 0.1529 0.3961 1" density="20"/>
+          <body pos="0.049 -0.0283 -0.025">
+            <joint axis=".5 .866 0" name="ankle_4" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
+            <geom fromto="0.0 0.0 0.0 -0.0588 0.0339 -0.05" name="ankle_4" density="20" rgba="0.8 0.6 0.4 1"/>
+            <site name="ankle_4a" pos="0 0 0"/>
+            <site name="ankle_4b" pos="-0.0588 0.0339 -0.05"/>
+          </body>
+        </body>
+      </body>
+
+      <body name="rear" pos="0 0 0">
+        <geom name="agent2" pos="0 0 0" size="0.0375" fromto="-.1 0 0 0 0 0" type="cylinder" density="2" rgba="0.8 0.6 0.4 1"/>
+        <joint axis="1 0 0" name="waist_x" pos="0 0 0" range="-0.523599 0.523599" type="hinge" springref="0"/>
+        <body name="leg_2" pos="0 0 0">
+          <geom fromto="-.05 0.0 0.0 -0.1 0.05 0.0" name="aux_2" rgba="0.7412 0.0431 0.1843 1" density="20"/>
+          <body name="aux_2" pos="-0.1 0.05 0">
+            <joint axis="0 0 1" name="hip_2_z" pos="0.0 0.0 0.0" range="-0.174533 0.523599" type="hinge" springref="0"/>
+            <joint axis="0 1 0" name="hip_2_y" pos="0.0 0.0 0.0" range="0 2.356196" type="hinge" springref="0"/>
+            <geom fromto="0.0 0.0 0.0 0.049 0.0283 -0.025" name="hip_2" rgba="0.7412 0.0431 0.1843 1" density="20"/>
+            <body pos="0.049 0.0283 -0.025">
+            <!-- <joint axis="-.5 .866 0" name="ankle_2" pos="0.0 0.0 0.0" range="-80 -30" type="hinge"/> -->
+              <joint axis="-.5 .866 0" name="ankle_2" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
+              <geom fromto="0.0 0.0 0.0 -0.0588 -0.0339 -0.05" name="ankle_2" density="20" rgba="0.8 0.6 0.4 1"/>
+              <site name="ankle_2a" pos="0 0 0"/>
+              <site name="ankle_2b" pos="-0.0588 -0.0339 -0.05"/>
+            </body>
+          </body>
+        </body>
+        <body name="leg_3" pos="0 0 0">
+          <geom fromto="-.05 0.0 0.0 -0.1 -0.05 0.0" name="aux_3" rgba="0.7412 0.0431 0.1843 1" density="20"/>
+          <body name="aux_3" pos="-0.1 -0.05 0">
+            <joint axis="0 0 -1" name="hip_3_z" pos="0.0 0.0 0.0" range="-0.174533 0.523599" type="hinge" springref="0"/>
+            <joint axis="0 1 0" name="hip_3_y" pos="0.0 0.0 0.0" range="0 2.356196" type="hinge" springref="0"/>
+            <geom fromto="0.0 0.0 0.0 0.049 -0.0283 -0.025" name="hip_3" rgba="0.7412 0.0431 0.1843 1" density="20"/>
+            <body pos="0.049 -0.0283 -0.025">
+            <!-- <joint axis=".5 .866 0" name="ankle_3" pos="0.0 0.0 0.0" range="-80 -30" type="hinge"/> -->
+              <joint axis=".5 .866 0" name="ankle_3" pos="0.0 0.0 0.0" range="-1.308998 0" type="hinge" springref="-0.349066"/>
+              <geom fromto="0.0 0.0 0.0 -0.0588 0.0339 -0.05" name="ankle_3" density="20" rgba="0.8 0.6 0.4 1"/>
+              <site name="ankle_3a" pos="0 0 0"/>
+              <site name="ankle_3b" pos="-0.0588 0.0339 -0.05"/>
+            </body>
+          </body>
+        </body>
+      </body>
+
+    </body>
+  </worldbody>
+  <sensor>
+    <touch site="ankle_1a" name="touch_ankle_1a"/>
+    <touch site="ankle_1b" name="touch_ankle_1b"/>
+    <touch site="ankle_2a" name="touch_ankle_2a"/>
+    <touch site="ankle_2b" name="touch_ankle_2b"/>
+    <touch site="ankle_3a" name="touch_ankle_3a"/>
+    <touch site="ankle_3b" name="touch_ankle_3b"/>
+    <touch site="ankle_4a" name="touch_ankle_4a"/>
+    <touch site="ankle_4b" name="touch_ankle_4b"/>
+
+    <jointpos joint="hip_1_z" name="jointpos_hip_1_z"/>
+    <jointpos joint="hip_2_z" name="jointpos_hip_2_z"/>
+    <jointpos joint="hip_3_z" name="jointpos_hip_3_z"/>
+    <jointpos joint="hip_4_z" name="jointpos_hip_4_z"/>
+
+    <jointpos joint="hip_1_y" name="jointpos_hip_1_y"/>
+    <jointpos joint="hip_2_y" name="jointpos_hip_2_y"/>
+    <jointpos joint="hip_3_y" name="jointpos_hip_3_y"/>
+    <jointpos joint="hip_4_y" name="jointpos_hip_4_y"/>
+
+    <jointpos joint="ankle_1" name="jointpos_ankle_1"/>
+    <jointpos joint="ankle_2" name="jointpos_ankle_2"/>
+    <jointpos joint="ankle_3" name="jointpos_ankle_3"/>
+    <jointpos joint="ankle_4" name="jointpos_ankle_4"/>
+
+    <jointvel joint="hip_1_z" name="jointvel_hip_1_z"/>
+    <jointvel joint="hip_2_z" name="jointvel_hip_2_z"/>
+    <jointvel joint="hip_3_z" name="jointvel_hip_3_z"/>
+    <jointvel joint="hip_4_z" name="jointvel_hip_4_z"/>
+
+    <jointvel joint="hip_1_y" name="jointvel_hip_1_y"/>
+    <jointvel joint="hip_2_y" name="jointvel_hip_2_y"/>
+    <jointvel joint="hip_3_y" name="jointvel_hip_3_y"/>
+    <jointvel joint="hip_4_y" name="jointvel_hip_4_y"/>
+
+    <jointvel joint="ankle_1" name="jointvel_ankle_1"/>
+    <jointvel joint="ankle_2" name="jointvel_ankle_2"/>
+    <jointvel joint="ankle_3" name="jointvel_ankle_3"/>
+    <jointvel joint="ankle_4" name="jointvel_ankle_4"/>
+
+    <!-- <actuatorpos actuator="hip_1"/>
+    <actuatorpos actuator="hip_2"/>
+    <actuatorpos actuator="hip_3"/>
+    <actuatorpos actuator="hip_4"/>
+    <actuatorpos actuator="ankle_1"/>
+    <actuatorpos actuator="ankle_2"/>
+    <actuatorpos actuator="ankle_3"/>
+    <actuatorpos actuator="ankle_4"/>
+
+    <actuatorvel actuator="hip_1"/>
+    <actuatorvel actuator="hip_2"/>
+    <actuatorvel actuator="hip_3"/>
+    <actuatorvel actuator="hip_4"/>
+    <actuatorvel actuator="ankle_1"/>
+    <actuatorvel actuator="ankle_2"/>
+    <actuatorvel actuator="ankle_3"/>
+    <actuatorvel actuator="ankle_4"/>
+
+    <actuatorfrc actuator="hip_1"/>
+    <actuatorfrc actuator="hip_2"/>
+    <actuatorfrc actuator="hip_3"/>
+    <actuatorfrc actuator="hip_4"/>
+    <actuatorfrc actuator="ankle_1"/>
+    <actuatorfrc actuator="ankle_2"/>
+    <actuatorfrc actuator="ankle_3"/>
+    <actuatorfrc actuator="ankle_4"/> -->
+
+    <!-- Used for observation -->
+    <accelerometer site="agent" name="accelerometer"/>
+    <velocimeter site="agent" name="velocimeter"/>
+    <gyro site="agent" name="gyro"/>
+    <magnetometer site="agent" name="magnetometer"/>
+
+    <!-- Used for intrinsic constraints -->
+    <subtreecom body="agent" name="subtreecom"/>
+    <subtreelinvel body="agent" name="subtreelinvel"/>
+    <subtreeangmom body="agent" name="subtreeangmom"/>
+  </sensor>
+  <actuator>
+    <motor name="hip_1_z" joint="hip_1_z"/>
+    <motor name="hip_2_z" joint="hip_2_z"/>
+    <motor name="hip_3_z" joint="hip_3_z"/>
+    <motor name="hip_4_z" joint="hip_4_z"/>
+    <motor name="hip_1_y" joint="hip_1_y"/>
+    <!-- gear=".05"/> -->
+    <motor name="hip_2_y" joint="hip_2_y"/>
+    <!-- gear=".05"/> -->
+    <motor name="hip_3_y" joint="hip_3_y"/>
+    <!-- gear=".05"/> -->
+    <motor name="hip_4_y" joint="hip_4_y"/>
+    <!-- gear=".05"/> -->
+    <motor name="ankle_1" joint="ankle_1"/>
+    <motor name="ankle_2" joint="ankle_2"/>
+    <motor name="ankle_3" joint="ankle_3"/>
+    <motor name="ankle_4" joint="ankle_4"/>
+  </actuator>
+</mujoco>

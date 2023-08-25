@@ -27,8 +27,8 @@ class MultiGoalLevel1(MultiGoalLevel0):
     One vase is present in the scene, but the agent is not penalized for hitting it.
     """
 
-    def __init__(self, config) -> None:
-        super().__init__(config=config)
+    def __init__(self, config, agent_num) -> None:
+        super().__init__(config=config, agent_num=agent_num)
 
         self.placements_conf.extents = [-1.5, -1.5, 1.5, 1.5]
 

@@ -187,7 +187,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
     - :attr:`_obstacles` (list): All types of object in current environment.
     """
 
-    def __init__(self, config: dict | None = None) -> None:
+    def __init__(self, config: dict | None = None, agent_num: int = None) -> None:
         """Initialize the engine.
 
         Args:
@@ -216,11 +216,12 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
 
         # something are parsed from pre-defined configs
         self.agent_name = None
+        self.agent_num = agent_num
         self.observe_vision = False  # Observe vision from the agent
         self.debug = False
         self.observation_flatten = True  # Flatten observation into a vector
         self._parse(config)
-        self.agent = None
+        self.agents = None
         self.action_noise: float = (
             0.0  # Magnitude of independent per-component gaussian action noise
         )
@@ -248,7 +249,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         """Build the agent in the world."""
         assert hasattr(agents, agent_name), 'agent not found'
         agent_cls = getattr(agents, agent_name)
-        self.agent = agent_cls(random_generator=self.random_generator)
+        self.agents = agent_cls(random_generator=self.random_generator, num=self.agent_num)
 
     def _add_geoms(self, *geoms: Geom) -> None:
         """Register geom type objects into environments and set corresponding attributes."""
@@ -258,7 +259,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             ), 'Please figure out the type of object before you add it into envs.'
             self._geoms[geom.name] = geom
             setattr(self, geom.name, geom)
-            geom.set_agent(self.agent)
+            geom.set_agent(self.agents)
 
     def _add_free_geoms(self, *free_geoms: FreeGeom) -> None:
         """Register FreeGeom type objects into environments and set corresponding attributes."""
@@ -268,7 +269,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             ), 'Please figure out the type of object before you add it into envs.'
             self._free_geoms[obj.name] = obj
             setattr(self, obj.name, obj)
-            obj.set_agent(self.agent)
+            obj.set_agent(self.agents)
 
     def _add_mocaps(self, *mocaps: Mocap) -> None:
         """Register mocap type objects into environments and set corresponding attributes."""
@@ -278,7 +279,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             ), 'Please figure out the type of object before you add it into envs.'
             self._mocaps[mocap.name] = mocap
             setattr(self, mocap.name, mocap)
-            mocap.set_agent(self.agent)
+            mocap.set_agent(self.agents)
 
     def reset(self) -> None:
         """Reset the environment."""
@@ -302,7 +303,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         self.world_info.world_config_dict = self._build_world_config(self.world_info.layout)
 
         if self.world is None:
-            self.world = World(self.agent, self._obstacles, self.world_info.world_config_dict)
+            self.world = World(self.agents, self._obstacles, self.world_info.world_config_dict)
             self.world.reset()
             self.world.build()
         else:
@@ -320,14 +321,14 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         """
         # Simulate physics forward
         if self.debug:
-            self.agent.debug()
+            self.agents.debug()
         else:
             noise = (
                 self.action_noise * self.random_generator.randn(self.agent.body_info.nu)
                 if self.action_noise
                 else None
             )
-            self.agent.apply_action(action, noise)
+            self.agents.apply_action(action, noise)
 
         exception = False
         for _ in range(
@@ -364,7 +365,10 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             # Mocap objects have to be handled separately
             if 'gremlin' in k:
                 continue
-            self.world_info.layout[k] = self.data.body(k).xpos[:2].copy()
+            k_engine = k
+            if 'agent' in k:
+                k_engine = k_engine[:-1] + '__' + k_engine[-1]
+            self.world_info.layout[k] = self.data.body(k_engine).xpos[:2].copy()
 
     def _set_goal(self, name, pos: np.ndarray) -> None:
         """Set position of goal object in Mujoco instance.
@@ -389,51 +393,25 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         group: int,
     ) -> None:
         """Render the lidar observation."""
-        agent_pos = self.agent.pos_0
-        agent_mat = self.agent.mat_0
-        lidar = self._obs_lidar(poses, group)
-        for i, sensor in enumerate(lidar):
-            if self.lidar_conf.type == 'pseudo':  # pylint: disable=no-member
-                i += 0.5  # Offset to center of bin
-            theta = 2 * np.pi * i / self.lidar_conf.num_bins  # pylint: disable=no-member
-            rad = self.render_conf.lidar_radius
-            binpos = np.array([np.cos(theta) * rad, np.sin(theta) * rad, offset])
-            pos = agent_pos + np.matmul(binpos, agent_mat.transpose())
-            alpha = min(1, sensor + 0.1)
-            self.viewer.add_marker(
-                pos=pos,
-                size=self.render_conf.lidar_size * np.ones(3),
-                type=mujoco.mjtGeom.mjGEOM_SPHERE,  # pylint: disable=no-member
-                rgba=np.array(color) * alpha,
-                label='',
-            )
-
-    def _render_lidar1(
-        self,
-        poses: np.ndarray,
-        color: np.ndarray,
-        offset: float,
-        group: int,
-    ) -> None:
-        """Render the lidar observation."""
-        agent_pos = self.agent.pos_1
-        agent_mat = self.agent.mat_1
-        lidar = self._obs_lidar1(poses, group)
-        for i, sensor in enumerate(lidar):
-            if self.lidar_conf.type == 'pseudo':  # pylint: disable=no-member
-                i += 0.5  # Offset to center of bin
-            theta = 2 * np.pi * i / self.lidar_conf.num_bins  # pylint: disable=no-member
-            rad = self.render_conf.lidar_radius
-            binpos = np.array([np.cos(theta) * rad, np.sin(theta) * rad, offset])
-            pos = agent_pos + np.matmul(binpos, agent_mat.transpose())
-            alpha = min(1, sensor + 0.1)
-            self.viewer.add_marker(
-                pos=pos,
-                size=self.render_conf.lidar_size * np.ones(3),
-                type=mujoco.mjtGeom.mjGEOM_SPHERE,  # pylint: disable=no-member
-                rgba=np.array(color) * alpha,
-                label='',
-            )
+        for index in range(self.agents.num):
+            agent_pos = self.agents.pos(index)
+            agent_mat = self.agents.mat(index)
+            lidar = self._obs_lidar(poses, group, index)
+            for i, sensor in enumerate(lidar):
+                if self.lidar_conf.type == 'pseudo':  # pylint: disable=no-member
+                    i += 0.5  # Offset to center of bin
+                theta = 2 * np.pi * i / self.lidar_conf.num_bins  # pylint: disable=no-member
+                rad = self.render_conf.lidar_radius
+                binpos = np.array([np.cos(theta) * rad, np.sin(theta) * rad, offset])
+                pos = agent_pos + np.matmul(binpos, agent_mat.transpose())
+                alpha = min(1, sensor + 0.1)
+                self.viewer.add_marker(
+                    pos=pos,
+                    size=self.render_conf.lidar_size * np.ones(3),
+                    type=mujoco.mjtGeom.mjGEOM_SPHERE,  # pylint: disable=no-member
+                    rgba=np.array(color) * alpha,
+                    label='',
+                )
 
     def _render_compass(self, pose: np.ndarray, color: np.ndarray, offset: float) -> None:
         """Render a compass observation."""
@@ -552,7 +530,6 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             for obstacle in self._obstacles:
                 if obstacle.is_lidar_observed:
                     self._render_lidar(obstacle.pos, obstacle.color, offset, obstacle.group)
-                    self._render_lidar1(obstacle.pos, obstacle.color, offset, obstacle.group)
                 if hasattr(obstacle, 'is_comp_observed') and obstacle.is_comp_observed:
                     self._render_compass(
                         getattr(self, obstacle.name + '_pos'),
@@ -562,10 +539,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                 offset += self.render_conf.lidar_offset_delta
 
         # Add indicator for nonzero cost
-        if cost['agent_0'].get('cost_sum', 0) > 0:
-            self._render_sphere(self.agent.pos_0, 0.25, COLOR['red'], alpha=0.5)
-        if cost['agent_1'].get('cost_sum', 0) > 0:
-            self._render_sphere(self.agent.pos_1, 0.25, COLOR['red'], alpha=0.5)
+        for index in range(self.agents.num):
+            if cost[f'agent_{index}'].get('cost_sum', 0) > 0:
+                self._render_sphere(self.agents.pos(index), 0.25, COLOR['red'], alpha=0.5)
 
         # Draw vision pixels
         if mode in {'rgb_array', 'depth_array'}:
@@ -592,7 +568,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                 self.viewer = KeyboardViewer(
                     self.model,
                     self.data,
-                    self.agent.keyboard_control_callback,
+                    self.agents.keyboard_control_callback,
                 )
             elif mode in {'rgb_array', 'depth_array'}:
                 self.viewer = OffScreenViewer(self.model, self.data)
@@ -611,11 +587,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         self.viewer.data = data
 
     @abc.abstractmethod
-    def _obs_lidar(self, positions: np.ndarray, group: int) -> np.ndarray:
-        """Calculate and return a lidar observation.  See sub methods for implementation."""
-
-    @abc.abstractmethod
-    def _obs_lidar1(self, positions: np.ndarray, group: int) -> np.ndarray:
+    def _obs_lidar(self, positions: np.ndarray, group: int, index: int) -> np.ndarray:
         """Calculate and return a lidar observation.  See sub methods for implementation."""
 
     @abc.abstractmethod

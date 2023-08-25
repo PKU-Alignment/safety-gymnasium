@@ -17,8 +17,9 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
 <mujoco>
   <size njmax="3000" nconmax="1000"/>
   <option timestep="0.002"/>
+  <statistic meansize="0.23" extent="3.96"/>
   <default>
-    <geom condim="6" density="1" rgba="0.7412 0.0431 0.1843 1"/>
+    <geom condim="6" density="1"/>
     <joint damping=".001"/>
     <motor ctrlrange="-1 1" ctrllimited="true" forcerange="-.05 .05" forcelimited="true"/>
     <velocity ctrlrange="-1 1" ctrllimited="true" forcerange="-.05 .05" forcelimited="true"/>
@@ -32,19 +33,9 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
       <joint type="slide" axis="1 0 0" name="x" damping="0.01"/>
       <joint type="slide" axis="0 1 0" name="y" damping="0.01"/>
       <joint type="hinge" axis="0 0 1" name="z" damping="0.005"/>
-      <geom name="agent" type="sphere" size=".1" friction="1 0.01 0.01"/>
-      <geom name="pointarrow" pos="0.1 0 0" size="0.05 0.05 0.05" type="box"/>
+      <geom name="agent" type="sphere" size=".1" friction="1 0.01 0.01" rgba="0.7412 0.0431 0.1843 1"/>
+      <geom name="pointarrow" pos="0.1 0 0" size="0.05 0.05 0.05" type="box" rgba="0.0039 0.1529 0.3961 1"/>
       <site name="agent" rgba="1 0 0 .1"/>
-    </body>
-    <body name="agent1" pos="0 0 .1">
-      <camera name="vision1" pos="0 0 .15" xyaxes="0 -1 0 .4 0 1" fovy="90"/>
-      <!-- <geom name="camera" pos="-.2 0 0" type="sphere" size=".05"/> -->
-      <joint type="slide" axis="1 0 0" name="x1" damping="0.01"/>
-      <joint type="slide" axis="0 1 0" name="y1" damping="0.01"/>
-      <joint type="hinge" axis="0 0 1" name="z1" damping="0.005"/>
-      <geom name="agent1" type="sphere" size=".1" friction="1 0.01 0.01" rgba="0.0039 0.1529 0.3961 1"/>
-      <geom name="pointarrow1" pos="0.1 0 0" size="0.05 0.05 0.05" type="box" rgba="0.0039 0.1529 0.3961 1"/>
-      <site name="agent1" rgba="1 0 0 .1"/>
     </body>
   </worldbody>
   <sensor>
@@ -58,21 +49,9 @@ Copyright 2022-2023 OmniSafe Team. All Rights Reserved.
     <subtreecom body="agent" name="subtreecom"/>
     <subtreelinvel body="agent" name="subtreelinvel"/>
     <subtreeangmom body="agent" name="subtreeangmom"/>
-
-    <accelerometer site="agent1" name="accelerometer1"/>
-    <velocimeter site="agent1" name="velocimeter1"/>
-    <gyro site="agent1" name="gyro1"/>
-    <magnetometer site="agent1" name="magnetometer1"/>
-
-    <!-- Used for intrinsic constraints -->
-    <subtreecom body="agent1" name="subtreecom1"/>
-    <subtreelinvel body="agent1" name="subtreelinvel1"/>
-    <subtreeangmom body="agent1" name="subtreeangmom1"/>
   </sensor>
   <actuator>
     <motor gear="0.3 0 0 0 0 0" site="agent" name="x"/>
     <velocity gear="0.3" jointinparent="z" name="z"/>
-    <motor gear="0.3 0 0 0 0 0" site="agent1" name="x1"/>
-    <velocity gear="0.3" jointinparent="z1" name="z1"/>
   </actuator>
 </mujoco>

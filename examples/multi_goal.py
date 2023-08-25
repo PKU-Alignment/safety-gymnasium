@@ -21,14 +21,14 @@ import safety_gymnasium
 
 def run_random(env_name):
     """Random run."""
-    env = safety_gymnasium.make(env_name, render_mode='human')
+    env = safety_gymnasium.make(env_name, render_mode='human', agent_num=10)
     obs, _ = env.reset()
     # Use below to specify seed.
     # obs, _ = env.reset(seed=0)
-    terminated, truncated = {'agent_0': False}, {'agent_0': False}
+    terminated, truncated = {f'agent_{i}': False for i in range(env.num_agents)}, {f'agent_{i}': False for i in range(env.num_agents)}
     ep_ret, ep_cost = 0, 0
     while True:
-        if terminated['agent_0'] or truncated['agent_0']:
+        if any(list(terminated.values())) or any(list(truncated.values())):
             print(f'Episode Return: {ep_ret} \t Episode Cost: {ep_cost}')
             ep_ret, ep_cost = 0, 0
             obs, _ = env.reset()
@@ -48,6 +48,6 @@ def run_random(env_name):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--env', default='SafetyAntMultiGoal2-v0')
+    parser.add_argument('--env', default='SafetyPointCoverGoal2Debug-v0')
     args = parser.parse_args()
     run_random(args.env)

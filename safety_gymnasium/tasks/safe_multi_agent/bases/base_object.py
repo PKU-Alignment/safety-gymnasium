@@ -77,7 +77,7 @@ class BaseObject(abc.ABC):
         Args:
             agent (BaseAgent): Agent instance in current environment.
         """
-        self.agent = agent
+        self.agents = agent
         self._specific_agent_config()
 
     def set_engine(self, engine: Engine) -> None:

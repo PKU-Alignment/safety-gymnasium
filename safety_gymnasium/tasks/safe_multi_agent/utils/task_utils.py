@@ -19,6 +19,9 @@ import re
 import mujoco
 import numpy as np
 
+import xml.etree.ElementTree as ET
+from copy import deepcopy
+
 
 def get_task_class_name(task_id):
     """Help to translate task_id into task_class_name."""
@@ -82,3 +85,94 @@ def clear_viewer(viewer):
     # pylint: disable=protected-access
     viewer._markers[:] = []
     viewer._overlays.clear()
+
+
+def generate_agents(xml_content, num_agents):
+    # Parse the XML content
+    root = ET.fromstring(xml_content)
+    
+    # Find the agent body, actuator, and sensor
+    agent_body = None
+    for child in root.find('worldbody'):
+        if child.get('name') == 'agent':
+            agent_body = child
+            break
+    
+    actuators = root.find('actuator')
+    sensors = root.find('sensor')
+    equalitys = root.find('equality')
+    contacts = root.find('contact')
+    
+    # Lists to store the original actuators and sensors
+    original_actuators = list(actuators) if actuators is not None else []
+    original_sensors = list(sensors) if sensors is not None else []
+    original_equality = list(equalitys) if equalitys is not None else []
+    original_contact = list(contacts) if contacts is not None else []
+    
+    # For each agent, copy the body, actuator, and sensor, and append to the respective parent elements
+    for i in range(0, num_agents):
+        # Copy agent body and append
+        new_agent_body = deepcopy(agent_body)
+        for elem in new_agent_body.iter():
+            if 'name' in elem.attrib:
+                elem.set('name', f"{elem.get('name')}__{i}")
+        root.find('worldbody').append(new_agent_body)
+
+        # Copy actuators and append
+        for actuator in original_actuators:
+            new_actuator = deepcopy(actuator)
+            if 'name' in new_actuator.attrib:
+                new_actuator.set('name', f"{new_actuator.get('name')}__{i}")
+            if 'joint' in new_actuator.attrib:
+                new_actuator.set('joint', f"{new_actuator.get('joint')}__{i}")
+            if 'jointinparent' in new_actuator.attrib:
+                new_actuator.set('jointinparent', f"{new_actuator.get('jointinparent')}__{i}")
+            if 'site' in new_actuator.attrib:
+                new_actuator.set('site', f"{new_actuator.get('site')}__{i}")
+            actuators.append(new_actuator)
+                
+        # Copy sensors and append
+        for sensor in original_sensors:
+            new_sensor = deepcopy(sensor)
+            if 'name' in new_sensor.attrib:
+                new_sensor.set('name', f"{new_sensor.get('name')}__{i}")
+            if 'joint' in new_sensor.attrib:
+                new_sensor.set('joint', f"{new_sensor.get('joint')}__{i}")
+            if 'objname' in new_sensor.attrib:
+                new_sensor.set('objname', f"{new_sensor.get('objname')}__{i}")
+            if 'body' in new_sensor.attrib:
+                new_sensor.set('body', f"{new_sensor.get('body')}__{i}")
+            if 'site' in new_sensor.attrib:
+                new_sensor.set('site', f"{new_sensor.get('site')}__{i}") 
+            sensors.append(new_sensor)
+        for contact in original_contact:
+            new_contact = deepcopy(contact)
+            if 'name' in new_contact.attrib:
+                new_contact.set('name', f"{new_contact.get('name')}__{i}")
+            if 'body1' in new_contact.attrib:
+                new_contact.set('body1', f"{new_contact.get('body1')}__{i}")
+            if 'body2' in new_contact.attrib:
+                new_contact.set('body2', f"{new_contact.get('body2')}__{i}")
+            contacts.append(new_contact)
+
+        for equality in original_equality:
+            new_equality = deepcopy(equality)
+            if 'name' in new_equality.attrib:
+                new_equality.set('name', f"{new_equality.get('name')}__{i}")
+            if 'joint1' in new_equality.attrib:
+                new_equality.set('joint1', f"{new_equality.get('joint1')}__{i}")
+            if 'joint2' in new_equality.attrib:
+                new_equality.set('joint2', f"{new_equality.get('joint2')}__{i}")
+            equalitys.append(new_equality)
+
+    for actuator in original_actuators:
+        actuators.remove(actuator)
+    for sensor in original_sensors:
+        sensors.remove(sensor)
+    for contact in original_contact:
+        contacts.remove(contact)
+    for equality in original_equality:
+        equalitys.remove(equality)
+    root.find('worldbody').remove(agent_body)
+    # Return the modified XML content
+    return ET.tostring(root, encoding="unicode")

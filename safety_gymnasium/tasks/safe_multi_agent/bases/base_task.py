@@ -169,14 +169,14 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
       and it is implemented in different task.
     """
 
-    def __init__(self, config: dict) -> None:  # pylint: disable-next=too-many-statements
+    def __init__(self, config: dict, agent_num: int) -> None:  # pylint: disable-next=too-many-statements
         """Initialize the task.
 
         Args:
             config (dict): Configuration dictionary, used to pre-config some attributes
               according to tasks via :meth:`safety_gymnasium.register`.
         """
-        super().__init__(config=config)
+        super().__init__(config=config, agent_num=agent_num)
 
         self.num_steps = 1000  # Maximum number of environment steps in an episode
 
@@ -186,7 +186,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         self.cost_conf = CostConf()
         self.mechanism_conf = MechanismConf()
 
-        self.action_space = self.agent.action_space
+        self.action_space = self.agents.action_space
         self.observation_space = None
         self.obs_info = ObservationInfo()
 
@@ -198,31 +198,35 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
     def dist_goal(self) -> float:
         """Return the distance from the agent to the goal XY position."""
         assert hasattr(self, 'goal'), 'Please make sure you have added goal into env.'
-        return self.agent.dist_xy(self.goal.pos)  # pylint: disable=no-member
+        return self.agents.dist_xy(self.goal.pos)  # pylint: disable=no-member
 
     def calculate_cost(self) -> dict:
         """Determine costs depending on the agent and obstacles."""
         # pylint: disable-next=no-member
         mujoco.mj_forward(self.model, self.data)  # Ensure positions and contacts are correct
-        cost = {'agent_0': {}, 'agent_1': {}}
+
+        cost = {f'agent_{index}': {} for index in range(self.agents.num)}
 
         # Calculate constraint violations
         for obstacle in self._obstacles:
             obj_cost = obstacle.cal_cost()
-            if 'agent_0' in obj_cost:
-                cost['agent_0'].update(obj_cost['agent_0'])
-            if 'agent_1' in obj_cost:
-                cost['agent_1'].update(obj_cost['agent_1'])
+            for index in range(self.agents.num):
+                cost_index = cost[f'agent_{index}']
+                if f'agent_{index}' in obj_cost:
+                    cost_index.update(obj_cost[f'agent_{index}'])
 
         if self.contact_other_cost:
             for contact in self.data.contact[: self.data.ncon]:
                 geom_ids = [contact.geom1, contact.geom2]
                 geom_names = sorted([self.model.geom(g).name for g in geom_ids])
-                if any(n in self.agent.body_info[1].geom_names for n in geom_names) and any(
-                    n in self.agent.body_info[0].geom_names for n in geom_names
-                ):
-                    cost['agent_0']['cost_contact_other'] = self.contact_other_cost
-                    cost['agent_1']['cost_contact_other'] = self.contact_other_cost
+                for i in range(self.agents.num):
+                    for j in range(self.agents.num):
+                        if i != j:  # We don't want to check an agent against itself
+                            if any(n in self.agents.body_info[i].geom_names for n in geom_names) and any(
+                                n in self.agents.body_info[j].geom_names for n in geom_names
+                            ):
+                                cost_key = f'agent_{i}'
+                                cost[cost_key]['cost_contact_other'] = self.contact_other_cost
 
         if self._is_load_static_geoms and self.static_geoms_contact_cost:
             cost['cost_static_geoms_contact'] = 0.0
@@ -245,75 +249,39 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         """Construct observation space.  Happens only once during __init__ in Builder."""
         obs_space_dict = OrderedDict()  # See self.obs()
 
-        sensor_dict = self.agent.build_sensor_observation_space()
-        agent0_sensor_dict = {}
-        agent1_sensor_dict = {}
+        sensor_dict = self.agents.build_sensor_observation_space()
 
-        for name, space in sensor_dict.items():
-            if name.endswith('1') and name[-2] != '_':
-                agent1_sensor_dict[name] = space
-            else:
-                agent0_sensor_dict[name] = space
-        obs_space_dict.update(agent0_sensor_dict)
+        obs_space_dict.update(sensor_dict)
 
-        for obstacle in self._obstacles:
-            if obstacle.is_lidar_observed:
-                name = obstacle.name + '_' + 'lidar'
-                obs_space_dict[name] = gymnasium.spaces.Box(
-                    0.0,
-                    1.0,
-                    (self.lidar_conf.num_bins,),
-                    dtype=np.float64,
+        for index in range(self.agents.num):
+            for obstacle in self._obstacles:
+                if obstacle.is_lidar_observed:
+                    name = obstacle.name + '_' + f'lidar__{index}'
+                    obs_space_dict[name] = gymnasium.spaces.Box(
+                        0.0,
+                        1.0,
+                        (self.lidar_conf.num_bins,),
+                        dtype=np.float64,
+                    )
+                if hasattr(obstacle, 'is_comp_observed') and obstacle.is_comp_observed:
+                    name = obstacle.name + '_' + 'comp'
+                    obs_space_dict[name] = gymnasium.spaces.Box(
+                        -1.0,
+                        1.0,
+                        (self.compass_conf.shape,),
+                        dtype=np.float64,
+                    )
+
+            if self.observe_vision:
+                width, height = self.vision_env_conf.vision_size
+                rows, cols = height, width
+                self.vision_env_conf.vision_size = (rows, cols)
+                obs_space_dict[f'vision__{index}'] = gymnasium.spaces.Box(
+                    0,
+                    255,
+                    (*self.vision_env_conf.vision_size, 3),
+                    dtype=np.uint8,
                 )
-            if hasattr(obstacle, 'is_comp_observed') and obstacle.is_comp_observed:
-                name = obstacle.name + '_' + 'comp'
-                obs_space_dict[name] = gymnasium.spaces.Box(
-                    -1.0,
-                    1.0,
-                    (self.compass_conf.shape,),
-                    dtype=np.float64,
-                )
-
-        if self.observe_vision:
-            width, height = self.vision_env_conf.vision_size
-            rows, cols = height, width
-            self.vision_env_conf.vision_size = (rows, cols)
-            obs_space_dict['vision_0'] = gymnasium.spaces.Box(
-                0,
-                255,
-                (*self.vision_env_conf.vision_size, 3),
-                dtype=np.uint8,
-            )
-
-        obs_space_dict.update(agent1_sensor_dict)
-        for obstacle in self._obstacles:
-            if obstacle.is_lidar_observed:
-                name = obstacle.name + '_' + 'lidar1'
-                obs_space_dict[name] = gymnasium.spaces.Box(
-                    0.0,
-                    1.0,
-                    (self.lidar_conf.num_bins,),
-                    dtype=np.float64,
-                )
-            if hasattr(obstacle, 'is_comp_observed') and obstacle.is_comp_observed:
-                name = obstacle.name + '_' + 'comp1'
-                obs_space_dict[name] = gymnasium.spaces.Box(
-                    -1.0,
-                    1.0,
-                    (self.compass_conf.shape,),
-                    dtype=np.float64,
-                )
-
-        if self.observe_vision:
-            width, height = self.vision_env_conf.vision_size
-            rows, cols = height, width
-            self.vision_env_conf.vision_size = (rows, cols)
-            obs_space_dict['vision_1'] = gymnasium.spaces.Box(
-                0,
-                255,
-                (*self.vision_env_conf.vision_size, 3),
-                dtype=np.uint8,
-            )
 
         self.obs_info.obs_space_dict = gymnasium.spaces.Dict(obs_space_dict)
 
@@ -331,7 +299,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         """
         placements = {}
 
-        placements.update(self._placements_dict_from_object('agent'))
+        placements.update(self._placements_dict_from_object('agents'))
         for obstacle in self._obstacles:
             placements.update(self._placements_dict_from_object(obstacle.name))
 
@@ -347,13 +315,8 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         world_config = {
             'floor_type': self.floor_conf.type,
             'floor_size': self.floor_conf.size,
-            'agent_base': self.agent.base,
-            'agent_xy': layout['agent'],
+            'agent_base': self.agents.base,
         }
-        if self.agent.rot is None:
-            world_config['agent_rot'] = self.random_generator.generate_rots(2)
-        else:
-            world_config['agent_rot'] = float(self.agent.rot)
 
         # process world config via different objects.
         world_config.update(
@@ -361,13 +324,13 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
                 'geoms': {},
                 'free_geoms': {},
                 'mocaps': {},
+                'agents': {},
             },
         )
         for obstacle in self._obstacles:
             num = obstacle.num if hasattr(obstacle, 'num') else 1
-            if obstacle.name == 'agent':
-                num = 2
             obstacle.process_config(world_config, layout, self.random_generator.generate_rots(num))
+        self.agents.process_config(world_config, layout, self.random_generator.generate_rots(self.agents.num))
         if self._is_load_static_geoms:
             self._build_static_geoms_config(world_config['geoms'])
 
@@ -406,17 +369,38 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
                 break
         else:
             raise ResamplingError('Failed to generate goal')
-        # Move goal geom to new layout position
-        if self.goal_achieved[0]:
-            self.world_info.world_config_dict['geoms']['goal_red']['pos'][
-                :2
-            ] = self.world_info.layout['goal_red']
-            self._set_goal('goal_red', self.world_info.layout['goal_red'])
-        if self.goal_achieved[1]:
-            self.world_info.world_config_dict['geoms']['goal_blue']['pos'][
-                :2
-            ] = self.world_info.layout['goal_blue']
-            self._set_goal('goal_blue', self.world_info.layout['goal_blue'])
+        if 'cover' not in self.__class__.__name__.lower():
+            # Move goal geom to new layout position
+            if self.goal_achieved_index[0]:
+                self.world_info.world_config_dict['geoms']['goal_red']['pos'][
+                    :2
+                ] = self.world_info.layout['goal_red']
+                self._set_goal('goal_red', self.world_info.layout['goal_red'])
+            if self.goal_achieved_index[1]:
+                self.world_info.world_config_dict['geoms']['goal_blue']['pos'][
+                    :2
+                ] = self.world_info.layout['goal_blue']
+                self._set_goal('goal_blue', self.world_info.layout['goal_blue'])
+        elif self.goal_achieved.all():
+            for i in range(self.goals.num):
+                self.world_info.world_config_dict['geoms'][f'goal{i}']['pos'][:2] = self.world_info.layout[f'goal{i}']
+                self._set_goal('goals', self.world_info.layout[f'goal{i}'])
+        mujoco.mj_forward(self.model, self.data)  # pylint: disable=no-member
+
+    def build_goals_position(self) -> None:
+        """Build a new goal position, maybe with resampling due to hazards."""
+        # Resample until goal is compatible with layout
+        for i in range(self.goals.num):
+            if f'goal{i}' in self.world_info.layout:
+                del self.world_info.layout[f'goal{i}']
+        for _ in range(10000):  # Retries
+            if self.random_generator.sample_goals_position(num=self.goals.num):
+                break
+        else:
+            raise ResamplingError('Failed to generate goal')
+        for i in range(self.goals.num):
+            self.world_info.world_config_dict['geoms'][f'goal{i}']['pos'][:2] = self.world_info.layout[f'goal{i}']
+            self._set_goal(f'goal{i}', self.world_info.layout[f'goal{i}'])
         mujoco.mj_forward(self.model, self.data)  # pylint: disable=no-member
 
     def _placements_dict_from_object(self, object_name: dict) -> dict:
@@ -454,18 +438,17 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         mujoco.mj_forward(self.model, self.data)  # Needed to get sensor's data correct
         obs = {}
 
-        obs.update(self.agent.obs_sensor())
+        obs.update(self.agents.obs_sensor())
 
-        for obstacle in self._obstacles:
-            if obstacle.is_lidar_observed:
-                obs[obstacle.name + '_lidar'] = self._obs_lidar(obstacle.pos, obstacle.group)
-                obs[obstacle.name + '_lidar1'] = self._obs_lidar1(obstacle.pos, obstacle.group)
-            if hasattr(obstacle, 'is_comp_observed') and obstacle.is_comp_observed:
-                obs[obstacle.name + '_comp'] = self._obs_compass(obstacle.pos)
+        for index in range(self.agents.num):
+            for obstacle in self._obstacles:
+                if obstacle.is_lidar_observed:
+                    obs[obstacle.name + f'_lidar__{index}'] = self._obs_lidar(obstacle.pos, obstacle.group, index)
+                if hasattr(obstacle, 'is_comp_observed') and obstacle.is_comp_observed:
+                    obs[obstacle.name + '_comp'] = self._obs_compass(obstacle.pos)
 
-        if self.observe_vision:
-            obs['vision_0'] = self._obs_vision()
-            obs['vision_1'] = self._obs_vision(camera_name='vision1')
+            if self.observe_vision:
+                obs[f'vision__{index}'] = self._obs_vision(camera_name=f'vision__{index}')
 
         assert self.obs_info.obs_space_dict.contains(
             obs,
@@ -475,26 +458,13 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             obs = gymnasium.spaces.utils.flatten(self.obs_info.obs_space_dict, obs)
         return obs
 
-    def _obs_lidar(self, positions: np.ndarray | list, group: int) -> np.ndarray:
+    def _obs_lidar(self, positions: np.ndarray | list, group: int, index: int) -> np.ndarray:
         """Calculate and return a lidar observation.
 
         See sub methods for implementation.
         """
         if self.lidar_conf.type == 'pseudo':
-            return self._obs_lidar_pseudo(positions)
-
-        if self.lidar_conf.type == 'natural':
-            return self._obs_lidar_natural(group)
-
-        raise ValueError(f'Invalid lidar_type {self.lidar_conf.type}')
-
-    def _obs_lidar1(self, positions: np.ndarray | list, group: int) -> np.ndarray:
-        """Calculate and return a lidar observation.
-
-        See sub methods for implementation.
-        """
-        if self.lidar_conf.type == 'pseudo':
-            return self._obs_lidar_pseudo1(positions)
+            return self._obs_lidar_pseudo(positions, index)
 
         if self.lidar_conf.type == 'natural':
             return self._obs_lidar_natural(group)
@@ -531,7 +501,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
                 obs[i] = np.exp(-dist)
         return obs
 
-    def _obs_lidar_pseudo(self, positions: np.ndarray) -> np.ndarray:
+    def _obs_lidar_pseudo(self, positions: np.ndarray, index: int) -> np.ndarray:
         """Return an agent-centric lidar observation of a list of positions.
 
         Lidar is a set of bins around the agent (divided evenly in a circle).
@@ -558,55 +528,7 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             if pos.shape == (3,):
                 pos = pos[:2]  # Truncate Z coordinate
             # pylint: disable-next=invalid-name
-            z = complex(*self._ego_xy(pos))  # X, Y as real, imaginary components
-            dist = np.abs(z)
-            angle = np.angle(z) % (np.pi * 2)
-            bin_size = (np.pi * 2) / self.lidar_conf.num_bins
-            bin = int(angle / bin_size)  # pylint: disable=redefined-builtin
-            bin_angle = bin_size * bin
-            if self.lidar_conf.max_dist is None:
-                sensor = np.exp(-self.lidar_conf.exp_gain * dist)
-            else:
-                sensor = max(0, self.lidar_conf.max_dist - dist) / self.lidar_conf.max_dist
-            obs[bin] = max(obs[bin], sensor)
-            # Aliasing
-            if self.lidar_conf.alias:
-                alias = (angle - bin_angle) / bin_size
-                assert 0 <= alias <= 1, f'bad alias {alias}, dist {dist}, angle {angle}, bin {bin}'
-                bin_plus = (bin + 1) % self.lidar_conf.num_bins
-                bin_minus = (bin - 1) % self.lidar_conf.num_bins
-                obs[bin_plus] = max(obs[bin_plus], alias * sensor)
-                obs[bin_minus] = max(obs[bin_minus], (1 - alias) * sensor)
-        return obs
-
-    def _obs_lidar_pseudo1(self, positions: np.ndarray) -> np.ndarray:
-        """Return an agent-centric lidar observation of a list of positions.
-
-        Lidar is a set of bins around the agent (divided evenly in a circle).
-        The detection directions are exclusive and exhaustive for a full 360 view.
-        Each bin reads 0 if there are no objects in that direction.
-        If there are multiple objects, the distance to the closest one is used.
-        Otherwise the bin reads the fraction of the distance towards the agent.
-
-        E.g. if the object is 90% of lidar_max_dist away, the bin will read 0.1,
-        and if the object is 10% of lidar_max_dist away, the bin will read 0.9.
-        (The reading can be thought of as "closeness" or inverse distance)
-
-        This encoding has some desirable properties:
-            - bins read 0 when empty
-            - bins smoothly increase as objects get close
-            - maximum reading is 1.0 (where the object overlaps the agent)
-            - close objects occlude far objects
-            - constant size observation with variable numbers of objects
-        """
-        positions = np.array(positions, ndmin=2)
-        obs = np.zeros(self.lidar_conf.num_bins)
-        for pos in positions:
-            pos = np.asarray(pos)
-            if pos.shape == (3,):
-                pos = pos[:2]  # Truncate Z coordinate
-            # pylint: disable-next=invalid-name
-            z = complex(*self._ego_xy1(pos))  # X, Y as real, imaginary components
+            z = complex(*self._ego_xy(pos, index))  # X, Y as real, imaginary components
             dist = np.abs(z)
             angle = np.angle(z) % (np.pi * 2)
             bin_size = (np.pi * 2) / self.lidar_conf.num_bins
@@ -670,20 +592,11 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             cost={'agent_0': {}, 'agent_1': {}},
         )
 
-    def _ego_xy(self, pos: np.ndarray) -> np.ndarray:
+    def _ego_xy(self, pos: np.ndarray, index: int) -> np.ndarray:
         """Return the egocentric XY vector to a position from the agent."""
         assert pos.shape == (2,), f'Bad pos {pos}'
-        agent_3vec = self.agent.pos_0
-        agent_mat = self.agent.mat_0
-        pos_3vec = np.concatenate([pos, [0]])  # Add a zero z-coordinate
-        world_3vec = pos_3vec - agent_3vec
-        return np.matmul(world_3vec, agent_mat)[:2]  # only take XY coordinates
-
-    def _ego_xy1(self, pos: np.ndarray) -> np.ndarray:
-        """Return the egocentric XY vector to a position from the agent."""
-        assert pos.shape == (2,), f'Bad pos {pos}'
-        agent_3vec = self.agent.pos_1
-        agent_mat = self.agent.mat_1
+        agent_3vec = self.agents.pos(index)
+        agent_mat = self.agents.mat(index)
         pos_3vec = np.concatenate([pos, [0]])  # Add a zero z-coordinate
         world_3vec = pos_3vec - agent_3vec
         return np.matmul(world_3vec, agent_mat)[:2]  # only take XY coordinates

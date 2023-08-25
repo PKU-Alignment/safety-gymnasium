@@ -12,15 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Multi Goal level 2."""
+"""CoverGoal level 2."""
 
-from safety_gymnasium.tasks.safe_multi_agent.tasks.multi_goal.multi_goal_level1 import (
-    MultiGoalLevel1,
+from safety_gymnasium.tasks.safe_multi_agent.tasks.cover_goal.cover_goal_level1 import (
+    CoverGoalLevel1,
 )
 
 
-class MultiGoalLevel2(MultiGoalLevel1):
-    """An agent must navigate to a goal while avoiding more hazards and vases."""
+class CoverGoalLevel2(CoverGoalLevel1):
 
     def __init__(self, config, agent_num) -> None:
         super().__init__(config=config, agent_num=agent_num)

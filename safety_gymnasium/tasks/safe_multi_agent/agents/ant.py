@@ -36,7 +36,10 @@ class Ant(BaseAgent):
         locations: Optional[list] = None,
         keepout: float = 0.4,
         rot: Optional[float] = None,
+        num: int = 2,
     ) -> None:
+        self.actuator_index = np.array([i for i in range(8)])
+        self.delta = 8
         super().__init__(
             self.__class__.__name__,
             random_generator,
@@ -44,14 +47,12 @@ class Ant(BaseAgent):
             locations,
             keepout,
             rot,
+            num,
         )
 
     def is_alive(self):
         """Die if it touches the ground."""
-        return (
-            self.engine.data.body('agent').xpos.copy()[2] > 0.08
-            and self.engine.data.body('agent1').xpos.copy()[2] > 0.08
-        )
+        return all([self.engine.data.body(f'agent__{index}').xpos.copy()[2] > 0.08 for index in range(self.num)])
 
     def reset(self):
         """Improved spawning behavior of Ant agent.
@@ -60,12 +61,11 @@ class Ant(BaseAgent):
         policies better exploration and occasionally generates forward
         movements.
         """
-        for i in range(self.body_info[0].nu):
-            noise = self.random_generator.uniform(low=-0.1, high=0.1)
-            pos = noise if i % 2 == 0 else np.pi / 2 + noise
-            joint_id = self.engine.model.actuator(i).trnid
-            joint_id1 = self.engine.model.actuator(i + 8).trnid
-            if i in (3, 5):
-                pos *= -1
-            self.engine.data.joint(joint_id[0]).qpos = pos
-            self.engine.data.joint(joint_id1[0]).qpos = pos
+        for index in range(self.num):
+            for i in range(self.body_info[index].nu):
+                noise = self.random_generator.uniform(low=-0.1, high=0.1)
+                pos = noise if i % 2 == 0 else np.pi / 2 + noise
+                joint_id = self.engine.model.actuator(i + index * self.body_info[index].nu).trnid
+                if i % self.body_info[index].nu in (3, 5):
+                    pos *= -1
+                self.engine.data.joint(joint_id[0]).qpos = pos

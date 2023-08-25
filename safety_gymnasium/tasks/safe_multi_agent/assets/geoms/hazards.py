@@ -68,24 +68,18 @@ class Hazards(Geom):  # pylint: disable=too-many-instance-attributes
 
     def cal_cost(self):
         """Contacts Processing."""
-        cost = {'agent_0': {}, 'agent_1': {}}
+        cost = {f'agent_{i}': {} for i in range(self.agents.num)}
         if not self.is_constrained:
             return cost
-        cost_0 = cost['agent_0']
-        cost_0['cost_hazards'] = 0
-        for h_pos in self.pos:
-            h_dist = self.agent.dist_xy(0, h_pos)
-            # pylint: disable=no-member
-            if h_dist <= self.size:
-                cost_0['cost_hazards'] += self.cost * (self.size - h_dist)
-
-        cost_1 = cost['agent_1']
-        cost_1['cost_hazards'] = 0
-        for h_pos in self.pos:
-            h_dist = self.agent.dist_xy(1, h_pos)
-            # pylint: disable=no-member
-            if h_dist <= self.size:
-                cost_1['cost_hazards'] += self.cost * (self.size - h_dist)
+        
+        for index in range(self.agents.num):
+            cost_index = cost[f'agent_{index}']
+            cost_index['cost_hazards'] = 0
+            for h_pos in self.pos:
+                h_dist = self.agents.dist_xy(h_pos, index)
+                # pylint: disable=no-member
+                if h_dist <= self.size:
+                    cost_index['cost_hazards'] += self.cost * (self.size - h_dist)
 
         return cost
 

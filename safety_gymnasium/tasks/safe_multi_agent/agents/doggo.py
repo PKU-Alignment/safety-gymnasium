@@ -19,6 +19,7 @@ from typing import Optional
 
 from safety_gymnasium.tasks.safe_multi_agent.bases.base_agent import BaseAgent
 from safety_gymnasium.tasks.safe_multi_agent.utils.random_generator import RandomGenerator
+import numpy as np
 
 
 class Doggo(BaseAgent):
@@ -38,6 +39,7 @@ class Doggo(BaseAgent):
         locations: Optional[list] = None,
         keepout: float = 0.4,
         rot: Optional[float] = None,
+        num: int = 2,
     ) -> None:
         super().__init__(
             self.__class__.__name__,
@@ -46,7 +48,10 @@ class Doggo(BaseAgent):
             locations,
             keepout,
             rot,
+            num,
         )
+        self.actuator_index = np.array([i for i in range(12)])
+        self.delta = 12
         self.sensor_conf.sensors += (
             'touch_ankle_1a',
             'touch_ankle_2a',

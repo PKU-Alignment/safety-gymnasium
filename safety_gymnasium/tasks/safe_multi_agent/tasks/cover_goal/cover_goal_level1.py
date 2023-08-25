@@ -12,23 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Multi Goal level 2."""
+"""CoverGoal level 1."""
 
-from safety_gymnasium.tasks.safe_multi_agent.tasks.multi_goal.multi_goal_level1 import (
-    MultiGoalLevel1,
+from safety_gymnasium.tasks.safe_multi_agent.assets.free_geoms import Vases
+from safety_gymnasium.tasks.safe_multi_agent.assets.geoms import Hazards
+from safety_gymnasium.tasks.safe_multi_agent.tasks.cover_goal.cover_goal_level0 import (
+    CoverGoalLevel0,
 )
 
 
-class MultiGoalLevel2(MultiGoalLevel1):
-    """An agent must navigate to a goal while avoiding more hazards and vases."""
+class CoverGoalLevel1(CoverGoalLevel0):
 
     def __init__(self, config, agent_num) -> None:
         super().__init__(config=config, agent_num=agent_num)
-        # pylint: disable=no-member
 
-        self.placements_conf.extents = [-2, -2, 2, 2]
+        self.placements_conf.extents = [-1.5, -1.5, 1.5, 1.5]
 
-        self.hazards.num = 10
-        self.vases.num = 10
-        self.vases.is_constrained = True
+        self._add_geoms(Hazards(num=8, keepout=0.18))
+        self._add_free_geoms(Vases(num=1, is_constrained=False))
         self.contact_other_cost = 1.0

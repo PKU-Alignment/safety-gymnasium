@@ -96,3 +96,15 @@ class GoalRed(Goal):
 
     def __post_init__(self) -> None:
         self.color: np.ndarray = np.array([0.7412, 0.0431, 0.1843, 1])
+
+@dataclass
+class Goals(Goal):
+    """Multiple goals."""
+
+    name: str = 'goals'
+    num: int = 2
+
+    @property
+    def pos(self):
+        """Helper to get goal position from layout."""
+        return [self.engine.data.body(f'{self.name[:-1]}{i}').xpos.copy() for i in range(self.num)]
