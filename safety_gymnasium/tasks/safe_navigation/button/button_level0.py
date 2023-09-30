@@ -32,7 +32,7 @@ class ButtonLevel0(BaseTask):
         self.placements_conf.extents = [-1, -1, 1, 1]
 
         self._add_geoms(Buttons(num=4, is_constrained=False))
-        self._add_geoms(Goal(size=self.buttons.size * 2, alpha=0.1))  # pylint: disable=no-member
+        self._add_geoms(Goal(size=self.buttons.size * 2, alpha=1.0))  # pylint: disable=no-member
 
         self.last_dist_goal = None
 
