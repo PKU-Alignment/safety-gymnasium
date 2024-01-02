@@ -27,6 +27,19 @@ It aims to deliver a good view of benchmarking SafeRL algorithms and a standardi
 We provide a set of standard APIs which are compatible with information on constraints.
 Users can explore new insights via an elegant code framework and well-designed environments.
 
+## Citing Safety-Gymnasium
+
+If you find Safety-Gymnasium useful, please cite it in your publications.
+
+```bibtex
+@article{ji2023safety,
+  title={Safety-Gymnasium: A Unified Safe Reinforcement Learning Benchmark},
+  author={Ji, Jiaming and Zhang, Borong and Zhou, Jiayi and Pan, Xuehai and Huang, Weidong and Sun, Ruiyang and Geng, Yiran and Zhong, Yifan and Dai, Juntao and Yang, Yaodong},
+  journal={arXiv preprint arXiv:2310.12567},
+  year={2023}
+}
+```
+
 --------------------------------------------------------------------------------
 
 # Note for v1.1.0 and v1.2.0❗️❗️❗️
@@ -627,20 +640,6 @@ class MytaskLevel0(BaseTask):
         # depending on your task
 ```
 
-## Citing Safety-Gymnasium
-
-If you find Safety-Gymnasium useful, please cite it in your publications.
-
-```bibtex
-@article{Safety-Gymnasium,
-  author = {Jiaming Ji and Borong Zhang and Xuehai Pan and Jiayi Zhou and Juntao Dai and Yaodong Yang},
-  title = {Safety-Gymnasium},
-  year = {2023},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/PKU-Alignment/safety-gymnasium}},
-}
-```
 
 ## License
 
