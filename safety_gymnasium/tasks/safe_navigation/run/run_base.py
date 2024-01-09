@@ -24,7 +24,7 @@ class RunBase(BaseTask):
 
     def __init__(self, config) -> None:
         assert 'Sigwalls' in config, 'config must have the field `Sigwalls`'
-        self.reward_factor = 1.0
+        self.reward_factor: float = 1.0
         super().__init__(config=config)
 
         self.old_potential = None
