@@ -176,7 +176,6 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             config (dict): Configuration dictionary, used to pre-config some attributes
               according to tasks via :meth:`safety_gymnasium.register`.
         """
-        super().__init__(config=config)
 
         self.task_name: str
         self.num_steps = 1000  # Maximum number of environment steps in an episode
@@ -187,13 +186,14 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
         self.cost_conf = CostConf()
         self.mechanism_conf = MechanismConf()
 
-        self.action_space = self.agent.action_space
         self.observation_space = None
         self.obs_info = ObservationInfo()
 
         self._is_load_static_geoms = False  # Whether to load static geoms in current task.
         self.static_geoms_names: dict
         self.static_geoms_contact_cost: float = None
+        super().__init__(config=config)
+        self.action_space = self.agent.action_space
 
     def dist_goal(self) -> float:
         """Return the distance from the agent to the goal XY position."""
