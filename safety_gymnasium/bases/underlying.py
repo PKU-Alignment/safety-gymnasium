@@ -26,6 +26,9 @@ import numpy as np
 from gymnasium.envs.mujoco.mujoco_rendering import OffScreenViewer
 
 import safety_gymnasium
+import safety_gymnasium.assets.free_geoms as free_geoms
+import safety_gymnasium.assets.geoms as geoms
+import safety_gymnasium.assets.mocaps as mocaps
 from safety_gymnasium import agents
 from safety_gymnasium.assets.color import COLOR
 from safety_gymnasium.assets.free_geoms import FREE_GEOMS_REGISTER
@@ -219,12 +222,13 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         self.observe_vision = False  # Observe vision from the agent
         self.debug = False
         self.observation_flatten = True  # Flatten observation into a vector
-        self._parse(config)
         self.agent = None
         self.action_noise: float = (
             0.0  # Magnitude of independent per-component gaussian action noise
         )
+        self.agent_name = config['agent_name']
         self._build_agent(self.agent_name)
+        self._parse(config)
 
     def _parse(self, config: dict) -> None:
         """Parse a config dict.
@@ -236,10 +240,18 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             config (dict): Configuration dictionary.
         """
         for key, value in config.items():
+            if key in ['agent_name', 'task_name']:
+                continue
             if '.' in key:
                 obj, key = key.split('.')
                 assert hasattr(self, obj) and hasattr(getattr(self, obj), key), f'Bad key {key}'
                 setattr(getattr(self, obj), key, value)
+            elif hasattr(geoms, key):
+                self._add_geoms(getattr(geoms, key)(**value))
+            elif hasattr(free_geoms, key):
+                self._add_free_geoms(getattr(free_geoms, key)(**value))
+            elif hasattr(mocaps, key):
+                self._add_mocaps(getattr(mocaps, key)(**value))
             else:
                 assert hasattr(self, key), f'Bad key {key}'
                 setattr(self, key, value)
