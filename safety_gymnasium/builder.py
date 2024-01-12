@@ -18,6 +18,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 from typing import Any, ClassVar
+from copy import deepcopy
 
 import gymnasium
 import numpy as np
@@ -26,7 +27,6 @@ from safety_gymnasium import tasks
 from safety_gymnasium.bases.base_task import BaseTask
 from safety_gymnasium.utils.common_utils import ResamplingError, quat2zalign
 from safety_gymnasium.utils.task_utils import get_task_class_name
-
 
 @dataclass
 class RenderConf:
@@ -340,3 +340,23 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
     def render_mode(self) -> str:
         """The render mode."""
         return self.render_parameters.mode
+    
+    
+    def __deepcopy__(self, memo) -> "Builder":
+        """Make Env copyable."""
+        other = Builder(self.task_id, self.config,
+            self.render_parameters.mode,
+            self.render_parameters.width,
+            self.render_parameters.height,
+            self.render_parameters.camera_id,
+            self.render_parameters.camera_name
+        )
+        other._seed = self._seed
+        other.first_reset = self.first_reset
+        other.steps = self.steps
+        other.cost = self.cost
+        other.terminated = self.terminated
+        other.truncated = self.truncated
+        other.task = deepcopy(self.task)
+        return other
+        
