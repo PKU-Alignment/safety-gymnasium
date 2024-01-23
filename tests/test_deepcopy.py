@@ -14,11 +14,12 @@
 # ==============================================================================
 """Test copy of environemnts."""
 
+from copy import deepcopy
+
 import gymnasium
+import numpy as np
 
 import helpers
-import numpy as np
-from copy import deepcopy
 
 
 @helpers.parametrize(
@@ -50,7 +51,6 @@ def test_equal_outcomes_branch(agent_id, env_id, level):
     obs2, reward2, term2, trunc2, info2 = env2.step(move)
     obs3, reward3, term3, trunc3, info3 = env3.step(move)
     obs4, reward4, term4, trunc4, info4 = env4.step(move)
-
 
     np.testing.assert_array_equal(obs1, obs2)
     np.testing.assert_array_equal(obs2, obs3)
@@ -99,4 +99,3 @@ def test_equal_outcomes_long(agent_id, env_id, level):
         assert term1 == term2
         assert trunc1 == trunc2
         assert info1 == info2
-
