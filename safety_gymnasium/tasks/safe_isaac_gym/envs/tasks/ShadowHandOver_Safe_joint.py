@@ -7,11 +7,11 @@
 
 import os
 import random
+import yaml
 
 import numpy as np
 import torch
-from isaacgym import gymapi, gymtorch
-from matplotlib.pyplot import axis
+from isaacgym import gymapi, gymtorch, gymutil
 
 from safety_gymnasium.tasks.safe_isaac_gym.envs.tasks.hand_base.base_task import BaseTask
 from safety_gymnasium.tasks.safe_isaac_gym.utils.torch_jit_utils import *
@@ -20,16 +20,29 @@ from safety_gymnasium.tasks.safe_isaac_gym.utils.torch_jit_utils import *
 class ShadowHandOver_Safe_joint(BaseTask):
     def __init__(
         self,
-        cfg,
         sim_params,
         physics_engine,
         device_type,
         device_id,
         headless,
+        num_envs=None,
+        cfg=None,
         agent_index=[[[0, 1, 2, 3, 4, 5]], [[0, 1, 2, 3, 4, 5]]],
         is_multi_agent=False,
     ):
-        self.cfg = cfg
+        yaml_path = os.path.abspath(__file__).replace("envs/tasks", "envs/cfgs").replace(".py", ".yaml")
+        if cfg:
+            self.cfg=cfg
+        else:
+            with open(yaml_path) as f:
+                self.cfg = yaml.load(f, Loader=yaml.FullLoader)
+        
+        if num_envs:
+            self.cfg['env']['numEnvs'] = num_envs
+        
+        if 'sim' in self.cfg:
+            gymutil.parse_sim_config(self.cfg["sim"], sim_params)
+        
         self.sim_params = sim_params
         self.physics_engine = physics_engine
         self.agent_index = agent_index
