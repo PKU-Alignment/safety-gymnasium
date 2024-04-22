@@ -376,9 +376,9 @@ class BaseTask(Underlying):  # pylint: disable=too-many-instance-attributes,too-
             self.staged_goal.get_next_goal_xy(),  # pylint: disable=no-member
         )
         # Move goal geom to new layout position
-        self.world_info.world_config_dict['geoms']['staged_goal']['pos'][
-            :2
-        ] = self.world_info.layout['staged_goal']
+        self.world_info.world_config_dict['geoms']['staged_goal']['pos'][:2] = (
+            self.world_info.layout['staged_goal']
+        )
         self._set_goal(self.world_info.layout['staged_goal'], 'staged_goal')
         mujoco.mj_forward(self.model, self.data)  # pylint: disable=no-member
 

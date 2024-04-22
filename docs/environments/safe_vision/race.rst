@@ -35,7 +35,7 @@ Rewards
 Episode End
 -----------
 
-- When episode length is greater than 500: ``Trucated = True``.
+- When episode length is greater than 500: ``Truncated = True``.
 - Upon the agent's arrival at the "Goal": ``goal_achieved = True``.
 
 .. _Race0:
