@@ -8,7 +8,7 @@ ci:
 default_stages: [commit, push, manual]
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.6.0
     hooks:
       - id: check-symlinks
       - id: destroyed-symlinks
@@ -45,7 +45,7 @@ repos:
           )
       - id: double-quote-string-fixer
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.0.285
+    rev: v0.4.1
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
@@ -54,15 +54,15 @@ repos:
             ^safety_gymnasium/tasks/safe_isaac_gym/
           )
   - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
+    rev: 5.13.2
     hooks:
       - id: isort
   - repo: https://github.com/psf/black
-    rev: 23.7.0
+    rev: 24.4.0
     hooks:
       - id: black-jupyter
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.10.1
+    rev: v3.15.2
     hooks:
       - id: pyupgrade
         args: [--py38-plus] # sync with requires-python
@@ -71,7 +71,7 @@ repos:
             ^examples/
           )
   - repo: https://github.com/pycqa/flake8
-    rev: 6.1.0
+    rev: 7.0.0
     hooks:
       - id: flake8
         additional_dependencies:
@@ -88,7 +88,7 @@ repos:
             ^docs/conf.py$
           )
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.5
+    rev: v2.2.6
     hooks:
       - id: codespell
         additional_dependencies: [".[toml]"]
