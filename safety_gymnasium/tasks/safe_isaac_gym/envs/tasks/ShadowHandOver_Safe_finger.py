@@ -33,11 +33,10 @@ class ShadowHandOver_Safe_finger(BaseTask):
         yaml_path = (
             os.path.abspath(__file__).replace('envs/tasks', 'envs/cfgs').replace('.py', '.yaml')
         )
+        with open(yaml_path) as f:
+            self.cfg = yaml.load(f, Loader=yaml.FullLoader)
         if cfg:
-            self.cfg = cfg
-        else:
-            with open(yaml_path) as f:
-                self.cfg = yaml.load(f, Loader=yaml.FullLoader)
+            self.cfg.update(cfg)
 
         if num_envs:
             self.cfg['env']['numEnvs'] = num_envs
