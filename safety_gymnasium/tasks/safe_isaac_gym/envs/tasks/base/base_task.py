@@ -474,6 +474,10 @@ class BaseTask:
     def post_physics_step(self):
         raise NotImplementedError
 
+    def close(self):
+        self.gym.destroy_viewer(self.viewer)
+        self.gym.destroy_sim(self.sim)
+
 
 def get_attr_val_from_sample(sample, offset, prop, attr):
     """Retrieves param value for the given prop and attr from the sample."""

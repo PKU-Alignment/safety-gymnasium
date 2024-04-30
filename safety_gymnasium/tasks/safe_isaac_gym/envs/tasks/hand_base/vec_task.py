@@ -191,6 +191,9 @@ class VecTaskPython(VecTask):
 
         return torch.clamp(self.task.obs_buf, -self.clip_obs, self.clip_obs).to(self.rl_device)
 
+    def close(self):
+        self.task.close()
+
 
 class VecTaskPythonArm(VecTask):
     def get_state(self):

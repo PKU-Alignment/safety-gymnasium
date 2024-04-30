@@ -36,7 +36,7 @@ Rewards
 Episode End
 -----------
 
-- When episode length is greater than 500: ``Trucated = True``.
+- When episode length is greater than 500: ``Truncated = True``.
 
 .. _Circle0:
 

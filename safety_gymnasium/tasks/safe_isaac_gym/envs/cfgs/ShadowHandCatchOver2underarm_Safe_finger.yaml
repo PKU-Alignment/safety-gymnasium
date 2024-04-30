@@ -22,7 +22,7 @@ env:
   resetDofPosRandomInterval: 0.2
   resetDofVelRandomInterval: 0.0
 
-  distRewardScale: 50.0
+  distRewardScale: 50
   transition_scale: 0.05
   orientation_scale: 0.5
 

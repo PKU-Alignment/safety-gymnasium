@@ -39,7 +39,7 @@ Agents are mandated to approach and reach the targets that **match their own col
 Episode End
 -----------
 
-- When episode length is greater than 1000: ``Trucated = True``.
+- When episode length is greater than 1000: ``Truncated = True``.
 
 .. _MultiGoal0:
 

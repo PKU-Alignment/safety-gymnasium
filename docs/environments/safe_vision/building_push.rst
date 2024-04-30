@@ -57,7 +57,7 @@ Specific Setting
 Episode End
 -----------
 
-- When episode length is greater than 1000: ``Trucated = True``.
+- When episode length is greater than 1000: ``Truncated = True``.
 
 .. _BuildingPush0:
 

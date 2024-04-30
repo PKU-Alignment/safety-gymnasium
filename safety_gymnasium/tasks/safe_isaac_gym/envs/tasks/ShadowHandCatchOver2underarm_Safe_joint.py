@@ -10,8 +10,8 @@ import random
 
 import numpy as np
 import torch
-from isaacgym import gymapi, gymtorch
-from matplotlib.pyplot import axis
+import yaml
+from isaacgym import gymapi, gymtorch, gymutil
 
 from safety_gymnasium.tasks.safe_isaac_gym.envs.tasks.hand_base.base_task import BaseTask
 from safety_gymnasium.tasks.safe_isaac_gym.utils.torch_jit_utils import *
@@ -20,16 +20,30 @@ from safety_gymnasium.tasks.safe_isaac_gym.utils.torch_jit_utils import *
 class ShadowHandCatchOver2Underarm_Safe_joint(BaseTask):
     def __init__(
         self,
-        cfg,
         sim_params,
         physics_engine,
         device_type,
         device_id,
         headless,
+        num_envs=None,
+        cfg=None,
         agent_index=[[[0, 1, 2, 3, 4, 5]], [[0, 1, 2, 3, 4, 5]]],
         is_multi_agent=False,
     ):
-        self.cfg = cfg
+        yaml_path = (
+            os.path.abspath(__file__).replace('envs/tasks', 'envs/cfgs').replace('.py', '.yaml')
+        )
+        with open(yaml_path) as f:
+            self.cfg = yaml.load(f, Loader=yaml.FullLoader)
+        if cfg:
+            self.cfg.update(cfg)
+
+        if num_envs:
+            self.cfg['env']['numEnvs'] = num_envs
+
+        if 'sim' in self.cfg:
+            gymutil.parse_sim_config(self.cfg['sim'], sim_params)
+
         self.sim_params = sim_params
         self.physics_engine = physics_engine
         self.agent_index = agent_index
@@ -731,9 +745,9 @@ class ShadowHandCatchOver2Underarm_Safe_joint(BaseTask):
         )
 
         fingertip_obs_start = 72  # 168 = 157 + 11
-        self.obs_buf[
-            :, fingertip_obs_start : fingertip_obs_start + num_ft_states
-        ] = self.fingertip_state.reshape(self.num_envs, num_ft_states)
+        self.obs_buf[:, fingertip_obs_start : fingertip_obs_start + num_ft_states] = (
+            self.fingertip_state.reshape(self.num_envs, num_ft_states)
+        )
         self.obs_buf[
             :,
             fingertip_obs_start
@@ -763,12 +777,12 @@ class ShadowHandCatchOver2Underarm_Safe_joint(BaseTask):
 
         # another_hand
         another_hand_start = action_obs_start + 26
-        self.obs_buf[
-            :, another_hand_start : self.num_shadow_hand_dofs + another_hand_start
-        ] = unscale(
-            self.shadow_hand_another_dof_pos,
-            self.shadow_hand_dof_lower_limits,
-            self.shadow_hand_dof_upper_limits,
+        self.obs_buf[:, another_hand_start : self.num_shadow_hand_dofs + another_hand_start] = (
+            unscale(
+                self.shadow_hand_another_dof_pos,
+                self.shadow_hand_dof_lower_limits,
+                self.shadow_hand_dof_upper_limits,
+            )
         )
         self.obs_buf[
             :,
@@ -802,9 +816,9 @@ class ShadowHandCatchOver2Underarm_Safe_joint(BaseTask):
         )
 
         hand_another_pose_start = fingertip_another_obs_start + 95
-        self.obs_buf[
-            :, hand_another_pose_start : hand_another_pose_start + 3
-        ] = self.hand_positions[self.another_hand_indices, :]
+        self.obs_buf[:, hand_another_pose_start : hand_another_pose_start + 3] = (
+            self.hand_positions[self.another_hand_indices, :]
+        )
         self.obs_buf[:, hand_another_pose_start + 3 : hand_another_pose_start + 4] = get_euler_xyz(
             self.hand_orientations[self.another_hand_indices, :]
         )[0].unsqueeze(-1)
