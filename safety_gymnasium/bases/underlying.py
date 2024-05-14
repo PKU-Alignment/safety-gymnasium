@@ -26,6 +26,9 @@ import numpy as np
 from gymnasium.envs.mujoco.mujoco_rendering import OffScreenViewer
 
 import safety_gymnasium
+import safety_gymnasium.assets.free_geoms as free_geoms
+import safety_gymnasium.assets.geoms as geoms
+import safety_gymnasium.assets.mocaps as mocaps
 from safety_gymnasium import agents
 from safety_gymnasium.assets.color import COLOR
 from safety_gymnasium.assets.free_geoms import FREE_GEOMS_REGISTER
@@ -219,12 +222,13 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         self.observe_vision = False  # Observe vision from the agent
         self.debug = False
         self.observation_flatten = True  # Flatten observation into a vector
-        self._parse(config)
         self.agent = None
         self.action_noise: float = (
             0.0  # Magnitude of independent per-component gaussian action noise
         )
+        self.agent_name = config['agent_name']
         self._build_agent(self.agent_name)
+        self._parse(config)
 
     def _parse(self, config: dict) -> None:
         """Parse a config dict.
@@ -236,10 +240,18 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             config (dict): Configuration dictionary.
         """
         for key, value in config.items():
+            if key in ['agent_name', 'task_name']:
+                continue
             if '.' in key:
                 obj, key = key.split('.')
                 assert hasattr(self, obj) and hasattr(getattr(self, obj), key), f'Bad key {key}'
                 setattr(getattr(self, obj), key, value)
+            elif hasattr(geoms, key):
+                self._add_geoms(getattr(geoms, key)(**value))
+            elif hasattr(free_geoms, key):
+                self._add_free_geoms(getattr(free_geoms, key)(**value))
+            elif hasattr(mocaps, key):
+                self._add_mocaps(getattr(mocaps, key)(**value))
             else:
                 assert hasattr(self, key), f'Bad key {key}'
                 setattr(self, key, value)
@@ -250,9 +262,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         agent_cls = getattr(agents, agent_name)
         self.agent = agent_cls(random_generator=self.random_generator)
 
-    def _add_geoms(self, *geoms: Geom) -> None:
+    def _add_geoms(self, *added_geoms: Geom) -> None:
         """Register geom type objects into environments and set corresponding attributes."""
-        for geom in geoms:
+        for geom in added_geoms:
             assert (
                 type(geom) in GEOMS_REGISTER
             ), 'Please figure out the type of object before you add it into envs.'
@@ -260,9 +272,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             setattr(self, geom.name, geom)
             geom.set_agent(self.agent)
 
-    def _add_free_geoms(self, *free_geoms: FreeGeom) -> None:
+    def _add_free_geoms(self, *added_free_geoms: FreeGeom) -> None:
         """Register FreeGeom type objects into environments and set corresponding attributes."""
-        for obj in free_geoms:
+        for obj in added_free_geoms:
             assert (
                 type(obj) in FREE_GEOMS_REGISTER
             ), 'Please figure out the type of object before you add it into envs.'
@@ -270,9 +282,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             setattr(self, obj.name, obj)
             obj.set_agent(self.agent)
 
-    def _add_mocaps(self, *mocaps: Mocap) -> None:
+    def _add_mocaps(self, *added_mocaps: Mocap) -> None:
         """Register mocap type objects into environments and set corresponding attributes."""
-        for mocap in mocaps:
+        for mocap in added_mocaps:
             assert (
                 type(mocap) in MOCAPS_REGISTER
             ), 'Please figure out the type of object before you add it into envs.'

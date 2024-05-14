@@ -144,7 +144,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
     def _get_task(self) -> BaseTask:
         """Instantiate a task object."""
-        class_name = get_task_class_name(self.task_id)
+        class_name = self.config.get('task_name', get_task_class_name(self.task_id))
         assert hasattr(tasks, class_name), f'Task={class_name} not implemented.'
         task_class = getattr(tasks, class_name)
         task = task_class(config=self.config)

@@ -17,6 +17,7 @@
 from __future__ import annotations
 
 import copy
+from collections.abc import Mapping
 from typing import Any
 
 from gymnasium import Env, error, logger
@@ -97,7 +98,23 @@ def make(
 
     # Update the env spec kwargs with the `make` kwargs
     env_spec_kwargs = copy.deepcopy(env_spec.kwargs)
-    env_spec_kwargs.update(kwargs)
+    # one level deeper update of `env_spec_kwargs`
+    for key, value in kwargs.items():
+        if key in env_spec_kwargs and isinstance(value, Mapping):
+            # updating not copying dictionaries
+            if key == 'config':
+                # Do not update 'agent_name' or 'task_name'
+                if 'agent_name' in value and 'agent_name' in env_spec_kwargs[key]:
+                    assert (
+                        env_spec_kwargs[key]['agent_name'] == value['agent_name']
+                    ), "Agent specified in the config doesn't match the agent in the `env_id`"
+                if 'task_name' in value and 'task_name' in env_spec_kwargs[key]:
+                    assert (
+                        env_spec_kwargs[key]['task_name'] == value['task_name']
+                    ), "Task specified in the config doesn't match the task in the `env_id`"
+            env_spec_kwargs[key].update(value)
+        else:
+            env_spec_kwargs[key] = value
 
     # Load the environment creator
     if env_spec.entry_point is None:
