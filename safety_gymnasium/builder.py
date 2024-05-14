@@ -16,6 +16,7 @@
 
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import asdict, dataclass
 from typing import Any, ClassVar
 
@@ -340,3 +341,23 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
     def render_mode(self) -> str:
         """The render mode."""
         return self.render_parameters.mode
+
+    def __deepcopy__(self, memo) -> Builder:
+        """Make class instance copyable."""
+        other = Builder(
+            self.task_id,
+            self.config,
+            self.render_parameters.mode,
+            self.render_parameters.width,
+            self.render_parameters.height,
+            self.render_parameters.camera_id,
+            self.render_parameters.camera_name,
+        )
+        other._seed = self._seed
+        other.first_reset = self.first_reset
+        other.steps = self.steps
+        other.cost = self.cost
+        other.terminated = self.terminated
+        other.truncated = self.truncated
+        other.task = deepcopy(self.task)  # pylint: disable=attribute-defined-outside-init
+        return other
