@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Test copy of environemnts."""
+"""Test copy of environments."""
 
 from copy import deepcopy
 
@@ -88,7 +88,7 @@ def test_equal_outcomes_long(agent_id, env_id, level):
 
     env2 = deepcopy(env1)
 
-    # the copied env should yield the same obervations, reward, etc as the original env when the same staps are taken:
+    # the copied env should yield the same observations, reward, etc as the original env when the same steps are taken:
     for _ in range(32):
         move = env1.action_space.sample()
         obs1, reward1, term1, trunc1, info1 = env1.step(move)

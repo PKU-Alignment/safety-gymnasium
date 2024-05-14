@@ -343,19 +343,21 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
         return self.render_parameters.mode
 
     def __deepcopy__(self, memo) -> Builder:
-        """Make Env copyable."""
-        other = Builder(self.task_id, self.config,
-                        self.render_parameters.mode,
-                        self.render_parameters.width,
-                        self.render_parameters.height,
-                        self.render_parameters.camera_id,
-                        self.render_parameters.camera_name,
-                        )
+        """Make class instance copyable."""
+        other = Builder(
+            self.task_id,
+            self.config,
+            self.render_parameters.mode,
+            self.render_parameters.width,
+            self.render_parameters.height,
+            self.render_parameters.camera_id,
+            self.render_parameters.camera_name,
+        )
         other._seed = self._seed
         other.first_reset = self.first_reset
         other.steps = self.steps
         other.cost = self.cost
         other.terminated = self.terminated
         other.truncated = self.truncated
-        other.task = deepcopy(self.task)
+        other.task = deepcopy(self.task)  # pylint: disable=attribute-defined-outside-init
         return other
