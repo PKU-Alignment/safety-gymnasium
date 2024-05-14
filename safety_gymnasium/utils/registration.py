@@ -102,7 +102,7 @@ def make(
     for key, value in kwargs.items():
         if key in env_spec_kwargs and isinstance(value, Mapping):
             # updating not copying dictionaries
-            if key == 'config':                
+            if key == 'config':
                 # Do not update 'agent_name' or 'task_name'
                 if 'agent_name' in value and 'agent_name' in env_spec_kwargs[key]:
                     assert (

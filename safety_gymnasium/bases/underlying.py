@@ -262,9 +262,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
         agent_cls = getattr(agents, agent_name)
         self.agent = agent_cls(random_generator=self.random_generator)
 
-    def _add_geoms(self, *geoms: Geom) -> None:
+    def _add_geoms(self, *added_geoms: Geom) -> None:
         """Register geom type objects into environments and set corresponding attributes."""
-        for geom in geoms:
+        for geom in added_geoms:
             assert (
                 type(geom) in GEOMS_REGISTER
             ), 'Please figure out the type of object before you add it into envs.'
@@ -272,9 +272,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             setattr(self, geom.name, geom)
             geom.set_agent(self.agent)
 
-    def _add_free_geoms(self, *free_geoms: FreeGeom) -> None:
+    def _add_free_geoms(self, *added_free_geoms: FreeGeom) -> None:
         """Register FreeGeom type objects into environments and set corresponding attributes."""
-        for obj in free_geoms:
+        for obj in added_free_geoms:
             assert (
                 type(obj) in FREE_GEOMS_REGISTER
             ), 'Please figure out the type of object before you add it into envs.'
@@ -282,9 +282,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
             setattr(self, obj.name, obj)
             obj.set_agent(self.agent)
 
-    def _add_mocaps(self, *mocaps: Mocap) -> None:
+    def _add_mocaps(self, *added_mocaps: Mocap) -> None:
         """Register mocap type objects into environments and set corresponding attributes."""
-        for mocap in mocaps:
+        for mocap in added_mocaps:
             assert (
                 type(mocap) in MOCAPS_REGISTER
             ), 'Please figure out the type of object before you add it into envs.'
