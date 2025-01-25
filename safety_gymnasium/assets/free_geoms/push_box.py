@@ -38,7 +38,7 @@ class PushBox(FreeGeom):  # pylint: disable=too-many-instance-attributes
     reward_box_dist: float = 1.0  # Dense reward for moving the agent towards the box
     reward_box_goal: float = 1.0  # Reward for moving the box towards the goal
 
-    color: np.array = COLOR['push_box']
+    color: np.array = field(default_factory=lambda: COLOR['push_box'])
     alpha: float = 0.25
     group: np.array = GROUP['push_box']
     is_lidar_observed: bool = True

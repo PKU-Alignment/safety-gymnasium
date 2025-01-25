@@ -58,7 +58,7 @@ class World:  # pylint: disable=too-many-instance-attributes
     # Default configuration (this should not be nested since it gets copied)
     # *NOTE:* Changes to this configuration should also be reflected in `Builder` configuration
     DEFAULT: ClassVar[dict[str, Any]] = {
-        'agent_base': 'assets/xmls/car.xml',  # Which agent XML to use as the base
+        'agent_base': os.path.join('assets', 'xmls', 'car.xml'),  # Which agent XML to use as the base
         'agent_xy': np.zeros(2),  # agent XY location
         'agent_rot': 0,  # agent rotation about Z axis
         'floor_size': [3.5, 3.5, 0.1],  # Used for displaying the floor
@@ -119,8 +119,8 @@ class World:  # pylint: disable=too-many-instance-attributes
             compiler = xmltodict.parse(
                 f"""<compiler
                 angle="radian"
-                meshdir="{BASE_DIR}/assets/meshes"
-                texturedir="{BASE_DIR}/assets/textures"
+                meshdir="{os.path.join(BASE_DIR, 'assets', 'meshes')}"
+                texturedir="{os.path.join(BASE_DIR, 'assets', 'textures')}"
                 />""",
             )
             self.xml['mujoco']['compiler'] = compiler['compiler']

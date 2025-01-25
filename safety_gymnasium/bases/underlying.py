@@ -46,7 +46,7 @@ class RenderConf:
     r"""Render options.
 
     Attributes:
-        libels (bool): Whether to render labels.
+        labels (bool): Whether to render labels.
         lidar_markers (bool): Whether to render lidar markers.
         lidar_radius (float): Radius of the lidar markers.
         lidar_size (float): Size of the lidar markers.
@@ -482,7 +482,7 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
     def render(
         self,
         width: int,
-        height: int,
+            height: int,
         mode: str,
         camera_id: int | None = None,
         camera_name: str | None = None,
@@ -577,7 +577,9 @@ class Underlying(abc.ABC):  # pylint: disable=too-many-instance-attributes
                     self.agent.keyboard_control_callback,
                 )
             elif mode in {'rgb_array', 'depth_array'}:
-                self.viewer = OffScreenViewer(self.model, self.data)
+                self.viewer = OffScreenViewer(self.model, self.data,
+                                              self.model.vis.global_.offwidth,
+                                              self.model.vis.global_.offheight)
             else:
                 raise AttributeError(f'Unexpected mode: {mode}')
 

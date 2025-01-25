@@ -14,7 +14,7 @@
 # ==============================================================================
 """Circle."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 
@@ -33,7 +33,7 @@ class Circle(Geom):  # pylint: disable=too-many-instance-attributes
     locations: tuple = ((0, 0),)
     keepout: float = 0.0
 
-    color: np.array = COLOR['circle']
+    color: np.array = field(default_factory=lambda: COLOR['circle'])
     alpha: float = 0.1
     group: np.array = GROUP['circle']
     is_lidar_observed: bool = True

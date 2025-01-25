@@ -25,10 +25,10 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "gymnasium == 0.28.1",
-    "gymnasium-robotics == 1.2.2",
-    "pygame == 2.1.0",
-    "mujoco == 2.3.3",
+    "gymnasium >= 0.28.1",
+    "gymnasium-robotics >= 1.2.2",
+    "pygame >= 2.1.0",
+    "mujoco >= 2.3.3",
     "xmltodict >= 0.13.0",
     "pyyaml >= 6.0",
     "imageio >= 2.27.0",
@@ -74,7 +74,7 @@ safe = true
 line-length = 100
 skip-string-normalization = true
 # Sync with requires-python
-target-version = ["py38", "py39", "py310", "py311"]
+target-version = ["py38", "py39", "py310", "py311", "py312"]
 
 [tool.isort]
 atomic = true

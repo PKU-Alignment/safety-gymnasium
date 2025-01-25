@@ -26,9 +26,9 @@ from gymnasium.envs.registration import spec  # noqa: F401 # pylint: disable=unu
 from gymnasium.envs.registration import EnvSpec, _check_metadata, _find_spec, load_env_creator
 from gymnasium.envs.registration import register as gymnasium_register
 from gymnasium.wrappers import HumanRendering, OrderEnforcing, RenderCollection
-from gymnasium.wrappers.compatibility import EnvCompatibility
+# from gymnasium.wrappers.compatibility import EnvCompatibility
 
-from safety_gymnasium.wrappers import SafeAutoResetWrapper, SafePassiveEnvChecker, SafeTimeLimit
+from safety_gymnasium.wrappers import SafeAutoReset, SafePassiveEnvChecker, SafeTimeLimit
 
 
 safe_registry = set()
@@ -44,8 +44,6 @@ def register(**kwargs):
 def make(
     id: str | EnvSpec,  # pylint: disable=invalid-name,redefined-builtin
     max_episode_steps: int | None = None,
-    autoreset: bool | None = None,
-    apply_api_compatibility: bool | None = None,
     disable_env_checker: bool | None = None,
     **kwargs: Any,
 ) -> Env:
@@ -61,13 +59,6 @@ def make(
         max_episode_steps: Maximum length of an episode, can override the registered
             :class:`EnvSpec` ``max_episode_steps``.
             The value is used by :class:`gymnasium.wrappers.TimeLimit`.
-        autoreset: Whether to automatically reset the environment after each episode
-        (:class:`gymnasium.wrappers.AutoResetWrapper`).
-        apply_api_compatibility: Whether to wrap the environment with the
-            :class:`gymnasium.wrappers.StepAPICompatibility` wrapper that
-            converts the environment step from a done bool to return termination and truncation bools.
-            By default, the argument is None in which the :class:`EnvSpec` ``apply_api_compatibility`` is used,
-            otherwise this variable is used in favor.
         disable_env_checker: If to add :class:`gymnasium.wrappers.PassiveEnvChecker`, ``None`` will default to the
             :class:`EnvSpec` ``disable_env_checker`` value otherwise use this value will be used.
         kwargs: Additional arguments to pass to the environment constructor.
@@ -153,14 +144,6 @@ def make(
                 f'that is not in the possible render_modes ({render_modes}).',
             )
 
-    if apply_api_compatibility or (
-        apply_api_compatibility is None and env_spec.apply_api_compatibility
-    ):
-        # If we use the compatibility layer, we treat the render mode explicitly and don't pass it to the env creator
-        render_mode = env_spec_kwargs.pop('render_mode', None)
-    else:
-        render_mode = None
-
     try:
         env = env_creator(**env_spec_kwargs)
     except TypeError as e:
@@ -183,9 +166,7 @@ def make(
         nondeterministic=env_spec.nondeterministic,
         max_episode_steps=None,
         order_enforce=False,
-        autoreset=False,
         disable_env_checker=True,
-        apply_api_compatibility=False,
         kwargs=env_spec_kwargs,
         additional_wrappers=(),
         vector_entry_point=env_spec.vector_entry_point,
@@ -204,12 +185,6 @@ def make(
                 f'the saved `EnvSpec` additional wrapper {env_spec_wrapper_spec}',
             )
 
-    # Add step API wrapper
-    if apply_api_compatibility is True or (
-        apply_api_compatibility is None and env_spec.apply_api_compatibility is True
-    ):
-        env = EnvCompatibility(env, render_mode)
-
     # Run the environment checker as the lowest level wrapper
     if disable_env_checker is False or (
         disable_env_checker is None and env_spec.disable_env_checker is False
@@ -225,10 +200,6 @@ def make(
         env = SafeTimeLimit(env, max_episode_steps)
     elif env_spec.max_episode_steps is not None:
         env = SafeTimeLimit(env, env_spec.max_episode_steps)
-
-    # Add the auto-reset wrapper
-    if autoreset is True or (autoreset is None and env_spec.autoreset is True):
-        env = SafeAutoResetWrapper(env)
 
     for wrapper_spec in env_spec.additional_wrappers[num_prior_wrappers:]:
         if wrapper_spec.kwargs is None:

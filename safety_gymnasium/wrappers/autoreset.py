@@ -15,10 +15,10 @@
 """Wrapper for limiting the time steps of an environment."""
 
 
-from gymnasium.wrappers.autoreset import AutoResetWrapper
+from gymnasium.wrappers import Autoreset
 
 
-class SafeAutoResetWrapper(AutoResetWrapper):
+class SafeAutoReset(Autoreset):
     """A class for providing an automatic reset functionality for gymnasium environments when calling :meth:`step`.
 
      - ``new_obs`` is the first observation after calling ``self.env.reset()``

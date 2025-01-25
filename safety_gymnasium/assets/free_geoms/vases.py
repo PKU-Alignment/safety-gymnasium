@@ -33,7 +33,7 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
     placements: list = None  # Vases placements list (defaults to full extents)
     locations: list = field(default_factory=list)  # Fixed locations to override placements
     keepout: float = 0.15  # Radius of vases keepout for placement
-    alpha: float = COLOR['vase'][-1]
+    alpha: float = field(default_factory=lambda: COLOR['vase'][-1])
     sink: float = 4e-5  # Experimentally measured, based on size and density,
     # how far vases "sink" into the floor.
     # Mujoco has soft contacts, so vases slightly sink into the floor,
@@ -48,7 +48,7 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
     velocity_cost: float = 1.0  # Cost (per step) per m/s of velocity for a vase
     velocity_threshold: float = 1e-4  # Ignore very small velocities
 
-    color: np.array = COLOR['vase']
+    color: np.array = field(default_factory=lambda: COLOR['vase'])
     group: np.array = GROUP['vase']
     is_lidar_observed: bool = True
     is_constrained: bool = True

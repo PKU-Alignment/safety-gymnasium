@@ -18,6 +18,7 @@ from copy import deepcopy
 
 import gymnasium
 import numpy as np
+import safety_gymnasium
 
 import helpers
 
@@ -30,7 +31,7 @@ import helpers
 def test_equal_outcomes_branch(agent_id, env_id, level):
     """Test copyable env."""
     env_name = 'Safety' + agent_id + env_id + level + 'Gymnasium' + '-v0'
-    env1 = gymnasium.make(env_name)
+    env1 = safety_gymnasium.make(env_name)
     obs, _ = env1.reset()
 
     env2 = deepcopy(env1)
@@ -78,7 +79,7 @@ def test_equal_outcomes_branch(agent_id, env_id, level):
 def test_equal_outcomes_long(agent_id, env_id, level):
     """Test SafetyGymnasium2Gymnasium env."""
     env_name = 'Safety' + agent_id + env_id + level + 'Gymnasium' + '-v0'
-    env1 = gymnasium.make(env_name)
+    env1 = safety_gymnasium.make(env_name)
     obs, _ = env1.reset()
 
     # get the env some steps away from the initial state just to be sure

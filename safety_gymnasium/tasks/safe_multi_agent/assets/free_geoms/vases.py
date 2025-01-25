@@ -48,7 +48,7 @@ class Vases(FreeGeom):  # pylint: disable=too-many-instance-attributes
     velocity_threshold: float = 1e-4  # Ignore very small velocities
     last_contact: dict = field(default_factory=lambda: {f'vase{i}': 0 for i in range(20)})
 
-    color: np.array = COLOR['vase']
+    color: np.array = field(default_factory=lambda: COLOR['vase'])
     group: np.array = GROUP['vase']
     is_lidar_observed: bool = True
     is_constrained: bool = True
