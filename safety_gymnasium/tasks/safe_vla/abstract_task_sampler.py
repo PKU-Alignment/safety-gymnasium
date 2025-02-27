@@ -1,3 +1,19 @@
+# Copyright 2024 Allen Institute for AI
+
+# Copyright 2024-2025 OmniSafe Team. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ==============================================================================
 import abc
 import gc
 import random
@@ -171,14 +187,6 @@ class AbstractSPOCTaskSampler(TaskSampler):
                     raise TaskSamplerInInvalidStateError("Controller has closed.")
 
             if retain_agent_pose:
-                # self.controller.step(
-                #     action="TeleportFull",
-                #     position=agent_pose["position"],
-                #     rotation=agent_pose["rotation"],
-                #     standing=agent_pose["isStanding"],
-                #     horizon=HORIZON,
-                #     forceAction=True,
-                # )
                 self.controller.teleport_agent(
                     position=agent_pose["position"],
                     rotation=agent_pose["rotation"],
@@ -186,53 +194,6 @@ class AbstractSPOCTaskSampler(TaskSampler):
                     horizon=HORIZON,
                     forceAction=True,
                 )
-            # else:
-            #     if self.controller.get_current_agent_full_pose()["position"]["y"] < 0:
-            #         warnings.warn(
-            #             f"Initial teleport failed in {self.current_house_index}, attempting to fix this initial position."
-            #         )
-            #         # Teleportation failed, let's try to find some other position
-            #         teleport_success = False
-            #         for room_id in sorted(self.controller.room_poly_map.keys()):
-            #             candidate_points = self.controller.get_candidate_points_in_room(room_id)
-            #             for cand in candidate_points:
-            #                 # event = self.controller.step(
-            #                 #     action="TeleportFull",
-            #                 #     position={
-            #                 #         "x": float(cand[0]),
-            #                 #         "y": self.current_house["metadata"]["agent"]["position"]["y"],
-            #                 #         "z": float(cand[1]),
-            #                 #     },
-            #                 #     rotation=self.current_house["metadata"]["agent"]["rotation"],
-            #                 #     standing=True,
-            #                 #     horizon=HORIZON,
-            #                 # )
-            #                 event = self.controller.teleport_agent(
-            #                     position={
-            #                         "x": float(cand[0]),
-            #                         "y": self.current_house["metadata"]["agent"]["position"]["y"],
-            #                         "z": float(cand[1]),
-            #                     },
-            #                     rotation=self.current_house["metadata"]["agent"]["rotation"],
-            #                     standing=True,
-            #                     horizon=HORIZON,
-            #                 )
-            #                 if event:
-            #                     teleport_success = True
-            #                     break
-            #
-            #             if teleport_success:
-            #                 break
-            #
-            #         if teleport_success:
-            #             assert self.controller.get_current_agent_full_pose()["position"]["y"] > 0
-            #             self.fixed_starting_positions[self.current_house_index] = (
-            #                 self.controller.get_current_agent_full_pose()["position"]
-            #             )
-            #         else:
-            #             raise HouseInvalidForTaskException(
-            #                 "Could not find a valid teleportation point in the house."
-            #             )
 
             if self.settle_physics_for_seconds_when_reset > 0:
                 self.controller.step(
@@ -240,12 +201,6 @@ class AbstractSPOCTaskSampler(TaskSampler):
                     simSeconds=self.settle_physics_for_seconds_when_reset,
                     raise_for_failure=True,
                 )
-
-        # # NOTE: Set reachable positions
-        # if self.current_house_index not in self.reachable_positions_map:
-        #     self.reachable_positions_map[self.current_house_index] = (
-        #         self.controller.get_reachable_positions()
-        #     )
 
         self.randomize_materials()  # Must be done after resetting!
 
