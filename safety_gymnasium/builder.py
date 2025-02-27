@@ -205,6 +205,7 @@ class Builder(gymnasium.Env, gymnasium.utils.EzPickle):
 
             reward = self.task.reward_conf.reward_exception
             info['cost_exception'] = 1.0
+            cost = info['cost_exception']
         else:
             # Reward processing
             reward = self._reward()

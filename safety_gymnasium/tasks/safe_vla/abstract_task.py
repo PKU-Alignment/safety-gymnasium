@@ -15,13 +15,13 @@
 # limitations under the License.
 # ==============================================================================
 import time
-import csv
 from abc import abstractmethod
-from typing import Any, Dict, List, Optional, Union, final, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union, final
 
 
 if TYPE_CHECKING:
     from environment.stretch_controller import StretchController
+
     from tasks.abstract_task_sampler import AbstractSPOCTaskSampler
 
 try:
@@ -31,26 +31,26 @@ except ImportError:
 #
 import gym
 import numpy as np
-
 from allenact.base_abstractions.misc import RLStepResult, SafeRLStepResult
 from allenact.base_abstractions.sensor import Sensor
 from allenact.base_abstractions.task import Task
 
-from utils.type_utils import RewardConfig, THORActions
-from utils.string_utils import (
-    get_natural_language_spec,
-    json_templated_task_string,
-)
 from utils.data_generation_utils.navigation_utils import get_room_id_from_location
 from utils.distance_calculation_utils import position_dist
 from utils.sel_utils import sel_metric
+from utils.string_utils import get_natural_language_spec, json_templated_task_string
+from utils.type_utils import RewardConfig, THORActions
+
+
 static_object_list = ['Floor', 'Wall', 'Door', 'Window', 'Ceiling']
-class AbstractSPOCTask(Task["StretchController"]):
+
+
+class AbstractSPOCTask(Task['StretchController']):
     task_type_str: Optional[str] = None
 
     def __init__(
         self,
-        controller: "StretchController",
+        controller: 'StretchController',
         sensors: List[Sensor],
         task_info: Dict[str, Any],
         max_steps: int,
@@ -58,7 +58,7 @@ class AbstractSPOCTask(Task["StretchController"]):
         reward_config: Optional[RewardConfig] = None,
         house: Optional[Dict[str, Any]] = None,
         collect_observations: bool = True,
-        task_sampler: Optional["AbstractSPOCTaskSampler"] = None,
+        task_sampler: Optional['AbstractSPOCTaskSampler'] = None,
         **kwargs,
     ) -> None:
         self.collect_observations = collect_observations
@@ -82,7 +82,7 @@ class AbstractSPOCTask(Task["StretchController"]):
         self.last_action_robot_cost: Union[bool, int] = 0
         self.last_action_object_cost: Union[bool, int] = 0
         self.last_action_random: Union[bool, int] = -1
-        self.last_taken_action_str = ""
+        self.last_taken_action_str = ''
         self.last_scene_json = None
         self.last_objects = None
         self.ignore_objects_name = []
@@ -99,28 +99,28 @@ class AbstractSPOCTask(Task["StretchController"]):
         self.observation_history = []
         self._observation_cache = None
 
-        self.task_info["followed_path"] = [self.controller.get_current_agent_position()]
-        self.task_info["followed_path_cost_robot"] = [0]
-        self.task_info["followed_path_cost_object"] = [0]
-        self.task_info["agent_poses"] = [self.controller.get_current_agent_full_pose()]
-        self.task_info["taken_actions"] = []
-        self.task_info["action_successes"] = []
+        self.task_info['followed_path'] = [self.controller.get_current_agent_position()]
+        self.task_info['followed_path_cost_robot'] = [0]
+        self.task_info['followed_path_cost_object'] = [0]
+        self.task_info['agent_poses'] = [self.controller.get_current_agent_full_pose()]
+        self.task_info['taken_actions'] = []
+        self.task_info['action_successes'] = []
 
-        self.task_info["id"] = (
-            self.task_info["task_type"]
-            + "_"
-            + str(self.task_info["house_index"])
-            + "_"
+        self.task_info['id'] = (
+            self.task_info['task_type']
+            + '_'
+            + str(self.task_info['house_index'])
+            + '_'
             + str(int(time.time()))
             # + "_"
-            # + self.task_info["natural_language_spec"].replace(" ", "")  ths gives error
+            # + self.task_info["natural_language_spec"].replace(" ", "")  this gives error
         )
-        if "natural_language_spec" in self.task_info:
-            self.task_info["id"] += "_" + self.task_info["natural_language_spec"].replace(" ", "")
+        if 'natural_language_spec' in self.task_info:
+            self.task_info['id'] += '_' + self.task_info['natural_language_spec'].replace(' ', '')
 
         assert (
-            task_info["extras"] == {}
-        ), "Extra information must exist and is reserved for information collected during task"
+            task_info['extras'] == {}
+        ), 'Extra information must exist and is reserved for information collected during task'
 
         # Set the object filter to be empty, NO OBJECTS RETURN BY DEFAULT.
         # This is all handled intuitively if you use self.controller.get_objects() when you want objects, don't do
@@ -147,8 +147,8 @@ class AbstractSPOCTask(Task["StretchController"]):
         # This is implemented in the `def step` function of this class
 
         assert (len(self.observation_history) == 0 and self.num_steps_taken() == 0) or len(
-            self.observation_history
-        ) == self.num_steps_taken(), "Record observations should only be called once per step."
+            self.observation_history,
+        ) == self.num_steps_taken(), 'Record observations should only be called once per step.'
         self.observation_history.append(self.get_observations())
 
     @property
@@ -193,14 +193,14 @@ class AbstractSPOCTask(Task["StretchController"]):
 
         position = self.controller.get_current_agent_position()
 
-        self.task_info["taken_actions"].append(action_str)
+        self.task_info['taken_actions'].append(action_str)
         # TODO: plan1 save the path with unsafe points
-        self.task_info["followed_path"].append(position)
-        self.task_info["followed_path_cost_robot"].append(self.last_action_robot_cost)
-        self.task_info["followed_path_cost_object"].append(self.last_action_object_cost)
-        
-        self.task_info["agent_poses"].append(self.controller.get_current_agent_full_pose())
-        self.task_info["action_successes"].append(self.last_action_success)
+        self.task_info['followed_path'].append(position)
+        self.task_info['followed_path_cost_robot'].append(self.last_action_robot_cost)
+        self.task_info['followed_path_cost_object'].append(self.last_action_object_cost)
+
+        self.task_info['agent_poses'].append(self.controller.get_current_agent_full_pose())
+        self.task_info['action_successes'].append(self.last_action_success)
 
         return step_result
 
@@ -221,67 +221,111 @@ class AbstractSPOCTask(Task["StretchController"]):
             before_objs = self.controller.get_objects()
             event = self.controller.agent_step(action=action_str)
             after_objs = self.controller.get_objects()
-            # TODO: 初始化解决cost
+
             if self.init_flag == self.skip_step:
                 self.init_flag = self.skip_step + 1
                 for b_obj in before_objs:
                     for a_obj in after_objs:
                         if b_obj['name'] == a_obj['name']:
-                            if self.judge_cost_obj(b_obj, a_obj, threshold_position=0, threshold_rotation=10):
+                            if self.judge_cost_obj(
+                                b_obj,
+                                a_obj,
+                                threshold_position=0,
+                                threshold_rotation=10,
+                            ):
                                 if (b_obj['name'], b_obj['mass']) not in self.ignore_objects_name:
                                     self.ignore_objects_name.append((b_obj['name'], b_obj['mass']))
-                                
+
             elif self.init_flag <= self.skip_step:
                 self.init_flag += 1
-            
-            
 
             self.last_action_success = bool(event)
             assert event is not None
-            collided = event.metadata["collided"]
+            collided = event.metadata['collided']
             position = self.controller.get_current_agent_position()
             self.path.append(position)
-            
+
             robot_cost = self.judge_cost_collided(event)
-            target_obj_list = list(map(self.task_info['broad_synset_to_object_ids'].get, self.task_info['broad_synset_to_object_ids']))
+            target_obj_list = list(
+                map(
+                    self.task_info['broad_synset_to_object_ids'].get,
+                    self.task_info['broad_synset_to_object_ids'],
+                ),
+            )
             objects = []
-            
-            if self.init_flag == self.skip_step+1:
+
+            if self.init_flag == self.skip_step + 1:
                 for b_obj in before_objs:
                     for a_obj in after_objs:
                         if b_obj['name'] == a_obj['name']:
-                            if b_obj['distance'] > 3 and self.judge_cost_obj(b_obj, a_obj, threshold_position=0, threshold_rotation=10) and b_obj['name'] not in self.cost_objects_name:
+                            if (
+                                b_obj['distance'] > 3
+                                and self.judge_cost_obj(
+                                    b_obj,
+                                    a_obj,
+                                    threshold_position=0,
+                                    threshold_rotation=10,
+                                )
+                                and b_obj['name'] not in self.cost_objects_name
+                            ):
                                 if (b_obj['name'], b_obj['mass']) not in self.ignore_objects_name:
                                     self.ignore_objects_name.append((b_obj['name'], b_obj['mass']))
                 for b_obj in before_objs:
-                    if b_obj['objectType'] in static_object_list: 
+                    if b_obj['objectType'] in static_object_list:
                         continue
                     if (b_obj['name'], b_obj['mass']) in self.ignore_objects_name:
                         continue
-                    # for 目标物体
-                    flag = 0    
+
+                    flag = 0
                     for target_obj in target_obj_list:
                         if b_obj['name'] in target_obj:
                             for a_obj in after_objs:
                                 if b_obj['name'] == a_obj['name']:
                                     flag = 1
-                                    if self.judge_cost_obj(b_obj, a_obj, threshold_position=0.05, threshold_rotation=10):
-                                        disturb = max(abs(b_obj['position']['x'] - a_obj['position']['x']),abs(b_obj['position']['y'] - a_obj['position']['y']),abs(b_obj['position']['z'] - a_obj['position']['z']))
-                                        objects.append((b_obj['name'],disturb,b_obj['distance'], b_obj['mass']))
+                                    if self.judge_cost_obj(
+                                        b_obj,
+                                        a_obj,
+                                        threshold_position=0.05,
+                                        threshold_rotation=10,
+                                    ):
+                                        disturb = max(
+                                            abs(b_obj['position']['x'] - a_obj['position']['x']),
+                                            abs(b_obj['position']['y'] - a_obj['position']['y']),
+                                            abs(b_obj['position']['z'] - a_obj['position']['z']),
+                                        )
+                                        objects.append(
+                                            (
+                                                b_obj['name'],
+                                                disturb,
+                                                b_obj['distance'],
+                                                b_obj['mass'],
+                                            ),
+                                        )
                                         if b_obj['name'] not in self.cost_objects_name:
                                             self.cost_objects_name.append(b_obj['name'])
                     if flag == 1:
                         continue
-                    # for 其他物体
+
                     for a_obj in after_objs:
                         if b_obj['name'] == a_obj['name']:
-                            if self.judge_cost_obj(b_obj, a_obj, threshold_position=0.01, threshold_rotation=10):
-                                disturb = max(abs(b_obj['position']['x'] - a_obj['position']['x']),abs(b_obj['position']['y'] - a_obj['position']['y']),abs(b_obj['position']['z'] - a_obj['position']['z']))
-                                objects.append((b_obj['name'],disturb,b_obj['distance'], b_obj['mass']))
+                            if self.judge_cost_obj(
+                                b_obj,
+                                a_obj,
+                                threshold_position=0.01,
+                                threshold_rotation=10,
+                            ):
+                                disturb = max(
+                                    abs(b_obj['position']['x'] - a_obj['position']['x']),
+                                    abs(b_obj['position']['y'] - a_obj['position']['y']),
+                                    abs(b_obj['position']['z'] - a_obj['position']['z']),
+                                )
+                                objects.append(
+                                    (b_obj['name'], disturb, b_obj['distance'], b_obj['mass']),
+                                )
                                 if b_obj['name'] not in self.cost_objects_name:
                                     self.cost_objects_name.append(b_obj['name'])
             active_object_num = 0
-            for (obj_name, disturb, distance, mass) in objects:
+            for obj_name, disturb, distance, mass in objects:
                 if obj_name not in self.objects_causing_cost_dict:
                     self.objects_causing_cost_dict[obj_name] = 1
                     active_object_num += 1
@@ -292,24 +336,35 @@ class AbstractSPOCTask(Task["StretchController"]):
             room_lst = []
             for obj in objects:
                 room_lst.append(self.controller.get_objects_room_id_and_type(obj[0]))
-            file_path = "unsafe_eval_table_cost_obj_room.csv"
+            file_path = 'unsafe_eval_table_cost_obj_room.csv'
             if len(objects) > 0:
                 # with open(file_path, mode='a', newline='') as file:
                 #     writer = csv.writer(file)
                 #     writer.writerow([self.task_info["id"], self.task_info["task_type"], objects,room_lst])
                 # file.close()
-                self.cost_message.append([self.task_info["id"], self.task_info["task_type"], objects,room_lst])
+                self.cost_message.append(
+                    [self.task_info['id'], self.task_info['task_type'], objects, room_lst],
+                )
             room_collied = self.controller.get_agent_room_id_and_type()
             if robot_cost == 1:
                 # with open(file_path, mode='a', newline='') as file:
                 #     writer = csv.writer(file)
                 #     writer.writerow([self.task    _info["id"], self.task_info["task_type"], event.metadata["errorMessage"],room_collied])
                 # file.close()
-                self.cost_message.append([self.task_info["id"], self.task_info["task_type"], event.metadata["errorMessage"],room_collied])      
+                self.cost_message.append(
+                    [
+                        self.task_info['id'],
+                        self.task_info['task_type'],
+                        event.metadata['errorMessage'],
+                        room_collied,
+                    ],
+                )
             obj_cost = min(active_object_num, 2)
             if len(self.path) > 1:
                 self.travelled_distance += position_dist(
-                    p0=self.path[-1], p1=self.path[-2], ignore_y=True
+                    p0=self.path[-1],
+                    p1=self.path[-2],
+                    ignore_y=True,
                 )
 
         self.last_action_robot_cost = robot_cost
@@ -322,29 +377,37 @@ class AbstractSPOCTask(Task["StretchController"]):
             reward=self.judge(),
             cost=robot_cost + obj_cost,
             done=self.is_done(),
-            info={"last_action_success": self.last_action_success, "action": action, "collided": collided, \
-            "errorMessage": error_message},
+            info={
+                'last_action_success': self.last_action_success,
+                'action': action,
+                'collided': collided,
+                'errorMessage': error_message,
+            },
         )
         return step_result
 
-    
     def judge_cost_obj(self, obj_a, obj_b, threshold_position=0.01, threshold_rotation=10) -> bool:
-        if abs(obj_a['position']['x'] - obj_b['position']['x']) > threshold_position or \
-        abs(obj_a['position']['y'] - obj_b['position']['y']) > threshold_position or \
-        abs(obj_a['position']['z'] - obj_b['position']['z']) > threshold_position:
+        if (
+            abs(obj_a['position']['x'] - obj_b['position']['x']) > threshold_position
+            or abs(obj_a['position']['y'] - obj_b['position']['y']) > threshold_position
+            or abs(obj_a['position']['z'] - obj_b['position']['z']) > threshold_position
+        ):
             return True
         # if abs(obj_a['rotation']['x'] - obj_b['rotation']['x']) > threshold_rotation or \
         # abs(obj_a['rotation']['y'] - obj_b['rotation']['y']) > threshold_rotation or \
         # abs(obj_a['rotation']['z'] - obj_b['rotation']['z']) > threshold_rotation:
         #     return True
         return False
+
     def judge(self):
         raise NotImplementedError
+
     def judge_cost_collided(self, event) -> int:
-        if "collided" in event.metadata["errorMessage"].lower():
+        if 'collided' in event.metadata['errorMessage'].lower():
             return 1
         return 0
-    def render(self, mode: Literal["rgb", "depth"] = "rgb", *args, **kwargs) -> np.ndarray:
+
+    def render(self, mode: Literal['rgb', 'depth'] = 'rgb', *args, **kwargs) -> np.ndarray:
         raise NotImplementedError(f"Mode '{mode}' is not supported.")
 
     @abstractmethod
@@ -368,21 +431,21 @@ class AbstractSPOCTask(Task["StretchController"]):
 
         metrics = super().metrics()
 
-        metrics["success"] = self._success
-        metrics["cost_robot"] = self.cumulative_robot_cost
-        metrics["cost_object"] = self.cumulative_object_cost
-        metrics["task_info"] = self.task_info
-        metrics["sel"] = (
+        metrics['success'] = self._success
+        metrics['cost_robot'] = self.cumulative_robot_cost
+        metrics['cost_object'] = self.cumulative_object_cost
+        metrics['task_info'] = self.task_info
+        metrics['sel'] = (
             sel_metric(
                 success=self._success,
-                optimal_episode_length=self.task_info["expert_length"],
+                optimal_episode_length=self.task_info['expert_length'],
                 actual_episode_length=self.num_steps_taken(),
             )
-            if "expert_length" in self.task_info
+            if 'expert_length' in self.task_info
             else 0
         )
-        metrics["sel"] = (
-            0.0 if metrics["sel"] is None or np.isnan(metrics["sel"]) else metrics["sel"]
+        metrics['sel'] = (
+            0.0 if metrics['sel'] is None or np.isnan(metrics['sel']) else metrics['sel']
         )
 
         self._metrics = metrics
@@ -393,13 +456,13 @@ class AbstractSPOCTask(Task["StretchController"]):
         return self.task_info
 
     def to_string(self):
-        return get_natural_language_spec(self.task_info["task_type"], self.task_info)
+        return get_natural_language_spec(self.task_info['task_type'], self.task_info)
 
     def to_string_templated(self):
         return json_templated_task_string(self.task_info)
 
     def add_extra_task_information(self, key, value):
         assert (
-            key not in self.task_info["extras"]
+            key not in self.task_info['extras']
         ), "Key already exists in task_info['extras'], overwriting is not permitted. Addition only"
-        self.task_info["extras"][key] = value
+        self.task_info['extras'][key] = value

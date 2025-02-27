@@ -179,6 +179,14 @@ format: py-format-install ruff-install addlicense-install
 	-ignore docs/_build/spelling/_sphinx_design_static/design-tabs.js \
 	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/tasks/freight_franka_close_drawer.py \
 	-ignore safety_gymnasium/tasks/safe_isaac_gym/envs/tasks/freight_franka_pick_and_place.py \
+	-ignore safety_gymnasium/tasks/safe_vla/__init__.py \
+	-ignore safety_gymnasium/tasks/safe_vla/abstract_task_sampler.py \
+	-ignore safety_gymnasium/tasks/safe_vla/abstract_task.py \
+	-ignore safety_gymnasium/tasks/safe_vla/fetch_task.py \
+	-ignore safety_gymnasium/tasks/safe_vla/multi_task_eval_sampler.py \
+	-ignore safety_gymnasium/tasks/safe_vla/object_nav_task.py \
+	-ignore safety_gymnasium/tasks/safe_vla/pickup_task.py \
+	-ignore safety_gymnasium/tasks/safe_vla/task_specs.py \
 	-ignore docs/_build/spelling/_sphinx_design_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css \
 	-l apache -y 2022-$(shell date +"%Y") $(SOURCE_FOLDERS)
 

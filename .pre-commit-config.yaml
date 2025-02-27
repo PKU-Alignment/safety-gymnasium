@@ -52,6 +52,7 @@ repos:
         exclude: |
           (?x)(
             ^safety_gymnasium/tasks/safe_isaac_gym/
+            ^safety_gymnasium/tasks/safe_vla/|
           )
   - repo: https://github.com/PyCQA/isort
     rev: 5.13.2
@@ -83,6 +84,7 @@ repos:
         exclude: |
           (?x)(
             ^safety_gymnasium/tasks/safe_isaac_gym/|
+            ^safety_gymnasium/tasks/safe_vla/|
             ^examples/|
             ^tests/|
             ^docs/conf.py$
@@ -108,6 +110,7 @@ repos:
         exclude: |
           (?x)(
             ^safety_gymnasium/tasks/safe_isaac_gym/|
+            ^safety_gymnasium/tasks/safe_vla/|
             ^examples/|
             ^tests/|
             ^setup.py$|

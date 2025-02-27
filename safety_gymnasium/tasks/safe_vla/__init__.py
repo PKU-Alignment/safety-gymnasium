@@ -24,6 +24,7 @@ from safety_gymnasium.tasks.safe_vla.abstract_task import AbstractSPOCTask
 from safety_gymnasium.tasks.safe_vla.abstract_task_sampler import AbstractSPOCTaskSampler
 from utils.type_utils import REGISTERED_TASK_PARAMS
 
+
 REGISTERED_TASKS: Dict[str, Type[AbstractSPOCTask]] = {}
 
 
@@ -39,7 +40,7 @@ def register_task(cls):
 package_dir = str(Path(__file__).resolve().parent)
 for _, module_name, _ in iter_modules([package_dir]):
     # import the module and iterate through its attributes
-    module = import_module(f"{__name__}.{module_name}")
+    module = import_module(f'{__name__}.{module_name}')
     for attribute_name in dir(module):
         attribute = getattr(module, attribute_name)
         if isclass(attribute):
