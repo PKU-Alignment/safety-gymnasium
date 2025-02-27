@@ -102,7 +102,7 @@ test: pytest
 # Python linters
 
 pylint: pylint-install
-	$(PYTHON) -m pylint $(PROJECT_PATH)
+	$(PYTHON) -m pylint $(PROJECT_PATH) --ignore=safety_gymnasium/tasks/safe_vla
 
 flake8: flake8-install
 	$(PYTHON) -m flake8 --count --show-source --statistics --exclude=safety_gymnasium/tasks/safe_isaac_gym,safety_gymnasium/tasks/safe_vla
