@@ -26,10 +26,10 @@ from safety_gymnasium.version import __version__
 
 
 __all__ = [
-    'register',
-    'make',
     'gymnasium_make',
     'gymnasium_register',
+    'make',
+    'register',
 ]
 
 VERSION = 'v0'
