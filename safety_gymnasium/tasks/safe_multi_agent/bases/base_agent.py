@@ -497,6 +497,8 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
             agent_pos = self.pos_0
         elif index == 1:
             agent_pos = self.pos_1
+        else:
+            raise ValueError(f'Invalid index: {index}')
         return np.sqrt(np.sum(np.square(pos - agent_pos[:2])))
 
     def world_xy(self, pos: np.ndarray) -> np.ndarray:

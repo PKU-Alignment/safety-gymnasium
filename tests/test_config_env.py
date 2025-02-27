@@ -52,5 +52,5 @@ def test_config(environments):
         assert np.isclose(s, s2).all()
         assert np.isclose(a, a2).all()
         assert np.isclose(c, c2).all()
-        all_done = done and done2 or terminated and terminated2
+        all_done = (done and done2) or (terminated and terminated2)
         num_iter += 1
