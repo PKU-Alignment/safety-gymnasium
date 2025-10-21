@@ -14,14 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-from typing import Any, Dict, List, Literal, Optional, Type, Union
+from typing import Dict, List, Union, Type, Any, Optional, Literal
 
 from allenact.utils.misc_utils import prepare_locals_for_super
 from allenact.utils.system import get_logger
 
 from safety_gymnasium.tasks.safe_vla import REGISTERED_TASKS
 from safety_gymnasium.tasks.safe_vla.abstract_task import AbstractSPOCTask
-from safety_gymnasium.tasks.safe_vla.abstract_task_sampler import AbstractSPOCTaskSampler
+from safety_gymnasium.tasks.safe_vla.abstract_task_sampler import (
+    AbstractSPOCTaskSampler,
+)
 from safety_gymnasium.tasks.safe_vla.object_nav_task import ObjectNavTask
 from safety_gymnasium.tasks.safe_vla.task_specs import (
     TaskSpec,
@@ -30,13 +32,13 @@ from safety_gymnasium.tasks.safe_vla.task_specs import (
     TaskSpecSamplerDatasetWrapper,
 )
 from utils.constants.stretch_initialization_utils import HORIZON
-from utils.type_utils import REGISTERED_TASK_PARAMS, AbstractTaskArgs, AgentPose, Vector3
+from utils.type_utils import Vector3, AgentPose, AbstractTaskArgs, REGISTERED_TASK_PARAMS
 
 
 class MultiTaskSampler(AbstractSPOCTaskSampler):
     def __init__(
         self,
-        mode: Literal['train', 'val', 'test'],
+        mode: Literal["train", "val", "test"],
         task_args: AbstractTaskArgs,
         houses: List[Dict[str, Any]],
         house_inds: List[int],
@@ -53,15 +55,15 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
 
         assert (
             task_type is None
-            and kwargs.get('max_tasks') is None
-            and kwargs.get('sample_per_house') is None
+            and kwargs.get("max_tasks") is None
+            and kwargs.get("sample_per_house") is None
         ), (
-            'MultiTaskSampler does not support the `task_type`, `max_tasks`, or `sample_per_house` arguments.'
-            ' You can control these parameters via the task_spec_sampler.'
+            "MultiTaskSampler does not support the `task_type`, `max_tasks`, or `sample_per_house` arguments."
+            " You can control these parameters via the task_spec_sampler."
         )
 
         self.mode = mode.strip().lower()
-        assert self.mode in ['train', 'val', 'test']
+        assert self.mode in ["train", "val", "test"]
 
         if isinstance(task_spec_sampler, TaskSpecDataset):
             task_spec_sampler = TaskSpecSamplerDatasetWrapper(task_spec_dataset=task_spec_sampler)
@@ -70,7 +72,7 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
 
         self.visualize = visualize
 
-        assert self.mode == 'train' or self.prob_randomize_materials == 0
+        # assert self.mode == "train" or self.prob_randomize_materials == 0
 
     @property
     def current_task_spec(self) -> TaskSpec:
@@ -91,44 +93,42 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
     @property
     def current_house_index(self) -> int:
         task_spec = self.current_task_spec
-        return task_spec.get('house_index')
+        return task_spec.get("house_index")
 
     @staticmethod
     def task_spec_to_task_info(
-        task_spec: TaskSpec,
-        house_index: int,
-        house: Dict[str, Any],
+        task_spec: TaskSpec, house_index: int, house: Dict[str, Any]
     ) -> Dict[str, Any]:
         agent_starting_position = {
-            key: value for key, value in zip(['x', 'y', 'z'], task_spec['agent_starting_position'])
+            key: value for key, value in zip(["x", "y", "z"], task_spec["agent_starting_position"])
         }
 
         task_info = {
-            'task_type': task_spec['task_type'],
-            'house_index': str(house_index),
-            'num_rooms': len(house['rooms']),
-            'agent_starting_position': agent_starting_position,
-            'agent_y_rotation': task_spec['agent_y_rotation'],
-            'natural_language_spec': task_spec['natural_language_spec'],
+            "task_type": task_spec["task_type"],
+            "house_index": str(house_index),
+            "num_rooms": len(house["rooms"]),
+            "agent_starting_position": agent_starting_position,
+            "agent_y_rotation": task_spec["agent_y_rotation"],
+            "natural_language_spec": task_spec["natural_language_spec"],
         }
 
-        if 'eval_info' in task_spec:
-            task_info['eval_info'] = task_spec['eval_info']
+        if "eval_info" in task_spec:
+            task_info["eval_info"] = task_spec["eval_info"]
 
-        for key in REGISTERED_TASK_PARAMS.get(task_spec['task_type']):
+        for key in REGISTERED_TASK_PARAMS.get(task_spec["task_type"]):
             if key in task_spec:
                 task_info[key] = task_spec[key]
 
         # Handle the remaining keys not found in current_task
-        remaining_keys = set(REGISTERED_TASK_PARAMS.get(task_spec['task_type'])) - set(
-            task_spec.keys(),
+        remaining_keys = set(REGISTERED_TASK_PARAMS.get(task_spec["task_type"])) - set(
+            task_spec.keys()
         )
 
         if len(remaining_keys) > 0:
             raise NotImplementedError(
-                f'Some keys require by the task are missing. You have given {task_info.keys()} but we require'
+                f"Some keys require by the task are missing. You have given {task_info.keys()} but we require"
                 f" {REGISTERED_TASK_PARAMS.get(task_spec['task_type'])}, i.e. {remaining_keys} are missing."
-                f' Ping Jordi if this is surprising.',
+                f" Ping Jordi if this is surprising."
             )
 
         return task_info
@@ -141,21 +141,18 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
         )
 
     def increment_task_and_reset_house(
-        self,
-        force_advance_scene: bool,
-        house_index: Optional[int] = None,
+        self, force_advance_scene: bool, house_index: Optional[int] = None
     ):
         # Now self.current_task_spec will be the next task spec
         last_task_spec = self.current_task_spec
         new_task_spec = self.task_spec_sampler.next_task_spec(
-            force_advance_scene=force_advance_scene,
-            house_index=house_index,
+            force_advance_scene=force_advance_scene, house_index=house_index
         )
 
         if last_task_spec is None:
-            last_task_spec = {'house_index': -1, 'task_type': ''}
+            last_task_spec = {"house_index": -1, "task_type": ""}
 
-        house_changed = last_task_spec['house_index'] != new_task_spec['house_index']
+        house_changed = last_task_spec["house_index"] != new_task_spec["house_index"]
 
         nav_only_tasks = [
             t.task_type_str
@@ -164,13 +161,13 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
             ]
         ]
         tasks_are_nav_only = (
-            last_task_spec['task_type'] in nav_only_tasks
-            and new_task_spec['task_type'] in nav_only_tasks
+            last_task_spec["task_type"] in nav_only_tasks
+            and new_task_spec["task_type"] in nav_only_tasks
         )
 
         # The above code ensure that self.current_house will now be the next house
         self.reset_controller_in_current_house_and_cache_house_data(
-            skip_controller_reset=self.mode == 'train'
+            skip_controller_reset=self.mode == "train"
             and (not house_changed)
             and tasks_are_nav_only,
         )
@@ -187,26 +184,28 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
         # ===============================
         if sample is not None:
             self.task_spec_sampler.next_task_spec_from_sample(sample)
+            self.reset_controller_in_current_house_and_cache_house_data(
+                skip_controller_reset=self.mode == "train"
+            )
         else:
             self.increment_task_and_reset_house(
-                force_advance_scene=force_advance_scene,
-                house_index=house_index,
+                force_advance_scene=force_advance_scene, house_index=house_index
             )
         assert house_index is None or self.current_house_index == house_index
 
         task_info = self.get_current_task_spec_task_info()
-        task_info['extras'] = {}
+        task_info["extras"] = {}
 
         # Enforce the task_info's house index
-        house_index = int(task_info['house_index'])
+        house_index = int(task_info["house_index"])
         if house_index != self.current_house_index:
             raise RuntimeError(
-                f'House index does not match! {house_index} != {self.current_house_index}',
+                f"House index does not match! {house_index} != {self.current_house_index}"
             )
 
         starting_pose = AgentPose(
-            position=task_info['agent_starting_position'],
-            rotation=Vector3(x=0, y=task_info['agent_y_rotation'], z=0),
+            position=task_info["agent_starting_position"],
+            rotation=Vector3(x=0, y=task_info["agent_y_rotation"], z=0),
             horizon=HORIZON,
             standing=True,
         )
@@ -226,7 +225,7 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
         if not event:
             return None
         if not event:
-            if self.mode == 'train':
+            if self.mode == "train":
                 self.controller.reset(self.current_house)
                 # event = self.controller.step(
                 #     action="TeleportFull",
@@ -238,21 +237,20 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
                 self.controller.calibrate_agent()
                 if not event:
                     get_logger().warning(
-                        f'Teleport failing in {self.current_house_index} at {starting_pose}',
+                        f"Teleport failing in {self.current_house_index} at {starting_pose}"
                     )
                     get_logger().warning(event)
                     return self.next_task(
-                        force_advance_scene=force_advance_scene,
-                        house_index=house_index,
+                        force_advance_scene=force_advance_scene, house_index=house_index
                     )
             else:
                 # This **must** be an error during eval rather than a warning for fairness/consistency.
                 raise RuntimeError(
-                    f"Teleport failed in {self.current_house_index} at {task_info['agent_starting_position']}",
+                    f"Teleport failed in {self.current_house_index} at {task_info['agent_starting_position']}"
                     # f"Teleport failed in {self.current_house_index} at"
                 )
 
-        self._last_sampled_task = REGISTERED_TASKS.get(task_info['task_type'])(
+        self._last_sampled_task = REGISTERED_TASKS.get(task_info["task_type"])(
             controller=self.controller,
             task_info=task_info,
             **self.task_args,

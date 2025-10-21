@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, TYPE_CHECKING
 
 from allenact.utils.misc_utils import prepare_locals_for_super
 from allenact_plugins.robothor_plugin.robothor_tasks import spl_metric
@@ -24,37 +24,38 @@ from utils.data_generation_utils.navigation_utils import (
     is_any_object_sufficiently_visible_and_in_center_frame,
 )
 
-
 try:
     from typing import Literal
 except ImportError:
     from typing_extensions import Literal
 
 import numpy as np
+
 from allenact.base_abstractions.sensor import Sensor
 from allenact.utils.system import get_logger
 from allenact_plugins.ithor_plugin.ithor_environment import IThorEnvironment
+from allenact.base_abstractions.misc import RLStepResult
+
+from utils.type_utils import RewardConfig, THORActions
+from utils.distance_calculation_utils import position_dist
 from training.online.reward.reward_shaper import ObjectNavRewardShaper
-
-from utils.type_utils import RewardConfig
-
 
 if TYPE_CHECKING:
     from environment.stretch_controller import StretchController
 
 
 class ObjectNavTask(AbstractSPOCTask):
-    task_type_str = 'ObjectNavType'
+    task_type_str = "ObjectNavType"
 
     def __init__(
         self,
-        controller: 'StretchController',
+        controller: "StretchController",
         sensors: List[Sensor],
         task_info: Dict[str, Any],
         max_steps: int,
         action_names: List[str],
         reward_config: Optional[RewardConfig] = None,
-        distance_type: Literal['l2'] = 'l2',
+        distance_type: Literal["l2"] = "l2",
         visualize: Optional[bool] = None,
         house: Optional[Dict[str, Any]] = None,
         **kwargs,
@@ -63,7 +64,7 @@ class ObjectNavTask(AbstractSPOCTask):
 
         self._rewards: List[float] = []
         self._distance_to_goal: List[float] = []
-        self.last_taken_action_str = ''
+        self.last_taken_action_str = ""
         self.last_action_success = -1
         self.last_action_random = -1
 
@@ -71,22 +72,21 @@ class ObjectNavTask(AbstractSPOCTask):
         self.dist_to_target_func = self.min_l2_distance_to_target
 
         if (
-            self.task_info.get('synset_to_object_ids') is None
+            self.task_info.get("synset_to_object_ids") is None
         ):  # Kiana : added this line, ask before removing
             # if "synsets" not in self.task_info:
             #     #  REMOVE THIS ONCE THE NEW DATASET IS GENERATED
             #     self.task_info = TARGET_TO_CONVERTER["ToLatest"].convert_params(
             #         self.task_info["task_type"], self.task_info, verbose=False
             #     )
-            self.task_info['synset_to_object_ids'] = {
+            self.task_info["synset_to_object_ids"] = {
                 synset: [
-                    o['objectId']
+                    o["objectId"]
                     for o in self.controller.get_all_objects_of_synset(
-                        synset=synset,
-                        include_hyponyms=True,
+                        synset=synset, include_hyponyms=True
                     )
                 ]
-                for synset in self.task_info['synsets']
+                for synset in self.task_info["synsets"]
             }
 
         last_distance = self.dist_to_target_func()
@@ -109,11 +109,10 @@ class ObjectNavTask(AbstractSPOCTask):
         May return a negative value if the target object is not reachable.
         """
         # NOTE: may return -1 if the object is unreachable.
-        min_dist = float('inf')
+        min_dist = float("inf")
 
         target_object_ids = sum(
-            map(list, self.task_info['broad_synset_to_object_ids'].values()),
-            [],
+            map(list, self.task_info["broad_synset_to_object_ids"].values()), []
         )
         for object_id in target_object_ids:
             min_dist = min(
@@ -123,34 +122,30 @@ class ObjectNavTask(AbstractSPOCTask):
                     self.controller.get_current_agent_position(),
                 ),
             )
-        if min_dist == float('inf'):
+        if min_dist == float("inf"):
             get_logger().error(
-                f'No target object among {target_object_ids} found'
-                f" in house {self.task_info['house_index']}.",
+                f"No target object among {target_object_ids} found"
+                f" in house {self.task_info['house_index']}."
             )
             return -1.0
         return min_dist
 
     def min_geodesic_distance_to_target(self) -> float:
         target_object_ids = sum(
-            map(list, self.task_info['broad_synset_to_object_ids'].values()),
-            [],
+            map(list, self.task_info["broad_synset_to_object_ids"].values()), []
         )
         _, min_dist = self.controller.get_closest_object_from_ids(
-            object_ids=target_object_ids,
-            return_id_and_dist=True,
+            object_ids=target_object_ids, return_id_and_dist=True
         )
         return min_dist
 
     def successful_if_done(self, strict_success=False) -> bool:
-        object_type = self.task_info['synsets'][0]
+        object_type = self.task_info["synsets"][0]
         visible_targets = [
             oid
-            for oid in self.task_info['broad_synset_to_object_ids'][object_type]
+            for oid in self.task_info["broad_synset_to_object_ids"][object_type]
             if self.controller.object_is_visible_in_camera(
-                oid,
-                which_camera='nav',
-                maximum_distance=2,
+                oid, which_camera="nav", maximum_distance=2
             )
         ]
         if not strict_success:
@@ -159,8 +154,7 @@ class ObjectNavTask(AbstractSPOCTask):
             return False
 
         return is_any_object_sufficiently_visible_and_in_center_frame(
-            controller=self.controller,
-            object_ids=visible_targets,
+            controller=self.controller, object_ids=visible_targets
         )
 
     def shaping(self) -> float:
@@ -192,27 +186,26 @@ class ObjectNavTask(AbstractSPOCTask):
             return {}
 
         metrics = super().metrics()
-        metrics['ep_length'] = self.num_steps_taken()
-        metrics['dist_to_target'] = self.dist_to_target_func()
-        metrics['total_reward'] = np.sum(self._rewards)
-        metrics['cost_robot'] = self.cumulative_robot_cost
-        metrics['cost_object'] = self.cumulative_object_cost
-        metrics['spl'] = spl_metric(
+        metrics["ep_length"] = self.num_steps_taken()
+        metrics["dist_to_target"] = self.dist_to_target_func()
+        metrics["total_reward"] = np.sum(self._rewards)
+        metrics["cost"] = self.cumulative_cost
+        metrics["spl"] = spl_metric(
             success=self._success,
             optimal_distance=self.optimal_distance,
             travelled_distance=self.travelled_distance,
         )
-        metrics['spl'] = (
-            0.0 if metrics['spl'] is None or np.isnan(metrics['spl']) else metrics['spl']
+        metrics["spl"] = (
+            0.0 if metrics["spl"] is None or np.isnan(metrics["spl"]) else metrics["spl"]
         )
-        metrics['success'] = self._success
+        metrics["success"] = self._success
         if self.reward_shaper is not None:
-            metrics['num_failed_actions'] = self.reward_shaper.num_failed_actions
-            metrics['percentage_collision'] = self.reward_shaper.num_failed_actions / (
+            metrics["num_failed_actions"] = self.reward_shaper.num_failed_actions
+            metrics["percentage_collision"] = self.reward_shaper.num_failed_actions / (
                 1e-9 + self.num_steps_taken()
             )
-            metrics['percentage_collision'] *= 100
-            metrics['has_collision'] = self.reward_shaper.num_failed_actions > 0
+            metrics["percentage_collision"] *= 100
+            metrics["has_collision"] = self.reward_shaper.num_failed_actions > 0
 
         self._metrics = metrics
 
@@ -220,24 +213,24 @@ class ObjectNavTask(AbstractSPOCTask):
 
 
 class EasyObjectNavTask(ObjectNavTask):
-    task_type_str = 'EasyObjectNavType'
+    task_type_str = "EasyObjectNavType"
 
 
 class ObjectNavRoomTask(ObjectNavTask):
-    task_type_str = 'ObjectNavRoom'
+    task_type_str = "ObjectNavRoom"
 
 
 class ObjectNavRelAttributeTask(ObjectNavTask):
-    task_type_str = 'ObjectNavRelAttribute'
+    task_type_str = "ObjectNavRelAttribute"
 
 
 class ObjectNavLocalRefTask(ObjectNavTask):
-    task_type_str = 'ObjectNavLocalRef'
+    task_type_str = "ObjectNavLocalRef"
 
 
 class ObjectNavAffordanceTask(ObjectNavTask):
-    task_type_str = 'ObjectNavAffordance'
+    task_type_str = "ObjectNavAffordance"
 
 
 class ObjectNavDescriptionTask(ObjectNavTask):
-    task_type_str = 'ObjectNavDescription'
+    task_type_str = "ObjectNavDescription"
