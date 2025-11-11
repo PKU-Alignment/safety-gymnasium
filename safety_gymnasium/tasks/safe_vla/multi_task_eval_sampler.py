@@ -209,11 +209,6 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
             horizon=HORIZON,
             standing=True,
         )
-
-        # event = self.controller.step(
-        #     action="TeleportFull",
-        #     **starting_pose,
-        # )
         try:
             event = self.controller.teleport_agent(
                 **starting_pose,
@@ -227,10 +222,6 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
         if not event:
             if self.mode == "train":
                 self.controller.reset(self.current_house)
-                # event = self.controller.step(
-                #     action="TeleportFull",
-                #     **starting_pose,
-                # )
                 event = self.controller.teleport_agent(
                     **starting_pose,
                 )

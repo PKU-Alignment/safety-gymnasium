@@ -204,7 +204,6 @@ class AbstractSPOCTask(Task["StretchController"]):
         position = self.controller.get_current_agent_position()
 
         self.task_info["taken_actions"].append(action_str)
-        # TODO: plan1 save the path with unsafe points
         self.task_info["followed_path"].append(position)
         
         self.task_info["agent_poses"].append(self.controller.get_current_agent_full_pose())

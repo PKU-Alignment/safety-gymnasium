@@ -204,13 +204,6 @@ class AbstractSPOCTaskSampler(TaskSampler):
                     simSeconds=self.settle_physics_for_seconds_when_reset,
                     raise_for_failure=True,
                 )
-
-        # # NOTE: Set reachable positions
-        # if self.current_house_index not in self.reachable_positions_map:
-        #     self.reachable_positions_map[self.current_house_index] = (
-        #         self.controller.get_reachable_positions()
-        #     )
-
         self.randomize_materials()  # Must be done after resetting!
 
     def reset_scene_with_timeout_handler(self):
