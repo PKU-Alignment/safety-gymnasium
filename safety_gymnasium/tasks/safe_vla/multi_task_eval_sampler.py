@@ -70,7 +70,7 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
 
         self.visualize = visualize
 
-        assert self.mode == 'train' or self.prob_randomize_materials == 0
+        # assert self.mode == "train" or self.prob_randomize_materials == 0
 
     @property
     def current_task_spec(self) -> TaskSpec:
@@ -95,9 +95,7 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
 
     @staticmethod
     def task_spec_to_task_info(
-        task_spec: TaskSpec,
-        house_index: int,
-        house: Dict[str, Any],
+        task_spec: TaskSpec, house_index: int, house: Dict[str, Any]
     ) -> Dict[str, Any]:
         agent_starting_position = {
             key: value for key, value in zip(['x', 'y', 'z'], task_spec['agent_starting_position'])
@@ -121,14 +119,14 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
 
         # Handle the remaining keys not found in current_task
         remaining_keys = set(REGISTERED_TASK_PARAMS.get(task_spec['task_type'])) - set(
-            task_spec.keys(),
+            task_spec.keys()
         )
 
         if len(remaining_keys) > 0:
             raise NotImplementedError(
                 f'Some keys require by the task are missing. You have given {task_info.keys()} but we require'
                 f" {REGISTERED_TASK_PARAMS.get(task_spec['task_type'])}, i.e. {remaining_keys} are missing."
-                f' Ping Jordi if this is surprising.',
+                f' Ping Jordi if this is surprising.'
             )
 
         return task_info
@@ -141,15 +139,12 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
         )
 
     def increment_task_and_reset_house(
-        self,
-        force_advance_scene: bool,
-        house_index: Optional[int] = None,
+        self, force_advance_scene: bool, house_index: Optional[int] = None
     ):
         # Now self.current_task_spec will be the next task spec
         last_task_spec = self.current_task_spec
         new_task_spec = self.task_spec_sampler.next_task_spec(
-            force_advance_scene=force_advance_scene,
-            house_index=house_index,
+            force_advance_scene=force_advance_scene, house_index=house_index
         )
 
         if last_task_spec is None:
@@ -187,10 +182,12 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
         # ===============================
         if sample is not None:
             self.task_spec_sampler.next_task_spec_from_sample(sample)
+            self.reset_controller_in_current_house_and_cache_house_data(
+                skip_controller_reset=self.mode == 'train'
+            )
         else:
             self.increment_task_and_reset_house(
-                force_advance_scene=force_advance_scene,
-                house_index=house_index,
+                force_advance_scene=force_advance_scene, house_index=house_index
             )
         assert house_index is None or self.current_house_index == house_index
 
@@ -201,7 +198,7 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
         house_index = int(task_info['house_index'])
         if house_index != self.current_house_index:
             raise RuntimeError(
-                f'House index does not match! {house_index} != {self.current_house_index}',
+                f'House index does not match! {house_index} != {self.current_house_index}'
             )
 
         starting_pose = AgentPose(
@@ -210,11 +207,6 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
             horizon=HORIZON,
             standing=True,
         )
-
-        # event = self.controller.step(
-        #     action="TeleportFull",
-        #     **starting_pose,
-        # )
         try:
             event = self.controller.teleport_agent(
                 **starting_pose,
@@ -228,27 +220,22 @@ class MultiTaskSampler(AbstractSPOCTaskSampler):
         if not event:
             if self.mode == 'train':
                 self.controller.reset(self.current_house)
-                # event = self.controller.step(
-                #     action="TeleportFull",
-                #     **starting_pose,
-                # )
                 event = self.controller.teleport_agent(
                     **starting_pose,
                 )
                 self.controller.calibrate_agent()
                 if not event:
                     get_logger().warning(
-                        f'Teleport failing in {self.current_house_index} at {starting_pose}',
+                        f'Teleport failing in {self.current_house_index} at {starting_pose}'
                     )
                     get_logger().warning(event)
                     return self.next_task(
-                        force_advance_scene=force_advance_scene,
-                        house_index=house_index,
+                        force_advance_scene=force_advance_scene, house_index=house_index
                     )
             else:
                 # This **must** be an error during eval rather than a warning for fairness/consistency.
                 raise RuntimeError(
-                    f"Teleport failed in {self.current_house_index} at {task_info['agent_starting_position']}",
+                    f"Teleport failed in {self.current_house_index} at {task_info['agent_starting_position']}"
                     # f"Teleport failed in {self.current_house_index} at"
                 )
 

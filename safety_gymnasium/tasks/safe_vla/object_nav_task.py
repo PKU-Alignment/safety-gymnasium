@@ -31,12 +31,14 @@ except ImportError:
     from typing_extensions import Literal
 
 import numpy as np
+from allenact.base_abstractions.misc import RLStepResult
 from allenact.base_abstractions.sensor import Sensor
 from allenact.utils.system import get_logger
 from allenact_plugins.ithor_plugin.ithor_environment import IThorEnvironment
 from training.online.reward.reward_shaper import ObjectNavRewardShaper
 
-from utils.type_utils import RewardConfig
+from utils.distance_calculation_utils import position_dist
+from utils.type_utils import RewardConfig, THORActions
 
 
 if TYPE_CHECKING:
@@ -82,8 +84,7 @@ class ObjectNavTask(AbstractSPOCTask):
                 synset: [
                     o['objectId']
                     for o in self.controller.get_all_objects_of_synset(
-                        synset=synset,
-                        include_hyponyms=True,
+                        synset=synset, include_hyponyms=True
                     )
                 ]
                 for synset in self.task_info['synsets']
@@ -112,8 +113,7 @@ class ObjectNavTask(AbstractSPOCTask):
         min_dist = float('inf')
 
         target_object_ids = sum(
-            map(list, self.task_info['broad_synset_to_object_ids'].values()),
-            [],
+            map(list, self.task_info['broad_synset_to_object_ids'].values()), []
         )
         for object_id in target_object_ids:
             min_dist = min(
@@ -126,19 +126,17 @@ class ObjectNavTask(AbstractSPOCTask):
         if min_dist == float('inf'):
             get_logger().error(
                 f'No target object among {target_object_ids} found'
-                f" in house {self.task_info['house_index']}.",
+                f" in house {self.task_info['house_index']}."
             )
             return -1.0
         return min_dist
 
     def min_geodesic_distance_to_target(self) -> float:
         target_object_ids = sum(
-            map(list, self.task_info['broad_synset_to_object_ids'].values()),
-            [],
+            map(list, self.task_info['broad_synset_to_object_ids'].values()), []
         )
         _, min_dist = self.controller.get_closest_object_from_ids(
-            object_ids=target_object_ids,
-            return_id_and_dist=True,
+            object_ids=target_object_ids, return_id_and_dist=True
         )
         return min_dist
 
@@ -148,9 +146,7 @@ class ObjectNavTask(AbstractSPOCTask):
             oid
             for oid in self.task_info['broad_synset_to_object_ids'][object_type]
             if self.controller.object_is_visible_in_camera(
-                oid,
-                which_camera='nav',
-                maximum_distance=2,
+                oid, which_camera='nav', maximum_distance=2
             )
         ]
         if not strict_success:
@@ -159,8 +155,7 @@ class ObjectNavTask(AbstractSPOCTask):
             return False
 
         return is_any_object_sufficiently_visible_and_in_center_frame(
-            controller=self.controller,
-            object_ids=visible_targets,
+            controller=self.controller, object_ids=visible_targets
         )
 
     def shaping(self) -> float:
@@ -195,8 +190,7 @@ class ObjectNavTask(AbstractSPOCTask):
         metrics['ep_length'] = self.num_steps_taken()
         metrics['dist_to_target'] = self.dist_to_target_func()
         metrics['total_reward'] = np.sum(self._rewards)
-        metrics['cost_robot'] = self.cumulative_robot_cost
-        metrics['cost_object'] = self.cumulative_object_cost
+        metrics['cost'] = self.cumulative_cost
         metrics['spl'] = spl_metric(
             success=self._success,
             optimal_distance=self.optimal_distance,

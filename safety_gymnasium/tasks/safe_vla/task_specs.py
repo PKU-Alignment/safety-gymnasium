@@ -52,9 +52,7 @@ class TaskSpecSampler(abc.ABC):
 
     @abc.abstractmethod
     def next_task_spec(
-        self,
-        force_advance_scene: bool = False,
-        house_index: Optional[int] = None,
+        self, force_advance_scene: bool = False, house_index: Optional[int] = None
     ) -> TaskSpec:
         raise NotImplementedError
 
@@ -78,9 +76,7 @@ class TaskSpecSamplerDatasetWrapper(TaskSpecSampler):
         self.last_task_spec: Optional[TaskSpec] = None
 
     def next_task_spec(
-        self,
-        force_advance_scene: bool = False,
-        house_index: Optional[int] = None,
+        self, force_advance_scene: bool = False, house_index: Optional[int] = None
     ) -> TaskSpec:
         assert (
             force_advance_scene is False and house_index is None
@@ -213,9 +209,7 @@ class TaskSpecSamplerInfiniteList(TaskSpecSampler):
             random.shuffle(self.specs_for_current_house)
 
     def next_task_spec(
-        self,
-        force_advance_scene: bool = False,
-        house_index: Optional[int] = None,
+        self, force_advance_scene: bool = False, house_index: Optional[int] = None
     ) -> TaskSpec:
         if force_advance_scene or len(self.specs_for_current_house) == 0 or house_index is not None:
             self.advance_house(force_advance_scene=force_advance_scene, house_index=house_index)
@@ -242,15 +236,9 @@ class TaskSpecQueue(TaskSpecSampler):
         self.last_task_spec = None
 
     def next_task_spec(
-        self,
-        force_advance_scene: bool = False,
-        house_index: Optional[int] = None,
+        self, force_advance_scene: bool = False, house_index: Optional[int] = None
     ) -> TaskSpec:
         self.last_task_spec = normalized_eval_sample_to_task_spec(self.queue.get(timeout=5))
-        return self.last_task_spec
-
-    def next_task_spec_from_sample(self, sample) -> TaskSpec:
-        self.last_task_spec = normalized_eval_sample_to_task_spec(sample)
         return self.last_task_spec
 
     def __len__(self) -> Union[int, float]:
@@ -258,6 +246,10 @@ class TaskSpecQueue(TaskSpecSampler):
 
     def num_remaining(self) -> Union[int, float]:
         return float('inf')
+
+    def next_task_spec_from_sample(self, sample) -> TaskSpec:
+        self.last_task_spec = normalized_eval_sample_to_task_spec(sample)
+        return self.last_task_spec
 
     def reset(self):
         self.last_task_spec = None

@@ -27,7 +27,7 @@ try:
     from typing import Literal
 except ImportError:
     from typing_extensions import Literal
-
+#
 import numpy as np
 from allenact.base_abstractions.sensor import Sensor
 from allenact.utils.system import get_logger
@@ -83,8 +83,7 @@ class FetchTask(AbstractSPOCTask):
         min_dist = float('inf')
 
         target_object_ids = sum(
-            map(list, self.task_info['broad_synset_to_object_ids'].values()),
-            [],
+            map(list, self.task_info['broad_synset_to_object_ids'].values()), []
         )
         for object_id in target_object_ids:
             min_dist = min(
@@ -97,7 +96,7 @@ class FetchTask(AbstractSPOCTask):
         if min_dist == float('inf'):
             get_logger().error(
                 f'No target object among {target_object_ids} found'
-                f" in house {self.task_info['house_index']}.",
+                f" in house {self.task_info['house_index']}."
             )
             return -1.0
         return min_dist
@@ -152,8 +151,7 @@ class FetchTask(AbstractSPOCTask):
             0.0 if metrics['spl'] is None or np.isnan(metrics['spl']) else metrics['spl']
         )
         metrics['success'] = self._success
-        metrics['cost_robot'] = self.cumulative_robot_cost
-        metrics['cost_object'] = self.cumulative_object_cost
+        metrics['cost'] = self.cumulative_cost
 
         self._metrics = metrics
 
