@@ -17,14 +17,12 @@
 import abc
 import multiprocessing as mp
 import random
-from typing import TypedDict, Optional, Dict, Any, Union, List
+from typing import Any, Dict, List, Optional, TypedDict, Union
 
 import numpy as np
+from online_evaluation.online_evaluation_types_and_utils import normalized_eval_sample_to_task_spec
 from torch.utils.data import Dataset
 
-from online_evaluation.online_evaluation_types_and_utils import (
-    normalized_eval_sample_to_task_spec,
-)
 from utils.task_type_mapping_utils import map_task_spec
 
 
@@ -82,7 +80,7 @@ class TaskSpecSamplerDatasetWrapper(TaskSpecSampler):
     ) -> TaskSpec:
         assert (
             force_advance_scene is False and house_index is None
-        ), "force_advance_scene and house_index are not supported by TaskSpecSamplerDatasetWrapper."
+        ), 'force_advance_scene and house_index are not supported by TaskSpecSamplerDatasetWrapper.'
         self.dataset_iterator_index += 1
         self.last_task_spec = map_task_spec(self.task_spec_dataset[self.dataset_iterator_index])
         return self.last_task_spec
@@ -118,9 +116,9 @@ class TaskSpecDatasetInfiniteList(TaskSpecDataset):
         task_specs = [map_task_spec(task_spec) for task_spec in task_specs]
 
         for task_spec in task_specs:
-            if task_spec["house_index"] not in self.house_index_to_task_specs:
-                self.house_index_to_task_specs[task_spec["house_index"]] = []
-            self.house_index_to_task_specs[task_spec["house_index"]].append(task_spec)
+            if task_spec['house_index'] not in self.house_index_to_task_specs:
+                self.house_index_to_task_specs[task_spec['house_index']] = []
+            self.house_index_to_task_specs[task_spec['house_index']].append(task_spec)
 
         self.task_specs_full = task_specs
         self.task_specs = []
@@ -142,7 +140,7 @@ class TaskSpecDatasetInfiniteList(TaskSpecDataset):
 
     def __getitem__(self, index: int) -> TaskSpec:
         if index not in [self.last_index + 1, self.last_index]:
-            raise ValueError("TaskSpecDatasetInfiniteList can only be accessed sequentially")
+            raise ValueError('TaskSpecDatasetInfiniteList can only be accessed sequentially')
 
         if index == self.last_index + 1:
             self.last_index = index
@@ -155,7 +153,7 @@ class TaskSpecDatasetInfiniteList(TaskSpecDataset):
         return self.last_task_spec
 
     def __len__(self) -> Union[int, float]:
-        return float("inf")
+        return float('inf')
 
 
 class TaskSpecSamplerInfiniteList(TaskSpecSampler):
@@ -188,7 +186,7 @@ class TaskSpecSamplerInfiniteList(TaskSpecSampler):
 
         if house_index is not None:
             if house_index not in self.house_index_to_task_specs:
-                raise ValueError(f"House index {house_index} not in `house_index_to_task_specs`")
+                raise ValueError(f'House index {house_index} not in `house_index_to_task_specs`')
 
             if house_index not in self.house_inds:
                 self.reset_houses_inds_list()
@@ -220,10 +218,10 @@ class TaskSpecSamplerInfiniteList(TaskSpecSampler):
         return self.last_task_spec
 
     def __len__(self) -> Union[int, float]:
-        return float("inf")
+        return float('inf')
 
     def num_remaining(self) -> Union[int, float]:
-        return float("inf")
+        return float('inf')
 
     def reset(self):
         self.specs_for_current_house.clear()
@@ -244,12 +242,14 @@ class TaskSpecQueue(TaskSpecSampler):
         return self.last_task_spec
 
     def __len__(self) -> Union[int, float]:
-        return float("inf")
+        return float('inf')
 
     def num_remaining(self) -> Union[int, float]:
-        return float("inf")
-    def next_task_spec_from_sample(self, sample)-> TaskSpec:
+        return float('inf')
+
+    def next_task_spec_from_sample(self, sample) -> TaskSpec:
         self.last_task_spec = normalized_eval_sample_to_task_spec(sample)
         return self.last_task_spec
+
     def reset(self):
         self.last_task_spec = None

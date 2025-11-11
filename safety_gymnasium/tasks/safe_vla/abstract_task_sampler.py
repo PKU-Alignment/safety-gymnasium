@@ -19,7 +19,7 @@ import gc
 import random
 import sys
 import warnings
-from typing import Dict, List, Optional, Union, Type, Any, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Type, Union
 
 import ai2thor.platform
 from allenact.base_abstractions.task import TaskSampler
@@ -32,7 +32,8 @@ from utils.data_generation_utils.exception_utils import (
     HouseInvalidForTaskException,
     TaskSamplerInInvalidStateError,
 )
-from utils.type_utils import Vector3, AbstractTaskArgs, KeyedDefaultDict
+from utils.type_utils import AbstractTaskArgs, KeyedDefaultDict, Vector3
+
 
 if TYPE_CHECKING:
     from environment.stretch_controller import StretchController
@@ -51,7 +52,7 @@ class AbstractSPOCTaskSampler(TaskSampler):
         prob_randomize_colors: float = 0,
         task_type: Optional[Type] = None,
         device: Optional[int] = None,
-        controller: Optional["StretchController"] = None,
+        controller: Optional['StretchController'] = None,
         always_allocate_a_new_stretch_controller_when_reset: bool = False,
         settle_physics_for_second_when_reset: float = PHYSICS_SETTLING_TIME,
         **kwargs: Any,
@@ -67,7 +68,7 @@ class AbstractSPOCTaskSampler(TaskSampler):
         self.settle_physics_for_seconds_when_reset = settle_physics_for_second_when_reset
         assert (
             PHYSICS_SETTLING_TIME == settle_physics_for_second_when_reset
-        ), "Currently not allowed! Chat with Luca/Kiana before allowing different values."
+        ), 'Currently not allowed! Chat with Luca/Kiana before allowing different values.'
 
         house_index_to_local_index = {
             house_index: local_index for local_index, house_index in enumerate(house_inds)
@@ -85,14 +86,14 @@ class AbstractSPOCTaskSampler(TaskSampler):
 
         self.controller_args = controller_args
 
-        if device is not None and device != -1 and sys.platform != "darwin":
+        if device is not None and device != -1 and sys.platform != 'darwin':
             self.controller_args = {
                 **self.controller_args,
-                "platform": ai2thor.platform.CloudRendering,
-                "gpu_device": device,
+                'platform': ai2thor.platform.CloudRendering,
+                'gpu_device': device,
             }
 
-        assert self.controller_args["agentMode"] != "locobot"
+        assert self.controller_args['agentMode'] != 'locobot'
 
         self._last_sampled_task: Optional[AbstractSPOCTask] = None
 
@@ -150,8 +151,8 @@ class AbstractSPOCTaskSampler(TaskSampler):
             try:
                 return self.controller_type(**self.controller_args)
             except Exception as e:
-                if "Unity process has exited" in e.args[0]:
-                    raise TaskSamplerInInvalidStateError("Controller has closed.")
+                if 'Unity process has exited' in e.args[0]:
+                    raise TaskSamplerInInvalidStateError('Controller has closed.')
                 else:
                     raise
         else:
@@ -176,31 +177,31 @@ class AbstractSPOCTaskSampler(TaskSampler):
 
             if self.current_house is None:
                 raise HouseInvalidForTaskException(
-                    "Current house is None. This can happen if the house was not successfully generated."
+                    'Current house is None. This can happen if the house was not successfully generated.'
                 )
 
             try:
                 if self.current_house_index in self.fixed_starting_positions:
-                    self.current_house["metadata"]["agent"]["position"] = (
+                    self.current_house['metadata']['agent']['position'] = (
                         self.fixed_starting_positions[self.current_house_index]
                     )
 
                 self.reset_scene_with_timeout_handler()
             except ValueError as e:
-                if "write to closed file" in e.args[0]:
-                    raise TaskSamplerInInvalidStateError("Controller has closed.")
+                if 'write to closed file' in e.args[0]:
+                    raise TaskSamplerInInvalidStateError('Controller has closed.')
 
             if retain_agent_pose:
                 self.controller.teleport_agent(
-                    position=agent_pose["position"],
-                    rotation=agent_pose["rotation"],
-                    standing=agent_pose["isStanding"],
+                    position=agent_pose['position'],
+                    rotation=agent_pose['rotation'],
+                    standing=agent_pose['isStanding'],
                     horizon=HORIZON,
                     forceAction=True,
                 )
             if self.settle_physics_for_seconds_when_reset > 0:
                 self.controller.step(
-                    action="AdvancePhysicsStep",
+                    action='AdvancePhysicsStep',
                     simSeconds=self.settle_physics_for_seconds_when_reset,
                     raise_for_failure=True,
                 )
@@ -226,7 +227,7 @@ class AbstractSPOCTaskSampler(TaskSampler):
                 initialize_controller=not use_original_ai2thor_controller, **self.controller_args
             )
         except TimeoutError:
-            if hasattr(self, "controller"):
+            if hasattr(self, 'controller'):
                 del self.controller
                 gc.collect()
             self.controller = self.controller_type(**self.controller_args)
@@ -236,20 +237,22 @@ class AbstractSPOCTaskSampler(TaskSampler):
 
     def randomize_materials(self):
         if random.random() < self.prob_randomize_materials:
-            self.controller.step(action="RandomizeMaterials", raise_for_failure=True)
+            self.controller.step(action='RandomizeMaterials', raise_for_failure=True)
         else:
-            self.controller.step(action="ResetMaterials", raise_for_failure=True)
+            self.controller.step(action='ResetMaterials', raise_for_failure=True)
+
     def randomize_lighting(self):
         if random.random() < self.prob_randomize_lighting:
-            self.controller.step(action="RandomizeLighting", raise_for_failure=True)
+            self.controller.step(action='RandomizeLighting', raise_for_failure=True)
         else:
-            self.controller.step(action="ResetLighting", raise_for_failure=True)
+            self.controller.step(action='ResetLighting', raise_for_failure=True)
 
     def randomize_colors(self):
         if random.random() < self.prob_randomize_colors:
-            self.controller.step(action="RandomizeColors")
+            self.controller.step(action='RandomizeColors')
         else:
-            self.controller.step(action="ResetColors")
+            self.controller.step(action='ResetColors')
+
     def increment_task_and_reset_house(
         self, force_advance_scene: bool, house_index: Optional[int] = None
     ) -> bool:
