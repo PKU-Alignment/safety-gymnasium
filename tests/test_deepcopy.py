@@ -17,9 +17,11 @@
 from copy import deepcopy
 
 import gymnasium
+import safety_gymnasium
 import numpy as np
-
 import helpers
+
+gymnasium.register_envs(safety_gymnasium)
 
 
 @helpers.parametrize(

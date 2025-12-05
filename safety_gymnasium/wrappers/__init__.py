@@ -18,7 +18,7 @@ from typing import Callable
 
 import gymnasium
 
-from safety_gymnasium.wrappers.autoreset import SafeAutoResetWrapper
+from safety_gymnasium.wrappers.autoreset import SafeAutoReset
 from safety_gymnasium.wrappers.env_checker import SafePassiveEnvChecker
 from safety_gymnasium.wrappers.gymnasium_conversion import (
     Gymnasium2SafetyGymnasium,

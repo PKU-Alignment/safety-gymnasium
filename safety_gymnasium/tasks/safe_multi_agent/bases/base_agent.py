@@ -182,7 +182,7 @@ class BaseAgent(abc.ABC):  # pylint: disable=too-many-instance-attributes
             keepout (float): Needs to be set to match the agent XML used.
             rot (float): Override agent starting angle.
         """
-        self.base: str = f'assets/xmls/multi_{name.lower()}.xml'
+        self.base: str = os.path.join('assets', 'xmls', f'multi_{name.lower()}.xml')
         self.random_generator: RandomGenerator = random_generator
         self.placements: list = placements
         self.locations: list = [] if locations is None else locations

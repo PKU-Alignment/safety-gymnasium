@@ -44,6 +44,7 @@ def test_env_render(agent_id, env_id, level, render_mode):
         ep_cost += cost
 
         env.render()
+    env.close()
 
 
 @helpers.parametrize(
@@ -75,6 +76,7 @@ def test_run_env_render(agent_id, env_id, level, render_mode):
         ep_cost += cost
 
         env.render()
+    env.close()
 
 
 @helpers.parametrize(
@@ -106,6 +108,7 @@ def test_velocity_env_render(agent_id, env_id, render_mode, version):
         ep_cost += cost
 
         env.render()
+    env.close()
 
 
 @helpers.parametrize(
@@ -137,6 +140,7 @@ def test_env_render_list(agent_id, env_id, level, render_mode):
         ep_cost += cost
 
     assert isinstance(env.render(), list)
+    env.close()
 
 
 @helpers.parametrize(
@@ -168,3 +172,4 @@ def test_velocity_env_render_list(agent_id, env_id, render_mode, version):
         ep_cost += cost
 
     assert isinstance(env.render(), list)
+    env.close()

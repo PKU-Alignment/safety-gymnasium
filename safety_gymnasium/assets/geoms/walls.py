@@ -36,7 +36,7 @@ class Walls(Geom):  # pylint: disable=too-many-instance-attributes
     locations: list = field(default_factory=list)  # This should be used and length == walls_num
     keepout: float = 0.0  # This should not be used
 
-    color: np.array = COLOR['wall']
+    color: np.array = field(default_factory=lambda: COLOR['wall'])
     group: np.array = GROUP['wall']
     is_lidar_observed: bool = True
     is_constrained: bool = False

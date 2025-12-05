@@ -30,7 +30,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         # TODO: add Python 3.11 to test matrix
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
       fail-fast: false
     timeout-minutes: 60
     steps:

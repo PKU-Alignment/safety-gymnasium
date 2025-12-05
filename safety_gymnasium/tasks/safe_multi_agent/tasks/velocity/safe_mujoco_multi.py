@@ -73,7 +73,7 @@ class SafeMAEnv:
             render_mode,
             **kwargs,
         )
-        self.env.single_agent_env.model.light(0).castshadow = False
+        self.env.single_agent_env.unwrapped.model.light(0).castshadow = False
 
     def __getattr__(self, name: str) -> Any:
         """Returns an attribute with ``name``, unless ``name`` starts with an underscore."""
@@ -97,7 +97,7 @@ class SafeMAEnv:
         for agents in self.env.possible_agents:
             costs[agents] = cost_n
 
-        viewer = self.env.single_agent_env.mujoco_renderer.viewer
+        viewer = self.env.single_agent_env.unwrapped.mujoco_renderer.viewer
         if viewer:
             clear_viewer(viewer)
             add_velocity_marker(
